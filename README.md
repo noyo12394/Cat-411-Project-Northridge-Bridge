@@ -175,6 +175,48 @@ Together, these notebooks create a stronger bridge risk framework that can suppo
 
 ---
 
+## Satellite NDVI-Based Catastrophe Model (New)
+
+A modular, end-to-end catastrophe modeling pipeline using satellite NDVI change detection as a damage proxy, integrated with USGS ShakeMap ground motion data.
+
+### New Code Structure
+
+```
+modules/                            # Satellite & NDVI analysis
+    ndvi_download.py                # Download NDVI composites from Google Earth Engine
+    change_detection.py             # NDVI change computation & per-bridge extraction
+    visualization.py                # Raster maps, PGA-NDVI scatter, spatial plots
+
+catastrophe_model/                  # Cat model pipeline (4 phases)
+    damage_classification.py        # Phase 1: DS0-DS4 from NDVI thresholds
+    proxy_fragility.py              # Phase 2: Empirical lognormal fragility curves
+    economic_disruption.py          # Phase 3: Traffic Disruption Index (TDI)
+    prioritization_map.py           # Phase 4: Emergency priority mapping
+
+run_analysis.ipynb                  # Main notebook - runs the full pipeline
+data/                               # Output datasets
+figures/                            # Output figures from all phases
+```
+
+### Pipeline Overview
+
+```
+Hazard (PGA) + Exposure (Bridges + ADT) + Vulnerability (NDVI Fragility) = Loss (TDI)
+```
+
+- **Phase 1**: Classifies bridges into HAZUS-aligned damage states (DS0-DS4) using NDVI change thresholds
+- **Phase 2**: Fits lognormal fragility curves from empirical PGA-damage exceedance data
+- **Phase 3**: Computes Traffic Disruption Index (TDI = severity_weight x ADT) as economic loss proxy
+- **Phase 4**: Generates emergency priority maps sized by TDI and colored by damage state
+
+### How to Run
+
+1. Open `run_analysis.ipynb` in Jupyter
+2. Run all cells sequentially (Phases 0/0b are optional if data is pre-computed)
+3. Figures are saved to `figures/`, final data to `data/`
+
+---
+
 ## Future Scope
 
 Possible next steps include:
