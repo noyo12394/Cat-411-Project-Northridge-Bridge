@@ -1,7 +1,8 @@
 from pathlib import Path
+from typing import Dict, List, Optional
 
 
-def get_project_root(start: Path | None = None) -> Path:
+def get_project_root(start: Optional[Path] = None) -> Path:
     """Return the repository root for notebooks or scripts launched inside the repo."""
     current = (start or Path.cwd()).resolve()
     for candidate in [current, *current.parents]:
@@ -10,7 +11,7 @@ def get_project_root(start: Path | None = None) -> Path:
     raise FileNotFoundError('Could not locate the project root. Run from inside the repository.')
 
 
-def build_paths(start: Path | None = None) -> dict[str, Path]:
+def build_paths(start: Optional[Path] = None) -> Dict[str, Path]:
     root = get_project_root(start)
     data_dir = root / 'data'
     processed_dir = data_dir / 'processed'
@@ -45,7 +46,7 @@ def build_paths(start: Path | None = None) -> dict[str, Path]:
     }
 
 
-def require_paths(paths: dict[str, Path], keys: list[str]) -> None:
+def require_paths(paths: Dict[str, Path], keys: List[str]) -> None:
     missing = [str(paths[key]) for key in keys if not paths[key].exists()]
     if missing:
         joined = '\n'.join(f'- {path}' for path in missing)

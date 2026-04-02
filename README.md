@@ -1,44 +1,47 @@
 # Cat-411-Project-Northridge-Bridge
 
-Bridge-level earthquake vulnerability analysis for the 1994 Northridge earthquake. The repository combines four related workflows:
+This repository analyzes bridge vulnerability during the 1994 Northridge earthquake.
 
-- bridge inventory cleaning and PGA assignment from USGS ShakeMap rasters
-- HAZUS fragility-based bridge damage estimation
-- Seismic Vulnerability Index (SVI) scoring
-- machine-learning prediction of bridge vulnerability
+It contains two related workflows:
+- a core engineering workflow that starts from the National Bridge Inventory and ShakeMap PGA rasters
+- an optional NDVI-based catastrophe-model extension that needs additional change-detection files
 
-The repo has been reorganized so the notebooks use paths inside the repository instead of machine-specific `Downloads` folders.
+The core workflow now runs entirely from repository-relative paths, so another user can clone the repo and reproduce the main results without relying on a personal `Downloads` folder.
 
-## What Is In The Repo
+## Repository Map
 
-Core source files:
-- `Bridge_Week1.ipynb`
-- `PGA_bridge.ipynb`
-- `HAZUS.ipynb`
-- `svi.ipynb`
-- `MachineLearning.ipynb`
-- `run_analysis.ipynb`
-- `modules/`
-- `catastrophe_model/`
-- `project_paths.py`
+Main notebooks:
+- `PGA_bridge.ipynb`: main preprocessing and PGA assignment notebook
+- `HAZUS.ipynb`: HAZUS classification and Expected Damage Ratio
+- `svi.ipynb`: Seismic Vulnerability Index computation
+- `MachineLearning.ipynb`: predictive modeling for bridge vulnerability
+- `Bridge_Week1.ipynb`: earlier exploratory preprocessing notebook
+- `run_analysis.ipynb`: optional NDVI catastrophe-model pipeline
 
-Core data already included:
+Main code folders:
+- `modules/`: NDVI download, change detection, and visualization helpers
+- `catastrophe_model/`: damage classification, fragility, disruption, and prioritization helpers
+
+Project helper:
+- `project_paths.py`: central path definitions used by the notebooks
+
+Documentation:
+- `README.md`: setup and high-level project explanation
+- `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
+- `data/README.md`: data layout and folder meaning
+
+## Core Data Already Included
+
+The following files needed for the main non-NDVI workflow are already in the repo:
 - `data/CA25.txt`
 - `data/pga_mean.flt`
 - `data/pga_mean.hdr`
-- additional ShakeMap raster layers in `data/`
+- other ShakeMap raster products in `data/`
 
-Generated outputs go to:
-- `data/processed/`
-- `figures/`
-
-Optional change-detection inputs for `run_analysis.ipynb` go to:
-- `data/change_detection/`
-
-## Setup
+## Quick Start
 
 1. Clone the repository.
-2. Create and activate a Python environment.
+2. Create a Python environment.
 3. Install dependencies:
 
 ```bash
@@ -51,56 +54,72 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-Running from the repository root matters because the notebooks now discover paths relative to the repo.
+Running from the repository root matters because the notebooks discover `data/`, `figures/`, and `data/processed/` relative to the repo.
 
-## Recommended Notebook Order
+## Recommended Execution Order
 
-If you want the main bridge vulnerability workflow, run these notebooks in order:
+For the main reproducible workflow, run these notebooks in order:
 
 1. `PGA_bridge.ipynb`
 2. `HAZUS.ipynb`
 3. `svi.ipynb`
 4. `MachineLearning.ipynb`
 
-What each one produces:
-- `PGA_bridge.ipynb` writes `data/processed/pga_nbi_bridge.csv`
-- `HAZUS.ipynb` writes `data/processed/bridges_with_edr.csv`
-- `svi.ipynb` writes `data/processed/bridges_with_svi.csv`
-- `MachineLearning.ipynb` writes `data/processed/bridge_ml_predictions.csv`
+What each step does:
+- `PGA_bridge.ipynb`
+  Reads the raw bridge inventory and ShakeMap raster, cleans coordinates, samples PGA values, and writes `data/processed/pga_nbi_bridge.csv`.
+- `HAZUS.ipynb`
+  Assigns HAZUS bridge classes, computes damage-state probabilities, and writes `data/processed/bridges_with_edr.csv`.
+- `svi.ipynb`
+  Builds a continuous bridge vulnerability score and writes `data/processed/bridges_with_svi.csv`.
+- `MachineLearning.ipynb`
+  Trains regression models that predict EDR and writes `data/processed/bridge_ml_predictions.csv`.
 
-`Bridge_Week1.ipynb` is an earlier exploratory notebook. It now also writes the affected-only bridge subset to `data/processed/bridges_with_pga_affected_only.csv`.
+## Generated Outputs
 
-## About `run_analysis.ipynb`
+Core outputs created by the workflow:
+- `data/processed/pga_nbi_bridge.csv`
+- `data/processed/bridges_with_edr.csv`
+- `data/processed/bridges_with_svi.csv`
+- `data/processed/bridge_ml_predictions.csv`
 
-`run_analysis.ipynb` drives the NDVI-based catastrophe-model extension. It needs additional change-detection files that are not currently committed in this repository:
+These are the best files to inspect if you want the end results without stepping through every notebook cell.
 
+## Optional NDVI Extension
+
+`run_analysis.ipynb` is a separate NDVI-based catastrophe-model pipeline.
+
+It requires additional files that are not currently committed in this repo:
 - `data/change_detection/Pre_Event_NDVI.tif`
 - `data/change_detection/Post_Event_NDVI.tif`
 - `data/change_detection/NDVI_Change.tif`
 - `data/change_detection/pga_bridge_ndvi_200m.csv`
 - `data/change_detection/pga_bridge_ndvi_200m.shp` and companion files
 
-If those files are missing, the notebook now stops immediately with a clear error instead of failing later with broken paths.
+If those files are missing, the notebook stops early with a clear message.
 
-If you also want to re-download NDVI data from Google Earth Engine, you will need:
-- an authenticated Earth Engine account
-- a valid GEE project for `ee.Initialize(...)`
-- the optional packages in `requirements.txt`
+## How To Read The Project
 
-## Main Methods
+If you are opening this repository for the first time, this order works well:
 
-### HAZUS-based damage estimation
-The HAZUS workflow assigns bridge classes and computes damage-state probabilities from PGA, then combines them into Expected Damage Ratio (EDR).
+1. Read `README.md`
+2. Read `docs/WORKFLOW.md`
+3. Open `PGA_bridge.ipynb`
+4. Open `HAZUS.ipynb`
+5. Open `svi.ipynb`
+6. Open `MachineLearning.ipynb`
+7. Open `run_analysis.ipynb` only if the optional NDVI data is available
 
-### SVI computation
-The SVI workflow creates a continuous vulnerability score from bridge age, reconstruction year, skew, span characteristics, and condition measures.
+## What Was Improved For Portability
 
-### Machine learning
-The ML workflow predicts EDR from bridge-specific features such as age, span geometry, condition, SVI, and HAZUS bridge class.
+- notebook paths no longer depend on `/Users/.../Downloads`
+- generated outputs are written inside the repository
+- setup instructions are now explicit
+- optional NDVI dependencies are separated from the core workflow
+- shared paths are defined in one place through `project_paths.py`
 
-## Repo Notes
+## Notes
 
-- Paths no longer depend on `/Users/.../Downloads`.
-- Generated outputs stay inside the repository.
-- The included ShakeMap raster lets the core PGA-to-HAZUS-to-SVI-to-ML workflow be reproduced once dependencies are installed.
-- The NDVI catastrophe-model extension still needs the optional `data/change_detection/` bundle before it can run end-to-end.
+- `Bridge_Week1.ipynb` is kept for context and exploratory preprocessing, but `PGA_bridge.ipynb` is the cleaner main entry point for the core workflow
+- the NDVI extension still depends on data not yet added to the repository
+- the core non-NDVI workflow has been tested locally in this repo and generates the expected processed CSV outputs
