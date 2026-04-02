@@ -8,6 +8,17 @@ These files are already committed and support the core engineering workflow:
 - `CA25.txt`: California National Bridge Inventory source table
 - `pga_mean.flt` and `pga_mean.hdr`: ShakeMap PGA raster and header
 - other ShakeMap raster products in this same folder
+- `Data Collection.xlsx` and `Data Collection.docx`: project data-planning notes describing which bridge parameters were considered critical, supplementary, or out of scope
+- `metadata.xml`: metadata that came with the raster download
+
+Notable additional raster products in this folder:
+- `mmi_mean` and `mmi_std`
+- `pgv_mean` and `pgv_std`
+- `psa0p3_mean` and `psa0p3_std`
+- `psa1p0_mean` and `psa1p0_std`
+- `psa3p0_mean` and `psa3p0_std`
+
+These are not all used in the current core notebooks, but they document the broader hazard dataset collected for the project.
 
 ## Generated Outputs
 
@@ -26,6 +37,13 @@ The optional NDVI-based catastrophe-model workflow uses `change_detection/`:
 - `change_detection/NDVI_Change.tif`
 - `change_detection/pga_bridge_ndvi_200m.csv`
 - `change_detection/pga_bridge_ndvi_200m.shp` plus companion files
+
+The shapefile component is important because shapefiles are multi-file datasets. If this layer is added later, keep all companion files together, such as:
+- `.shp`
+- `.shx`
+- `.dbf`
+- `.prj`
+- `.cpg` when available
 
 If those files are missing, `run_analysis.ipynb` will stop immediately and tell the user exactly which files are required.
 

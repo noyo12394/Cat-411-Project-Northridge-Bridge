@@ -28,6 +28,7 @@ Project helper:
 Documentation:
 - `README.md`: setup and high-level project explanation
 - `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
+- `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
 - `data/README.md`: data layout and folder meaning
 
 ## Core Data Already Included
@@ -37,6 +38,11 @@ The following files needed for the main non-NDVI workflow are already in the rep
 - `data/pga_mean.flt`
 - `data/pga_mean.hdr`
 - other ShakeMap raster products in `data/`
+
+Important supporting files also included:
+- `data/Data Collection.xlsx` and `data/Data Collection.docx`: project data-collection notes and bridge-parameter planning
+- additional ShakeMap products such as `pga_std`, `mmi_mean`, `pgv_mean`, `psa0p3_mean`, `psa1p0_mean`, and `psa3p0_mean`
+- `data/metadata.xml`: source metadata packaged with the raster download
 
 ## Quick Start
 
@@ -75,6 +81,29 @@ What each step does:
 - `MachineLearning.ipynb`
   Trains regression models that predict EDR and writes `data/processed/bridge_ml_predictions.csv`.
 
+## Data Story And Modeling Logic
+
+This project is easier to understand if you think of it as five connected layers:
+
+1. Asset data:
+   Bridge records come from the California National Bridge Inventory in `data/CA25.txt`.
+2. Hazard data:
+   USGS ShakeMap rasters provide spatial earthquake intensity, with `pga_mean.flt` used for the main bridge-level hazard assignment.
+3. Fragility logic:
+   HAZUS-style bridge classification converts bridge attributes plus PGA into damage-state probabilities and Expected Damage Ratio.
+4. Vulnerability refinement:
+   The Seismic Vulnerability Index adds a continuous vulnerability score using bridge age, reconstruction, skew, span geometry, and condition.
+5. Extensions:
+   Machine learning approximates the HAZUS-based damage pattern, and the optional NDVI workflow explores remote-sensing-based loss and prioritization ideas.
+
+The weekly project updates also document why certain parameters were prioritized:
+- critical structural-response parameters:
+  structure height, span length, span continuity, skew angle, and location
+- supplementary but useful variables:
+  year built, retrofit status, material type, number of spans, and total bridge length
+- out-of-scope parameters for this simplified workflow:
+  bearing type and foundation type, because they would require deeper finite-element-style modeling and more complete data
+
 ## Generated Outputs
 
 Core outputs created by the workflow:
@@ -103,12 +132,13 @@ If those files are missing, the notebook stops early with a clear message.
 If you are opening this repository for the first time, this order works well:
 
 1. Read `README.md`
-2. Read `docs/WORKFLOW.md`
-3. Open `PGA_bridge.ipynb`
-4. Open `HAZUS.ipynb`
-5. Open `svi.ipynb`
-6. Open `MachineLearning.ipynb`
-7. Open `run_analysis.ipynb` only if the optional NDVI data is available
+2. Read `docs/DATA_AND_METHODS.md`
+3. Read `docs/WORKFLOW.md`
+4. Open `PGA_bridge.ipynb`
+5. Open `HAZUS.ipynb`
+6. Open `svi.ipynb`
+7. Open `MachineLearning.ipynb`
+8. Open `run_analysis.ipynb` only if the optional NDVI data is available
 
 ## What Was Improved For Portability
 
@@ -123,3 +153,4 @@ If you are opening this repository for the first time, this order works well:
 - `Bridge_Week1.ipynb` is kept for context and exploratory preprocessing, but `PGA_bridge.ipynb` is the cleaner main entry point for the core workflow
 - the NDVI extension still depends on data not yet added to the repository
 - the core non-NDVI workflow has been tested locally in this repo and generates the expected processed CSV outputs
+- the repository now documents both the code path and the underlying data-collection / modeling rationale so a new reader can understand the project without needing the original class presentation context

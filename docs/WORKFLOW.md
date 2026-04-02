@@ -2,6 +2,8 @@
 
 This file explains the project from raw inputs to final outputs.
 
+For the data-collection rationale and variable-selection logic behind this workflow, also read `docs/DATA_AND_METHODS.md`.
+
 ## Goal
 
 The project studies bridge vulnerability during the 1994 Northridge earthquake using two connected ideas:
@@ -16,6 +18,8 @@ These files are already in the repository:
 - `data/CA25.txt`: California National Bridge Inventory source table
 - `data/pga_mean.flt`: ShakeMap raster with log-scale PGA values
 - `data/pga_mean.hdr`: raster header file required to read `pga_mean.flt`
+- additional ShakeMap products in `data/` such as MMI, PGV, and PSA rasters
+- `data/Data Collection.xlsx` and `data/Data Collection.docx`: bridge-parameter planning notes used during project development
 
 ## Core Notebook Sequence
 
@@ -114,15 +118,18 @@ Additional files required:
 
 This notebook is intentionally separated from the core workflow because these files are not currently committed in the repository.
 
+The shapefile and CSV in `data/change_detection/` represent the spatial bridge-layer outputs needed to connect the remote-sensing rasters back to bridge-level analysis.
+
 ## Recommended Reading Order For A New User
 
 1. `README.md`
-2. `docs/WORKFLOW.md`
-3. `PGA_bridge.ipynb`
-4. `HAZUS.ipynb`
-5. `svi.ipynb`
-6. `MachineLearning.ipynb`
-7. `run_analysis.ipynb` if the optional NDVI data is available
+2. `docs/DATA_AND_METHODS.md`
+3. `docs/WORKFLOW.md`
+4. `PGA_bridge.ipynb`
+5. `HAZUS.ipynb`
+6. `svi.ipynb`
+7. `MachineLearning.ipynb`
+8. `run_analysis.ipynb` if the optional NDVI data is available
 
 ## Final Outputs A Reader Should Look At
 
