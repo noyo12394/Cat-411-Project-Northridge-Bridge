@@ -1,0 +1,14 @@
+numpy
+pandas
+matplotlib
+scipy
+scikit-learn
+rasterio
+geopandas
+shapely
+seaborn
+rasterstats
+jupyter
+notebook
+earthengine-api
+geemap

@@ -1,229 +1,106 @@
 # Cat-411-Project-Northridge-Bridge
 
-This repository contains a bridge-level earthquake vulnerability analysis for the 1994 Northridge earthquake as part of the CAT 411 course project. The workflow combines bridge inventory processing, hazard assignment, HAZUS-based fragility analysis, Seismic Vulnerability Index (SVI) computation, and machine learning-based bridge vulnerability prediction.
+Bridge-level earthquake vulnerability analysis for the 1994 Northridge earthquake. The repository combines four related workflows:
 
-The goal of the project is to move from basic bridge exposure analysis toward a more complete bridge risk framework by comparing engineering-based and data-driven methods for estimating damage vulnerability.
+- bridge inventory cleaning and PGA assignment from USGS ShakeMap rasters
+- HAZUS fragility-based bridge damage estimation
+- Seismic Vulnerability Index (SVI) scoring
+- machine-learning prediction of bridge vulnerability
 
----
+The repo has been reorganized so the notebooks use paths inside the repository instead of machine-specific `Downloads` folders.
 
-## Project Overview
+## What Is In The Repo
 
-This project was developed in multiple stages:
+Core source files:
+- `Bridge_Week1.ipynb`
+- `PGA_bridge.ipynb`
+- `HAZUS.ipynb`
+- `svi.ipynb`
+- `MachineLearning.ipynb`
+- `run_analysis.ipynb`
+- `modules/`
+- `catastrophe_model/`
+- `project_paths.py`
 
-1. *Bridge exposure and hazard assignment*
-   - Processed the California National Bridge Inventory (NBI)
-   - Converted original bridge coordinates into usable latitude–longitude format
-   - Integrated USGS ShakeMap Peak Ground Acceleration (PGA) data
-   - Assigned PGA values to bridges within the earthquake footprint
-   - Generated validation plots to inspect spatial exposure patterns
+Core data already included:
+- `data/CA25.txt`
+- `data/pga_mean.flt`
+- `data/pga_mean.hdr`
+- additional ShakeMap raster layers in `data/`
 
-2. *HAZUS fragility-based damage estimation*
-   - Assigned HAZUS bridge classes using structural attributes
-   - Computed fragility-based damage-state probabilities
-   - Estimated Expected Damage Ratio (EDR) for each bridge
-   - Visualized class distribution and damage patterns
+Generated outputs go to:
+- `data/processed/`
+- `figures/`
 
-3. *Seismic Vulnerability Index (SVI) computation*
-   - Built a continuous bridge vulnerability metric using bridge-specific variables
-   - Used factors such as year built, reconstruction year, skew, span characteristics, and condition rating
-   - Compared SVI against HAZUS-based damage outputs
-   - Mapped spatial variation in structural vulnerability
+Optional change-detection inputs for `run_analysis.ipynb` go to:
+- `data/change_detection/`
 
-4. *Machine learning-based vulnerability prediction*
-   - Built predictive models for bridge vulnerability using meaningful bridge-specific factors
-   - Avoided using PGA in the core ML model so the prediction focuses on intrinsic vulnerability rather than hazard intensity
-   - Compared Linear Regression, Gradient Boosting, and Random Forest
-   - Identified the best model for predicting EDR from structural and condition-related features
+## Setup
 
----
+1. Clone the repository.
+2. Create and activate a Python environment.
+3. Install dependencies:
 
-## Repository Contents
-
-### Bridge_Week1.ipynb
-This notebook contains the initial bridge exposure workflow.
-
-Main tasks:
-- Load and clean California NBI bridge data
-- Convert raw latitude and longitude fields into decimal degrees
-- Check spatial coverage of bridges across California
-- Prepare the bridge inventory for hazard assignment
-
-### PGA_bridge.ipynb
-This notebook assigns earthquake hazard values to the bridge inventory.
-
-Main tasks:
-- Read PGA raster data from the Northridge ShakeMap output
-- Sample raster values at bridge coordinates
-- Convert raster values from log scale back to PGA values
-- Create bridge-level PGA outputs
-- Generate spatial and statistical plots for validation
-
-### HAZUS.ipynb
-This notebook applies the HAZUS-based bridge fragility framework.
-
-Main tasks:
-- Assign HAZUS bridge classes
-- Compute exceedance probabilities for bridge damage states
-- Convert exceedance probabilities into discrete damage-state probabilities
-- Estimate Expected Damage Ratio (EDR)
-- Visualize HAZUS class distributions and damage severity
-
-### svi.ipynb
-This notebook computes the Seismic Vulnerability Index (SVI).
-
-Main tasks:
-- Extract and clean bridge-specific vulnerability variables
-- Normalize age, reconstruction history, skew, span geometry, and condition
-- Build a weighted SVI score from 0 to 1
-- Compare SVI against HAZUS-based EDR
-- Generate spatial and class-based SVI plots
-
----
-
-## Machine Learning Extension
-
-The later phase of the project extends the engineering workflow into a machine learning framework for vulnerability prediction.
-
-The ML setup uses only bridge-specific and structurally meaningful variables:
-- year built
-- reconstructed year
-- number of spans
-- maximum span length
-- skew
-- condition rating
-- HAZUS bridge class
-- SVI
-
-The target variable is:
-- *Expected Damage Ratio (EDR)*
-
-This design is intentional. PGA was not used in the core ML model because PGA represents event intensity rather than intrinsic bridge vulnerability. Excluding PGA allows the model to focus on the bridge itself rather than simply reproducing hazard severity.
-
-The tested models include:
-- Linear Regression
-- Gradient Boosting
-- Random Forest
-
-Among these, *Random Forest* performed best, suggesting that bridge vulnerability is influenced by nonlinear interactions among structural age, condition, geometry, and bridge class.
-
----
-
-## Key Outputs
-
-The project produces the following main outputs:
-- cleaned bridge inventory with converted coordinates
-- bridge-level PGA assignments
-- HAZUS bridge classification
-- damage-state probabilities
-- Expected Damage Ratio (EDR)
-- Seismic Vulnerability Index (SVI)
-- machine learning predictions of bridge vulnerability
-
----
-
-## Main Variables Used
-
-Important bridge-level variables used across the workflow include:
-- YEAR_BUILT_027
-- YEAR_RECONSTRUCTED_106
-- MAIN_UNIT_SPANS_045
-- MAX_SPAN_LEN_MT_048
-- DEGREES_SKEW_034
-- LOWEST_RATING or SUBSTRUCTURE_COND_060
-- STRUCTURE_KIND_043A
-- STRUCTURE_TYPE_043B
-- LAT_016
-- LONG_017
-
-Derived variables include:
-- latitude
-- longitude
-- pga_raw
-- pga
-- HWB_CLASS
-- P_DS0 to P_DS4
-- EDR
-- SVI
-
----
-
-## Methods Summary
-
-### HAZUS approach
-The HAZUS method uses bridge classification and fragility parameters to estimate damage-state probabilities and Expected Damage Ratio based on hazard exposure.
-
-### SVI approach
-The SVI method provides a continuous, interpretable bridge-level vulnerability score derived from bridge attributes rather than predefined fragility classes alone.
-
-### Machine learning approach
-The ML method predicts damage-related vulnerability using bridge-specific features only, helping build a more flexible and interpretable data-driven framework.
-
----
-
-## Interpretation
-
-This repository reflects a progression from:
-- bridge exposure analysis,
-to
-- fragility-based engineering damage estimation,
-to
-- bridge-specific vulnerability scoring,
-to
-- machine learning-based vulnerability prediction.
-
-Together, these notebooks create a stronger bridge risk framework that can support future work such as dashboard development, decision-support tools, and comparison between HAZUS, SVI, and machine learning methods.
-
----
-
-## Satellite NDVI-Based Catastrophe Model (New)
-
-A modular, end-to-end catastrophe modeling pipeline using satellite NDVI change detection as a damage proxy, integrated with USGS ShakeMap ground motion data.
-
-### New Code Structure
-
-```
-modules/                            # Satellite & NDVI analysis
-    ndvi_download.py                # Download NDVI composites from Google Earth Engine
-    change_detection.py             # NDVI change computation & per-bridge extraction
-    visualization.py                # Raster maps, PGA-NDVI scatter, spatial plots
-
-catastrophe_model/                  # Cat model pipeline (4 phases)
-    damage_classification.py        # Phase 1: DS0-DS4 from NDVI thresholds
-    proxy_fragility.py              # Phase 2: Empirical lognormal fragility curves
-    economic_disruption.py          # Phase 3: Traffic Disruption Index (TDI)
-    prioritization_map.py           # Phase 4: Emergency priority mapping
-
-run_analysis.ipynb                  # Main notebook - runs the full pipeline
-data/                               # Output datasets
-figures/                            # Output figures from all phases
+```bash
+pip install -r requirements.txt
 ```
 
-### Pipeline Overview
+4. Launch Jupyter from the repository root:
 
+```bash
+jupyter notebook
 ```
-Hazard (PGA) + Exposure (Bridges + ADT) + Vulnerability (NDVI Fragility) = Loss (TDI)
-```
 
-- **Phase 1**: Classifies bridges into HAZUS-aligned damage states (DS0-DS4) using NDVI change thresholds
-- **Phase 2**: Fits lognormal fragility curves from empirical PGA-damage exceedance data
-- **Phase 3**: Computes Traffic Disruption Index (TDI = severity_weight x ADT) as economic loss proxy
-- **Phase 4**: Generates emergency priority maps sized by TDI and colored by damage state
+Running from the repository root matters because the notebooks now discover paths relative to the repo.
 
-### How to Run
+## Recommended Notebook Order
 
-1. Open `run_analysis.ipynb` in Jupyter
-2. Run all cells sequentially (Phases 0/0b are optional if data is pre-computed)
-3. Figures are saved to `figures/`, final data to `data/`
+If you want the main bridge vulnerability workflow, run these notebooks in order:
 
----
+1. `PGA_bridge.ipynb`
+2. `HAZUS.ipynb`
+3. `svi.ipynb`
+4. `MachineLearning.ipynb`
 
-## Future Scope
+What each one produces:
+- `PGA_bridge.ipynb` writes `data/processed/pga_nbi_bridge.csv`
+- `HAZUS.ipynb` writes `data/processed/bridges_with_edr.csv`
+- `svi.ipynb` writes `data/processed/bridges_with_svi.csv`
+- `MachineLearning.ipynb` writes `data/processed/bridge_ml_predictions.csv`
 
-Possible next steps include:
-- refining HAZUS class assignment logic
-- validating SVI against observed bridge damage
-- extending the machine learning workflow
-- adding explainability and feature interpretation
-- developing an interactive webpage or dashboard for bridge risk prediction and prioritization
+`Bridge_Week1.ipynb` is an earlier exploratory notebook. It now also writes the affected-only bridge subset to `data/processed/bridges_with_pga_affected_only.csv`.
 
----
+## About `run_analysis.ipynb`
+
+`run_analysis.ipynb` drives the NDVI-based catastrophe-model extension. It needs additional change-detection files that are not currently committed in this repository:
+
+- `data/change_detection/Pre_Event_NDVI.tif`
+- `data/change_detection/Post_Event_NDVI.tif`
+- `data/change_detection/NDVI_Change.tif`
+- `data/change_detection/pga_bridge_ndvi_200m.csv`
+- `data/change_detection/pga_bridge_ndvi_200m.shp` and companion files
+
+If those files are missing, the notebook now stops immediately with a clear error instead of failing later with broken paths.
+
+If you also want to re-download NDVI data from Google Earth Engine, you will need:
+- an authenticated Earth Engine account
+- a valid GEE project for `ee.Initialize(...)`
+- the optional packages in `requirements.txt`
+
+## Main Methods
+
+### HAZUS-based damage estimation
+The HAZUS workflow assigns bridge classes and computes damage-state probabilities from PGA, then combines them into Expected Damage Ratio (EDR).
+
+### SVI computation
+The SVI workflow creates a continuous vulnerability score from bridge age, reconstruction year, skew, span characteristics, and condition measures.
+
+### Machine learning
+The ML workflow predicts EDR from bridge-specific features such as age, span geometry, condition, SVI, and HAZUS bridge class.
+
+## Repo Notes
+
+- Paths no longer depend on `/Users/.../Downloads`.
+- Generated outputs stay inside the repository.
+- The included ShakeMap raster lets the core PGA-to-HAZUS-to-SVI-to-ML workflow be reproduced once dependencies are installed.
+- The NDVI catastrophe-model extension still needs the optional `data/change_detection/` bundle before it can run end-to-end.
