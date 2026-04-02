@@ -42,6 +42,11 @@ Primary files:
 - `data/pga_mean.flt`
 - `data/pga_mean.hdr`
 
+Collection method:
+- downloaded from the USGS ShakeMap product set for the 1994 Northridge earthquake
+- stored in the repository as raster grid files, with `pga_mean.flt` used as the main hazard surface in the core workflow
+- accompanied by related hazard layers and source metadata packaged with the ShakeMap download
+
 Additional ShakeMap products included in the repository:
 - `data/pga_std.flt`
 - `data/pga_std.hdr`
@@ -71,6 +76,10 @@ Purpose:
 - `pga_mean` is the main hazard surface used in the core workflow
 - the other raster products show that the repository preserves the broader ShakeMap download, not just a single derived file
 - `psa0p3` and `psa1p0` are especially relevant to HAZUS-style fragility adjustment concepts discussed during project development
+
+Source note:
+- USGS describes the 1994 Northridge ShakeMap as a retroactively generated ShakeMap product
+- the broader ShakeMap program provides mapped ground-motion products such as PGA, PGV, MMI, and spectral acceleration layers
 
 ## Data Collection Strategy
 

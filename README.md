@@ -89,7 +89,7 @@ This project is easier to understand if you think of it as five connected layers
 1. Asset data:
    Bridge records come from the California National Bridge Inventory in `data/CA25.txt`, downloaded as the California state ASCII extract from the FHWA National Bridge Inventory dataset.
 2. Hazard data:
-   USGS ShakeMap rasters provide spatial earthquake intensity, with `pga_mean.flt` used for the main bridge-level hazard assignment.
+   USGS ShakeMap rasters provide spatial earthquake intensity, with `pga_mean.flt` used for the main bridge-level hazard assignment. In this repo, those rasters come from the USGS ShakeMap product set for the 1994 Northridge earthquake.
 3. Fragility logic:
    HAZUS-style bridge classification converts bridge attributes plus PGA into damage-state probabilities and Expected Damage Ratio.
 4. Vulnerability refinement:
@@ -111,6 +111,11 @@ For this repository, the bridge-data collection process was:
 - clean the packed coordinate fields
 - convert bridge locations into decimal latitude and longitude
 - use the cleaned bridge dataset as the base table for hazard sampling, HAZUS, SVI, and ML
+
+For the hazard-data collection process, the team:
+- downloaded the Northridge ShakeMap raster package from USGS
+- kept the main PGA raster plus related hazard grids and metadata in `data/`
+- used `pga_mean.flt` as the main ground-motion surface for bridge-level PGA sampling
 
 ## Generated Outputs
 

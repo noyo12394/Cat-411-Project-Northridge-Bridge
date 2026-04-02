@@ -6,7 +6,7 @@ This folder contains both committed source inputs and generated outputs.
 
 These files are already committed and support the core engineering workflow:
 - `CA25.txt`: California National Bridge Inventory source table downloaded as the California state ASCII extract from the FHWA National Bridge Inventory dataset
-- `pga_mean.flt` and `pga_mean.hdr`: ShakeMap PGA raster and header
+- `pga_mean.flt` and `pga_mean.hdr`: ShakeMap PGA raster and header downloaded from the USGS ShakeMap product set for the 1994 Northridge earthquake
 - other ShakeMap raster products in this same folder
 - `Data Collection.xlsx` and `Data Collection.docx`: project data-planning notes describing which bridge parameters were considered critical, supplementary, or out of scope
 - `metadata.xml`: metadata that came with the raster download
@@ -29,6 +29,15 @@ In this repository, that file is then:
 - cleaned to unpack the stored coordinate fields
 - converted into usable latitude / longitude values
 - joined with the ShakeMap hazard raster during PGA assignment
+
+## How The Hazard Rasters Were Collected
+
+The hazard rasters in this folder were collected from the USGS ShakeMap product set for the 1994 Northridge earthquake. The repository keeps the main PGA raster used by the workflow, along with other related hazard layers and metadata that came with the download.
+
+In this repository, those files are then:
+- read as raster grids during preprocessing
+- converted from stored ShakeMap values into usable ground-motion measures where needed
+- sampled at bridge locations to assign bridge-level hazard intensity
 
 ## Generated Outputs
 
