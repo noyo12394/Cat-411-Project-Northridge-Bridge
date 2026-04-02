@@ -87,7 +87,7 @@ What each step does:
 This project is easier to understand if you think of it as five connected layers:
 
 1. Asset data:
-   Bridge records come from the California National Bridge Inventory in `data/CA25.txt`.
+   Bridge records come from the California National Bridge Inventory in `data/CA25.txt`, downloaded as the California state ASCII extract from the FHWA National Bridge Inventory dataset.
 2. Hazard data:
    USGS ShakeMap rasters provide spatial earthquake intensity, with `pga_mean.flt` used for the main bridge-level hazard assignment.
 3. Fragility logic:
@@ -104,6 +104,13 @@ The weekly project updates also document why certain parameters were prioritized
   year built, retrofit status, material type, number of spans, and total bridge length
 - out-of-scope parameters for this simplified workflow:
   bearing type and foundation type, because they would require deeper finite-element-style modeling and more complete data
+
+For this repository, the bridge-data collection process was:
+- download the California bridge inventory extract as `CA25.txt`
+- load it into pandas
+- clean the packed coordinate fields
+- convert bridge locations into decimal latitude and longitude
+- use the cleaned bridge dataset as the base table for hazard sampling, HAZUS, SVI, and ML
 
 ## Generated Outputs
 

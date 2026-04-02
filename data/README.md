@@ -5,7 +5,7 @@ This folder contains both committed source inputs and generated outputs.
 ## Included Source Inputs
 
 These files are already committed and support the core engineering workflow:
-- `CA25.txt`: California National Bridge Inventory source table
+- `CA25.txt`: California National Bridge Inventory source table downloaded as the California state ASCII extract from the FHWA National Bridge Inventory dataset
 - `pga_mean.flt` and `pga_mean.hdr`: ShakeMap PGA raster and header
 - other ShakeMap raster products in this same folder
 - `Data Collection.xlsx` and `Data Collection.docx`: project data-planning notes describing which bridge parameters were considered critical, supplementary, or out of scope
@@ -19,6 +19,16 @@ Notable additional raster products in this folder:
 - `psa3p0_mean` and `psa3p0_std`
 
 These are not all used in the current core notebooks, but they document the broader hazard dataset collected for the project.
+
+## How The Bridge Inventory Was Collected
+
+The bridge inventory in `CA25.txt` was not created manually. It was collected by downloading the California state bridge-inventory extract from the Federal Highway Administration National Bridge Inventory ASCII files and then bringing that file into the repository for preprocessing.
+
+In this repository, that file is then:
+- read into pandas as the raw bridge table
+- cleaned to unpack the stored coordinate fields
+- converted into usable latitude / longitude values
+- joined with the ShakeMap hazard raster during PGA assignment
 
 ## Generated Outputs
 

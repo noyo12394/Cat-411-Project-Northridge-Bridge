@@ -21,10 +21,20 @@ The result is a bridge-by-bridge workflow that starts from raw inventory and haz
 Primary file:
 - `data/CA25.txt`
 
+Collection method:
+- downloaded as the California state extract from the Federal Highway Administration National Bridge Inventory ASCII files
+- saved into the repository as `CA25.txt`
+- loaded into Python with `pandas.read_csv()` for cleaning and analysis
+
 Purpose:
 - provides the California bridge inventory used throughout the project
 - contains bridge attributes such as location, year built, reconstruction information, geometry, and condition-related fields
 - serves as the asset base for hazard assignment, HAZUS classification, SVI computation, and ML modeling
+
+What is in the local file:
+- `25,975` bridge records
+- `123` tabular fields
+- key fields used in this project include structure identifiers, packed latitude and longitude values, bridge age / reconstruction variables, span-related fields, and condition-related attributes
 
 ### 2. ShakeMap Hazard Data
 
