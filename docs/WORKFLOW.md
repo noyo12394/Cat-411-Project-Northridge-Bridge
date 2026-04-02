@@ -110,6 +110,7 @@ Purpose:
 Run the NDVI-based damage proxy workflow and catastrophe-model extension.
 
 Additional files required:
+- `data/change_detection/pga_nbi_bridge.shp` and companion shapefile files
 - `data/change_detection/Pre_Event_NDVI.tif`
 - `data/change_detection/Post_Event_NDVI.tif`
 - `data/change_detection/NDVI_Change.tif`

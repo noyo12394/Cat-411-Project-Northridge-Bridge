@@ -220,6 +220,7 @@ Main idea:
 - NDVI can be used as a proxy signal for disruption and post-event prioritization
 
 Expected additional inputs:
+- `data/change_detection/pga_nbi_bridge.shp` and companion shapefile files
 - `data/change_detection/Pre_Event_NDVI.tif`
 - `data/change_detection/Post_Event_NDVI.tif`
 - `data/change_detection/NDVI_Change.tif`

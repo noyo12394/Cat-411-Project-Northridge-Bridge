@@ -51,6 +51,7 @@ The main workflow writes outputs into `processed/`:
 ## Optional NDVI Extension Inputs
 
 The optional NDVI-based catastrophe-model workflow uses `change_detection/`:
+- `change_detection/pga_nbi_bridge.shp` plus companion files
 - `change_detection/Pre_Event_NDVI.tif`
 - `change_detection/Post_Event_NDVI.tif`
 - `change_detection/NDVI_Change.tif`

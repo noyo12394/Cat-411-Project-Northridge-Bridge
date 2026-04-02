@@ -132,6 +132,7 @@ These are the best files to inspect if you want the end results without stepping
 `run_analysis.ipynb` is a separate NDVI-based catastrophe-model pipeline.
 
 It requires additional files that are not currently committed in this repo:
+- `data/change_detection/pga_nbi_bridge.shp` and companion files
 - `data/change_detection/Pre_Event_NDVI.tif`
 - `data/change_detection/Post_Event_NDVI.tif`
 - `data/change_detection/NDVI_Change.tif`
