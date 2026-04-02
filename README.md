@@ -29,6 +29,7 @@ Documentation:
 - `README.md`: setup and high-level project explanation
 - `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
 - `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
+- `docs/RESULTS_SUMMARY.md`: plain-English summary of the tested core workflow results
 - `data/README.md`: data layout and folder meaning
 
 ## Core Data Already Included
@@ -134,11 +135,12 @@ If you are opening this repository for the first time, this order works well:
 1. Read `README.md`
 2. Read `docs/DATA_AND_METHODS.md`
 3. Read `docs/WORKFLOW.md`
-4. Open `PGA_bridge.ipynb`
-5. Open `HAZUS.ipynb`
-6. Open `svi.ipynb`
-7. Open `MachineLearning.ipynb`
-8. Open `run_analysis.ipynb` only if the optional NDVI data is available
+4. Read `docs/RESULTS_SUMMARY.md`
+5. Open `PGA_bridge.ipynb`
+6. Open `HAZUS.ipynb`
+7. Open `svi.ipynb`
+8. Open `MachineLearning.ipynb`
+9. Open `run_analysis.ipynb` only if the optional NDVI data is available
 
 ## What Was Improved For Portability
 
