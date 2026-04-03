@@ -218,6 +218,10 @@ def extract_bridge_ndvi(
     print("4. Calculating NDVI change (Post - Pre)...")
     bridges["ndvi_chan"] = bridges["post_ndvi"] - bridges["pre_ndvi"]
 
+    # Keep a stable ADT field name for downstream catastrophe-model steps.
+    if "avg_daily_" not in bridges.columns and "adt" in bridges.columns:
+        bridges["avg_daily_"] = bridges["adt"]
+
     # Save outputs
     if output_csv:
         pd.DataFrame(bridges.drop(columns="geometry")).to_csv(output_csv, index=False)

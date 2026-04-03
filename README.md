@@ -167,7 +167,7 @@ It also generates comparison tables in `data/processed/`, benchmark artifacts fo
 
 `run_analysis.ipynb` is a separate NDVI-based catastrophe-model pipeline.
 
-It requires additional files that are not currently committed in this repo:
+The NDVI branch expects these files in `data/change_detection/`:
 - `data/change_detection/pga_nbi_bridge.shp` and companion files
 - `data/change_detection/Pre_Event_NDVI.tif`
 - `data/change_detection/Post_Event_NDVI.tif`
@@ -177,16 +177,22 @@ It requires additional files that are not currently committed in this repo:
 
 If those files are missing, the notebook stops early with a clear message.
 
-Helper script for this stage:
+Helper scripts for this stage:
 
 ```bash
 python scripts/prepare_ndvi_inputs.py
+python scripts/run_ndvi_pipeline.py
 ```
 
-This script now:
+`prepare_ndvi_inputs.py` now:
 - builds `data/change_detection/pga_nbi_bridge.shp` from `data/processed/pga_nbi_bridge.csv`
 - extracts bridge-level NDVI summaries if the NDVI rasters are present
 - prints the exact missing files if the NDVI bundle is still incomplete
+
+`run_ndvi_pipeline.py` runs the optional NDVI workflow end to end and writes:
+- `data/processed/final_bridge_analysis.csv`
+- all NDVI figures in `figures/`
+- packaged review copies in `outputs/ndvi/` after `python scripts/package_outputs.py`
 
 ## Output Bundle
 
@@ -212,7 +218,7 @@ If you are opening this repository for the first time, this order works well:
 6. Open `HAZUS.ipynb`
 7. Open `svi.ipynb`
 8. Open `MachineLearning.ipynb`
-9. Open `run_analysis.ipynb` only if the optional NDVI data is available
+9. Open `run_analysis.ipynb` if you want the notebook walkthrough for the optional NDVI workflow
 
 ## What Was Improved For Portability
 
@@ -221,10 +227,12 @@ If you are opening this repository for the first time, this order works well:
 - setup instructions are now explicit
 - optional NDVI dependencies are separated from the core workflow
 - shared paths are defined in one place through `project_paths.py`
+- the optional NDVI branch now has a scriptable entry point instead of depending only on notebook state
 
 ## Notes
 
 - `Bridge_Week1.ipynb` is kept for context and exploratory preprocessing, but `PGA_bridge.ipynb` is the cleaner main entry point for the core workflow
-- the NDVI extension still depends on data not yet added to the repository
+- the NDVI extension still depends on the NDVI raster files being present on the user's machine or committed with the repo
 - the core non-NDVI workflow has been tested locally in this repo and generates the expected processed CSV outputs
+- the NDVI workflow has also been run locally once the TIFF bundle was added to `data/change_detection/`
 - the repository now documents both the code path and the underlying data-collection / modeling rationale so a new reader can understand the project without needing the original class presentation context

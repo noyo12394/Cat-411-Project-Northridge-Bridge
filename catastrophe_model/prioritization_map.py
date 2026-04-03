@@ -16,6 +16,7 @@ import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
 
 from .damage_classification import DS_ORDER, DS_COLORS
+from .economic_disruption import _resolve_adt_col
 
 
 def create_priority_map(gdf, adt_col="avg_daily_", save_path=None):
@@ -36,6 +37,7 @@ def create_priority_map(gdf, adt_col="avg_daily_", save_path=None):
     fig : matplotlib Figure
     """
     gdf = gdf.copy()
+    adt_col = _resolve_adt_col(gdf, adt_col)
     gdf["damage_state"] = gdf["damage_state"].fillna("DS0 – No Damage")
     gdf["TDI_weighted"] = gdf["TDI_weighted"].fillna(0)
 
@@ -128,6 +130,7 @@ def get_top_priority_bridges(df, n=20, adt_col="avg_daily_"):
     -------
     top : DataFrame
     """
+    adt_col = _resolve_adt_col(df, adt_col)
     damaged = df[df["damage_state"] != "DS0 – No Damage"]
     top = (
         damaged

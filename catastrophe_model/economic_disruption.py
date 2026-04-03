@@ -29,6 +29,17 @@ DS_SEVERITY_WEIGHT = {
 }
 
 
+def _resolve_adt_col(df, requested="avg_daily_"):
+    """Return the first matching ADT column name used in the project outputs."""
+    candidates = [requested, "adt", "ADT_029"]
+    for col in candidates:
+        if col in df.columns:
+            return col
+    raise KeyError(
+        "Could not find an ADT column. Expected one of: avg_daily_, adt, ADT_029."
+    )
+
+
 def compute_tdi(df, adt_col="avg_daily_"):
     """
     Compute Traffic Disruption Index for each bridge.
@@ -46,6 +57,7 @@ def compute_tdi(df, adt_col="avg_daily_"):
         With 'severity_weight', 'is_damaged', 'TDI_binary', 'TDI_weighted' added.
     """
     df = df.copy()
+    adt_col = _resolve_adt_col(df, adt_col)
     df["severity_weight"] = df["damage_state"].map(DS_SEVERITY_WEIGHT)
     df["is_damaged"] = (df["damage_state"] != "DS0 – No Damage").astype(int)
     df["TDI_binary"] = df["is_damaged"] * df[adt_col]
@@ -57,6 +69,7 @@ def summarize_tdi(df, adt_col="avg_daily_"):
     """
     Print a formatted TDI summary table.
     """
+    adt_col = _resolve_adt_col(df, adt_col)
     total_bridges = len(df)
     total_adt = df[adt_col].sum()
     at_risk_adt = df["TDI_binary"].sum()
