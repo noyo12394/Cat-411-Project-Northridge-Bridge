@@ -30,6 +30,7 @@ Documentation:
 - `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
 - `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
 - `docs/RESULTS_SUMMARY.md`: plain-English summary of the tested core workflow results
+- `docs/ML_HYBRID_ANALYSIS.md`: advanced comparison of HAZUS-only, SVI-only, and hybrid machine-learning models
 - `data/README.md`: data layout and folder meaning
 
 Helper folders:
@@ -138,8 +139,25 @@ Core outputs created by the workflow:
 - `data/processed/bridges_with_edr.csv`
 - `data/processed/bridges_with_svi.csv`
 - `data/processed/bridge_ml_predictions.csv`
+- `data/processed/ml_hybrid_comparison.csv`
+- `data/processed/ml_hybrid_best_by_feature_set.csv`
+- `data/processed/ml_hybrid_predictions.csv`
 
 These are the best files to inspect if you want the end results without stepping through every notebook cell.
+
+## Advanced ML Add-On
+
+For a deeper machine-learning comparison, the repository now includes:
+
+- `scripts/run_ml_hybrid_analysis.py`
+- `docs/ML_HYBRID_ANALYSIS.md`
+
+This add-on compares:
+- `SVI-only` models
+- `HAZUS-only` models
+- `Hybrid HAZUS+SVI` models
+
+It also generates comparison tables and figures in `data/processed/` and `figures/`.
 
 ## Optional NDVI Extension
 
