@@ -142,6 +142,9 @@ Core outputs created by the workflow:
 - `data/processed/ml_hybrid_comparison.csv`
 - `data/processed/ml_hybrid_best_by_feature_set.csv`
 - `data/processed/ml_hybrid_predictions.csv`
+- `data/processed/ml_recommended_hybrid_metrics.csv`
+- `data/processed/ml_recommended_hybrid_predictions.csv`
+- `data/processed/ml_recommended_hybrid_feature_importance.csv`
 
 These are the best files to inspect if you want the end results without stepping through every notebook cell.
 
@@ -150,6 +153,7 @@ These are the best files to inspect if you want the end results without stepping
 For a deeper machine-learning comparison, the repository now includes:
 
 - `scripts/run_ml_hybrid_analysis.py`
+- `scripts/export_recommended_hybrid.py`
 - `docs/ML_HYBRID_ANALYSIS.md`
 
 This add-on compares:
@@ -157,7 +161,7 @@ This add-on compares:
 - `HAZUS-only` models
 - `Hybrid HAZUS+SVI` models
 
-It also generates comparison tables and figures in `data/processed/` and `figures/`.
+It also generates comparison tables in `data/processed/`, benchmark artifacts for the overall best model, and a separate recommended hybrid-model export built from the most interpretable engineering variables.
 
 ## Optional NDVI Extension
 

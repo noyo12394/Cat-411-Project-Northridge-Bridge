@@ -1,0 +1,10 @@
+Feature,Role,Reason
+pga,Hazard demand,Peak ground acceleration at the bridge site; event-severity input.
+HWB_CLASS,Engineering class,HAZUS bridge class used to represent fragility-family behavior.
+SVI,Continuous vulnerability,Composite vulnerability score built from bridge attributes.
+year,Design era,Construction year proxy for code era and age.
+yr_recon,Rehabilitation history,Reconstruction year proxy for retrofit / renewal history.
+spans,Geometry,Number of spans; captures system configuration.
+max_span,Geometry,Maximum span length; captures structural scale and flexibility.
+skew,Geometry,Skew angle; relevant to seismic response and support behavior.
+cond,Condition,Condition-rating proxy for deterioration / existing state.

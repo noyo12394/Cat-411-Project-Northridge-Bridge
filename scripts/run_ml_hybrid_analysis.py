@@ -41,6 +41,18 @@ FEATURE_SETS = {
     'Hybrid HAZUS+SVI': ['pga', 'HWB_CLASS', 'SVI', 'year', 'yr_recon', 'spans', 'max_span', 'skew', 'cond'],
 }
 
+FEATURE_MANIFEST = [
+    ('pga', 'Hazard demand', 'Peak ground acceleration at the bridge site; event-severity input.'),
+    ('HWB_CLASS', 'Engineering class', 'HAZUS bridge class used to represent fragility-family behavior.'),
+    ('SVI', 'Continuous vulnerability', 'Composite vulnerability score built from bridge attributes.'),
+    ('year', 'Design era', 'Construction year proxy for code era and age.'),
+    ('yr_recon', 'Rehabilitation history', 'Reconstruction year proxy for retrofit / renewal history.'),
+    ('spans', 'Geometry', 'Number of spans; captures system configuration.'),
+    ('max_span', 'Geometry', 'Maximum span length; captures structural scale and flexibility.'),
+    ('skew', 'Geometry', 'Skew angle; relevant to seismic response and support behavior.'),
+    ('cond', 'Condition', 'Condition-rating proxy for deterioration / existing state.'),
+]
+
 
 def make_preprocessor(numeric_features, categorical_features):
     numeric_pipe = Pipeline([
@@ -101,6 +113,31 @@ def regression_metrics(y_true, y_pred):
         'RMSE': np.sqrt(mean_squared_error(y_true, y_pred)),
         'R2': r2_score(y_true, y_pred),
     }
+
+
+def fit_holdout_model(df, features, model, label):
+    X = df[features].copy()
+    y = df[TARGET].copy()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=RANDOM_STATE)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    metrics = regression_metrics(y_test, y_pred)
+
+    pred_df = X_test.copy()
+    pred_df['EDR_actual'] = y_test.values
+    pred_df['EDR_predicted'] = y_pred
+    pred_df['Residual'] = pred_df['EDR_actual'] - pred_df['EDR_predicted']
+    pred_df['Absolute_Error'] = pred_df['Residual'].abs()
+
+    perm = permutation_importance(model, X_test, y_test, n_repeats=8, random_state=RANDOM_STATE, n_jobs=1)
+    importance_df = pd.DataFrame({
+        'Feature': features,
+        'Importance': perm.importances_mean,
+        'Importance_std': perm.importances_std,
+        'Model_Label': label,
+    }).sort_values('Importance', ascending=False)
+
+    return metrics, pred_df, importance_df, y_test, y_pred
 
 
 def save_heatmap(df, value_col, title, path):
@@ -191,19 +228,17 @@ def main():
     best_summary_csv = processed_dir / 'ml_hybrid_best_by_feature_set.csv'
     best_by_feature.to_csv(best_summary_csv, index=False)
 
-    best_rmse, best_feature_set, best_model_name, best_features, best_model = min(best_candidates, key=lambda x: x[0])
-    X_best = df[best_features].copy()
-    y_best = df[TARGET].copy()
-    X_train, X_test, y_train, y_test = train_test_split(X_best, y_best, test_size=0.2, random_state=RANDOM_STATE)
-    best_model.fit(X_train, y_train)
-    y_pred = best_model.predict(X_test)
-    pred_metrics = regression_metrics(y_test, y_pred)
+    manifest_df = pd.DataFrame(FEATURE_MANIFEST, columns=['Feature', 'Role', 'Reason'])
+    manifest_csv = processed_dir / 'ml_feature_manifest.csv'
+    manifest_df.to_csv(manifest_csv, index=False)
 
-    pred_df = X_test.copy()
-    pred_df['EDR_actual'] = y_test.values
-    pred_df['EDR_predicted'] = y_pred
-    pred_df['Residual'] = pred_df['EDR_actual'] - pred_df['EDR_predicted']
-    pred_df['Absolute_Error'] = pred_df['Residual'].abs()
+    best_rmse, best_feature_set, best_model_name, best_features, best_model = min(best_candidates, key=lambda x: x[0])
+    pred_metrics, pred_df, importance_df, y_test, y_pred = fit_holdout_model(
+        df,
+        best_features,
+        best_model,
+        f'{best_feature_set} :: {best_model_name}',
+    )
     pred_path = processed_dir / 'ml_hybrid_predictions.csv'
     pred_df.to_csv(pred_path, index=False)
 
@@ -230,12 +265,6 @@ def main():
     plt.savefig(figures_dir / 'ml_hybrid_residuals.png', dpi=200, bbox_inches='tight')
     plt.close()
 
-    perm = permutation_importance(best_model, X_test, y_test, n_repeats=8, random_state=RANDOM_STATE, n_jobs=1)
-    importance_df = pd.DataFrame({
-        'Feature': best_features,
-        'Importance': perm.importances_mean,
-        'Importance_std': perm.importances_std,
-    }).sort_values('Importance', ascending=False)
     importance_path = processed_dir / 'ml_hybrid_feature_importance.csv'
     importance_df.to_csv(importance_path, index=False)
 
@@ -246,6 +275,61 @@ def main():
     plt.title('Top Features for Best Hybrid Model')
     plt.tight_layout()
     plt.savefig(figures_dir / 'ml_hybrid_feature_importance.png', dpi=200, bbox_inches='tight')
+    plt.close()
+
+    recommended_row = results_df[
+        (results_df['Feature Set'] == 'Hybrid HAZUS+SVI')
+    ].sort_values(['RMSE', 'MAE']).iloc[0]
+    recommended_model_name = recommended_row['Model']
+    recommended_features = FEATURE_SETS['Hybrid HAZUS+SVI']
+    recommended_model = make_models(
+        make_preprocessor(
+            [c for c in recommended_features if c != 'HWB_CLASS'],
+            [c for c in recommended_features if c == 'HWB_CLASS'],
+        )
+    )[recommended_model_name]
+    recommended_metrics, recommended_pred_df, recommended_importance_df, recommended_y_test, recommended_y_pred = fit_holdout_model(
+        df,
+        recommended_features,
+        recommended_model,
+        f'Hybrid HAZUS+SVI :: {recommended_model_name}',
+    )
+
+    recommended_metrics_df = pd.DataFrame([{
+        'Feature Set': 'Hybrid HAZUS+SVI',
+        'Model': recommended_model_name,
+        **recommended_metrics,
+    }])
+    recommended_metrics_path = processed_dir / 'ml_recommended_hybrid_metrics.csv'
+    recommended_metrics_df.to_csv(recommended_metrics_path, index=False)
+
+    recommended_pred_path = processed_dir / 'ml_recommended_hybrid_predictions.csv'
+    recommended_pred_df.to_csv(recommended_pred_path, index=False)
+
+    recommended_importance_path = processed_dir / 'ml_recommended_hybrid_feature_importance.csv'
+    recommended_importance_df.to_csv(recommended_importance_path, index=False)
+
+    plt.figure(figsize=(7, 6))
+    plt.scatter(recommended_y_test, recommended_y_pred, s=14, alpha=0.45)
+    recommended_lims = [
+        min(recommended_y_test.min(), recommended_y_pred.min()),
+        max(recommended_y_test.max(), recommended_y_pred.max()),
+    ]
+    plt.plot(recommended_lims, recommended_lims, color='black', linestyle='--', linewidth=1)
+    plt.xlabel('Actual EDR')
+    plt.ylabel('Predicted EDR')
+    plt.title(f'Recommended Model: {recommended_model_name} on Hybrid HAZUS+SVI')
+    plt.tight_layout()
+    plt.savefig(figures_dir / 'ml_recommended_hybrid_actual_vs_predicted.png', dpi=200, bbox_inches='tight')
+    plt.close()
+
+    recommended_top_imp = recommended_importance_df.head(10).iloc[::-1]
+    plt.figure(figsize=(8, 5.5))
+    plt.barh(recommended_top_imp['Feature'], recommended_top_imp['Importance'], xerr=recommended_top_imp['Importance_std'])
+    plt.xlabel('Permutation Importance')
+    plt.title('Top Features for Recommended Hybrid Model')
+    plt.tight_layout()
+    plt.savefig(figures_dir / 'ml_recommended_hybrid_feature_importance.png', dpi=200, bbox_inches='tight')
     plt.close()
 
     literature = [
@@ -281,6 +365,7 @@ def main():
         'Full comparison table saved to:',
         f'- `{results_csv.relative_to(PROJECT_ROOT)}`',
         f'- `{best_summary_csv.relative_to(PROJECT_ROOT)}`',
+        f'- `{manifest_csv.relative_to(PROJECT_ROOT)}`',
         '',
         '## Best Overall Model',
         '',
@@ -290,21 +375,52 @@ def main():
         f'- Holdout RMSE: `{pred_metrics["RMSE"]:.6f}`',
         f'- Holdout R2: `{pred_metrics["R2"]:.6f}`',
         '',
+        '## Recommended Final Model For Presentation',
+        '',
+        '- Recommended feature set: `Hybrid HAZUS+SVI`',
+        f'- Recommended model: `{recommended_model_name}`',
+        f'- Holdout MAE: `{recommended_metrics["MAE"]:.6f}`',
+        f'- Holdout RMSE: `{recommended_metrics["RMSE"]:.6f}`',
+        f'- Holdout R2: `{recommended_metrics["R2"]:.6f}`',
+        '',
+        'This is the recommended final model because it uses only interpretable hazard, class, geometry, age, and condition variables while still performing very strongly.',
+        '',
         '## Generated Artifacts',
         '',
         f'- `{pred_path.relative_to(PROJECT_ROOT)}`: holdout predictions and residuals',
         f'- `{importance_path.relative_to(PROJECT_ROOT)}`: permutation-based feature importance for the best model',
+        f'- `{recommended_metrics_path.relative_to(PROJECT_ROOT)}`: metrics for the recommended hybrid model',
+        f'- `{recommended_pred_path.relative_to(PROJECT_ROOT)}`: holdout predictions for the recommended hybrid model',
+        f'- `{recommended_importance_path.relative_to(PROJECT_ROOT)}`: feature importance for the recommended hybrid model',
         f'- `figures/ml_hybrid_rmse_heatmap.png`',
         f'- `figures/ml_hybrid_r2_heatmap.png`',
         f'- `figures/ml_hybrid_actual_vs_predicted.png`',
         f'- `figures/ml_hybrid_residuals.png`',
         f'- `figures/ml_hybrid_feature_importance.png`',
+        f'- `figures/ml_recommended_hybrid_actual_vs_predicted.png`',
+        f'- `figures/ml_recommended_hybrid_feature_importance.png`',
         '',
         '## Interpretation',
         '',
         '- `HAZUS-only` is expected to be very strong because EDR is directly tied to hazard intensity and HAZUS fragility logic.',
         '- `SVI-only` tests how much of the damage pattern can be reconstructed from bridge vulnerability traits alone.',
         '- `Hybrid HAZUS+SVI` is the most decision-useful framing for a dashboard because it combines event severity, engineering classification, and continuous vulnerability context.',
+        '- For reporting, `HAZUS-only` should be treated as a benchmark ceiling, while `Hybrid HAZUS+SVI` is the more defensible final model.',
+        '- All input variables in the hybrid model were restricted to interpretable engineering variables; identifiers and non-causal descriptive fields were intentionally excluded.',
+        '',
+        '## Recommended Final Variable Set',
+        '',
+        '- `pga`',
+        '- `HWB_CLASS`',
+        '- `SVI`',
+        '- `year`',
+        '- `yr_recon`',
+        '- `spans`',
+        '- `max_span`',
+        '- `skew`',
+        '- `cond`',
+        '',
+        'This is the most defensible final model for presentation because every variable has a clear hazard, classification, geometry, age, or condition interpretation.',
         '',
         '## Literature Notes',
         '',
