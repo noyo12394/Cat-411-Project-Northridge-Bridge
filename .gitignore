@@ -3,3 +3,7 @@ __pycache__/
 .ipynb_checkpoints/
 *.pyc
 .DS_Store
+outputs/core/*
+!outputs/core/README.md
+outputs/ndvi/*
+!outputs/ndvi/README.md

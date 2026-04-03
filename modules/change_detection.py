@@ -21,6 +21,105 @@ import rasterio
 from rasterstats import zonal_stats
 
 
+def build_bridge_shapefile(
+    bridge_csv_path,
+    output_shp_path,
+    lat_col="latitude",
+    lon_col="longitude",
+    crs="EPSG:4326",
+):
+    """
+    Build a bridge point shapefile from a CSV produced by the PGA workflow.
+
+    Parameters
+    ----------
+    bridge_csv_path : str or Path
+        Path to the bridge CSV, typically data/processed/pga_nbi_bridge.csv.
+    output_shp_path : str or Path
+        Destination shapefile path.
+    lat_col : str
+        Latitude column name.
+    lon_col : str
+        Longitude column name.
+    crs : str
+        CRS for the output point layer.
+
+    Returns
+    -------
+    GeoDataFrame
+        Bridge point layer written to disk.
+    """
+    bridge_csv_path = os.fspath(bridge_csv_path)
+    output_shp_path = os.fspath(output_shp_path)
+
+    print(f"Loading bridge CSV: {bridge_csv_path}")
+    bridges = pd.read_csv(bridge_csv_path, low_memory=False)
+
+    if lat_col not in bridges.columns or lon_col not in bridges.columns:
+        raise KeyError(
+            f"Bridge CSV must contain '{lat_col}' and '{lon_col}' columns."
+        )
+
+    bridges = bridges.dropna(subset=[lat_col, lon_col]).copy()
+
+    # Keep a compact bridge layer so the shapefile stays readable and avoids
+    # aggressive field-name truncation.
+    preferred_columns = [
+        "STRUCTURE_NUMBER_008",
+        "FEATURES_DESC_006A",
+        "FACILITY_CARRIED_007",
+        "ADT_029",
+        "YEAR_BUILT_027",
+        "YEAR_RECONSTRUCTED_106",
+        "MAX_SPAN_LEN_MT_048",
+        "STRUCTURE_LEN_MT_049",
+        "DEGREES_SKEW_034",
+        "DECK_COND_058",
+        "SUPERSTRUCTURE_COND_059",
+        "SUBSTRUCTURE_COND_060",
+        "BRIDGE_CONDITION",
+        "latitude",
+        "longitude",
+        "pga",
+        "join_id",
+    ]
+    keep = [col for col in preferred_columns if col in bridges.columns]
+    bridge_export = bridges[keep].copy()
+
+    rename_map = {
+        "STRUCTURE_NUMBER_008": "bridge_id",
+        "FEATURES_DESC_006A": "feature",
+        "FACILITY_CARRIED_007": "facility",
+        "ADT_029": "adt",
+        "YEAR_BUILT_027": "year_built",
+        "YEAR_RECONSTRUCTED_106": "yr_recon",
+        "MAX_SPAN_LEN_MT_048": "max_span_m",
+        "STRUCTURE_LEN_MT_049": "length_m",
+        "DEGREES_SKEW_034": "skew_deg",
+        "DECK_COND_058": "deck_cond",
+        "SUPERSTRUCTURE_COND_059": "super_cond",
+        "SUBSTRUCTURE_COND_060": "sub_cond",
+        "BRIDGE_CONDITION": "br_cond",
+        "latitude": "lat",
+        "longitude": "long",
+    }
+    bridge_export = bridge_export.rename(columns=rename_map)
+
+    gdf = gpd.GeoDataFrame(
+        bridge_export,
+        geometry=gpd.points_from_xy(bridges[lon_col], bridges[lat_col]),
+        crs=crs,
+    )
+
+    output_dir = os.path.dirname(output_shp_path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+
+    gdf.to_file(output_shp_path)
+    print(f"Bridge shapefile saved: {output_shp_path}")
+    return gdf
+
+
 def compute_ndvi_change(pre_ndvi_path, post_ndvi_path, output_path=None):
     """
     Compute NDVI change raster (post - pre).

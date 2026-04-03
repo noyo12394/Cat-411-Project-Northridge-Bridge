@@ -32,6 +32,10 @@ Documentation:
 - `docs/RESULTS_SUMMARY.md`: plain-English summary of the tested core workflow results
 - `data/README.md`: data layout and folder meaning
 
+Helper folders:
+- `scripts/`: helper scripts for preparing NDVI inputs and packaging outputs
+- `outputs/`: review-friendly copies of generated outputs with markdown inventories
+
 ## Core Data Already Included
 
 The following files needed for the main non-NDVI workflow are already in the repo:
@@ -140,6 +144,29 @@ It requires additional files that are not currently committed in this repo:
 - `data/change_detection/pga_bridge_ndvi_200m.shp` and companion files
 
 If those files are missing, the notebook stops early with a clear message.
+
+Helper script for this stage:
+
+```bash
+python scripts/prepare_ndvi_inputs.py
+```
+
+This script now:
+- builds `data/change_detection/pga_nbi_bridge.shp` from `data/processed/pga_nbi_bridge.csv`
+- extracts bridge-level NDVI summaries if the NDVI rasters are present
+- prints the exact missing files if the NDVI bundle is still incomplete
+
+## Output Bundle
+
+The repository now also includes an `outputs/` folder for handoff-friendly copies of generated results:
+- `outputs/core/`: packaged copies of the main reproducible workflow outputs
+- `outputs/ndvi/`: packaged copies of optional NDVI workflow outputs when available
+
+Refresh that bundle with:
+
+```bash
+python scripts/package_outputs.py
+```
 
 ## How To Read The Project
 
