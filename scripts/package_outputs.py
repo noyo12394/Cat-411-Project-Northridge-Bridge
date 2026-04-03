@@ -19,6 +19,8 @@ CORE_OUTPUTS = {
 
 NDVI_EXPECTED = {
     'final_bridge_analysis.csv': 'Final catastrophe-model dataset after NDVI damage classification, fragility, and disruption analysis.',
+    'proxy_validation_metrics.csv': 'Proxy-validation metrics comparing the HAZUS baseline against the hybrid validation model.',
+    'proxy_validation_predictions.csv': 'Held-out bridge-level proxy-validation predictions for HAZUS and the hybrid validation model.',
     'NDVI_Raster_Maps.png': 'Three-panel raster comparison of pre-event NDVI, post-event NDVI, and NDVI change.',
     'NDVI_Change_Only.png': 'Standalone map of NDVI change.',
     'PGA_vs_NDVI.png': 'Scatter plot comparing bridge PGA values to bridge-level NDVI change.',
@@ -27,6 +29,7 @@ NDVI_EXPECTED = {
     'Phase2_FragilityCurves.png': 'Empirical proxy fragility curves derived from NDVI-based damage states.',
     'Phase3_EconomicDisruption.png': 'Traffic disruption summary figure.',
     'Phase4_PriorityMap.png': 'Emergency bridge prioritization map.',
+    'proxy_validation_confusion_matrices.png': 'Side-by-side confusion matrices for the HAZUS baseline and the hybrid proxy-validation model.',
 }
 
 
@@ -59,6 +62,10 @@ def main() -> None:
 
     if paths['FINAL_ANALYSIS_CSV'].exists():
         shutil.copy2(paths['FINAL_ANALYSIS_CSV'], ndvi_dir / paths['FINAL_ANALYSIS_CSV'].name)
+    for name in ['proxy_validation_metrics.csv', 'proxy_validation_predictions.csv']:
+        src = processed_dir / name
+        if src.exists():
+            shutil.copy2(src, ndvi_dir / name)
 
     for name in NDVI_EXPECTED:
         src = figures_dir / name

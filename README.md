@@ -31,6 +31,7 @@ Documentation:
 - `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
 - `docs/RESULTS_SUMMARY.md`: plain-English summary of the tested core workflow results
 - `docs/ML_HYBRID_ANALYSIS.md`: advanced comparison of HAZUS-only, SVI-only, and hybrid machine-learning models
+- `docs/PROXY_VALIDATION.md`: proxy-validation results for the optional NDVI branch, including weighted kappa and within-one-state accuracy
 - `data/README.md`: data layout and folder meaning
 
 Helper folders:
@@ -182,6 +183,7 @@ Helper scripts for this stage:
 ```bash
 python scripts/prepare_ndvi_inputs.py
 python scripts/run_ndvi_pipeline.py
+python scripts/run_proxy_validation.py
 ```
 
 `prepare_ndvi_inputs.py` now:
@@ -193,6 +195,12 @@ python scripts/run_ndvi_pipeline.py
 - `data/processed/final_bridge_analysis.csv`
 - all NDVI figures in `figures/`
 - packaged review copies in `outputs/ndvi/` after `python scripts/package_outputs.py`
+
+`run_proxy_validation.py` evaluates the NDVI branch as a **proxy-validation** workflow and writes:
+- `data/processed/proxy_validation_metrics.csv`
+- `data/processed/proxy_validation_predictions.csv`
+- `figures/proxy_validation_confusion_matrices.png`
+- `docs/PROXY_VALIDATION.md`
 
 ## Output Bundle
 
