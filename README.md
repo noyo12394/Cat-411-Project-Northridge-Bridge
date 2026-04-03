@@ -59,6 +59,12 @@ Important supporting files also included:
 pip install -r requirements.txt
 ```
 
+Optional preflight check:
+
+```bash
+python scripts/check_environment.py
+```
+
 4. Launch Jupyter from the repository root:
 
 ```bash
@@ -66,6 +72,10 @@ jupyter notebook
 ```
 
 Running from the repository root matters because the notebooks discover `data/`, `figures/`, and `data/processed/` relative to the repo.
+
+Important:
+- do not run these notebooks in browser-only notebook runtimes such as JupyterLite / Pyodide
+- use a normal local Python environment in VS Code or Jupyter
 
 ## Recommended Execution Order
 
