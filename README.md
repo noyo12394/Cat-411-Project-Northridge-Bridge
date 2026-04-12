@@ -149,6 +149,14 @@ Core outputs created by the workflow:
 
 These are the best files to inspect if you want the end results without stepping through every notebook cell.
 
+Core figures can now be regenerated directly into `figures/` with:
+
+```bash
+python scripts/export_core_figures.py
+```
+
+That script exports the main notebook visuals for the PGA, HAZUS, SVI, and notebook ML workflow, so the `figures/` folder is no longer limited to the NDVI branch.
+
 ## Advanced ML Add-On
 
 For a deeper machine-learning comparison, the repository now includes:
@@ -163,6 +171,18 @@ This add-on compares:
 - `Hybrid HAZUS+SVI` models
 
 It also generates comparison tables in `data/processed/`, benchmark artifacts for the overall best model, and a separate recommended hybrid-model export built from the most interpretable engineering variables.
+
+To refresh all figure outputs in one shot, run:
+
+```bash
+python scripts/refresh_all_figures.py
+```
+
+That helper regenerates:
+- the core workflow figures
+- the advanced ML comparison figures
+- the recommended hybrid-model figures
+- the NDVI and proxy-validation figures, when the NDVI bundle is available
 
 ## Optional NDVI Extension
 

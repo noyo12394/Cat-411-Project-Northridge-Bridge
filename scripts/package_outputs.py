@@ -17,6 +17,30 @@ CORE_OUTPUTS = {
     'bridges_with_pga_affected_only.csv': 'Exploratory subset of bridges with usable PGA values from the week-1 workflow.',
 }
 
+CORE_FIGURES = {
+    'core_bridge_locations.png': 'Scatter map of bridge locations from the core PGA workflow.',
+    'core_pga_distribution.png': 'Histogram of sampled bridge PGA values.',
+    'core_hazus_class_distribution.png': 'Distribution of HAZUS bridge classes in the processed bridge inventory.',
+    'core_edr_distribution.png': 'Distribution of Expected Damage Ratio values.',
+    'core_edr_by_hazus_class.png': 'Boxplot of EDR by the most common HAZUS bridge classes.',
+    'core_log_edr_distribution.png': 'Log-scaled EDR distribution for positive-damage bridges.',
+    'core_damage_state_probabilities.png': 'Average HAZUS damage-state probabilities across the bridge set.',
+    'core_damage_state_by_hazus_class.png': 'Stacked average damage-state probabilities by HAZUS class.',
+    'core_svi_distribution.png': 'Distribution of Seismic Vulnerability Index values.',
+    'core_svi_vs_edr.png': 'Scatter plot comparing SVI against HAZUS EDR.',
+    'core_mean_svi_by_hazus_class.png': 'Mean SVI by HAZUS bridge class.',
+    'core_pga_vs_svi.png': 'Scatter plot relating PGA and SVI.',
+    'core_ml_actual_vs_predicted.png': 'Actual-versus-predicted EDR figure for the notebook ML output.',
+    'core_ml_residuals.png': 'Residual distribution for the notebook ML output.',
+    'ml_hybrid_rmse_heatmap.png': 'RMSE heatmap for the advanced hybrid ML comparison.',
+    'ml_hybrid_r2_heatmap.png': 'R2 heatmap for the advanced hybrid ML comparison.',
+    'ml_hybrid_actual_vs_predicted.png': 'Actual-versus-predicted EDR for the best advanced hybrid ML model.',
+    'ml_hybrid_residuals.png': 'Residual distribution for the best advanced hybrid ML model.',
+    'ml_hybrid_feature_importance.png': 'Permutation feature importance for the best advanced hybrid ML model.',
+    'ml_recommended_hybrid_actual_vs_predicted.png': 'Actual-versus-predicted EDR for the recommended hybrid engineering model.',
+    'ml_recommended_hybrid_feature_importance.png': 'Feature importance for the recommended hybrid engineering model.',
+}
+
 NDVI_EXPECTED = {
     'final_bridge_analysis.csv': 'Final catastrophe-model dataset after NDVI damage classification, fragility, and disruption analysis.',
     'proxy_validation_metrics.csv': 'Proxy-validation metrics comparing the HAZUS baseline against the hybrid validation model.',
@@ -60,6 +84,11 @@ def main() -> None:
         if src.exists():
             shutil.copy2(src, core_dir / name)
 
+    for name in CORE_FIGURES:
+        src = figures_dir / name
+        if src.exists():
+            shutil.copy2(src, core_dir / name)
+
     if paths['FINAL_ANALYSIS_CSV'].exists():
         shutil.copy2(paths['FINAL_ANALYSIS_CSV'], ndvi_dir / paths['FINAL_ANALYSIS_CSV'].name)
     for name in ['proxy_validation_metrics.csv', 'proxy_validation_predictions.csv']:
@@ -72,7 +101,7 @@ def main() -> None:
         if src.exists():
             shutil.copy2(src, ndvi_dir / name)
 
-    write_inventory(core_dir, 'Core Outputs', CORE_OUTPUTS)
+    write_inventory(core_dir, 'Core Outputs', {**CORE_OUTPUTS, **CORE_FIGURES})
     write_inventory(ndvi_dir, 'NDVI Outputs', NDVI_EXPECTED)
 
     overview = outputs_dir / 'README.md'
