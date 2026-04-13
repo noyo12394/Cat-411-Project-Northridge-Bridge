@@ -1,10 +1,21 @@
 Feature,Role,Reason
-pga,Hazard demand,Peak ground acceleration at the bridge site; event-severity input.
-HWB_CLASS,Engineering class,HAZUS bridge class used to represent fragility-family behavior.
-SVI,Continuous vulnerability,Composite vulnerability score built from bridge attributes.
-year,Design era,Construction year proxy for code era and age.
-yr_recon,Rehabilitation history,Reconstruction year proxy for retrofit / renewal history.
-spans,Geometry,Number of spans; captures system configuration.
-max_span,Geometry,Maximum span length; captures structural scale and flexibility.
-skew,Geometry,Skew angle; relevant to seismic response and support behavior.
-cond,Condition,Condition-rating proxy for deterioration / existing state.
+pga,Hazard demand,Peak ground acceleration at the bridge site; direct shaking demand.
+HWB_CLASS,HAZUS classification,Bridge fragility family assigned from structure type and era logic.
+SVI,Composite vulnerability,Seismic Vulnerability Index carried over from the engineering scoring workflow.
+design_era_1989,Design era,Categorical design-era feature that separates older bridges from post-1989 design practice.
+age_years,Age,Bridge age in years relative to 2025.
+time_since_rehab,Rehabilitation timing,Years since the last recorded reconstruction; falls back to bridge age if never reconstructed.
+reconstructed_flag,Rehabilitation indicator,Binary flag indicating whether a bridge has a recorded reconstruction year.
+spans,Geometry,Number of main unit spans.
+max_span_log1p,Geometry,Log-transformed maximum span length to tame the extreme right tail.
+skew,Geometry,Skew angle in degrees.
+cond,Condition,Lowest available bridge condition rating proxy.
+deck_area_log1p,Scale,Log-transformed deck area as a size / exposure proxy.
+adt_log1p,Traffic importance,Log-transformed average daily traffic.
+truck_pct,Traffic importance,Truck share of ADT.
+detour_km_log1p,Network disruption,Log-transformed detour length in kilometers.
+lanes_on,Capacity,Traffic lanes carried by the bridge.
+operating_rating,Capacity / condition,Operating rating from the inventory.
+functional_class_cat,Network role,Functional class category from the bridge inventory.
+kind,Structural system,Structure kind code from the NBI inventory.
+type,Structural system,Structure type code from the NBI inventory.

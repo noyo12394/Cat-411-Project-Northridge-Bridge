@@ -7,3 +7,42 @@ This folder contains packaged outputs for easier review.
 - `bridges_with_svi.csv`: Bridge-level Seismic Vulnerability Index scores merged onto the damage table. Currently present.
 - `bridge_ml_predictions.csv`: Machine-learning predictions and evaluation outputs for bridge damage modeling. Currently present.
 - `bridges_with_pga_affected_only.csv`: Exploratory subset of bridges with usable PGA values from the week-1 workflow. Currently present.
+- `ml_statewide_training_dataset.csv`: Statewide ML training table rebuilt on all California bridges with engineered HAZUS, SVI, and bridge features. Currently present.
+- `ml_feature_manifest.csv`: Engineering feature manifest used in the statewide ML comparison. Currently present.
+- `ml_hybrid_comparison.csv`: Cross-validated statewide ML model comparison across feature sets and model families. Currently present.
+- `ml_hybrid_best_by_feature_set.csv`: Best statewide ML model within each feature-set framing. Currently present.
+- `ml_hybrid_predictions.csv`: Holdout predictions for the best overall statewide ML benchmark model. Currently present.
+- `ml_hybrid_feature_importance.csv`: Permutation feature importance for the best overall statewide ML benchmark model. Currently present.
+- `ml_target_transform_comparison.csv`: Raw-target versus log-target holdout comparison for the recommended statewide model. Currently present.
+- `ml_recommended_hybrid_metrics.csv`: Metrics for the recommended statewide hybrid engineering model. Currently present.
+- `ml_recommended_hybrid_predictions.csv`: Holdout predictions for the recommended statewide hybrid engineering model. Currently present.
+- `ml_recommended_hybrid_feature_importance.csv`: Permutation feature importance for the recommended statewide hybrid engineering model. Currently present.
+- `ml_feature_screen_mutual_info.csv`: Mutual-information screen showing which statewide engineered variables carry the most signal. Currently present.
+- `ml_statewide_bridge_scores.csv`: Predicted statewide bridge-risk scores from the final recommended ML model. Currently present.
+- `core_bridge_locations.png`: Scatter map of bridge locations from the core PGA workflow. Currently present.
+- `core_pga_distribution.png`: Histogram of sampled bridge PGA values. Currently present.
+- `core_hazus_class_distribution.png`: Distribution of HAZUS bridge classes in the processed bridge inventory. Currently present.
+- `core_edr_distribution.png`: Distribution of Expected Damage Ratio values. Currently present.
+- `core_edr_by_hazus_class.png`: Boxplot of EDR by the most common HAZUS bridge classes. Currently present.
+- `core_log_edr_distribution.png`: Log-scaled EDR distribution for positive-damage bridges. Currently present.
+- `core_damage_state_probabilities.png`: Average HAZUS damage-state probabilities across the bridge set. Currently present.
+- `core_damage_state_by_hazus_class.png`: Stacked average damage-state probabilities by HAZUS class. Currently present.
+- `core_svi_distribution.png`: Distribution of Seismic Vulnerability Index values. Currently present.
+- `core_svi_vs_edr.png`: Scatter plot comparing SVI against HAZUS EDR. Currently present.
+- `core_mean_svi_by_hazus_class.png`: Mean SVI by HAZUS bridge class. Currently present.
+- `core_pga_vs_svi.png`: Scatter plot relating PGA and SVI. Currently present.
+- `core_ml_actual_vs_predicted.png`: Actual-versus-predicted EDR figure for the notebook ML output. Currently present.
+- `core_ml_residuals.png`: Residual distribution for the notebook ML output. Currently present.
+- `ml_hybrid_rmse_heatmap.png`: RMSE heatmap for the advanced hybrid ML comparison. Currently present.
+- `ml_hybrid_r2_heatmap.png`: R2 heatmap for the advanced hybrid ML comparison. Currently present.
+- `ml_hybrid_rmsle_heatmap.png`: RMSLE heatmap for the advanced hybrid ML comparison. Currently present.
+- `ml_hybrid_actual_vs_predicted.png`: Actual-versus-predicted EDR for the best advanced hybrid ML model. Currently present.
+- `ml_hybrid_log_actual_vs_predicted.png`: Log-scale actual-versus-predicted EDR for the best advanced hybrid ML model. Currently present.
+- `ml_hybrid_residuals.png`: Residual distribution for the best advanced hybrid ML model. Currently present.
+- `ml_hybrid_decile_calibration.png`: Decile calibration plot for the best advanced hybrid ML model. Currently present.
+- `ml_hybrid_feature_importance.png`: Permutation feature importance for the best advanced hybrid ML model. Currently present.
+- `ml_recommended_hybrid_actual_vs_predicted.png`: Actual-versus-predicted EDR for the recommended hybrid engineering model. Currently present.
+- `ml_recommended_hybrid_log_actual_vs_predicted.png`: Log-scale actual-versus-predicted EDR for the recommended hybrid engineering model. Currently present.
+- `ml_recommended_hybrid_feature_importance.png`: Feature importance for the recommended hybrid engineering model. Currently present.
+- `ml_recommended_hybrid_decile_calibration.png`: Decile calibration plot for the recommended hybrid engineering model. Currently present.
+- `ml_recommended_hybrid_mutual_information.png`: Mutual-information ranking for the recommended statewide feature set. Currently present.

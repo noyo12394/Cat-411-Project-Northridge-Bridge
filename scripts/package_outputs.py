@@ -15,6 +15,18 @@ CORE_OUTPUTS = {
     'bridges_with_svi.csv': 'Bridge-level Seismic Vulnerability Index scores merged onto the damage table.',
     'bridge_ml_predictions.csv': 'Machine-learning predictions and evaluation outputs for bridge damage modeling.',
     'bridges_with_pga_affected_only.csv': 'Exploratory subset of bridges with usable PGA values from the week-1 workflow.',
+    'ml_statewide_training_dataset.csv': 'Statewide ML training table rebuilt on all California bridges with engineered HAZUS, SVI, and bridge features.',
+    'ml_feature_manifest.csv': 'Engineering feature manifest used in the statewide ML comparison.',
+    'ml_hybrid_comparison.csv': 'Cross-validated statewide ML model comparison across feature sets and model families.',
+    'ml_hybrid_best_by_feature_set.csv': 'Best statewide ML model within each feature-set framing.',
+    'ml_hybrid_predictions.csv': 'Holdout predictions for the best overall statewide ML benchmark model.',
+    'ml_hybrid_feature_importance.csv': 'Permutation feature importance for the best overall statewide ML benchmark model.',
+    'ml_target_transform_comparison.csv': 'Raw-target versus log-target holdout comparison for the recommended statewide model.',
+    'ml_recommended_hybrid_metrics.csv': 'Metrics for the recommended statewide hybrid engineering model.',
+    'ml_recommended_hybrid_predictions.csv': 'Holdout predictions for the recommended statewide hybrid engineering model.',
+    'ml_recommended_hybrid_feature_importance.csv': 'Permutation feature importance for the recommended statewide hybrid engineering model.',
+    'ml_feature_screen_mutual_info.csv': 'Mutual-information screen showing which statewide engineered variables carry the most signal.',
+    'ml_statewide_bridge_scores.csv': 'Predicted statewide bridge-risk scores from the final recommended ML model.',
 }
 
 CORE_FIGURES = {
@@ -34,11 +46,17 @@ CORE_FIGURES = {
     'core_ml_residuals.png': 'Residual distribution for the notebook ML output.',
     'ml_hybrid_rmse_heatmap.png': 'RMSE heatmap for the advanced hybrid ML comparison.',
     'ml_hybrid_r2_heatmap.png': 'R2 heatmap for the advanced hybrid ML comparison.',
+    'ml_hybrid_rmsle_heatmap.png': 'RMSLE heatmap for the advanced hybrid ML comparison.',
     'ml_hybrid_actual_vs_predicted.png': 'Actual-versus-predicted EDR for the best advanced hybrid ML model.',
+    'ml_hybrid_log_actual_vs_predicted.png': 'Log-scale actual-versus-predicted EDR for the best advanced hybrid ML model.',
     'ml_hybrid_residuals.png': 'Residual distribution for the best advanced hybrid ML model.',
+    'ml_hybrid_decile_calibration.png': 'Decile calibration plot for the best advanced hybrid ML model.',
     'ml_hybrid_feature_importance.png': 'Permutation feature importance for the best advanced hybrid ML model.',
     'ml_recommended_hybrid_actual_vs_predicted.png': 'Actual-versus-predicted EDR for the recommended hybrid engineering model.',
+    'ml_recommended_hybrid_log_actual_vs_predicted.png': 'Log-scale actual-versus-predicted EDR for the recommended hybrid engineering model.',
     'ml_recommended_hybrid_feature_importance.png': 'Feature importance for the recommended hybrid engineering model.',
+    'ml_recommended_hybrid_decile_calibration.png': 'Decile calibration plot for the recommended hybrid engineering model.',
+    'ml_recommended_hybrid_mutual_information.png': 'Mutual-information ranking for the recommended statewide feature set.',
 }
 
 NDVI_EXPECTED = {

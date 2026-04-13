@@ -1,10 +1,21 @@
-Feature,Importance,Importance_std,Model_Label
-pga,2.01665475434252,0.045070587097670055,Hybrid HAZUS+SVI :: Extra Trees
-HWB_CLASS,0.06326356668010925,0.0072528206901890015,Hybrid HAZUS+SVI :: Extra Trees
-max_span,1.6450296978998136e-05,1.0788634286630847e-05,Hybrid HAZUS+SVI :: Extra Trees
-year,1.2509658300755011e-05,1.183177394572075e-05,Hybrid HAZUS+SVI :: Extra Trees
-spans,5.7640898298710885e-06,1.1903082781316422e-05,Hybrid HAZUS+SVI :: Extra Trees
-yr_recon,-6.16897025143559e-07,2.2799154371095357e-06,Hybrid HAZUS+SVI :: Extra Trees
-SVI,-1.6085270345300717e-05,9.366239901644396e-06,Hybrid HAZUS+SVI :: Extra Trees
-skew,-2.7365971513593212e-05,1.9356363506601646e-05,Hybrid HAZUS+SVI :: Extra Trees
-cond,-3.3250703245640834e-05,6.902946273190717e-05,Hybrid HAZUS+SVI :: Extra Trees
+Feature,Importance,Importance_std,Label
+pga,2.06350305171287,0.045650722556826305,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+HWB_CLASS,0.02952127807616865,0.0034298806982158018,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+kind,0.020779578531914106,0.0015886639965786956,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+SVI,0.0024724412709604495,0.00023367347481041375,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+skew,0.0008256514407736412,0.0001695247942658422,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+age_years,0.0006845948842401084,9.751535430152614e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+time_since_rehab,0.0005677294104350916,8.123239850449477e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+cond,0.0004025057474245086,5.7086928510196e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+deck_area_log1p,0.0003617695579938111,5.871691829895057e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+max_span_log1p,0.0003052105147758148,2.2312303448320974e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+spans,0.00022127689360187017,0.0003073347231948067,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+adt_log1p,0.00013732682002008204,3.8327100877743226e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+lanes_on,0.00012041695981968026,2.9947213218265065e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+type,0.00010528050538710643,3.8708197853977006e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+design_era_1989,9.595360050842124e-05,1.5095917260246386e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+reconstructed_flag,9.510572057208622e-05,3.40986429241509e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+truck_pct,8.351971963138638e-05,4.2907312409840125e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+operating_rating,8.283876929595276e-05,2.4365365954298567e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+functional_class_cat,6.825356001009346e-05,1.2034102420932077e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target
+detour_km_log1p,2.2490109960915383e-05,2.125021747152464e-05,Statewide HAZUS + Bridge :: MLPRegressor :: raw target

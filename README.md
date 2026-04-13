@@ -140,12 +140,17 @@ Core outputs created by the workflow:
 - `data/processed/bridges_with_edr.csv`
 - `data/processed/bridges_with_svi.csv`
 - `data/processed/bridge_ml_predictions.csv`
+- `data/processed/ml_statewide_training_dataset.csv`
+- `data/processed/ml_feature_manifest.csv`
 - `data/processed/ml_hybrid_comparison.csv`
 - `data/processed/ml_hybrid_best_by_feature_set.csv`
 - `data/processed/ml_hybrid_predictions.csv`
+- `data/processed/ml_target_transform_comparison.csv`
 - `data/processed/ml_recommended_hybrid_metrics.csv`
 - `data/processed/ml_recommended_hybrid_predictions.csv`
 - `data/processed/ml_recommended_hybrid_feature_importance.csv`
+- `data/processed/ml_feature_screen_mutual_info.csv`
+- `data/processed/ml_statewide_bridge_scores.csv`
 
 These are the best files to inspect if you want the end results without stepping through every notebook cell.
 
@@ -166,11 +171,17 @@ For a deeper machine-learning comparison, the repository now includes:
 - `docs/ML_HYBRID_ANALYSIS.md`
 
 This add-on compares:
-- `SVI-only` models
-- `HAZUS-only` models
-- `Hybrid HAZUS+SVI` models
+- `HAZUS Benchmark` models
+- `Intrinsic Vulnerability` models
+- `Statewide Bridge` models
+- `Statewide HAZUS + Bridge` models
 
-It also generates comparison tables in `data/processed/`, benchmark artifacts for the overall best model, and a separate recommended hybrid-model export built from the most interpretable engineering variables.
+It also:
+- rebuilds the ML dataset on all California bridges, not only the ShakeMap-affected subset
+- tests the professor-requested `log1p(EDR) -> expm1(...)` target transform and saves the raw-vs-log comparison
+- exports benchmark artifacts for the overall best model
+- exports a separate recommended statewide hybrid model built from the most interpretable engineering variables
+- writes richer validation plots, including log-scale fit plots, decile calibration, and a mutual-information screen
 
 To refresh all figure outputs in one shot, run:
 
@@ -181,7 +192,7 @@ python scripts/refresh_all_figures.py
 That helper regenerates:
 - the core workflow figures
 - the advanced ML comparison figures
-- the recommended hybrid-model figures
+- the recommended statewide-model figures
 - the NDVI and proxy-validation figures, when the NDVI bundle is available
 
 ## Optional NDVI Extension
