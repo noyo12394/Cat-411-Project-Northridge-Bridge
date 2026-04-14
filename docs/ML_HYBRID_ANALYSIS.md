@@ -8,7 +8,7 @@ This refreshed analysis rebuilds the machine-learning pipeline on the full Calif
 - Bridges with positive PGA / positive fragility demand: `16,796`.
 - The professor-requested log-target workflow was tested directly, and the final recommended transform is chosen from the raw-vs-log comparison rather than assumed in advance.
 - A new `design_era_1989` categorical feature was added to reflect the professor note about a HAZUS-style design-era split.
-- The model comparison now tests generic statewide bridge features, HAZUS variables, and a combined statewide hybrid model.
+- The model comparison now separates pure bridge vulnerability models from event-damage models that also include hazard demand.
 - Additional validation outputs were added: log-scale fit plots, decile calibration plots, feature-importance charts, and a mutual-information screen.
 
 ## Why These Models
@@ -35,30 +35,23 @@ This refreshed analysis rebuilds the machine-learning pipeline on the full Calif
 | skew | Geometry | Skew angle in degrees. |
 | cond | Condition | Lowest available bridge condition rating proxy. |
 | deck_area_log1p | Scale | Log-transformed deck area as a size / exposure proxy. |
-| adt_log1p | Traffic importance | Log-transformed average daily traffic. |
-| truck_pct | Traffic importance | Truck share of ADT. |
-| detour_km_log1p | Network disruption | Log-transformed detour length in kilometers. |
-| lanes_on | Capacity | Traffic lanes carried by the bridge. |
 | operating_rating | Capacity / condition | Operating rating from the inventory. |
-| functional_class_cat | Network role | Functional class category from the bridge inventory. |
-| kind | Structural system | Structure kind code from the NBI inventory. |
-| type | Structural system | Structure type code from the NBI inventory. |
 
 ## Feature-Set Comparison
 
 - `HAZUS Benchmark`: Minimal hazard-only benchmark using PGA and HAZUS bridge class.
-- `Intrinsic Vulnerability`: Bridge age, geometry, condition, and SVI without direct hazard demand.
-- `Statewide Bridge`: Generic statewide bridge descriptors that remain meaningful across California.
-- `Statewide HAZUS + Bridge`: Hazard, HAZUS class, and statewide bridge descriptors combined into the final presentation model.
+- `Bridge Vulnerability Compact`: Compact no-PGA vulnerability framing using SVI and the core age / geometry / condition variables.
+- `Bridge Vulnerability Structural`: Pure bridge-intrinsic structural vulnerability model with no PGA and no traffic / network consequence variables.
+- `Event Damage Hybrid`: Event-damage model that combines shaking demand with the bridge-intrinsic structural variables.
 
 ## Best Model By Feature Set
 
 | Feature Set | Model | CV_MAE | CV_RMSE | CV_RMSLE | CV_R2 | Holdout_RMSE | Holdout_R2 | Holdout_RMSE_Positive | Holdout_R2_Positive |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | HAZUS Benchmark | MLPRegressor | 0.000226 | 0.000726 | 0.000671 | 0.999755 | 0.000443 | 0.999905 | 0.000545 | 0.999904 |
-| Statewide HAZUS + Bridge | MLPRegressor | 0.000665 | 0.001476 | 0.001263 | 0.998993 | 0.001217 | 0.999280 | 0.001503 | 0.999271 |
-| Statewide Bridge | Extra Trees | 0.012796 | 0.039416 | 0.034096 | 0.297143 | 0.038945 | 0.262355 | 0.048011 | 0.256139 |
-| Intrinsic Vulnerability | Random Forest | 0.015209 | 0.043409 | 0.037694 | 0.147169 | 0.042214 | 0.133301 | 0.051780 | 0.134738 |
+| Event Damage Hybrid | MLPRegressor | 0.000712 | 0.001514 | 0.001334 | 0.998916 | 0.001438 | 0.998994 | 0.001721 | 0.999044 |
+| Bridge Vulnerability Structural | Extra Trees | 0.014493 | 0.042959 | 0.037391 | 0.164772 | 0.041457 | 0.164107 | 0.050829 | 0.166245 |
+| Bridge Vulnerability Compact | Random Forest | 0.015600 | 0.044166 | 0.038448 | 0.116852 | 0.042453 | 0.123477 | 0.051900 | 0.130733 |
 
 ## Top Overall Results
 
@@ -66,23 +59,23 @@ This refreshed analysis rebuilds the machine-learning pipeline on the full Calif
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | HAZUS Benchmark | MLPRegressor | 0.000226 | 0.000726 | 0.000671 | 0.999755 | 0.000183 | 0.000443 | 0.000401 | 0.999905 | 0.000545 | 0.999904 |
 | HAZUS Benchmark | Extra Trees | 0.000026 | 0.000939 | 0.000743 | 0.999449 | 0.000008 | 0.000106 | 0.000079 | 0.999994 | 0.000132 | 0.999994 |
-| Statewide HAZUS + Bridge | MLPRegressor | 0.000665 | 0.001476 | 0.001263 | 0.998993 | 0.000468 | 0.001217 | 0.001019 | 0.999280 | 0.001503 | 0.999271 |
+| Event Damage Hybrid | MLPRegressor | 0.000712 | 0.001514 | 0.001334 | 0.998916 | 0.000716 | 0.001438 | 0.001282 | 0.998994 | 0.001721 | 0.999044 |
 | HAZUS Benchmark | Random Forest | 0.000261 | 0.001904 | 0.001474 | 0.998325 | 0.000236 | 0.001655 | 0.001316 | 0.998668 | 0.002058 | 0.998633 |
 | HAZUS Benchmark | HistGradientBoosting | 0.000597 | 0.003503 | 0.002711 | 0.994433 | 0.000558 | 0.002978 | 0.002321 | 0.995685 | 0.003704 | 0.995573 |
-| Statewide HAZUS + Bridge | HistGradientBoosting | 0.000670 | 0.003684 | 0.002878 | 0.993857 | 0.000539 | 0.002626 | 0.002095 | 0.996645 | 0.003266 | 0.996558 |
-| Statewide HAZUS + Bridge | Elastic Net | 0.006397 | 0.015798 | 0.013448 | 0.887019 | 0.006160 | 0.015380 | 0.013093 | 0.884958 | 0.019121 | 0.882007 |
-| Statewide HAZUS + Bridge | Extra Trees | 0.004560 | 0.016362 | 0.013254 | 0.878897 | 0.004217 | 0.016113 | 0.013020 | 0.873731 | 0.019964 | 0.871385 |
+| Event Damage Hybrid | HistGradientBoosting | 0.000661 | 0.004099 | 0.003186 | 0.992382 | 0.000488 | 0.002708 | 0.002154 | 0.996433 | 0.003368 | 0.996340 |
+| Event Damage Hybrid | Extra Trees | 0.002077 | 0.008748 | 0.006867 | 0.965331 | 0.001882 | 0.008336 | 0.006505 | 0.966206 | 0.010348 | 0.965442 |
+| Event Damage Hybrid | Random Forest | 0.003090 | 0.011509 | 0.009024 | 0.940051 | 0.002733 | 0.010639 | 0.008307 | 0.944948 | 0.013163 | 0.944088 |
+| Event Damage Hybrid | Elastic Net | 0.006583 | 0.016284 | 0.013884 | 0.879968 | 0.006343 | 0.015959 | 0.013591 | 0.876128 | 0.019843 | 0.872933 |
 | HAZUS Benchmark | Elastic Net | 0.006877 | 0.016846 | 0.014399 | 0.871530 | 0.006622 | 0.016529 | 0.014105 | 0.867128 | 0.020556 | 0.863644 |
-| Statewide HAZUS + Bridge | Random Forest | 0.005357 | 0.018008 | 0.014427 | 0.853247 | 0.005097 | 0.017690 | 0.014144 | 0.847799 | 0.021870 | 0.845651 |
 
 ## Target-Transform Check
 
-The professor note about training on the log of the model was implemented directly. The table below compares the same recommended model trained on the raw target versus `log1p(EDR)` and then mapped back with `expm1(...)`.
+The professor note about training on the log of the model was implemented directly. The table below compares the same recommended no-PGA vulnerability model trained on the raw target versus `log1p(EDR)` and then mapped back with `expm1(...)`.
 
 | Transform | MAE | RMSE | RMSLE | MedianAE | R2 | MAE_Positive | RMSE_Positive | RMSLE_Positive | R2_Positive |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Raw target | 0.000352 | 0.001056 | 0.000914 | 0.000068 | 0.999458 | 0.000497 | 0.001246 | 0.001061 | 0.999499 |
-| log1p -> expm1 target | 0.000468 | 0.001217 | 0.001019 | 0.000164 | 0.999280 | 0.000667 | 0.001503 | 0.001254 | 0.999271 |
+| Raw target | 0.013941 | 0.041542 | 0.036109 | 0.003266 | 0.160687 | 0.018168 | 0.050792 | 0.043949 | 0.167465 |
+| log1p -> expm1 target | 0.013475 | 0.041457 | 0.035974 | 0.003054 | 0.164107 | 0.017717 | 0.050829 | 0.043934 | 0.166245 |
 
 ## Best Overall Benchmark
 
@@ -97,23 +90,24 @@ The professor note about training on the log of the model was implemented direct
 
 ## Recommended Final Model For Presentation
 
-- Feature set: `Statewide HAZUS + Bridge`
-- Model: `MLPRegressor`
-- Target transform used for the final exported model: `Raw target`
-- Holdout MAE: `0.000352`
-- Holdout RMSE: `0.001056`
-- Holdout RMSLE: `0.000914`
-- Holdout R2: `0.999458`
-- Holdout RMSE on positive-damage bridges only: `0.001246`
-- Holdout R2 on positive-damage bridges only: `0.999499`
+- Feature set: `Bridge Vulnerability Structural`
+- Model: `Extra Trees`
+- Target transform used for the final exported model: `log1p -> expm1 target`
+- Holdout MAE: `0.013475`
+- Holdout RMSE: `0.041457`
+- Holdout RMSLE: `0.035974`
+- Holdout R2: `0.164107`
+- Holdout RMSE on positive-damage bridges only: `0.050829`
+- Holdout R2 on positive-damage bridges only: `0.166245`
 
-This is the recommended presentation model because it is the most generic statewide framing while still using variables that make engineering sense: hazard demand, HAZUS class, design era, bridge geometry, traffic importance, and continuous vulnerability context.
+This is the recommended presentation model because it is a pure bridge-intrinsic vulnerability model: it removes PGA and traffic/network consequence variables and keeps only structural class, age / rehabilitation, geometry, condition, and rating information.
 
 ## Important Interpretation Note
 
 - Because the statewide inventory contains many bridges with zero or near-zero damage, overall metrics improve compared with the affected-only subset.
 - For that reason, the positive-damage holdout metrics are also reported above so the model is not judged only on easy zero-damage cases.
-- The target is still HAZUS-derived `EDR`, so this is a statewide surrogate / reconstruction model rather than external field-damage validation.
+- The target is still HAZUS-derived `EDR`, so the no-PGA vulnerability model is best interpreted as a bridge-intrinsic surrogate for relative vulnerability, not as a full physics-based damage predictor.
+- The `Event Damage Hybrid` rows should be used when the question is event-specific damage prediction, because that framing intentionally includes PGA.
 
 ## Generated Artifacts
 

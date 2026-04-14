@@ -27,6 +27,12 @@ CORE_OUTPUTS = {
     'ml_recommended_hybrid_feature_importance.csv': 'Permutation feature importance for the recommended statewide hybrid engineering model.',
     'ml_feature_screen_mutual_info.csv': 'Mutual-information screen showing which statewide engineered variables carry the most signal.',
     'ml_statewide_bridge_scores.csv': 'Predicted statewide bridge-risk scores from the final recommended ML model.',
+    'damage_state_model_comparison.csv': 'Exploratory damage-state classification comparison across structural-only and event-damage classifiers.',
+    'damage_state_best_by_feature_set.csv': 'Best damage-state classification model within each exploratory feature framing.',
+    'damage_state_predictions.csv': 'Held-out damage-state predictions for the best classifier in each exploratory framing.',
+    'damage_state_classification_report.csv': 'Per-class precision, recall, and F1 metrics for the exploratory damage-state classifiers.',
+    'future_scenario_summary.csv': 'Statewide summary of hypothetical future earthquake scenario scores under uniform PGA assumptions.',
+    'future_scenario_bridge_scores.csv': 'Bridge-level scenario scores for the exploratory future-earthquake screening workflow.',
 }
 
 CORE_FIGURES = {
@@ -57,6 +63,10 @@ CORE_FIGURES = {
     'ml_recommended_hybrid_feature_importance.png': 'Feature importance for the recommended hybrid engineering model.',
     'ml_recommended_hybrid_decile_calibration.png': 'Decile calibration plot for the recommended hybrid engineering model.',
     'ml_recommended_hybrid_mutual_information.png': 'Mutual-information ranking for the recommended statewide feature set.',
+    'damage_state_confusion_matrices.png': 'Confusion matrices for the best exploratory damage-state classifiers.',
+    'future_scenario_mean_edr.png': 'Scenario-sensitivity plot showing how statewide mean and upper-tail EDR change with PGA.',
+    'future_scenario_risk_bands.png': 'Bridge counts by risk band across hypothetical future PGA scenarios.',
+    'future_scenario_top_counties.png': 'Top county-level scenario summary for the 0.20g exploratory earthquake case.',
 }
 
 NDVI_EXPECTED = {

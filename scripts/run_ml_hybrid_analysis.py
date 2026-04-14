@@ -47,35 +47,33 @@ warnings.filterwarnings('ignore', category=ConvergenceWarning)
 RANDOM_STATE = 42
 REFERENCE_YEAR = 2025
 TARGET = 'EDR'
-RECOMMENDED_FEATURE_SET = 'Statewide HAZUS + Bridge'
+RECOMMENDED_FEATURE_SET = 'Bridge Vulnerability Structural'
 BENCHMARK_FEATURE_SET = 'HAZUS Benchmark'
 CATEGORICAL_FEATURES = {'HWB_CLASS', 'design_era_1989', 'functional_class_cat', 'kind', 'type'}
 
 FEATURE_SETS = {
     'HAZUS Benchmark': ['pga', 'HWB_CLASS'],
-    'Intrinsic Vulnerability': [
+    'Bridge Vulnerability Compact': [
         'SVI', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
+        'spans', 'max_span_log1p', 'skew', 'cond',
+    ],
+    'Bridge Vulnerability Structural': [
+        'HWB_CLASS', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
         'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p',
+        'operating_rating',
     ],
-    'Statewide Bridge': [
-        'SVI', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
-        'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p', 'adt_log1p',
-        'truck_pct', 'detour_km_log1p', 'lanes_on', 'operating_rating',
-        'functional_class_cat', 'kind', 'type',
-    ],
-    'Statewide HAZUS + Bridge': [
-        'pga', 'HWB_CLASS', 'SVI', 'design_era_1989', 'age_years', 'time_since_rehab',
+    'Event Damage Hybrid': [
+        'pga', 'HWB_CLASS', 'design_era_1989', 'age_years', 'time_since_rehab',
         'reconstructed_flag', 'spans', 'max_span_log1p', 'skew', 'cond',
-        'deck_area_log1p', 'adt_log1p', 'truck_pct', 'detour_km_log1p', 'lanes_on',
-        'operating_rating', 'functional_class_cat', 'kind', 'type',
+        'deck_area_log1p', 'operating_rating',
     ],
 }
 
 FEATURE_SET_DESCRIPTIONS = {
     'HAZUS Benchmark': 'Minimal hazard-only benchmark using PGA and HAZUS bridge class.',
-    'Intrinsic Vulnerability': 'Bridge age, geometry, condition, and SVI without direct hazard demand.',
-    'Statewide Bridge': 'Generic statewide bridge descriptors that remain meaningful across California.',
-    'Statewide HAZUS + Bridge': 'Hazard, HAZUS class, and statewide bridge descriptors combined into the final presentation model.',
+    'Bridge Vulnerability Compact': 'Compact no-PGA vulnerability framing using SVI and the core age / geometry / condition variables.',
+    'Bridge Vulnerability Structural': 'Pure bridge-intrinsic structural vulnerability model with no PGA and no traffic / network consequence variables.',
+    'Event Damage Hybrid': 'Event-damage model that combines shaking demand with the bridge-intrinsic structural variables.',
 }
 
 FEATURE_MANIFEST = [
@@ -91,14 +89,7 @@ FEATURE_MANIFEST = [
     ('skew', 'Geometry', 'Skew angle in degrees.'),
     ('cond', 'Condition', 'Lowest available bridge condition rating proxy.'),
     ('deck_area_log1p', 'Scale', 'Log-transformed deck area as a size / exposure proxy.'),
-    ('adt_log1p', 'Traffic importance', 'Log-transformed average daily traffic.'),
-    ('truck_pct', 'Traffic importance', 'Truck share of ADT.'),
-    ('detour_km_log1p', 'Network disruption', 'Log-transformed detour length in kilometers.'),
-    ('lanes_on', 'Capacity', 'Traffic lanes carried by the bridge.'),
     ('operating_rating', 'Capacity / condition', 'Operating rating from the inventory.'),
-    ('functional_class_cat', 'Network role', 'Functional class category from the bridge inventory.'),
-    ('kind', 'Structural system', 'Structure kind code from the NBI inventory.'),
-    ('type', 'Structural system', 'Structure type code from the NBI inventory.'),
 ]
 
 LITERATURE = [
@@ -754,7 +745,7 @@ def write_ml_doc(
         f'- Bridges with positive PGA / positive fragility demand: `{int(dataset_df["positive_pga_flag"].sum()):,}`.',
         '- The professor-requested log-target workflow was tested directly, and the final recommended transform is chosen from the raw-vs-log comparison rather than assumed in advance.',
         '- A new `design_era_1989` categorical feature was added to reflect the professor note about a HAZUS-style design-era split.',
-        '- The model comparison now tests generic statewide bridge features, HAZUS variables, and a combined statewide hybrid model.',
+        '- The model comparison now separates pure bridge vulnerability models from event-damage models that also include hazard demand.',
         '- Additional validation outputs were added: log-scale fit plots, decile calibration plots, feature-importance charts, and a mutual-information screen.',
         '',
         '## Why These Models',
@@ -789,7 +780,7 @@ def write_ml_doc(
         '',
         '## Target-Transform Check',
         '',
-        'The professor note about training on the log of the model was implemented directly. The table below compares the same recommended model trained on the raw target versus `log1p(EDR)` and then mapped back with `expm1(...)`.',
+        'The professor note about training on the log of the model was implemented directly. The table below compares the same recommended no-PGA vulnerability model trained on the raw target versus `log1p(EDR)` and then mapped back with `expm1(...)`.',
         '',
         table_to_markdown(transform_df),
         '',
@@ -816,13 +807,14 @@ def write_ml_doc(
         f'- Holdout RMSE on positive-damage bridges only: `{recommended_metrics["RMSE_Positive"]:.6f}`',
         f'- Holdout R2 on positive-damage bridges only: `{recommended_metrics["R2_Positive"]:.6f}`',
         '',
-        'This is the recommended presentation model because it is the most generic statewide framing while still using variables that make engineering sense: hazard demand, HAZUS class, design era, bridge geometry, traffic importance, and continuous vulnerability context.',
+        'This is the recommended presentation model because it is a pure bridge-intrinsic vulnerability model: it removes PGA and traffic/network consequence variables and keeps only structural class, age / rehabilitation, geometry, condition, and rating information.',
         '',
         '## Important Interpretation Note',
         '',
         '- Because the statewide inventory contains many bridges with zero or near-zero damage, overall metrics improve compared with the affected-only subset.',
         '- For that reason, the positive-damage holdout metrics are also reported above so the model is not judged only on easy zero-damage cases.',
-        '- The target is still HAZUS-derived `EDR`, so this is a statewide surrogate / reconstruction model rather than external field-damage validation.',
+        '- The target is still HAZUS-derived `EDR`, so the no-PGA vulnerability model is best interpreted as a bridge-intrinsic surrogate for relative vulnerability, not as a full physics-based damage predictor.',
+        '- The `Event Damage Hybrid` rows should be used when the question is event-specific damage prediction, because that framing intentionally includes PGA.',
         '',
         '## Generated Artifacts',
         '',

@@ -28,6 +28,8 @@ def main() -> None:
     run_step("export_core_figures.py")
     run_step("run_ml_hybrid_analysis.py")
     run_step("export_recommended_hybrid.py")
+    run_step("run_damage_state_classification.py")
+    run_step("run_future_scenario_scoring.py")
 
     ndvi_required = ["PRE_NDVI_TIF", "POST_NDVI_TIF", "NDVI_CHANGE_TIF"]
     if all(paths[key].exists() for key in ndvi_required):

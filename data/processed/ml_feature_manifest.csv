@@ -11,11 +11,4 @@ max_span_log1p,Geometry,Log-transformed maximum span length to tame the extreme 
 skew,Geometry,Skew angle in degrees.
 cond,Condition,Lowest available bridge condition rating proxy.
 deck_area_log1p,Scale,Log-transformed deck area as a size / exposure proxy.
-adt_log1p,Traffic importance,Log-transformed average daily traffic.
-truck_pct,Traffic importance,Truck share of ADT.
-detour_km_log1p,Network disruption,Log-transformed detour length in kilometers.
-lanes_on,Capacity,Traffic lanes carried by the bridge.
 operating_rating,Capacity / condition,Operating rating from the inventory.
-functional_class_cat,Network role,Functional class category from the bridge inventory.
-kind,Structural system,Structure kind code from the NBI inventory.
-type,Structural system,Structure type code from the NBI inventory.

@@ -172,16 +172,45 @@ For a deeper machine-learning comparison, the repository now includes:
 
 This add-on compares:
 - `HAZUS Benchmark` models
-- `Intrinsic Vulnerability` models
-- `Statewide Bridge` models
-- `Statewide HAZUS + Bridge` models
+- `Bridge Vulnerability Compact` models
+- `Bridge Vulnerability Structural` models
+- `Event Damage Hybrid` models
 
 It also:
 - rebuilds the ML dataset on all California bridges, not only the ShakeMap-affected subset
 - tests the professor-requested `log1p(EDR) -> expm1(...)` target transform and saves the raw-vs-log comparison
 - exports benchmark artifacts for the overall best model
-- exports a separate recommended statewide hybrid model built from the most interpretable engineering variables
+- exports a separate recommended no-PGA bridge-vulnerability model built from the most interpretable structural variables
 - writes richer validation plots, including log-scale fit plots, decile calibration, and a mutual-information screen
+
+## Exploratory Model Add-Ons
+
+The repo now also includes two extra exploratory ML/modeling scripts:
+
+- `scripts/run_damage_state_classification.py`
+- `scripts/run_future_scenario_scoring.py`
+
+`run_damage_state_classification.py` reframes the problem as an ordinal damage-state classification task and compares:
+- a structural-only vulnerability classifier with no PGA
+- an event-damage classifier that adds PGA back in
+
+It writes:
+- `data/processed/damage_state_model_comparison.csv`
+- `data/processed/damage_state_best_by_feature_set.csv`
+- `data/processed/damage_state_predictions.csv`
+- `data/processed/damage_state_classification_report.csv`
+- `figures/damage_state_confusion_matrices.png`
+- `docs/DAMAGE_STATE_MODELS.md`
+
+`run_future_scenario_scoring.py` fits the event-damage model and then scores the full California bridge inventory under hypothetical future PGA scenarios such as `0.05g`, `0.10g`, `0.20g`, and `0.40g`.
+
+It writes:
+- `data/processed/future_scenario_summary.csv`
+- `data/processed/future_scenario_bridge_scores.csv`
+- `figures/future_scenario_mean_edr.png`
+- `figures/future_scenario_risk_bands.png`
+- `figures/future_scenario_top_counties.png`
+- `docs/FUTURE_SCENARIO_SCORING.md`
 
 To refresh all figure outputs in one shot, run:
 
@@ -193,6 +222,7 @@ That helper regenerates:
 - the core workflow figures
 - the advanced ML comparison figures
 - the recommended statewide-model figures
+- the exploratory damage-state and future-scenario figures
 - the NDVI and proxy-validation figures, when the NDVI bundle is available
 
 ## Optional NDVI Extension
