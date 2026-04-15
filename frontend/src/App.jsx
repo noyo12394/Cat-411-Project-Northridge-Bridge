@@ -19,14 +19,24 @@ function App() {
   const [bridgeState, setBridgeState] = useState(null)
 
   const heroBridgeState = useMemo(() => bridgeState, [bridgeState])
+  const summaryCounts = useMemo(
+    () =>
+      researchData.summary.counts ??
+      researchData.summary.totals ?? {
+        totalBridges: 0,
+        hazardSampled: 0,
+        hazardSampledBridges: 0,
+      },
+    [researchData],
+  )
   const dashboardKey = useMemo(
     () =>
       [
         researchData.availability.repoData ? 'repo' : 'fallback',
-        researchData.summary.totals.totalBridges,
-        researchData.summary.totals.hazardSampledBridges,
+        summaryCounts.totalBridges,
+        summaryCounts.hazardSampled ?? summaryCounts.hazardSampledBridges,
       ].join('-'),
-    [researchData],
+    [researchData.availability.repoData, summaryCounts],
   )
 
   return (
