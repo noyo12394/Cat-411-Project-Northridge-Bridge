@@ -1,13 +1,13 @@
 Feature,Importance,Importance_std,Label
-SVI,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-HWB_CLASS,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-design_era_1989,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-age_years,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-time_since_rehab,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-reconstructed_flag,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-spans,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-max_span_log1p,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-skew,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-cond,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-deck_area_log1p,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
-operating_rating,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+HWB_CLASS,0.16234046645288897,0.01562576552374195,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+deck_area_log1p,0.12870435121373316,0.011405976277188496,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+design_era_1989,0.08590884315266335,0.010059421275056078,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+operating_rating,0.0797926869084639,0.01563187416733784,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+time_since_rehab,0.07644286799997017,0.008175346436956702,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+max_span_log1p,0.07635726323305299,0.011728952504811936,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+age_years,0.06257436604590677,0.005175962314687382,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+spans,0.05095529568128815,0.008636893141859244,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+SVI,0.04027454593136522,0.005830261108982098,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+skew,0.038272351339406784,0.004835566578640288,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+reconstructed_flag,0.028716252922150003,0.005203589978344939,Structural + SVI + HAZUS Class :: Extra Trees :: raw target
+cond,0.012385646108466208,0.0066255144224760905,Structural + SVI + HAZUS Class :: Extra Trees :: raw target

@@ -1,3 +1,14 @@
 Feature,Importance,Importance_std,Label
-pga,0.0,0.0,HAZUS Benchmark :: Ridge
-HWB_CLASS,0.0,0.0,HAZUS Benchmark :: Ridge
+pga,2.064371645942295,0.04730104890306238,Event Damage Hybrid :: MLPRegressor
+SVI,0.0337595761321427,0.0021744175500057854,Event Damage Hybrid :: MLPRegressor
+time_since_rehab,0.00045844653295066634,4.571447071024484e-05,Event Damage Hybrid :: MLPRegressor
+age_years,0.00030800797068284796,1.770596107987449e-05,Event Damage Hybrid :: MLPRegressor
+spans,0.000169159392615544,0.00015650010009361838,Event Damage Hybrid :: MLPRegressor
+design_era_1989,0.00014746703328168595,8.14884104204246e-06,Event Damage Hybrid :: MLPRegressor
+deck_area_log1p,0.00011594348121333568,1.1249410823978594e-05,Event Damage Hybrid :: MLPRegressor
+skew,7.998864049633496e-05,3.0316333078002952e-05,Event Damage Hybrid :: MLPRegressor
+reconstructed_flag,7.10064390641955e-05,6.474870558871611e-06,Event Damage Hybrid :: MLPRegressor
+max_span_log1p,5.2959783405156134e-05,1.2378199998166971e-05,Event Damage Hybrid :: MLPRegressor
+HWB_CLASS,3.846180531130727e-05,5.463965001806952e-06,Event Damage Hybrid :: MLPRegressor
+cond,3.66317133814927e-05,2.4209364055629113e-05,Event Damage Hybrid :: MLPRegressor
+operating_rating,7.163101207537566e-06,5.359230319975805e-06,Event Damage Hybrid :: MLPRegressor
