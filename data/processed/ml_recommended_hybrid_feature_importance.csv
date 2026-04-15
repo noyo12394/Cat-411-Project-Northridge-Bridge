@@ -1,12 +1,13 @@
 Feature,Importance,Importance_std,Label
-HWB_CLASS,0.14088532004835178,0.006092207074139819,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-deck_area_log1p,0.10884579733706241,0.009342107007719595,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-max_span_log1p,0.07070042528959235,0.013873489401375,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-design_era_1989,0.06707491132642328,0.007799397075042682,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-operating_rating,0.06571169395212127,0.006163032154046175,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-time_since_rehab,0.057803011827453545,0.003924818587133907,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-age_years,0.05759453245030736,0.005196944773126889,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-reconstructed_flag,0.04462812471583064,0.010269647199774199,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-spans,0.034425404872221364,0.006516218057906914,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-cond,0.03150730937525936,0.010436871851801456,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
-skew,0.02387104619462747,0.01071840335677692,Bridge Vulnerability Structural :: Extra Trees :: log1p -> expm1 target
+SVI,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+HWB_CLASS,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+design_era_1989,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+age_years,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+time_since_rehab,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+reconstructed_flag,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+spans,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+max_span_log1p,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+skew,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+cond,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+deck_area_log1p,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target
+operating_rating,0.0,0.0,Structural + SVI + HAZUS Class :: Ridge :: raw target

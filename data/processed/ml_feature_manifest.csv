@@ -1,7 +1,7 @@
 Feature,Role,Reason
 pga,Hazard demand,Peak ground acceleration at the bridge site; direct shaking demand.
 HWB_CLASS,HAZUS classification,Bridge fragility family assigned from structure type and era logic.
-SVI,Composite vulnerability,Seismic Vulnerability Index carried over from the engineering scoring workflow.
+SVI,Composite vulnerability,Seismic Vulnerability Index from the revised April 2026 weighted methodology.
 design_era_1989,Design era,Categorical design-era feature that separates older bridges from post-1989 design practice.
 age_years,Age,Bridge age in years relative to 2025.
 time_since_rehab,Rehabilitation timing,Years since the last recorded reconstruction; falls back to bridge age if never reconstructed.
@@ -9,6 +9,6 @@ reconstructed_flag,Rehabilitation indicator,Binary flag indicating whether a bri
 spans,Geometry,Number of main unit spans.
 max_span_log1p,Geometry,Log-transformed maximum span length to tame the extreme right tail.
 skew,Geometry,Skew angle in degrees.
-cond,Condition,Lowest available bridge condition rating proxy.
+cond,Condition,Primary condition proxy from NBI Item 60 / substructure condition when available.
 deck_area_log1p,Scale,Log-transformed deck area as a size / exposure proxy.
 operating_rating,Capacity / condition,Operating rating from the inventory.

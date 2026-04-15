@@ -18,14 +18,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from scipy.stats import norm
 from sklearn.base import clone
 from sklearn.compose import ColumnTransformer, TransformedTargetRegressor
-from sklearn.ensemble import ExtraTreesRegressor, HistGradientBoostingRegressor, RandomForestRegressor
+from sklearn.ensemble import (
+    AdaBoostRegressor,
+    ExtraTreesRegressor,
+    GradientBoostingRegressor,
+    HistGradientBoostingRegressor,
+    RandomForestRegressor,
+)
 from sklearn.feature_selection import mutual_info_regression
 from sklearn.impute import SimpleImputer
 from sklearn.inspection import permutation_importance
-from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import ElasticNet, Ridge
 from sklearn.metrics import (
     make_scorer,
     mean_absolute_error,
@@ -33,13 +38,25 @@ from sklearn.metrics import (
     median_absolute_error,
     r2_score,
 )
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.exceptions import ConvergenceWarning
+from sklearn.svm import LinearSVR
+from sklearn.tree import DecisionTreeRegressor
 
 from project_paths import build_paths, require_paths
+from svi_methodology import (
+    DEFAULT_FRAGILITY_MEDIAN_METHOD,
+    FRAGILITY_DAMAGE_WEIGHTS,
+    clean_float_series,
+    clean_int_series,
+    compute_damage_probs_row,
+    compute_svi_scores,
+    extract_year,
+)
 
 sns.set_theme(style='whitegrid')
 warnings.filterwarnings('ignore', category=ConvergenceWarning)
@@ -47,23 +64,30 @@ warnings.filterwarnings('ignore', category=ConvergenceWarning)
 RANDOM_STATE = 42
 REFERENCE_YEAR = 2025
 TARGET = 'EDR'
-RECOMMENDED_FEATURE_SET = 'Bridge Vulnerability Structural'
+RECOMMENDED_FEATURE_SET = 'Structural + SVI + HAZUS Class'
 BENCHMARK_FEATURE_SET = 'HAZUS Benchmark'
 CATEGORICAL_FEATURES = {'HWB_CLASS', 'design_era_1989', 'functional_class_cat', 'kind', 'type'}
 
 FEATURE_SETS = {
     'HAZUS Benchmark': ['pga', 'HWB_CLASS'],
-    'Bridge Vulnerability Compact': [
-        'SVI', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
-        'spans', 'max_span_log1p', 'skew', 'cond',
+    'Structural Core': [
+        'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
+        'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p', 'operating_rating',
     ],
-    'Bridge Vulnerability Structural': [
+    'Structural + SVI': [
+        'SVI', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
+        'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p', 'operating_rating',
+    ],
+    'Structural + HAZUS Class': [
         'HWB_CLASS', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
-        'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p',
-        'operating_rating',
+        'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p', 'operating_rating',
+    ],
+    'Structural + SVI + HAZUS Class': [
+        'SVI', 'HWB_CLASS', 'design_era_1989', 'age_years', 'time_since_rehab', 'reconstructed_flag',
+        'spans', 'max_span_log1p', 'skew', 'cond', 'deck_area_log1p', 'operating_rating',
     ],
     'Event Damage Hybrid': [
-        'pga', 'HWB_CLASS', 'design_era_1989', 'age_years', 'time_since_rehab',
+        'pga', 'SVI', 'HWB_CLASS', 'design_era_1989', 'age_years', 'time_since_rehab',
         'reconstructed_flag', 'spans', 'max_span_log1p', 'skew', 'cond',
         'deck_area_log1p', 'operating_rating',
     ],
@@ -71,15 +95,17 @@ FEATURE_SETS = {
 
 FEATURE_SET_DESCRIPTIONS = {
     'HAZUS Benchmark': 'Minimal hazard-only benchmark using PGA and HAZUS bridge class.',
-    'Bridge Vulnerability Compact': 'Compact no-PGA vulnerability framing using SVI and the core age / geometry / condition variables.',
-    'Bridge Vulnerability Structural': 'Pure bridge-intrinsic structural vulnerability model with no PGA and no traffic / network consequence variables.',
+    'Structural Core': 'Pure no-PGA intrinsic screening using age, rehabilitation, geometry, condition, scale, and rating variables only.',
+    'Structural + SVI': 'Intrinsic structural screening plus the continuous SVI summary, still with no PGA.',
+    'Structural + HAZUS Class': 'Intrinsic structural screening plus HAZUS bridge family, still with no PGA.',
+    'Structural + SVI + HAZUS Class': 'Full intrinsic vulnerability model using structural variables, SVI, and HAZUS class while keeping PGA out.',
     'Event Damage Hybrid': 'Event-damage model that combines shaking demand with the bridge-intrinsic structural variables.',
 }
 
 FEATURE_MANIFEST = [
     ('pga', 'Hazard demand', 'Peak ground acceleration at the bridge site; direct shaking demand.'),
     ('HWB_CLASS', 'HAZUS classification', 'Bridge fragility family assigned from structure type and era logic.'),
-    ('SVI', 'Composite vulnerability', 'Seismic Vulnerability Index carried over from the engineering scoring workflow.'),
+    ('SVI', 'Composite vulnerability', 'Seismic Vulnerability Index from the revised April 2026 weighted methodology.'),
     ('design_era_1989', 'Design era', 'Categorical design-era feature that separates older bridges from post-1989 design practice.'),
     ('age_years', 'Age', 'Bridge age in years relative to 2025.'),
     ('time_since_rehab', 'Rehabilitation timing', 'Years since the last recorded reconstruction; falls back to bridge age if never reconstructed.'),
@@ -87,7 +113,7 @@ FEATURE_MANIFEST = [
     ('spans', 'Geometry', 'Number of main unit spans.'),
     ('max_span_log1p', 'Geometry', 'Log-transformed maximum span length to tame the extreme right tail.'),
     ('skew', 'Geometry', 'Skew angle in degrees.'),
-    ('cond', 'Condition', 'Lowest available bridge condition rating proxy.'),
+    ('cond', 'Condition', 'Primary condition proxy from NBI Item 60 / substructure condition when available.'),
     ('deck_area_log1p', 'Scale', 'Log-transformed deck area as a size / exposure proxy.'),
     ('operating_rating', 'Capacity / condition', 'Operating rating from the inventory.'),
 ]
@@ -109,6 +135,21 @@ LITERATURE = [
         'https://www.sciencedirect.com/science/article/pii/S0141029619328068',
     ),
     (
+        'Vamvatsikos et al. / On the application of machine learning techniques to derive seismic fragility curves (2019)',
+        'On the application of machine learning techniques to derive seismic fragility curves',
+        'https://www.sciencedirect.com/science/article/pii/S0045794918318650',
+    ),
+    (
+        'Wang et al. (2022)',
+        'Probabilistic seismic analysis of bridges through machine learning approaches',
+        'https://www.sciencedirect.com/science/article/pii/S2352012422000972',
+    ),
+    (
+        'Zhao et al. (2023)',
+        'Bridge seismic fragility model based on support vector machine and relevance vector machine',
+        'https://www.sciencedirect.com/science/article/pii/S2352012423004666',
+    ),
+    (
         'Luo et al. (2025)',
         'Post-earthquake functionality and resilience prediction of bridge networks based on data-driven machine learning method',
         'https://www.sciencedirect.com/science/article/abs/pii/S0267726124006791',
@@ -117,6 +158,11 @@ LITERATURE = [
         'scikit-learn docs',
         'TransformedTargetRegressor',
         'https://scikit-learn.org/1.5/modules/generated/sklearn.compose.TransformedTargetRegressor.html',
+    ),
+    (
+        'scikit-learn docs',
+        'LinearSVR',
+        'https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVR.html',
     ),
     (
         'scikit-learn docs',
@@ -130,74 +176,6 @@ LITERATURE = [
     ),
 ]
 
-FRAG = {
-    'HWB1': {'slight': (0.25, 0.6), 'moderate': (0.50, 0.6), 'extensive': (0.90, 0.6), 'complete': (1.20, 0.6)},
-    'HWB2': {'slight': (0.20, 0.6), 'moderate': (0.40, 0.6), 'extensive': (0.80, 0.6), 'complete': (1.10, 0.6)},
-    'HWB3': {'slight': (0.18, 0.6), 'moderate': (0.35, 0.6), 'extensive': (0.70, 0.6), 'complete': (1.00, 0.6)},
-    'HWB4': {'slight': (0.15, 0.6), 'moderate': (0.30, 0.6), 'extensive': (0.60, 0.6), 'complete': (0.90, 0.6)},
-    'HWB5': {'slight': (0.22, 0.6), 'moderate': (0.45, 0.6), 'extensive': (0.85, 0.6), 'complete': (1.15, 0.6)},
-    'HWB6': {'slight': (0.18, 0.6), 'moderate': (0.36, 0.6), 'extensive': (0.72, 0.6), 'complete': (1.00, 0.6)},
-    'HWB7': {'slight': (0.30, 0.6), 'moderate': (0.60, 0.6), 'extensive': (1.00, 0.6), 'complete': (1.30, 0.6)},
-    'HWB8': {'slight': (0.24, 0.6), 'moderate': (0.48, 0.6), 'extensive': (0.90, 0.6), 'complete': (1.20, 0.6)},
-    'HWB9': {'slight': (0.20, 0.6), 'moderate': (0.40, 0.6), 'extensive': (0.80, 0.6), 'complete': (1.10, 0.6)},
-    'HWB10': {'slight': (0.16, 0.6), 'moderate': (0.32, 0.6), 'extensive': (0.64, 0.6), 'complete': (0.95, 0.6)},
-    'HWB11': {'slight': (0.21, 0.6), 'moderate': (0.42, 0.6), 'extensive': (0.82, 0.6), 'complete': (1.12, 0.6)},
-    'HWB12': {'slight': (0.19, 0.6), 'moderate': (0.38, 0.6), 'extensive': (0.76, 0.6), 'complete': (1.05, 0.6)},
-    'HWB13': {'slight': (0.23, 0.6), 'moderate': (0.46, 0.6), 'extensive': (0.88, 0.6), 'complete': (1.18, 0.6)},
-    'HWB14': {'slight': (0.18, 0.6), 'moderate': (0.36, 0.6), 'extensive': (0.70, 0.6), 'complete': (1.00, 0.6)},
-    'HWB15': {'slight': (0.14, 0.6), 'moderate': (0.28, 0.6), 'extensive': (0.56, 0.6), 'complete': (0.85, 0.6)},
-    'HWB16': {'slight': (0.17, 0.6), 'moderate': (0.34, 0.6), 'extensive': (0.68, 0.6), 'complete': (0.98, 0.6)},
-    'HWB17': {'slight': (0.20, 0.6), 'moderate': (0.40, 0.6), 'extensive': (0.80, 0.6), 'complete': (1.10, 0.6)},
-    'HWB18': {'slight': (0.22, 0.6), 'moderate': (0.44, 0.6), 'extensive': (0.84, 0.6), 'complete': (1.14, 0.6)},
-    'HWB19': {'slight': (0.18, 0.6), 'moderate': (0.36, 0.6), 'extensive': (0.72, 0.6), 'complete': (1.02, 0.6)},
-    'HWB20': {'slight': (0.16, 0.6), 'moderate': (0.32, 0.6), 'extensive': (0.64, 0.6), 'complete': (0.94, 0.6)},
-    'HWB21': {'slight': (0.24, 0.6), 'moderate': (0.48, 0.6), 'extensive': (0.90, 0.6), 'complete': (1.20, 0.6)},
-    'HWB22': {'slight': (0.20, 0.6), 'moderate': (0.40, 0.6), 'extensive': (0.80, 0.6), 'complete': (1.10, 0.6)},
-    'HWB23': {'slight': (0.15, 0.6), 'moderate': (0.30, 0.6), 'extensive': (0.60, 0.6), 'complete': (0.90, 0.6)},
-    'HWB24': {'slight': (0.19, 0.6), 'moderate': (0.38, 0.6), 'extensive': (0.76, 0.6), 'complete': (1.06, 0.6)},
-    'HWB25': {'slight': (0.22, 0.6), 'moderate': (0.44, 0.6), 'extensive': (0.86, 0.6), 'complete': (1.16, 0.6)},
-    'HWB26': {'slight': (0.17, 0.6), 'moderate': (0.34, 0.6), 'extensive': (0.68, 0.6), 'complete': (0.98, 0.6)},
-    'HWB27': {'slight': (0.21, 0.6), 'moderate': (0.42, 0.6), 'extensive': (0.82, 0.6), 'complete': (1.12, 0.6)},
-    'HWB28': {'slight': (0.20, 0.6), 'moderate': (0.40, 0.6), 'extensive': (0.80, 0.6), 'complete': (1.10, 0.6)},
-}
-
-DAMAGE_WEIGHTS = {
-    'P_DS0': 0.00,
-    'P_DS1': 0.03,
-    'P_DS2': 0.08,
-    'P_DS3': 0.25,
-    'P_DS4': 1.00,
-}
-
-
-def clean_int_series(series: pd.Series) -> pd.Series:
-    return pd.to_numeric(series, errors='coerce')
-
-
-def clean_float_series(series: pd.Series) -> pd.Series:
-    return pd.to_numeric(series, errors='coerce')
-
-
-def extract_year(series: pd.Series) -> pd.Series:
-    return (
-        series.astype(str)
-        .str.extract(r'(\d{4})')[0]
-        .pipe(pd.to_numeric, errors='coerce')
-    )
-
-
-def minmax_scale(series: pd.Series) -> pd.Series:
-    numeric = pd.to_numeric(series, errors='coerce')
-    valid = numeric.dropna()
-    if valid.empty:
-        return pd.Series(np.nan, index=series.index)
-    lo = valid.min()
-    hi = valid.max()
-    if hi == lo:
-        return pd.Series(0.0, index=series.index)
-    return (numeric - lo) / (hi - lo)
-
-
 def design_era_from_year(year: float) -> str:
     if pd.isna(year):
         return 'Unknown'
@@ -209,10 +187,10 @@ def design_era_from_year(year: float) -> str:
 
 
 def assign_hwb_class(row: pd.Series) -> str:
-    year = row['year']
-    kind = row['kind']
-    spans = row['spans']
-    max_span = row['max_span']
+    year = pd.to_numeric(row.get('year', row.get('YEAR_BUILT_027')), errors='coerce')
+    kind = str(row.get('kind', row.get('STRUCTURE_KIND_043A', ''))).strip()
+    spans = pd.to_numeric(row.get('spans', row.get('MAIN_UNIT_SPANS_045')), errors='coerce')
+    max_span = pd.to_numeric(row.get('max_span', row.get('MAX_SPAN_LEN_MT_048')), errors='coerce')
 
     if pd.isna(year):
         return 'HWB28'
@@ -261,66 +239,12 @@ def assign_hwb_class(row: pd.Series) -> str:
     if kind == '24':
         return 'HWB27'
     return 'HWB28'
-
-
-def exceed_prob(pga: float, median: float, beta: float) -> float:
-    if pd.isna(pga) or pga <= 0 or pd.isna(median) or pd.isna(beta):
-        return 0.0
-    z = (np.log(pga) - np.log(median)) / beta
-    return float(norm.cdf(z))
-
-
 def compute_damage_probs(row: pd.Series) -> pd.Series:
-    hwb = row['HWB_CLASS']
-    pga = row['pga']
-    if hwb not in FRAG or pd.isna(pga) or pga <= 0:
-        return pd.Series([1.0, 0.0, 0.0, 0.0, 0.0])
-
-    frag = FRAG[hwb]
-    pe_slight = exceed_prob(pga, frag['slight'][0], frag['slight'][1])
-    pe_moderate = exceed_prob(pga, frag['moderate'][0], frag['moderate'][1])
-    pe_extensive = exceed_prob(pga, frag['extensive'][0], frag['extensive'][1])
-    pe_complete = exceed_prob(pga, frag['complete'][0], frag['complete'][1])
-
-    p_ds0 = max(0.0, 1.0 - pe_slight)
-    p_ds1 = max(0.0, pe_slight - pe_moderate)
-    p_ds2 = max(0.0, pe_moderate - pe_extensive)
-    p_ds3 = max(0.0, pe_extensive - pe_complete)
-    p_ds4 = max(0.0, pe_complete)
-
-    total = p_ds0 + p_ds1 + p_ds2 + p_ds3 + p_ds4
-    if total <= 0:
-        return pd.Series([1.0, 0.0, 0.0, 0.0, 0.0])
-    return pd.Series([p_ds0 / total, p_ds1 / total, p_ds2 / total, p_ds3 / total, p_ds4 / total])
+    return compute_damage_probs_row(row, median_method=DEFAULT_FRAGILITY_MEDIAN_METHOD)
 
 
 def compute_svi(df: pd.DataFrame) -> pd.DataFrame:
-    score_year = minmax_scale(REFERENCE_YEAR - df['year'])
-    recon_base = (REFERENCE_YEAR - df['yr_recon']).fillna(REFERENCE_YEAR - df['year'])
-    score_recon = minmax_scale(recon_base)
-    score_skew = minmax_scale(df['skew'])
-    score_spans = minmax_scale(df['spans'])
-    score_max_span = minmax_scale(df['max_span'])
-    score_cond = minmax_scale(9 - df['cond'])
-
-    svi_raw = (
-        0.20 * score_year.fillna(score_year.median()) +
-        0.10 * score_recon.fillna(score_recon.median()) +
-        0.15 * score_skew.fillna(score_skew.median()) +
-        0.10 * score_spans.fillna(score_spans.median()) +
-        0.15 * score_max_span.fillna(score_max_span.median()) +
-        0.30 * score_cond.fillna(score_cond.median())
-    )
-
-    df['score_year'] = score_year
-    df['score_recon'] = score_recon
-    df['score_skew'] = score_skew
-    df['score_spans'] = score_spans
-    df['score_max_span'] = score_max_span
-    df['score_cond'] = score_cond
-    df['SVI_RAW'] = svi_raw
-    df['SVI'] = minmax_scale(svi_raw)
-    return df
+    return compute_svi_scores(df)
 
 
 def table_to_markdown(df: pd.DataFrame) -> str:
@@ -424,6 +348,12 @@ def wrap_target_transform(pipeline: Pipeline, log_target: bool = True):
 
 def make_models(preprocessor: ColumnTransformer, log_target: bool = True) -> dict:
     models = {
+        'Ridge': Pipeline([
+            ('prep', clone(preprocessor)),
+            ('model', Ridge(
+                alpha=1.5,
+            )),
+        ]),
         'Elastic Net': Pipeline([
             ('prep', clone(preprocessor)),
             ('model', ElasticNet(
@@ -433,10 +363,37 @@ def make_models(preprocessor: ColumnTransformer, log_target: bool = True) -> dic
                 max_iter=12000,
             )),
         ]),
+        'LinearSVR': Pipeline([
+            ('prep', clone(preprocessor)),
+            ('model', LinearSVR(
+                C=0.7,
+                epsilon=0.01,
+                loss='squared_epsilon_insensitive',
+                random_state=RANDOM_STATE,
+                max_iter=15000,
+            )),
+        ]),
+        'Decision Tree': Pipeline([
+            ('prep', clone(preprocessor)),
+            ('model', DecisionTreeRegressor(
+                max_depth=14,
+                min_samples_leaf=6,
+                random_state=RANDOM_STATE,
+            )),
+        ]),
+        'KNN Regressor': Pipeline([
+            ('prep', clone(preprocessor)),
+            ('model', KNeighborsRegressor(
+                n_neighbors=35,
+                weights='distance',
+                p=2,
+                n_jobs=-1,
+            )),
+        ]),
         'Random Forest': Pipeline([
             ('prep', clone(preprocessor)),
             ('model', RandomForestRegressor(
-                n_estimators=150,
+                n_estimators=200,
                 min_samples_leaf=2,
                 max_features='sqrt',
                 n_jobs=-1,
@@ -446,10 +403,29 @@ def make_models(preprocessor: ColumnTransformer, log_target: bool = True) -> dic
         'Extra Trees': Pipeline([
             ('prep', clone(preprocessor)),
             ('model', ExtraTreesRegressor(
-                n_estimators=180,
+                n_estimators=220,
                 min_samples_leaf=1,
                 max_features='sqrt',
                 n_jobs=-1,
+                random_state=RANDOM_STATE,
+            )),
+        ]),
+        'AdaBoost': Pipeline([
+            ('prep', clone(preprocessor)),
+            ('model', AdaBoostRegressor(
+                n_estimators=200,
+                learning_rate=0.03,
+                loss='square',
+                random_state=RANDOM_STATE,
+            )),
+        ]),
+        'Gradient Boosting': Pipeline([
+            ('prep', clone(preprocessor)),
+            ('model', GradientBoostingRegressor(
+                n_estimators=220,
+                learning_rate=0.04,
+                max_depth=3,
+                subsample=0.85,
                 random_state=RANDOM_STATE,
             )),
         ]),
@@ -457,7 +433,7 @@ def make_models(preprocessor: ColumnTransformer, log_target: bool = True) -> dic
             ('prep', clone(preprocessor)),
             ('model', HistGradientBoostingRegressor(
                 learning_rate=0.04,
-                max_iter=180,
+                max_iter=220,
                 max_leaf_nodes=31,
                 min_samples_leaf=20,
                 l2_regularization=0.05,
@@ -467,12 +443,12 @@ def make_models(preprocessor: ColumnTransformer, log_target: bool = True) -> dic
         'MLPRegressor': Pipeline([
             ('prep', clone(preprocessor)),
             ('model', MLPRegressor(
-                hidden_layer_sizes=(64, 32),
-                alpha=1e-4,
-                learning_rate_init=0.001,
+                hidden_layer_sizes=(96, 48),
+                alpha=5e-4,
+                learning_rate_init=8e-4,
                 early_stopping=True,
                 validation_fraction=0.1,
-                max_iter=250,
+                max_iter=300,
                 random_state=RANDOM_STATE,
             )),
         ]),
@@ -481,15 +457,24 @@ def make_models(preprocessor: ColumnTransformer, log_target: bool = True) -> dic
 
 
 def load_statewide_bridge_dataset(paths: dict) -> pd.DataFrame:
-    require_paths(paths, ['PGA_BRIDGE_CSV'])
-    df = pd.read_csv(paths['PGA_BRIDGE_CSV'], low_memory=False)
+    require_paths(paths, ['SVI_CSV'])
+    df = pd.read_csv(paths['SVI_CSV'], low_memory=False)
 
-    df['year'] = clean_int_series(df['YEAR_BUILT_027'])
-    df['yr_recon'] = extract_year(df['YEAR_RECONSTRUCTED_106'])
-    df['spans'] = clean_int_series(df['MAIN_UNIT_SPANS_045'])
-    df['max_span'] = clean_float_series(df['MAX_SPAN_LEN_MT_048']).clip(lower=0)
-    df['skew'] = clean_float_series(df['DEGREES_SKEW_034']).clip(lower=0)
-    df['cond'] = clean_float_series(df['LOWEST_RATING'])
+    if 'year' not in df.columns:
+        df['year'] = clean_int_series(df['YEAR_BUILT_027'])
+    if 'yr_recon' not in df.columns:
+        df['yr_recon'] = extract_year(df['YEAR_RECONSTRUCTED_106'])
+    if 'spans' not in df.columns:
+        df['spans'] = clean_int_series(df['MAIN_UNIT_SPANS_045'])
+    if 'max_span' not in df.columns:
+        df['max_span'] = clean_float_series(df['MAX_SPAN_LEN_MT_048']).clip(lower=0)
+    if 'skew' not in df.columns:
+        df['skew'] = clean_float_series(df['DEGREES_SKEW_034']).clip(lower=0)
+    if 'cond' not in df.columns:
+        if 'SUBSTRUCTURE_COND_060' in df.columns:
+            df['cond'] = clean_float_series(df['SUBSTRUCTURE_COND_060'])
+        else:
+            df['cond'] = clean_float_series(df['LOWEST_RATING'])
     df['pga'] = clean_float_series(df['pga']).fillna(0.0).clip(lower=0)
     df['adt_raw'] = clean_float_series(df['ADT_029']).fillna(0)
     df['truck_pct'] = clean_float_series(df['PERCENT_ADT_TRUCK_109']).fillna(0).clip(lower=0)
@@ -512,14 +497,20 @@ def load_statewide_bridge_dataset(paths: dict) -> pd.DataFrame:
     df['adt_log1p'] = np.log1p(df['adt_raw'])
     df['detour_km_log1p'] = np.log1p(df['detour_km'])
 
-    df['HWB_CLASS'] = df.apply(assign_hwb_class, axis=1)
-    df[['P_DS0', 'P_DS1', 'P_DS2', 'P_DS3', 'P_DS4']] = df.apply(compute_damage_probs, axis=1)
-    df['P_SUM'] = df[['P_DS0', 'P_DS1', 'P_DS2', 'P_DS3', 'P_DS4']].sum(axis=1)
-    df[TARGET] = sum(df[col] * DAMAGE_WEIGHTS[col] for col in DAMAGE_WEIGHTS)
+    if 'HWB_CLASS' not in df.columns:
+        df['HWB_CLASS'] = df.apply(assign_hwb_class, axis=1)
+    if TARGET not in df.columns:
+        if all(col in df.columns for col in FRAGILITY_DAMAGE_WEIGHTS):
+            df[TARGET] = sum(df[col] * FRAGILITY_DAMAGE_WEIGHTS[col] for col in FRAGILITY_DAMAGE_WEIGHTS)
+        else:
+            raise KeyError('EDR was not found in bridges_with_svi.csv and could not be reconstructed from damage-state probabilities.')
+    for damage_col in ['P_DS0', 'P_DS1', 'P_DS2', 'P_DS3', 'P_DS4']:
+        if damage_col not in df.columns:
+            break
+    else:
+        df['P_SUM'] = df[['P_DS0', 'P_DS1', 'P_DS2', 'P_DS3', 'P_DS4']].sum(axis=1)
     df['EDR_LOG1P'] = np.log1p(df[TARGET])
     df['positive_pga_flag'] = (df['pga'] > 0).astype(int)
-
-    df = compute_svi(df)
     return df
 
 
@@ -743,6 +734,7 @@ def write_ml_doc(
         '',
         '- The training set now covers the full California inventory (`25,975` bridges).',
         f'- Bridges with positive PGA / positive fragility demand: `{int(dataset_df["positive_pga_flag"].sum()):,}`.',
+        '- The upstream engineering tables now use the revised April 2026 SVI methodology, including updated parameter weights, continuous component scores, and SVI-driven fragility medians / dispersion.',
         '- The professor-requested log-target workflow was tested directly, and the final recommended transform is chosen from the raw-vs-log comparison rather than assumed in advance.',
         '- A new `design_era_1989` categorical feature was added to reflect the professor note about a HAZUS-style design-era split.',
         '- The model comparison now separates pure bridge vulnerability models from event-damage models that also include hazard demand.',
@@ -750,11 +742,11 @@ def write_ml_doc(
         '',
         '## Why These Models',
         '',
+        '- The comparison now spans 10 models: regularized linear baselines, a max-margin baseline, a distance-based baseline, a single-tree baseline, bagging / forest models, boosting models, and a neural-network baseline.',
         '- Tree ensembles remain the strongest default choice for structured tabular engineering data in both the tabular-ML literature and bridge-seismic applications.',
-        '- `HistGradientBoosting` and `Extra Trees` cover two strong nonlinear ensemble families available in the project runtime.',
-        '- `Random Forest` is kept because bridge-seismic studies often report it as a robust baseline.',
-        '- `MLPRegressor` is included as a nonlinear neural-network baseline, but only after the tabular tree baselines.',
-        '- `Elastic Net` remains as the transparent linear baseline.',
+        '- `LinearSVR` is included because support-vector approaches appear repeatedly in bridge fragility studies and provide a useful non-tree nonlinear benchmark.',
+        '- `Random Forest`, `Extra Trees`, `Gradient Boosting`, `HistGradientBoosting`, and `AdaBoost` provide a broad ensemble comparison rather than relying on only one nonlinear family.',
+        '- `Ridge` and `Elastic Net` remain as transparent linear baselines, while `MLPRegressor` gives a neural-network comparison without leaving the project runtime.',
         '',
         '## Engineering Variable Screen',
         '',

@@ -11,8 +11,8 @@ from project_paths import build_paths
 
 CORE_OUTPUTS = {
     'pga_nbi_bridge.csv': 'Bridge inventory with cleaned coordinates and sampled PGA values.',
-    'bridges_with_edr.csv': 'HAZUS-based bridge damage probabilities and Expected Damage Ratio.',
-    'bridges_with_svi.csv': 'Bridge-level Seismic Vulnerability Index scores merged onto the damage table.',
+    'bridges_with_edr.csv': 'Bridge damage table with HAZUS class labels, updated SVI-driven fragility parameters, damage-state probabilities, and Expected Damage Ratio.',
+    'bridges_with_svi.csv': 'Bridge-level Seismic Vulnerability Index scores rebuilt with the April 2026 weighting table and reconstruction-year multiplier.',
     'bridge_ml_predictions.csv': 'Machine-learning predictions and evaluation outputs for bridge damage modeling.',
     'bridges_with_pga_affected_only.csv': 'Exploratory subset of bridges with usable PGA values from the week-1 workflow.',
     'ml_statewide_training_dataset.csv': 'Statewide ML training table rebuilt on all California bridges with engineered HAZUS, SVI, and bridge features.',

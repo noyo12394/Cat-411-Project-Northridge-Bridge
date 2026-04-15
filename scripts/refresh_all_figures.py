@@ -25,6 +25,7 @@ def run_step(script_name: str) -> None:
 def main() -> None:
     paths = build_paths()
 
+    run_step("refresh_svi_hazus_outputs.py")
     run_step("export_core_figures.py")
     run_step("run_ml_hybrid_analysis.py")
     run_step("export_recommended_hybrid.py")

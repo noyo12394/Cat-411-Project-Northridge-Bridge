@@ -43,7 +43,7 @@ Main columns created:
 
 ### 2. `HAZUS.ipynb`
 Purpose:
-Assign HAZUS bridge classes and compute damage-state probabilities and Expected Damage Ratio.
+Assign HAZUS bridge classes for reporting, rebuild the updated SVI methodology, and compute SVI-driven damage-state probabilities and Expected Damage Ratio.
 
 Reads:
 - `data/processed/pga_nbi_bridge.csv`
@@ -53,13 +53,27 @@ Writes:
 
 Main columns created:
 - `HWB_CLASS`
+- `score_year_built`
+- `score_condition`
+- `score_skew`
+- `score_continuity`
+- `score_material`
+- `score_max_span`
+- `score_num_spans`
+- `YR_MULTIPLIER`
+- `SVI_RAW`
+- `SVI`
+- `MU_DS1_LINEAR` to `MU_DS4_LINEAR`
+- `MU_DS1_EXPONENTIAL` to `MU_DS4_EXPONENTIAL`
+- `BETA_SVI`
 - `P_DS0` to `P_DS4`
 - `P_SUM`
 - `EDR`
+- `Fragility_Median_Method`
 
 ### 3. `svi.ipynb`
 Purpose:
-Build a continuous Seismic Vulnerability Index from bridge attributes.
+Inspect and rebuild the continuous Seismic Vulnerability Index from bridge attributes using the revised April 2026 weighting table.
 
 Reads:
 - `data/processed/bridges_with_edr.csv`
@@ -68,14 +82,21 @@ Writes:
 - `data/processed/bridges_with_svi.csv`
 
 Main columns created:
-- `score_year`
-- `score_recon`
+- `score_year_built`
+- `score_condition`
 - `score_skew`
-- `score_spans`
+- `score_continuity`
+- `score_material`
 - `score_max_span`
-- `score_cond`
+- `score_num_spans`
+- `YR_MULTIPLIER`
 - `SVI_RAW`
 - `SVI`
+
+The SVI step now uses:
+- explicit parameter weights from the April 2026 methodology memo
+- continuous formulas for condition, skew, and maximum span length
+- a reconstruction-year multiplier applied after the weighted sum
 
 ### 4. `MachineLearning.ipynb`
 Purpose:
@@ -139,3 +160,6 @@ If you want the clearest summary of the reproducible core workflow, start with:
 - `data/processed/bridges_with_edr.csv`
 - `data/processed/bridges_with_svi.csv`
 - `data/processed/bridge_ml_predictions.csv`
+
+If you want to refresh the engineering tables after an SVI methodology change without reopening the notebooks, run:
+- `python scripts/refresh_svi_hazus_outputs.py`

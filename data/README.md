@@ -48,6 +48,10 @@ The main workflow writes outputs into `processed/`:
 - `processed/bridge_ml_predictions.csv`
 - `processed/final_bridge_analysis.csv` when the full optional pipeline is available
 
+After the April 2026 SVI revision:
+- `processed/bridges_with_edr.csv` includes the updated SVI component scores, SVI-driven fragility medians, `BETA_SVI`, damage-state probabilities, and `EDR`
+- `processed/bridges_with_svi.csv` contains the same updated vulnerability fields in a bridge-vulnerability-focused output table
+
 ## Optional NDVI Extension Inputs
 
 The optional NDVI-based catastrophe-model workflow uses `change_detection/`:

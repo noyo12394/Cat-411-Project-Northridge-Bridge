@@ -144,7 +144,9 @@ This produces the first major derived table:
 
 The HAZUS portion of the project:
 - assigns a HAZUS bridge class to each bridge
-- maps each class to fragility parameters
+- rebuilds the updated SVI methodology on the bridge table
+- computes damage-state fragility medians from SVI using either the revised linear or exponential expressions
+- computes fragility dispersion from SVI using `beta = 0.6 + 0.2 * SVI`
 - computes damage-state exceedance probabilities using lognormal fragility functions
 - converts those into discrete damage-state probabilities
 - computes Expected Damage Ratio (`EDR`)
@@ -154,28 +156,82 @@ This produces:
 
 ### Step 4. Seismic Vulnerability Index
 
-The project then adds a continuous vulnerability measure to complement the class-based HAZUS approach.
+The project then adds a continuous vulnerability measure that now follows the revised April 2026 methodology note.
 
-The SVI uses available bridge attributes such as:
+The updated SVI uses these bridge attributes:
 - year built
-- year reconstructed
-- skew
-- maximum span length
 - condition rating
+- skew
+- structural continuity
+- material family
+- maximum span length
 - number of spans
+- year reconstructed as a multiplier
 
-Method:
-- each variable is bucketed into a normalized vulnerability score
-- weights are assigned to reflect relative importance
-- the weighted scores are combined into a raw vulnerability measure
-- the result is normalized to an `SVI` value between `0` and `1`
+Updated method:
+- `Year Built` uses era buckets:
+  - pre-1971 -> `1.00`
+  - `1971-1989` -> `0.70`
+  - post-1989 -> `0.40`
+- `Condition Rating` uses the continuous expression `(9 - CR) / 9`
+- `Skew` uses the continuous expression `Skew / 30`, capped at `1.0`
+- `Continuity` is scored as `1.0` for simply supported bridges and `0.0` for continuous bridges
+- `Material` is scored by material family:
+  - wood -> `1.00`
+  - concrete -> `0.85`
+  - steel -> `0.50`
+- `Maximum Span Length` uses the continuous expression `Span Length / 250`, capped at `1.0`
+- `Number of Spans` uses span-count buckets:
+  - `1` -> `0.00`
+  - `2-3` -> `0.25`
+  - `4-6` -> `0.50`
+  - `> 6` -> `0.85`
+- the weighted raw score is multiplied by the `Year Reconstructed` factor:
+  - pre-1971 -> `1.00`
+  - `1971-1989` -> `0.95`
+  - post-1989 -> `0.90`
+
+Updated weights:
+- Year Built -> `0.20`
+- Condition Rating -> `0.20`
+- Skew -> `0.15`
+- Continuity -> `0.15`
+- Material -> `0.10`
+- Maximum Span Length -> `0.10`
+- Number of Spans -> `0.10`
+
+In code, the final score is:
+- `SVI = (w_YB*YB + w_CR*CR + w_SK*SK + w_CT*CT + w_MA*MA + w_SL*SL + w_NS*NS) * YR`
 
 Interpretation:
-- lower `SVI` means lower vulnerability
-- higher `SVI` means higher vulnerability
+- lower `SVI` means lower relative bridge vulnerability
+- higher `SVI` means higher relative bridge vulnerability
 
 This produces:
 - `data/processed/bridges_with_svi.csv`
+
+### Step 4b. SVI-driven fragility parameters
+
+The revised methodology also connects SVI directly to fragility parameters.
+
+Median options implemented in the repo:
+- linear:
+  - `mu_DS(SVI) = mu_min,DS + SVI * (mu_max,DS - mu_min,DS)`
+- exponential:
+  - `mu_DS(SVI) = mu_max,DS * (mu_min,DS / mu_max,DS) ** (1 - SVI)`
+
+The current default in the repo is the `linear` option.
+
+Damage-state bounds used:
+- slight: `0.25` to `0.80`
+- moderate: `0.35` to `1.00`
+- extensive: `0.45` to `1.20`
+- complete: `0.70` to `1.70`
+
+Dispersion expression:
+- `beta = 0.6 + 0.2 * SVI`
+
+This means the fragility curves are no longer a fixed lookup by bridge class alone. They now vary continuously with bridge-level vulnerability.
 
 ### Step 5. Machine-learning extension
 

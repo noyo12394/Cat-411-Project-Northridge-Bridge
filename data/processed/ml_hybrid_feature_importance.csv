@@ -1,3 +1,3 @@
 Feature,Importance,Importance_std,Label
-pga,2.0547334209112416,0.040860584222543246,HAZUS Benchmark :: MLPRegressor
-HWB_CLASS,0.06810621227777243,0.0075020444331186,HAZUS Benchmark :: MLPRegressor
+pga,0.0,0.0,HAZUS Benchmark :: Ridge
+HWB_CLASS,0.0,0.0,HAZUS Benchmark :: Ridge

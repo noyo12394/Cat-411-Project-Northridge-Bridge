@@ -8,6 +8,17 @@ It contains two related workflows:
 
 The core workflow now runs entirely from repository-relative paths, so another user can clone the repo and reproduce the main results without relying on a personal `Downloads` folder.
 
+## April 2026 SVI Update
+
+The repository now implements the revised April 2026 Seismic Vulnerability Index methodology from the team update memo:
+- the SVI parameter weights and scores were updated
+- continuous scoring is now used for condition, skew, and span length
+- year reconstructed is applied as a multiplier on the weighted raw score
+- fragility medians are now derived from SVI using the updated linear and exponential expressions
+- fragility dispersion is now tied to SVI using `beta = 0.6 + 0.2 * SVI`
+
+The default engineering workflow uses the `linear` fragility-median option when rebuilding the damage tables.
+
 ## Repository Map
 
 Main notebooks:
@@ -92,11 +103,17 @@ What each step does:
 - `PGA_bridge.ipynb`
   Reads the raw bridge inventory and ShakeMap raster, cleans coordinates, samples PGA values, and writes `data/processed/pga_nbi_bridge.csv`.
 - `HAZUS.ipynb`
-  Assigns HAZUS bridge classes, computes damage-state probabilities, and writes `data/processed/bridges_with_edr.csv`.
+  Assigns HAZUS bridge classes for reporting, rebuilds the updated SVI inputs, computes SVI-driven fragility parameters, and writes `data/processed/bridges_with_edr.csv`.
 - `svi.ipynb`
-  Builds a continuous bridge vulnerability score and writes `data/processed/bridges_with_svi.csv`.
+  Recomputes and inspects the updated Seismic Vulnerability Index component scores and writes `data/processed/bridges_with_svi.csv`.
 - `MachineLearning.ipynb`
   Trains regression models that predict EDR and writes `data/processed/bridge_ml_predictions.csv`.
+
+If you want to rebuild the engineering tables without opening notebooks, run:
+
+```bash
+python scripts/refresh_svi_hazus_outputs.py
+```
 
 ## Data Story And Modeling Logic
 
@@ -107,9 +124,9 @@ This project is easier to understand if you think of it as five connected layers
 2. Hazard data:
    USGS ShakeMap rasters provide spatial earthquake intensity, with `pga_mean.flt` used for the main bridge-level hazard assignment. In this repo, those rasters come from the USGS ShakeMap product set for the 1994 Northridge earthquake.
 3. Fragility logic:
-   HAZUS-style bridge classification converts bridge attributes plus PGA into damage-state probabilities and Expected Damage Ratio.
+   HAZUS-style bridge classification is still kept for reporting, but the fragility medians and dispersion are now driven by the updated SVI formulas before PGA is converted into damage-state probabilities and Expected Damage Ratio.
 4. Vulnerability refinement:
-   The Seismic Vulnerability Index adds a continuous vulnerability score using bridge age, reconstruction, skew, span geometry, and condition.
+   The Seismic Vulnerability Index now follows the April 2026 methodology note, including explicit weights, continuous scores for selected parameters, continuity/material assumptions, and a reconstruction-year multiplier.
 5. Extensions:
    Machine learning approximates the HAZUS-based damage pattern, and the optional NDVI workflow explores remote-sensing-based loss and prioritization ideas.
 
@@ -133,6 +150,15 @@ For the hazard-data collection process, the team:
 - kept the main PGA raster plus related hazard grids and metadata in `data/`
 - used `pga_mean.flt` as the main ground-motion surface for bridge-level PGA sampling
 
+For the revised SVI methodology, the repository now uses:
+- `YEAR_BUILT_027` for the year-built score
+- `SUBSTRUCTURE_COND_060` as the primary condition proxy
+- `DEGREES_SKEW_034` for skew
+- `STRUCTURE_KIND_043A` to infer continuity and material family
+- `MAX_SPAN_LEN_MT_048` for the continuous span-length score
+- `MAIN_UNIT_SPANS_045` for the span-count score
+- `YEAR_RECONSTRUCTED_106` for the reconstruction-year multiplier
+
 ## Generated Outputs
 
 Core outputs created by the workflow:
@@ -153,6 +179,10 @@ Core outputs created by the workflow:
 - `data/processed/ml_statewide_bridge_scores.csv`
 
 These are the best files to inspect if you want the end results without stepping through every notebook cell.
+
+Two especially important engineering tables after the April 2026 update are:
+- `data/processed/bridges_with_edr.csv`: now includes updated SVI component scores, SVI-driven fragility medians, `BETA_SVI`, damage-state probabilities, and `EDR`
+- `data/processed/bridges_with_svi.csv`: mirrors the same bridge table but is convenient for inspecting the vulnerability side separately
 
 Core figures can now be regenerated directly into `figures/` with:
 

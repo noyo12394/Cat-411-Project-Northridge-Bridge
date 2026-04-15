@@ -2,6 +2,9 @@
 
 This file summarizes the core non-NDVI workflow results that were generated directly from the repository data.
 
+Important methodology note:
+- the engineering workflow now uses the revised April 2026 SVI methodology, including updated parameter weights, continuous scoring for selected variables, an SVI-based fragility-median mapping, and the SVI-based dispersion expression
+
 ## What Was Run
 
 The following notebooks were run successfully as the main reproducible workflow:
