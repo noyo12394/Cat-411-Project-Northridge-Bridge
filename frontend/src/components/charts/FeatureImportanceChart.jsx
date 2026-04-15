@@ -1,23 +1,29 @@
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import SurfaceCard from '../common/SurfaceCard'
+import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import ChartShell from './ChartShell'
 
-export default function FeatureImportanceChart({ data }) {
+const BAR_COLORS = ['#1d4ed8', '#2563eb', '#3b82f6', '#6366f1', '#8b5cf6', '#0f766e', '#0284c7', '#7c3aed']
+
+export default function FeatureImportanceChart({ data, source }) {
   return (
-    <SurfaceCard className="p-6">
-      <p className="eyebrow">Chart 01</p>
-      <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.03em] text-ink">Feature importance</h3>
-      <p className="mt-2 text-sm leading-7 text-muted">Illustrative importance values for the intrinsic vulnerability engine.</p>
-      <div className="mt-6 h-[320px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} layout="vertical" margin={{ top: 10, right: 10, bottom: 0, left: 40 }}>
-            <CartesianGrid stroke="#e8eef5" strokeDasharray="3 3" />
-            <XAxis type="number" tickFormatter={(value) => `${Math.round(value * 100)}%`} stroke="#72839a" />
-            <YAxis type="category" dataKey="feature" width={120} stroke="#72839a" />
-            <Tooltip formatter={(value) => [`${Math.round(value * 100)}%`, 'Importance']} />
-            <Bar dataKey="importance" radius={[10, 10, 10, 10]} fill="#1f5fbf" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-    </SurfaceCard>
+    <ChartShell
+      eyebrow="Model inputs"
+      title="Feature importance / contribution priors"
+      description="When repo feature-importance exports are valid we show them directly. Otherwise the adapter falls back to domain-prior weights aligned with the bridge-intrinsic screening logic."
+      aside={<span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 font-medium text-slate-600">Source: {source === 'repo' ? 'Repo export' : 'Adapter fallback'}</span>}
+    >
+      <ResponsiveContainer>
+        <BarChart data={data} layout="vertical" margin={{ top: 8, right: 18, bottom: 8, left: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.25)" horizontal={false} />
+          <XAxis type="number" tick={{ fill: '#64748b', fontSize: 12 }} axisLine={false} tickLine={false} />
+          <YAxis dataKey="feature" type="category" width={148} tick={{ fill: '#334155', fontSize: 12 }} axisLine={false} tickLine={false} />
+          <Tooltip formatter={(value) => Number(value).toFixed(3)} contentStyle={{ borderRadius: 18, border: '1px solid rgba(226,232,240,0.95)' }} />
+          <Bar dataKey="importance" radius={[10, 10, 10, 10]}>
+            {data.map((entry, index) => (
+              <Cell key={entry.feature} fill={BAR_COLORS[index % BAR_COLORS.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </ChartShell>
   )
 }

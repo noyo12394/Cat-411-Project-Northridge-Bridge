@@ -10,61 +10,26 @@
   }
 
   body {
-    @apply bg-canvas font-sans text-ink antialiased;
-    background-image:
-      radial-gradient(circle at top left, rgba(78, 163, 255, 0.18), transparent 28%),
-      radial-gradient(circle at 85% 10%, rgba(86, 100, 245, 0.14), transparent 22%),
-      linear-gradient(180deg, #f9fbfe 0%, #f4f7fb 42%, #edf3f8 100%);
+    @apply font-sans antialiased text-slate-950;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.16), transparent 24%),
+      radial-gradient(circle at 100% 12%, rgba(139, 92, 246, 0.1), transparent 20%),
+      linear-gradient(180deg, #f8fbff 0%, #f3f7fd 38%, #eef3fb 100%);
   }
 
   * {
-    @apply border-line;
+    @apply border-slate-200;
   }
 
   ::selection {
-    background: rgba(31, 95, 191, 0.18);
-    color: #0c1b2b;
+    background: rgba(59, 130, 246, 0.18);
+    color: #0f172a;
   }
 }
 
 @layer components {
-  .section-shell {
-    @apply relative overflow-hidden rounded-[32px] border border-white/70 bg-white/80 shadow-panel backdrop-blur;
-  }
-
-  .section-grid {
-    @apply absolute inset-0 opacity-30;
-    background-image: linear-gradient(rgba(31, 95, 191, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(31, 95, 191, 0.06) 1px, transparent 1px);
-    background-size: 28px 28px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 80%);
-  }
-
-  .surface-card {
-    @apply rounded-[28px] border border-white/80 bg-white/95 shadow-soft backdrop-blur;
-  }
-
-  .section-title {
-    @apply font-display text-3xl font-semibold tracking-[-0.04em] text-ink sm:text-4xl;
-  }
-
-  .section-copy {
-    @apply max-w-3xl text-base leading-7 text-muted sm:text-lg;
-  }
-
-  .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-ocean/15 bg-ocean/5 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-ocean;
-  }
-
-  .field-label {
-    @apply mb-2 block text-sm font-semibold text-ink;
-  }
-
   .field-input {
-    @apply h-12 w-full rounded-2xl border border-slate-200 bg-white px-4 text-sm text-ink outline-none transition placeholder:text-slate-400 focus:border-ocean focus:ring-4 focus:ring-ocean/10;
-  }
-
-  .field-help {
-    @apply mt-2 text-xs leading-5 text-muted;
+    @apply h-12 w-full rounded-2xl border border-slate-200/90 bg-white/95 px-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10;
   }
 }
 
@@ -77,6 +42,6 @@
 
 .recharts-default-tooltip {
   border-radius: 18px !important;
-  border: 1px solid rgba(217, 225, 234, 0.9) !important;
-  box-shadow: 0 16px 40px rgba(16, 32, 51, 0.12) !important;
+  border: 1px solid rgba(226, 232, 240, 0.95) !important;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12) !important;
 }

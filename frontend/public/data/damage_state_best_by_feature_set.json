@@ -1,0 +1,30 @@
+[
+  {
+    "Feature Group": "Event Damage Classifier",
+    "Model": "Logistic Regression",
+    "CV_Accuracy": 0.989066,
+    "CV_Balanced_Accuracy": 0.985661,
+    "CV_Macro_F1": 0.931205,
+    "CV_Weighted_F1": 0.989721,
+    "Holdout_Accuracy": 0.989028,
+    "Holdout_Balanced_Accuracy": 0.983681,
+    "Holdout_Macro_F1": 0.920788,
+    "Holdout_Weighted_F1": 0.989679,
+    "Holdout_Within_One_State_Accuracy": 0.99923,
+    "Holdout_Quadratic_Weighted_Kappa": 0.962124
+  },
+  {
+    "Feature Group": "Structural Vulnerability Classifier",
+    "Model": "Logistic Regression",
+    "CV_Accuracy": 0.577517,
+    "CV_Balanced_Accuracy": 0.538226,
+    "CV_Macro_F1": 0.262409,
+    "CV_Weighted_F1": 0.697091,
+    "Holdout_Accuracy": 0.574398,
+    "Holdout_Balanced_Accuracy": 0.558036,
+    "Holdout_Macro_F1": 0.263839,
+    "Holdout_Weighted_F1": 0.694802,
+    "Holdout_Within_One_State_Accuracy": 0.711453,
+    "Holdout_Quadratic_Weighted_Kappa": 0.046746
+  }
+]

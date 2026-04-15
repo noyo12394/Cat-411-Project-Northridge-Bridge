@@ -1,43 +1,52 @@
-import { Suspense, lazy } from 'react'
+import { useMemo, useState } from 'react'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
-import HeroSection from './components/sections/HeroSection'
-import ObjectivesSection from './components/sections/ObjectivesSection'
-import MotivationSection from './components/sections/MotivationSection'
-import FeatureSelectionSection from './components/sections/FeatureSelectionSection'
+import AnalyticsSection from './components/sections/AnalyticsSection'
 import ComparativeFrameworkSection from './components/sections/ComparativeFrameworkSection'
-import InteractiveDashboardSection from './components/sections/InteractiveDashboardSection'
+import DashboardSection from './components/sections/DashboardSection'
+import FeatureDisciplineSection from './components/sections/FeatureDisciplineSection'
+import HeroSection from './components/sections/HeroSection'
+import InterpretabilitySection from './components/sections/InterpretabilitySection'
+import ObjectivesSection from './components/sections/ObjectivesSection'
+import PipelineSection from './components/sections/PipelineSection'
 import SignificanceSection from './components/sections/SignificanceSection'
-
-const AnalyticsSection = lazy(() => import('./components/sections/AnalyticsSection'))
+import TransparencySection from './components/sections/TransparencySection'
+import WhyDifferentSection from './components/sections/WhyDifferentSection'
+import { useResearchData } from './hooks/useResearchData'
 
 function App() {
+  const { data: researchData, loading, diagnostics } = useResearchData()
+  const [bridgeState, setBridgeState] = useState(null)
+
+  const heroBridgeState = useMemo(() => bridgeState, [bridgeState])
+  const dashboardKey = useMemo(
+    () =>
+      [
+        researchData.availability.repoData ? 'repo' : 'fallback',
+        researchData.summary.totals.totalBridges,
+        researchData.summary.totals.hazardSampledBridges,
+      ].join('-'),
+    [researchData],
+  )
+
   return (
-    <div className="min-h-screen">
-      {/* Single-page research demo layout with anchored sections for navigation. */}
+    <div className="min-h-screen bg-transparent text-slate-950">
       <Header />
-      <main className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 pb-12 pt-24 sm:px-6 lg:px-8">
-        <HeroSection />
+      <main className="mx-auto flex w-full max-w-[1440px] flex-col gap-20 px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+        <HeroSection researchData={researchData} bridgeState={heroBridgeState} />
         <ObjectivesSection />
-        <MotivationSection />
-        <FeatureSelectionSection />
+        <WhyDifferentSection />
+        <FeatureDisciplineSection />
+        <PipelineSection pipeline={researchData.summary.pipeline} />
         <ComparativeFrameworkSection />
-        <InteractiveDashboardSection />
-        <Suspense
-          fallback={
-            <section className="section-shell">
-              <div className="section-grid" />
-              <div className="relative z-10 p-8">
-                <p className="eyebrow">Analytics</p>
-                <p className="mt-5 text-sm leading-7 text-muted">
-                  Loading the charting layer for the analytics section.
-                </p>
-              </div>
-            </section>
-          }
-        >
-          <AnalyticsSection />
-        </Suspense>
+        <DashboardSection
+          key={dashboardKey}
+          researchData={researchData}
+          onBridgeStateChange={setBridgeState}
+        />
+        <AnalyticsSection researchData={researchData} />
+        <TransparencySection researchData={researchData} diagnostics={loading ? 'Loading exported research snapshots...' : diagnostics} />
+        <InterpretabilitySection />
         <SignificanceSection />
       </main>
       <Footer />

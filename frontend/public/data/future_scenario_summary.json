@@ -1,0 +1,57 @@
+[
+  {
+    "Scenario": "Observed PGA",
+    "Scenario_PGA_g": null,
+    "Mean_Predicted_EDR": 0.010988,
+    "Median_Predicted_EDR": 0.000377,
+    "P90_Predicted_EDR": 0.01158,
+    "P95_Predicted_EDR": 0.049385,
+    "Bridges_EDR_ge_0_02": 2052,
+    "Bridges_EDR_ge_0_08": 961,
+    "Bridges_EDR_ge_0_25": 332
+  },
+  {
+    "Scenario": "Scenario 0.05g",
+    "Scenario_PGA_g": 0.05,
+    "Mean_Predicted_EDR": 0.001248,
+    "Median_Predicted_EDR": 0.001241,
+    "P90_Predicted_EDR": 0.001831,
+    "P95_Predicted_EDR": 0.002067,
+    "Bridges_EDR_ge_0_02": 0,
+    "Bridges_EDR_ge_0_08": 0,
+    "Bridges_EDR_ge_0_25": 0
+  },
+  {
+    "Scenario": "Scenario 0.10g",
+    "Scenario_PGA_g": 0.1,
+    "Mean_Predicted_EDR": 0.004818,
+    "Median_Predicted_EDR": 0.004129,
+    "P90_Predicted_EDR": 0.008894,
+    "P95_Predicted_EDR": 0.0099,
+    "Bridges_EDR_ge_0_02": 0,
+    "Bridges_EDR_ge_0_08": 0,
+    "Bridges_EDR_ge_0_25": 0
+  },
+  {
+    "Scenario": "Scenario 0.20g",
+    "Scenario_PGA_g": 0.2,
+    "Mean_Predicted_EDR": 0.027061,
+    "Median_Predicted_EDR": 0.030867,
+    "P90_Predicted_EDR": 0.036017,
+    "P95_Predicted_EDR": 0.037672,
+    "Bridges_EDR_ge_0_02": 20817,
+    "Bridges_EDR_ge_0_08": 0,
+    "Bridges_EDR_ge_0_25": 0
+  },
+  {
+    "Scenario": "Scenario 0.40g",
+    "Scenario_PGA_g": 0.4,
+    "Mean_Predicted_EDR": 0.114803,
+    "Median_Predicted_EDR": 0.126824,
+    "P90_Predicted_EDR": 0.155431,
+    "P95_Predicted_EDR": 0.160674,
+    "Bridges_EDR_ge_0_02": 25975,
+    "Bridges_EDR_ge_0_08": 20959,
+    "Bridges_EDR_ge_0_25": 0
+  }
+]

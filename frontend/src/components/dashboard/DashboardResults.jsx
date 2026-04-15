@@ -1,149 +1,83 @@
-import SurfaceCard from '../common/SurfaceCard'
+import BridgeStateVisual from '../visuals/BridgeStateVisual'
 
-function MetricTile({ label, value, supporting, accentClass = 'text-ink' }) {
-  return (
-    <SurfaceCard className="h-full p-5">
-      <p className="text-xs uppercase tracking-[0.18em] text-muted">{label}</p>
-      <p className={`mt-3 font-display text-3xl font-semibold tracking-[-0.04em] ${accentClass}`}>{value}</p>
-      <p className="mt-2 text-sm leading-6 text-muted">{supporting}</p>
-    </SurfaceCard>
-  )
-}
-
-export default function DashboardResults({ result }) {
-  if (!result) {
-    return (
-      <div className="surface-card p-8">
-        <p className="eyebrow">Output panel</p>
-        <p className="mt-6 text-sm leading-7 text-muted">Run the dashboard once to generate a vulnerability interpretation.</p>
-      </div>
-    )
+function StatCard({ label, value, hint, accent = 'slate' }) {
+  const accentClasses = {
+    slate: 'border-slate-200/80 bg-white',
+    blue: 'border-blue-200/80 bg-blue-50/70',
+    violet: 'border-violet-200/80 bg-violet-50/70',
+    amber: 'border-amber-200/80 bg-amber-50/70',
   }
 
   return (
+    <div className={`rounded-[24px] border p-4 shadow-sm ${accentClasses[accent]}`}>
+      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{label}</p>
+      <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">{value}</div>
+      {hint ? <p className="mt-2 text-sm leading-6 text-slate-600">{hint}</p> : null}
+    </div>
+  )
+}
+
+export default function DashboardResults({ result, modeMeta }) {
+  return (
     <div className="space-y-5">
-      <SurfaceCard className="overflow-hidden p-0">
-        <div className="border-b border-white/10 bg-gradient-to-br from-ink via-[#173967] to-ocean px-6 py-6 text-white">
-          <p className="eyebrow border-white/15 bg-white/10 text-white">Output panel</p>
-          <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-sm uppercase tracking-[0.18em] text-white/65">Predicted Vulnerability Score</p>
-              <div className="mt-2 flex items-end gap-3">
-                <span className="font-display text-6xl font-semibold tracking-[-0.05em]">
-                  {result.vulnerabilityScore.toFixed(2)}
-                </span>
-                <span className={`rounded-full border px-3 py-1 text-sm font-medium ${result.riskLevel.chip}`}>
-                  {result.riskLevel.label} risk
-                </span>
-              </div>
-            </div>
-            <div className="w-full max-w-[280px] rounded-[24px] border border-white/10 bg-white/8 p-4">
-              <div className="flex items-center justify-between text-sm text-white/72">
-                <span>Priority score</span>
-                <span>{(result.priorityScore * 100).toFixed(0)} / 100</span>
-              </div>
-              <div className="mt-3 h-3 rounded-full bg-white/15">
-                <div
-                  className="h-3 rounded-full bg-gradient-to-r from-sky via-signal to-[#ff7b72]"
-                  style={{ width: `${result.priorityScore * 100}%` }}
-                />
-              </div>
-            </div>
+      <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Output panel</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">{modeMeta.label}</h3>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{result.narrative}</p>
           </div>
+          <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-600">{result.scenarioTag}</div>
         </div>
-
-        <div className="grid gap-4 p-6 md:grid-cols-2 xl:grid-cols-4">
-          <MetricTile
-            label="Estimated Damage Category"
-            value={`${result.damageCategory.code}`}
-            supporting={result.damageCategory.explanation}
-            accentClass="text-ocean"
-          />
-          <MetricTile
-            label="Bridge Risk Level"
-            value={result.riskLevel.label}
-            supporting="Qualitative tier derived from the intrinsic vulnerability score."
-            accentClass={result.riskLevel.tone}
-          />
-          <MetricTile
-            label="Inspection Priority Rank"
-            value={`#${result.inspectionPriorityRank}`}
-            supporting="Lower rank means higher priority once vulnerability and consequence are combined."
-            accentClass="text-violet"
-          />
-          <MetricTile
-            label="Confidence Indicator"
-            value={`${result.confidence.score}%`}
-            supporting={`${result.confidence.label} based on input completeness and model framing.`}
-            accentClass="text-teal"
-          />
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <StatCard label="Predicted Vulnerability Score" value={result.vulnerabilityScore.toFixed(3)} hint="0 to 1 screening scale" accent="blue" />
+          <StatCard label="Damage Category" value={result.damageCategory} hint="Displayed as a screening-tier interpretation" accent="violet" />
+          <StatCard label="Risk Level" value={result.riskLevel} hint="Portfolio band used for dashboard communication" accent="amber" />
+          <StatCard label="Inspection Priority Rank" value={result.inspectionPriorityRank} hint="Consequence-aware ranking output" />
+          <StatCard label="Confidence Indicator" value={result.confidenceLabel} hint={`Confidence score ${result.confidence.toFixed(2)}`} />
+          <StatCard label="Traffic / Economic Disruption" value={result.trafficIndicator.label} hint="ADT changes this layer without changing baseline vulnerability" />
         </div>
-      </SurfaceCard>
+      </div>
 
-      <div className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
-        <SurfaceCard className="p-6">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="eyebrow">Interpretability</p>
-              <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.03em] text-ink">Top contributing features</h3>
-            </div>
-            <span className="rounded-full border border-slate-200 px-3 py-2 text-sm text-muted">Transparent mock logic</span>
-          </div>
-          <div className="mt-6 space-y-4">
-            {result.topContributingFeatures.map((item) => (
-              <div key={item.feature}>
-                <div className="mb-2 flex items-center justify-between text-sm font-medium text-ink">
-                  <span>{item.feature}</span>
-                  <span>{item.contribution}%</span>
-                </div>
-                <div className="h-2 rounded-full bg-slate-100">
-                  <div
-                    className="h-2 rounded-full bg-gradient-to-r from-ocean via-sky to-violet"
-                    style={{ width: `${Math.min(item.contribution, 100)}%` }}
-                  />
+      <BridgeStateVisual score={result.vulnerabilityScore} visualState={result.visualState} title={`${modeMeta.label} structural signal`} />
+
+      <div className="grid gap-5 xl:grid-cols-[1.25fr_0.75fr]">
+        <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Interpretability</p>
+          <h3 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-slate-950">Top contributing features</h3>
+          <div className="mt-5 space-y-3">
+            {result.topContributors.map((item) => (
+              <div key={item.label} className="rounded-[22px] border border-slate-200/80 bg-slate-50/80 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <h4 className="font-semibold text-slate-900">{item.label}</h4>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{item.narrative}</p>
+                  </div>
+                  <div className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm">{item.value.toFixed(3)}</div>
                 </div>
               </div>
             ))}
           </div>
-        </SurfaceCard>
+        </div>
 
-        <div className="grid gap-5">
-          <SurfaceCard className="p-6">
-            <p className="eyebrow">Consequence layer</p>
-            <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
-              Traffic / Economic Disruption Indicator
-            </h3>
-            <div className="mt-5 flex items-center justify-between gap-4">
-              <div>
-                <p className="font-display text-4xl font-semibold tracking-[-0.04em] text-ink">{result.disruption.label}</p>
-                <p className="mt-2 text-sm leading-7 text-muted">{result.disruption.detail}</p>
-              </div>
-              <div className="rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-3 text-center">
-                <p className="text-xs uppercase tracking-[0.2em] text-muted">Score</p>
-                <p className="mt-2 font-display text-3xl font-semibold tracking-[-0.04em] text-ocean">
-                  {result.disruption.score.toFixed(2)}
-                </p>
-              </div>
+        <div className="space-y-5">
+          <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">NDVI adjustment card</p>
+            <h3 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-slate-950">Post-event evidence status</h3>
+            <p className="mt-3 text-sm leading-6 text-slate-600">{result.ndviAdjustment.narrative}</p>
+            <div className="mt-4 rounded-[22px] border border-slate-200/80 bg-slate-50 p-4 text-sm text-slate-700">
+              Adjustment shift: <span className="font-semibold">{result.ndviAdjustment.shift.toFixed(3)}</span>
             </div>
-          </SurfaceCard>
-
-          <SurfaceCard className="p-6">
-            <p className="eyebrow">NDVI adjustment card</p>
-            <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.03em] text-ink">Post-event signal</h3>
-            <div className="mt-5 space-y-3 text-sm leading-7 text-muted">
-              <p>{result.ndviAdjustment.message}</p>
-              <div className="flex items-center justify-between rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-3">
-                <span>Adjustment applied</span>
-                <span className="font-semibold text-ink">
-                  {result.ndviAdjustment.applied ? `${result.ndviAdjustment.adjustment >= 0 ? '+' : ''}${result.ndviAdjustment.adjustment.toFixed(3)}` : 'None'}
-                </span>
-              </div>
-              <div className="flex items-center justify-between rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-3">
-                <span>Rehabilitation credit</span>
-                <span className="font-semibold text-ink">-{result.rehabCredit.toFixed(3)}</span>
-              </div>
-            </div>
-          </SurfaceCard>
+          </div>
+          <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Rule discipline</p>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
+              <li>• Intrinsic mode excludes PGA from the core vulnerability score.</li>
+              <li>• Event mode introduces PGA only as a scenario layer after screening.</li>
+              <li>• ADT changes prioritization and disruption, not intrinsic vulnerability.</li>
+              <li>• NDVI acts only as an optional post-event adjustment.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

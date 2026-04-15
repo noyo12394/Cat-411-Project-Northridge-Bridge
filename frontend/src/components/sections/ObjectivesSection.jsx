@@ -1,35 +1,40 @@
-import { Layers3, Target, Workflow } from 'lucide-react'
-import SectionHeader from '../common/SectionHeader'
-import SurfaceCard from '../common/SurfaceCard'
-import SectionShell from '../layout/SectionShell'
-import { objectives } from '../../data/content'
-
-const icons = [Target, Workflow, Layers3]
+import InsightCard from '../common/InsightCard'
+import SectionHeading from '../common/SectionHeading'
 
 export default function ObjectivesSection() {
+  const cards = [
+    {
+      eyebrow: 'Core objective',
+      title: 'Bridge vulnerability prediction from intrinsic structural attributes',
+      description:
+        'Screen bridges using age, reconstruction timing, skew, span geometry, class, condition, and SVI without letting PGA dominate the baseline vulnerability experience.',
+    },
+    {
+      eyebrow: 'Secondary objective',
+      title: 'Interactive bridge-level dashboard for inspection prioritization',
+      description:
+        'Translate the notebook workflow into a usable interface for bridge-level queries, interpretable scores, damage framing, and emergency inspection triage.',
+    },
+    {
+      eyebrow: 'Integrative goal',
+      title: 'Comparative framework linking HAZUS, SVI, NDVI, and ML',
+      description:
+        'Show how class-based fragility logic, intrinsic index scoring, post-event proxy evidence, and ML-based screening can coexist in one coherent platform.',
+    },
+  ]
+
   return (
-    <SectionShell id="objectives">
-      <SectionHeader
-        eyebrow="Objectives"
-        title="A bridge-risk website with a serious research posture"
-        description="The site is intentionally framed as more than a visualization exercise. It is meant to communicate the modeling logic, the decision-support goal, and the comparative value of HAZUS, SVI, NDVI, and ML in one coherent demo."
+    <section className="space-y-8">
+      <SectionHeading
+        eyebrow="What this project does"
+        title="A research platform that connects engineering workflow, model discipline, and usable decision support"
+        description="The site is meant to read like a serious infrastructure intelligence platform rather than a notebook appendix: one layer for intrinsic vulnerability, one for scenario damage, and one for inspection prioritization."
       />
-      <div className="mt-8 grid gap-5 xl:grid-cols-3">
-        {objectives.map((item, index) => {
-          const Icon = icons[index]
-          return (
-            <SurfaceCard key={item.title} className="flex h-full flex-col gap-5 p-7">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-ocean/8 text-ocean">
-                <Icon className="h-5 w-5" />
-              </div>
-              <div className="space-y-3">
-                <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] text-ink">{item.title}</h3>
-                <p className="text-sm leading-7 text-muted">{item.body}</p>
-              </div>
-            </SurfaceCard>
-          )
-        })}
+      <div className="grid gap-5 lg:grid-cols-3">
+        {cards.map((card, index) => (
+          <InsightCard key={card.title} {...card} tone={index === 1 ? 'accent' : 'default'} />
+        ))}
       </div>
-    </SectionShell>
+    </section>
   )
 }

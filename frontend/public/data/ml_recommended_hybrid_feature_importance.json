@@ -1,0 +1,68 @@
+[
+  {
+    "Feature": "HWB_CLASS",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "design_era_1989",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "age_years",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "time_since_rehab",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "reconstructed_flag",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "spans",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "max_span_log1p",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "skew",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "cond",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "deck_area_log1p",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  },
+  {
+    "Feature": "operating_rating",
+    "Importance": 0.0,
+    "Importance_std": 0.0,
+    "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+  }
+]

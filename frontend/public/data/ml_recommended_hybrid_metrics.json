@@ -1,0 +1,16 @@
+[
+  {
+    "Feature Set": "Bridge Vulnerability Structural",
+    "Model": "Elastic Net",
+    "Transform": "Raw target",
+    "MAE": 0.0,
+    "RMSE": 0.0,
+    "RMSLE": 0.0,
+    "MedianAE": 0.0,
+    "R2": 1.0,
+    "MAE_Positive": null,
+    "RMSE_Positive": null,
+    "RMSLE_Positive": null,
+    "R2_Positive": null
+  }
+]

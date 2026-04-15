@@ -1,57 +1,42 @@
-import { BarChart3, BrainCircuit, Database, Layers3 } from 'lucide-react'
-import SectionHeader from '../common/SectionHeader'
-import SurfaceCard from '../common/SurfaceCard'
-import SectionShell from '../layout/SectionShell'
-import { frameworkCards } from '../../data/content'
+import InsightCard from '../common/InsightCard'
+import SectionHeading from '../common/SectionHeading'
 
-const iconMap = {
-  HAZUS: Database,
-  SVI: Layers3,
-  NDVI: BarChart3,
-  'ML (Proposed)': BrainCircuit,
-}
+const cards = [
+  {
+    eyebrow: 'HAZUS',
+    title: 'Class-based event damage backbone',
+    description: 'Primary role: fragility / expected damage ratio estimation under an earthquake demand. Strength: engineering lineage and class-based fragility mapping. Limitation: class-based and hazard-driven, not a bridge-intrinsic ranking.',
+  },
+  {
+    eyebrow: 'SVI',
+    title: 'Intrinsic structural screening layer',
+    description: 'Primary role: interpretable bridge vulnerability screening. Strength: transparent weights and bridge-specific factors. Limitation: simplified and still a surrogate, not an event-specific damage solver.',
+  },
+  {
+    eyebrow: 'NDVI',
+    title: 'Proxy-based post-event evidence',
+    description: 'Primary role: post-event proxy validation and attention adjustment. Strength: useful when inspection labels are sparse. Limitation: not a structural core driver and not equivalent to field-observed damage.',
+  },
+  {
+    eyebrow: 'ML (proposed)',
+    title: 'Bridge-specific nonlinear screening',
+    description: 'Primary role: bridge-level vulnerability screening and scenario-aware comparison. Strength: captures nonlinear variation and connects outputs into a usable dashboard. Limitation: browser-side demo mode may approximate the trained model when a live backend is absent.',
+  },
+]
 
 export default function ComparativeFrameworkSection() {
   return (
-    <SectionShell id="framework">
-      <SectionHeader
+    <section className="space-y-8">
+      <SectionHeading
         eyebrow="Comparative framework"
-        title="Where HAZUS, SVI, NDVI, and ML each belong"
-        description="A strong demo should make the methods legible. The framework below shows each tool’s role, what it does well, where it is limited, and how it connects back to the proposed ML-driven dashboard."
+        title="Four methods, four roles, one coherent platform"
+        description="The project is strongest when these methods are shown as complementary rather than interchangeable."
       />
-
-      <div className="mt-8 grid gap-5 xl:grid-cols-4">
-        {frameworkCards.map((card) => {
-          const Icon = iconMap[card.name]
-          return (
-            <SurfaceCard key={card.name} className="flex h-full flex-col gap-5 p-6">
-              <div className="flex items-center gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-ocean/8 text-ocean">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="font-display text-xl font-semibold tracking-[-0.03em] text-ink">{card.name}</p>
-                  <p className="text-xs uppercase tracking-[0.2em] text-muted">{card.role}</p>
-                </div>
-              </div>
-              <div className="space-y-4 text-sm leading-7 text-muted">
-                <div>
-                  <p className="font-semibold text-ink">Strength</p>
-                  <p>{card.strength}</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-ink">Limitation</p>
-                  <p>{card.limitation}</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-ink">ML connection</p>
-                  <p>{card.connection}</p>
-                </div>
-              </div>
-            </SurfaceCard>
-          )
-        })}
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {cards.map((card, index) => (
+          <InsightCard key={card.title} {...card} tone={index === 3 ? 'accent' : 'default'} />
+        ))}
       </div>
-    </SectionShell>
+    </section>
   )
 }

@@ -1,0 +1,2205 @@
+{
+  "generatedAt": "2026-04-15T05:32:48.378169+00:00",
+  "counts": {
+    "totalBridges": 25975,
+    "hazardSampled": 16796,
+    "mlCalibrationRows": 3360,
+    "bridgeClasses": 13
+  },
+  "portfolio": {
+    "meanSVI": 0.450561,
+    "medianSVI": 0.449804,
+    "meanEDR": 0.008538,
+    "sviRiskBands": {
+      "Low": 571,
+      "Guarded": 8188,
+      "Elevated": 12981,
+      "High": 4104,
+      "Critical": 131
+    },
+    "modalDamageStates": {
+      "None": 25861,
+      "Complete": 114
+    }
+  },
+  "classProfiles": [
+    {
+      "bridgeClass": "HWB2",
+      "count": 3439,
+      "meanSVI": 0.557891,
+      "meanEDR": 0.016841
+    },
+    {
+      "bridgeClass": "HWB28",
+      "count": 12,
+      "meanSVI": 0.5467,
+      "meanEDR": 0.015886
+    },
+    {
+      "bridgeClass": "HWB11",
+      "count": 32,
+      "meanSVI": 0.543194,
+      "meanEDR": 6.8e-05
+    },
+    {
+      "bridgeClass": "HWB8",
+      "count": 1706,
+      "meanSVI": 0.510073,
+      "meanEDR": 0.007789
+    },
+    {
+      "bridgeClass": "HWB1",
+      "count": 1346,
+      "meanSVI": 0.462969,
+      "meanEDR": 0.011246
+    },
+    {
+      "bridgeClass": "HWB4",
+      "count": 1287,
+      "meanSVI": 0.461303,
+      "meanEDR": 0.005989
+    },
+    {
+      "bridgeClass": "HWB7",
+      "count": 2000,
+      "meanSVI": 0.454433,
+      "meanEDR": 0.007806
+    },
+    {
+      "bridgeClass": "HWB3",
+      "count": 77,
+      "meanSVI": 0.454222,
+      "meanEDR": 0.002836
+    },
+    {
+      "bridgeClass": "HWB6",
+      "count": 9240,
+      "meanSVI": 0.447714,
+      "meanEDR": 0.007146
+    },
+    {
+      "bridgeClass": "HWB12",
+      "count": 20,
+      "meanSVI": 0.447029,
+      "meanEDR": 0.0
+    },
+    {
+      "bridgeClass": "HWB10",
+      "count": 2759,
+      "meanSVI": 0.404096,
+      "meanEDR": 0.007694
+    },
+    {
+      "bridgeClass": "HWB9",
+      "count": 1308,
+      "meanSVI": 0.387177,
+      "meanEDR": 0.010749
+    }
+  ],
+  "countyProfiles": [
+    {
+      "countyCode": 37,
+      "count": 3549,
+      "meanSVI": 0.485037,
+      "meanEDR": 0.055079
+    },
+    {
+      "countyCode": 73,
+      "count": 1632,
+      "meanSVI": 0.444185,
+      "meanEDR": 2e-06
+    },
+    {
+      "countyCode": 71,
+      "count": 1422,
+      "meanSVI": 0.465882,
+      "meanEDR": 0.000173
+    },
+    {
+      "countyCode": 59,
+      "count": 1181,
+      "meanSVI": 0.448569,
+      "meanEDR": 0.000857
+    },
+    {
+      "countyCode": 65,
+      "count": 1120,
+      "meanSVI": 0.445055,
+      "meanEDR": 9.6e-05
+    },
+    {
+      "countyCode": 85,
+      "count": 966,
+      "meanSVI": 0.430471,
+      "meanEDR": 0.0
+    },
+    {
+      "countyCode": 19,
+      "count": 921,
+      "meanSVI": 0.439584,
+      "meanEDR": 0.0
+    },
+    {
+      "countyCode": 67,
+      "count": 737,
+      "meanSVI": 0.41058,
+      "meanEDR": 0.0
+    },
+    {
+      "countyCode": 29,
+      "count": 668,
+      "meanSVI": 0.436745,
+      "meanEDR": 5.1e-05
+    },
+    {
+      "countyCode": 1,
+      "count": 662,
+      "meanSVI": 0.433295,
+      "meanEDR": 0.0
+    },
+    {
+      "countyCode": 77,
+      "count": 655,
+      "meanSVI": 0.433296,
+      "meanEDR": 0.0
+    },
+    {
+      "countyCode": 13,
+      "count": 622,
+      "meanSVI": 0.443063,
+      "meanEDR": 0.0
+    }
+  ],
+  "featureRanges": {
+    "yearBuilt": {
+      "min": 1860,
+      "max": 2025
+    },
+    "yearReconstructed": {
+      "min": 0,
+      "max": 2024
+    },
+    "skew": {
+      "min": 0,
+      "max": 99
+    },
+    "spans": {
+      "min": 1,
+      "max": 271
+    },
+    "maxSpan": {
+      "min": 0.0,
+      "max": 61.0
+    },
+    "condition": {
+      "min": 0,
+      "max": 9
+    },
+    "svi": {
+      "min": 0.192302,
+      "max": 0.82732
+    },
+    "adt": {
+      "min": 0,
+      "max": 120000
+    }
+  },
+  "sampleBridges": [
+    {
+      "label": "Portfolio Lower Risk",
+      "structureNumber": "      57 0688L ",
+      "countyCode": 73,
+      "yearBuilt": 1970,
+      "yearReconstructed": 0.0,
+      "spans": 3,
+      "maxSpan": 64.9,
+      "skew": 0,
+      "condition": 7.0,
+      "svi": 0.345404,
+      "bridgeClass": "HWB8",
+      "adt": 11050
+    },
+    {
+      "label": "Portfolio Mid Risk",
+      "structureNumber": "      29C0249  ",
+      "countyCode": 77,
+      "yearBuilt": 1990,
+      "yearReconstructed": 0.0,
+      "spans": 19,
+      "maxSpan": 13.4,
+      "skew": 99,
+      "condition": 7.0,
+      "svi": 0.449804,
+      "bridgeClass": "HWB5",
+      "adt": 1120
+    },
+    {
+      "label": "Portfolio Higher Risk",
+      "structureNumber": "      53 1716F ",
+      "countyCode": 37,
+      "yearBuilt": 1967,
+      "yearReconstructed": 0.0,
+      "spans": 12,
+      "maxSpan": 35.1,
+      "skew": 99,
+      "condition": 8.0,
+      "svi": 0.556262,
+      "bridgeClass": "HWB6",
+      "adt": 13700
+    }
+  ],
+  "pipeline": [
+    {
+      "label": "Bridge inventory",
+      "file": "CA25.txt",
+      "output": "Raw statewide NBI bridge inventory"
+    },
+    {
+      "label": "ShakeMap sampling",
+      "file": "pga_mean.flt",
+      "output": "pga_nbi_bridge.csv"
+    },
+    {
+      "label": "Fragility / EDR",
+      "file": "bridges_with_edr.csv",
+      "output": "Modal damage probabilities + EDR"
+    },
+    {
+      "label": "SVI scoring",
+      "file": "bridges_with_svi.csv",
+      "output": "April 2026 weighted intrinsic screening"
+    },
+    {
+      "label": "ML comparison",
+      "file": "ml_hybrid_best_by_feature_set.csv",
+      "output": "Bridge vulnerability vs event-damage framing"
+    },
+    {
+      "label": "Scenario scoring",
+      "file": "future_scenario_summary.csv",
+      "output": "Uniform PGA stress-test summaries"
+    }
+  ],
+  "calibrationPoints": [
+    {
+      "Actual_EDR": 5e-06,
+      "Predicted_EDR": 0.001829,
+      "SVI": 0.392016,
+      "year": 1946,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 2.7e-05,
+      "Predicted_EDR": 0.002799,
+      "SVI": 0.374216,
+      "year": 1985,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001036,
+      "SVI": 0.530015,
+      "year": 1930,
+      "cond": 6,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.003776,
+      "Predicted_EDR": 0.029426,
+      "SVI": 0.484285,
+      "year": 1970,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.000733,
+      "Predicted_EDR": 0.009806,
+      "SVI": 0.446353,
+      "year": 1971,
+      "cond": 5,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 0.006774,
+      "Predicted_EDR": 0.021615,
+      "SVI": 0.53333,
+      "year": 1954,
+      "cond": 6,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.001834,
+      "Predicted_EDR": 0.020703,
+      "SVI": 0.386446,
+      "year": 1958,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.017181,
+      "SVI": 0.345563,
+      "year": 1959,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.008544,
+      "SVI": 0.32865,
+      "year": 1998,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.042018,
+      "Predicted_EDR": 0.056634,
+      "SVI": 0.24101,
+      "year": 1996,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 3.9e-05,
+      "Predicted_EDR": 0.005178,
+      "SVI": 0.401878,
+      "year": 1964,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.077501,
+      "SVI": 0.365352,
+      "year": 1974,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.05798,
+      "Predicted_EDR": 0.043509,
+      "SVI": 0.373107,
+      "year": 1966,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.005525,
+      "SVI": 0.422883,
+      "year": 1968,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000745,
+      "SVI": 0.357438,
+      "year": 1970,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000837,
+      "Predicted_EDR": 0.004338,
+      "SVI": 0.34849,
+      "year": 1990,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 6.3e-05,
+      "Predicted_EDR": 0.001454,
+      "SVI": 0.461922,
+      "year": 1958,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001334,
+      "SVI": 0.478883,
+      "year": 1930,
+      "cond": 6,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.00615,
+      "Predicted_EDR": 0.03577,
+      "SVI": 0.43299,
+      "year": 1955,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.001952,
+      "Predicted_EDR": 0.0232,
+      "SVI": 0.395568,
+      "year": 1962,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000372,
+      "Predicted_EDR": 0.027104,
+      "SVI": 0.244592,
+      "year": 1993,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.024191,
+      "Predicted_EDR": 0.014474,
+      "SVI": 0.48101,
+      "year": 1953,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.016102,
+      "SVI": 0.371624,
+      "year": 1973,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.010095,
+      "SVI": 0.492845,
+      "year": 1973,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.000196,
+      "Predicted_EDR": 0.010387,
+      "SVI": 0.353739,
+      "year": 1980,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 1e-06,
+      "Predicted_EDR": 0.025725,
+      "SVI": 0.32327,
+      "year": 1970,
+      "cond": 7,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 0.009113,
+      "Predicted_EDR": 0.008415,
+      "SVI": 0.483803,
+      "year": 1922,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000987,
+      "SVI": 0.251934,
+      "year": 1998,
+      "cond": 6,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.027698,
+      "Predicted_EDR": 0.037067,
+      "SVI": 0.59349,
+      "year": 1939,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000127,
+      "Predicted_EDR": 0.00319,
+      "SVI": 0.382512,
+      "year": 2008,
+      "cond": 5,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.014586,
+      "Predicted_EDR": 0.020923,
+      "SVI": 0.409163,
+      "year": 1955,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003654,
+      "SVI": 0.130221,
+      "year": 2022,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.141795,
+      "Predicted_EDR": 0.074495,
+      "SVI": 0.444596,
+      "year": 1943,
+      "cond": 7,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.006384,
+      "SVI": 0.453055,
+      "year": 1954,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.002452,
+      "Predicted_EDR": 0.005923,
+      "SVI": 0.494371,
+      "year": 1996,
+      "cond": 7,
+      "HWB_CLASS": "HWB9"
+    },
+    {
+      "Actual_EDR": 1.7e-05,
+      "Predicted_EDR": 0.012576,
+      "SVI": 0.307699,
+      "year": 1973,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 6e-06,
+      "Predicted_EDR": 0.041769,
+      "SVI": 0.447717,
+      "year": 1975,
+      "cond": 6,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.008468,
+      "Predicted_EDR": 0.011877,
+      "SVI": 0.452219,
+      "year": 1968,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000227,
+      "Predicted_EDR": 0.008229,
+      "SVI": 0.262352,
+      "year": 1965,
+      "cond": 8,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.009036,
+      "Predicted_EDR": 0.005067,
+      "SVI": 0.408809,
+      "year": 1959,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000642,
+      "Predicted_EDR": 0.02391,
+      "SVI": 0.3466,
+      "year": 1958,
+      "cond": 7,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 7.6e-05,
+      "Predicted_EDR": 0.007795,
+      "SVI": 0.343938,
+      "year": 1993,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 2e-06,
+      "Predicted_EDR": 0.003223,
+      "SVI": 0.52097,
+      "year": 1966,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.021616,
+      "SVI": 0.298145,
+      "year": 1976,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.003483,
+      "Predicted_EDR": 0.003079,
+      "SVI": 0.298221,
+      "year": 2006,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.001278,
+      "Predicted_EDR": 0.017865,
+      "SVI": 0.491189,
+      "year": 1976,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.010853,
+      "Predicted_EDR": 0.027304,
+      "SVI": 0.601133,
+      "year": 1955,
+      "cond": 5,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 0.019047,
+      "Predicted_EDR": 0.0673,
+      "SVI": 0.348853,
+      "year": 1953,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.003765,
+      "Predicted_EDR": 0.053589,
+      "SVI": 0.394813,
+      "year": 1959,
+      "cond": 5,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.005581,
+      "SVI": 0.242233,
+      "year": 2002,
+      "cond": 6,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 7.3e-05,
+      "SVI": 0.525327,
+      "year": 1940,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.024523,
+      "SVI": 0.387977,
+      "year": 1966,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 4.3e-05,
+      "Predicted_EDR": 0.003796,
+      "SVI": 0.327199,
+      "year": 1998,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.000227,
+      "Predicted_EDR": 0.000745,
+      "SVI": 0.420131,
+      "year": 1968,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000816,
+      "Predicted_EDR": 0.063503,
+      "SVI": 0.32308,
+      "year": 1982,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.114623,
+      "Predicted_EDR": 0.011448,
+      "SVI": 0.51233,
+      "year": 1981,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.002205,
+      "Predicted_EDR": 0.002782,
+      "SVI": 0.277094,
+      "year": 2010,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.004762,
+      "SVI": 0.309967,
+      "year": 1990,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.000638,
+      "Predicted_EDR": 0.004837,
+      "SVI": 0.329743,
+      "year": 1998,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.012491,
+      "SVI": 0.381029,
+      "year": 1975,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001381,
+      "SVI": 0.306464,
+      "year": 2008,
+      "cond": 6,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.023838,
+      "Predicted_EDR": 0.043308,
+      "SVI": 0.255237,
+      "year": 1987,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.014601,
+      "Predicted_EDR": 0.034304,
+      "SVI": 0.365393,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.01693,
+      "SVI": 0.483958,
+      "year": 1973,
+      "cond": 5,
+      "HWB_CLASS": "HWB9"
+    },
+    {
+      "Actual_EDR": 0.012434,
+      "Predicted_EDR": 0.019864,
+      "SVI": 0.374573,
+      "year": 1955,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.005158,
+      "SVI": 0.169489,
+      "year": 2012,
+      "cond": 7,
+      "HWB_CLASS": "HWB9"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001808,
+      "SVI": 0.355385,
+      "year": 2009,
+      "cond": 5,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.011308,
+      "Predicted_EDR": 0.014113,
+      "SVI": 0.460264,
+      "year": 1963,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 5e-06,
+      "Predicted_EDR": 0.000217,
+      "SVI": 0.596613,
+      "year": 1930,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.001335,
+      "Predicted_EDR": 0.00503,
+      "SVI": 0.381487,
+      "year": 2007,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.015262,
+      "Predicted_EDR": 0.007508,
+      "SVI": 0.262128,
+      "year": 1989,
+      "cond": 7,
+      "HWB_CLASS": "HWB9"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.012702,
+      "SVI": 0.335809,
+      "year": 1977,
+      "cond": 6,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001435,
+      "SVI": 0.165632,
+      "year": 2019,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 9e-06,
+      "Predicted_EDR": 0.000364,
+      "SVI": 0.475758,
+      "year": 1939,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000112,
+      "Predicted_EDR": 0.00296,
+      "SVI": 0.148775,
+      "year": 2014,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 7.4e-05,
+      "Predicted_EDR": 0.020424,
+      "SVI": 0.494679,
+      "year": 1955,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.002789,
+      "SVI": 0.392397,
+      "year": 1991,
+      "cond": 6,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.006932,
+      "Predicted_EDR": 0.021548,
+      "SVI": 0.598132,
+      "year": 1958,
+      "cond": 5,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.00176,
+      "Predicted_EDR": 0.003253,
+      "SVI": 0.437663,
+      "year": 1964,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.021811,
+      "Predicted_EDR": 0.024706,
+      "SVI": 0.554453,
+      "year": 1934,
+      "cond": 5,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 5.2e-05,
+      "Predicted_EDR": 0.044003,
+      "SVI": 0.333591,
+      "year": 1975,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.007193,
+      "Predicted_EDR": 0.021605,
+      "SVI": 0.307348,
+      "year": 1968,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 2e-06,
+      "Predicted_EDR": 0.010961,
+      "SVI": 0.256418,
+      "year": 1993,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 1e-06,
+      "Predicted_EDR": 0.026608,
+      "SVI": 0.600489,
+      "year": 1951,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.268428,
+      "Predicted_EDR": 0.087312,
+      "SVI": 0.426939,
+      "year": 1969,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.01127,
+      "Predicted_EDR": 0.002279,
+      "SVI": 0.432321,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.096494,
+      "Predicted_EDR": 0.043856,
+      "SVI": 0.311824,
+      "year": 1957,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.318519,
+      "Predicted_EDR": 0.103182,
+      "SVI": 0.30465,
+      "year": 1969,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.002917,
+      "Predicted_EDR": 0.008409,
+      "SVI": 0.368187,
+      "year": 1985,
+      "cond": 5,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000425,
+      "SVI": 0.560038,
+      "year": 1970,
+      "cond": 4,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.005528,
+      "Predicted_EDR": 0.001442,
+      "SVI": 0.613585,
+      "year": 1985,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.005312,
+      "Predicted_EDR": 0.035396,
+      "SVI": 0.643955,
+      "year": 1959,
+      "cond": 6,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 3.4e-05,
+      "Predicted_EDR": 0.039662,
+      "SVI": 0.474965,
+      "year": 1956,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 1.2e-05,
+      "Predicted_EDR": 0.002964,
+      "SVI": 0.155659,
+      "year": 2010,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.000787,
+      "Predicted_EDR": 0.018325,
+      "SVI": 0.301193,
+      "year": 1985,
+      "cond": 6,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.011927,
+      "Predicted_EDR": 0.035526,
+      "SVI": 0.301191,
+      "year": 1966,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000122,
+      "Predicted_EDR": 0.000421,
+      "SVI": 0.505489,
+      "year": 1970,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001354,
+      "SVI": 0.215109,
+      "year": 1994,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.018986,
+      "SVI": 0.543934,
+      "year": 1932,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.016591,
+      "SVI": 0.285167,
+      "year": 1965,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 1e-06,
+      "Predicted_EDR": 0.000796,
+      "SVI": 0.206626,
+      "year": 1997,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 1.4e-05,
+      "Predicted_EDR": 0.049768,
+      "SVI": 0.337808,
+      "year": 1971,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.001918,
+      "Predicted_EDR": 0.014899,
+      "SVI": 0.341095,
+      "year": 1974,
+      "cond": 6,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001548,
+      "SVI": 0.617539,
+      "year": 1914,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.000368,
+      "Predicted_EDR": 0.024935,
+      "SVI": 0.579078,
+      "year": 1965,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.009815,
+      "SVI": 0.560519,
+      "year": 1956,
+      "cond": 5,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003283,
+      "SVI": 0.162621,
+      "year": 2008,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.07235,
+      "Predicted_EDR": 0.027019,
+      "SVI": 0.541662,
+      "year": 1948,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.041712,
+      "Predicted_EDR": 0.025277,
+      "SVI": 0.665812,
+      "year": 1940,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.02383,
+      "SVI": 0.704911,
+      "year": 1964,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.023242,
+      "SVI": 0.679476,
+      "year": 1972,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003733,
+      "SVI": 0.21451,
+      "year": 1999,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.248668,
+      "Predicted_EDR": 0.050693,
+      "SVI": 0.54763,
+      "year": 1976,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 1.6e-05,
+      "Predicted_EDR": 0.016772,
+      "SVI": 0.461082,
+      "year": 1966,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.011205,
+      "SVI": 0.477964,
+      "year": 1939,
+      "cond": 6,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.002164,
+      "Predicted_EDR": 0.001612,
+      "SVI": 0.301099,
+      "year": 1970,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.083102,
+      "Predicted_EDR": 0.268263,
+      "SVI": 0.374153,
+      "year": 1980,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003595,
+      "SVI": 0.329272,
+      "year": 1997,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.00765,
+      "Predicted_EDR": 0.001239,
+      "SVI": 0.412623,
+      "year": 1966,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.002872,
+      "Predicted_EDR": 0.030114,
+      "SVI": 0.363866,
+      "year": 1950,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.030771,
+      "SVI": 0.509305,
+      "year": 1917,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.007993,
+      "Predicted_EDR": 0.025314,
+      "SVI": 0.347273,
+      "year": 1962,
+      "cond": 7,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.007239,
+      "SVI": 0.164099,
+      "year": 2008,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.000121,
+      "Predicted_EDR": 0.017501,
+      "SVI": 0.328016,
+      "year": 1973,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.005148,
+      "Predicted_EDR": 0.026968,
+      "SVI": 0.569083,
+      "year": 1945,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.000788,
+      "Predicted_EDR": 0.020077,
+      "SVI": 0.290454,
+      "year": 1940,
+      "cond": 8,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 2e-06,
+      "Predicted_EDR": 0.008197,
+      "SVI": 0.384065,
+      "year": 2002,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.009532,
+      "SVI": 0.094162,
+      "year": 2011,
+      "cond": 8,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.000384,
+      "Predicted_EDR": 0.007962,
+      "SVI": 0.307112,
+      "year": 1993,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.000244,
+      "Predicted_EDR": 0.066004,
+      "SVI": 0.380365,
+      "year": 1972,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.001812,
+      "Predicted_EDR": 0.000834,
+      "SVI": 0.349751,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.031397,
+      "SVI": 0.365531,
+      "year": 1965,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001609,
+      "SVI": 0.422013,
+      "year": 1938,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.0011,
+      "SVI": 0.492404,
+      "year": 1939,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.170975,
+      "Predicted_EDR": 0.030552,
+      "SVI": 0.544258,
+      "year": 1979,
+      "cond": 7,
+      "HWB_CLASS": "HWB9"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.009898,
+      "SVI": 0.413596,
+      "year": 1940,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.016743,
+      "Predicted_EDR": 0.027902,
+      "SVI": 0.465912,
+      "year": 1910,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003134,
+      "SVI": 0.203013,
+      "year": 2011,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 7.4e-05,
+      "Predicted_EDR": 0.007021,
+      "SVI": 0.658755,
+      "year": 1956,
+      "cond": 4,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.005681,
+      "Predicted_EDR": 0.011468,
+      "SVI": 0.564132,
+      "year": 1971,
+      "cond": 7,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 1e-06,
+      "Predicted_EDR": 0.000929,
+      "SVI": 0.416383,
+      "year": 1979,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.006226,
+      "SVI": 0.386316,
+      "year": 1981,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.018824,
+      "SVI": 0.476753,
+      "year": 1970,
+      "cond": 4,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.021113,
+      "SVI": 0.325677,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003143,
+      "SVI": 0.554271,
+      "year": 1948,
+      "cond": 4,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.010077,
+      "Predicted_EDR": 0.016398,
+      "SVI": 0.401781,
+      "year": 1971,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.070367,
+      "Predicted_EDR": 0.034588,
+      "SVI": 0.473169,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003654,
+      "SVI": 0.327562,
+      "year": 1990,
+      "cond": 6,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.004591,
+      "Predicted_EDR": 0.003343,
+      "SVI": 0.379406,
+      "year": 1998,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000278,
+      "SVI": 0.546875,
+      "year": 1950,
+      "cond": 4,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000277,
+      "SVI": 0.53792,
+      "year": 1952,
+      "cond": 4,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.001274,
+      "Predicted_EDR": 0.003333,
+      "SVI": 0.346994,
+      "year": 1998,
+      "cond": 5,
+      "HWB_CLASS": "HWB9"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.017093,
+      "SVI": 0.355467,
+      "year": 1989,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003807,
+      "SVI": 0.535918,
+      "year": 1939,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.003193,
+      "Predicted_EDR": 0.00165,
+      "SVI": 0.381109,
+      "year": 1979,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.002644,
+      "SVI": 0.263201,
+      "year": 2000,
+      "cond": 6,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 7.4e-05,
+      "Predicted_EDR": 0.010009,
+      "SVI": 0.363805,
+      "year": 1955,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.008091,
+      "Predicted_EDR": 0.002388,
+      "SVI": 0.332644,
+      "year": 2008,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001158,
+      "SVI": 0.494246,
+      "year": 1936,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000381,
+      "SVI": 0.6044,
+      "year": 1926,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.053728,
+      "Predicted_EDR": 0.020628,
+      "SVI": 0.380202,
+      "year": 1970,
+      "cond": 7,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 9.7e-05,
+      "Predicted_EDR": 0.014106,
+      "SVI": 0.417261,
+      "year": 1970,
+      "cond": 6,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.004967,
+      "Predicted_EDR": 0.026692,
+      "SVI": 0.423075,
+      "year": 1961,
+      "cond": 7,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 6.6e-05,
+      "Predicted_EDR": 0.017849,
+      "SVI": 0.452391,
+      "year": 1965,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.020845,
+      "SVI": 0.332139,
+      "year": 1960,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.022512,
+      "SVI": 0.38967,
+      "year": 1958,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.119801,
+      "Predicted_EDR": 0.011781,
+      "SVI": 0.424829,
+      "year": 1925,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.079811,
+      "Predicted_EDR": 0.037177,
+      "SVI": 0.598911,
+      "year": 1938,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.107422,
+      "Predicted_EDR": 0.011906,
+      "SVI": 0.43315,
+      "year": 1983,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.011788,
+      "SVI": 0.457971,
+      "year": 2000,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.001824,
+      "Predicted_EDR": 0.003751,
+      "SVI": 0.559267,
+      "year": 2003,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.0355,
+      "SVI": 0.396451,
+      "year": 1955,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.377003,
+      "Predicted_EDR": 0.069332,
+      "SVI": 0.339732,
+      "year": 1970,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.187407,
+      "Predicted_EDR": 0.105259,
+      "SVI": 0.30118,
+      "year": 1976,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.007161,
+      "Predicted_EDR": 0.018723,
+      "SVI": 0.338769,
+      "year": 1960,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.003628,
+      "Predicted_EDR": 0.016096,
+      "SVI": 0.425246,
+      "year": 1992,
+      "cond": 4,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.012192,
+      "Predicted_EDR": 0.014416,
+      "SVI": 0.411522,
+      "year": 1956,
+      "cond": 5,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.005339,
+      "SVI": 0.369527,
+      "year": 1995,
+      "cond": 6,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.003545,
+      "Predicted_EDR": 0.002196,
+      "SVI": 0.303033,
+      "year": 2005,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.20252,
+      "Predicted_EDR": 0.035089,
+      "SVI": 0.326281,
+      "year": 1968,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.055613,
+      "Predicted_EDR": 0.068144,
+      "SVI": 0.518628,
+      "year": 1939,
+      "cond": 7,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.007196,
+      "SVI": 0.509571,
+      "year": 1954,
+      "cond": 5,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.027024,
+      "SVI": 0.458608,
+      "year": 1947,
+      "cond": 6,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.022304,
+      "SVI": 0.324439,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.4604,
+      "Predicted_EDR": 0.031764,
+      "SVI": 0.33851,
+      "year": 1971,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003581,
+      "SVI": 0.447525,
+      "year": 1961,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.014375,
+      "SVI": 0.495177,
+      "year": 1950,
+      "cond": 5,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.000369,
+      "Predicted_EDR": 0.012123,
+      "SVI": 0.529606,
+      "year": 1961,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.014782,
+      "SVI": 0.370299,
+      "year": 1994,
+      "cond": 6,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.001786,
+      "Predicted_EDR": 0.000828,
+      "SVI": 0.356058,
+      "year": 1966,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000581,
+      "SVI": 0.481562,
+      "year": 1963,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.019769,
+      "Predicted_EDR": 0.084421,
+      "SVI": 0.34163,
+      "year": 1967,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.006139,
+      "Predicted_EDR": 0.038284,
+      "SVI": 0.358383,
+      "year": 1970,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.003949,
+      "SVI": 0.200425,
+      "year": 1999,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.002646,
+      "Predicted_EDR": 0.003282,
+      "SVI": 0.252637,
+      "year": 2020,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.006788,
+      "Predicted_EDR": 0.042396,
+      "SVI": 0.432807,
+      "year": 1969,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.001148,
+      "Predicted_EDR": 0.001812,
+      "SVI": 0.203584,
+      "year": 1994,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 1.1e-05,
+      "Predicted_EDR": 0.00471,
+      "SVI": 0.180707,
+      "year": 2010,
+      "cond": 8,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 3e-06,
+      "Predicted_EDR": 0.007942,
+      "SVI": 0.185872,
+      "year": 2008,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.026411,
+      "SVI": 0.396845,
+      "year": 1965,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 1e-06,
+      "Predicted_EDR": 0.000829,
+      "SVI": 0.459291,
+      "year": 1979,
+      "cond": 5,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.001806,
+      "Predicted_EDR": 0.027299,
+      "SVI": 0.478218,
+      "year": 1962,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.103068,
+      "Predicted_EDR": 0.02749,
+      "SVI": 0.420459,
+      "year": 1964,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.000262,
+      "SVI": 0.661549,
+      "year": 1921,
+      "cond": 3,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0263,
+      "Predicted_EDR": 0.005801,
+      "SVI": 0.618414,
+      "year": 1989,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.012944,
+      "SVI": 0.265334,
+      "year": 1989,
+      "cond": 7,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.005008,
+      "Predicted_EDR": 0.03172,
+      "SVI": 0.595847,
+      "year": 1959,
+      "cond": 5,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.017225,
+      "Predicted_EDR": 0.02411,
+      "SVI": 0.587887,
+      "year": 1924,
+      "cond": 6,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.000444,
+      "Predicted_EDR": 0.020158,
+      "SVI": 0.292443,
+      "year": 1953,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 5.7e-05,
+      "Predicted_EDR": 0.00304,
+      "SVI": 0.303891,
+      "year": 1962,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.120775,
+      "SVI": 0.298371,
+      "year": 1976,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.007847,
+      "SVI": 0.453285,
+      "year": 1965,
+      "cond": 5,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 3e-06,
+      "Predicted_EDR": 0.027818,
+      "SVI": 0.451243,
+      "year": 1967,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.011049,
+      "SVI": 0.423147,
+      "year": 1972,
+      "cond": 5,
+      "HWB_CLASS": "HWB8"
+    },
+    {
+      "Actual_EDR": 0.005865,
+      "Predicted_EDR": 0.022219,
+      "SVI": 0.348649,
+      "year": 1973,
+      "cond": 6,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.002668,
+      "Predicted_EDR": 0.009686,
+      "SVI": 0.387345,
+      "year": 1976,
+      "cond": 7,
+      "HWB_CLASS": "HWB1"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.012743,
+      "SVI": 0.436663,
+      "year": 2002,
+      "cond": 5,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.039638,
+      "Predicted_EDR": 0.027128,
+      "SVI": 0.408042,
+      "year": 1967,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.002489,
+      "SVI": 0.341483,
+      "year": 1974,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.02823,
+      "Predicted_EDR": 0.03294,
+      "SVI": 0.356444,
+      "year": 1959,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.013152,
+      "Predicted_EDR": 0.050703,
+      "SVI": 0.34229,
+      "year": 1957,
+      "cond": 7,
+      "HWB_CLASS": "HWB2"
+    },
+    {
+      "Actual_EDR": 0.147241,
+      "Predicted_EDR": 0.063525,
+      "SVI": 0.418295,
+      "year": 1968,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.00104,
+      "SVI": 0.50518,
+      "year": 1961,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.020196,
+      "SVI": 0.560887,
+      "year": 1974,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.004221,
+      "SVI": 0.547047,
+      "year": 1989,
+      "cond": 6,
+      "HWB_CLASS": "HWB5"
+    },
+    {
+      "Actual_EDR": 0.268773,
+      "Predicted_EDR": 0.018075,
+      "SVI": 0.516371,
+      "year": 1976,
+      "cond": 5,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 1.9e-05,
+      "Predicted_EDR": 0.006634,
+      "SVI": 0.277147,
+      "year": 1982,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 2.7e-05,
+      "Predicted_EDR": 0.025596,
+      "SVI": 0.587202,
+      "year": 1963,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.008522,
+      "SVI": 0.353076,
+      "year": 1968,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.140614,
+      "Predicted_EDR": 0.249545,
+      "SVI": 0.291511,
+      "year": 1980,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.009366,
+      "SVI": 0.336839,
+      "year": 1950,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 2e-06,
+      "Predicted_EDR": 0.003984,
+      "SVI": 0.305492,
+      "year": 1993,
+      "cond": 6,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 1e-06,
+      "Predicted_EDR": 0.000925,
+      "SVI": 0.465541,
+      "year": 1963,
+      "cond": 6,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 6.4e-05,
+      "Predicted_EDR": 0.007865,
+      "SVI": 0.505885,
+      "year": 1988,
+      "cond": 7,
+      "HWB_CLASS": "HWB10"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.010998,
+      "SVI": 0.722888,
+      "year": 1940,
+      "cond": 4,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.003227,
+      "Predicted_EDR": 0.011433,
+      "SVI": 0.414703,
+      "year": 1962,
+      "cond": 5,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.037907,
+      "Predicted_EDR": 0.025079,
+      "SVI": 0.554458,
+      "year": 1974,
+      "cond": 7,
+      "HWB_CLASS": "HWB6"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.001769,
+      "SVI": 0.367809,
+      "year": 1983,
+      "cond": 5,
+      "HWB_CLASS": "HWB7"
+    },
+    {
+      "Actual_EDR": 0.016367,
+      "Predicted_EDR": 0.012851,
+      "SVI": 0.381929,
+      "year": 1935,
+      "cond": 7,
+      "HWB_CLASS": "HWB4"
+    },
+    {
+      "Actual_EDR": 0.0,
+      "Predicted_EDR": 0.009123,
+      "SVI": 0.195455,
+      "year": 2002,
+      "cond": 7,
+      "HWB_CLASS": "HWB7"
+    }
+  ]
+}

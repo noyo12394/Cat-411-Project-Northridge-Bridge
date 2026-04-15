@@ -1,0 +1,32 @@
+[
+  {
+    "file": "ml_recommended_hybrid_actual_vs_predicted.png",
+    "title": "Ml Recommended Hybrid Actual Vs Predicted",
+    "path": "/research/ml_recommended_hybrid_actual_vs_predicted.png"
+  },
+  {
+    "file": "ml_recommended_hybrid_decile_calibration.png",
+    "title": "Ml Recommended Hybrid Decile Calibration",
+    "path": "/research/ml_recommended_hybrid_decile_calibration.png"
+  },
+  {
+    "file": "damage_state_confusion_matrices.png",
+    "title": "Damage State Confusion Matrices",
+    "path": "/research/damage_state_confusion_matrices.png"
+  },
+  {
+    "file": "future_scenario_mean_edr.png",
+    "title": "Future Scenario Mean Edr",
+    "path": "/research/future_scenario_mean_edr.png"
+  },
+  {
+    "file": "future_scenario_risk_bands.png",
+    "title": "Future Scenario Risk Bands",
+    "path": "/research/future_scenario_risk_bands.png"
+  },
+  {
+    "file": "future_scenario_top_counties.png",
+    "title": "Future Scenario Top Counties",
+    "path": "/research/future_scenario_top_counties.png"
+  }
+]

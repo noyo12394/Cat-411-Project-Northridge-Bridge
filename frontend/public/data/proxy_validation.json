@@ -1,0 +1,24 @@
+{
+  "subsetSize": 10255,
+  "models": [
+    {
+      "label": "Univariate (HAZUS)",
+      "exactAccuracy": 0.6845,
+      "withinOneStateAccuracy": 0.8016,
+      "maeOrdinal": 0.707,
+      "weightedKappa": 0.0809,
+      "macroF1": 0.2166,
+      "underpredictionRate": 0.2599
+    },
+    {
+      "label": "Hybrid Proxy Model",
+      "exactAccuracy": 0.7426,
+      "withinOneStateAccuracy": 0.8415,
+      "maeOrdinal": 0.5787,
+      "weightedKappa": 0.3548,
+      "macroF1": 0.3899,
+      "underpredictionRate": 0.2209
+    }
+  ],
+  "source": "docs/PROXY_VALIDATION.md"
+}

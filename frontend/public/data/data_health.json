@@ -1,0 +1,133 @@
+{
+  "recommendedMetricsValid": false,
+  "recommendedFeatureImportanceValid": false,
+  "recommendedMetrics": [
+    {
+      "Feature Set": "Bridge Vulnerability Structural",
+      "Model": "Elastic Net",
+      "Transform": "Raw target",
+      "MAE": 0.0,
+      "RMSE": 0.0,
+      "RMSLE": 0.0,
+      "MedianAE": 0.0,
+      "R2": 1.0,
+      "MAE_Positive": null,
+      "RMSE_Positive": null,
+      "RMSLE_Positive": null,
+      "R2_Positive": null
+    }
+  ],
+  "recommendedFeatureImportance": [
+    {
+      "Feature": "HWB_CLASS",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "design_era_1989",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "age_years",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "time_since_rehab",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "reconstructed_flag",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "spans",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "max_span_log1p",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "skew",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "cond",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "deck_area_log1p",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    },
+    {
+      "Feature": "operating_rating",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+    }
+  ],
+  "fallbackFeatureImportance": [
+    {
+      "feature": "Condition rating",
+      "importance": 0.24
+    },
+    {
+      "feature": "SVI score",
+      "importance": 0.18
+    },
+    {
+      "feature": "Year built / age",
+      "importance": 0.14
+    },
+    {
+      "feature": "Maximum span length",
+      "importance": 0.12
+    },
+    {
+      "feature": "Skew angle",
+      "importance": 0.1
+    },
+    {
+      "feature": "Bridge class",
+      "importance": 0.09
+    },
+    {
+      "feature": "Number of spans",
+      "importance": 0.07
+    },
+    {
+      "feature": "Reconstruction timing",
+      "importance": 0.06
+    }
+  ],
+  "bridgeMlCalibrationMetrics": {
+    "rows": 3360,
+    "modelLabel": "Random Forest",
+    "mae": 0.022871,
+    "rmse": 0.052651,
+    "r2": 0.153384
+  },
+  "notes": {
+    "metrics": "The exporter marks recommended regression metrics as invalid when the current repo snapshot contains perfect zero-error rows, so the frontend can avoid presenting them as credible evidence.",
+    "importance": "The exporter falls back to domain-prior contribution weights when the recommended feature-importance file is degenerate or all-zero."
+  }
+}
