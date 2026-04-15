@@ -1,0 +1,103 @@
+{
+  "status": "research-prototype",
+  "engineLabel": "Literature-informed prototype vulnerability engine",
+  "discipline": {
+    "core": "No PGA in the intrinsic vulnerability score.",
+    "event": "PGA is introduced only in event-damage scenario mode.",
+    "priority": "ADT changes prioritization and consequence, not structural vulnerability.",
+    "ndvi": "NDVI remains an optional contextual modifier rather than a structural core driver."
+  },
+  "priors": [
+    {
+      "key": "condition",
+      "label": "Condition rating",
+      "weight": 0.22,
+      "group": "condition",
+      "rationale": "Condition remains the clearest bridge-health signal in inspection-led vulnerability screening."
+    },
+    {
+      "key": "svi",
+      "label": "SVI",
+      "weight": 0.18,
+      "group": "intrinsic index",
+      "rationale": "The revised Seismic Vulnerability Index aggregates multiple structural vulnerability factors into one interpretable score."
+    },
+    {
+      "key": "age",
+      "label": "Bridge age / design era",
+      "weight": 0.15,
+      "group": "age / detailing",
+      "rationale": "Older bridges are more likely to reflect earlier seismic detailing assumptions and legacy configurations."
+    },
+    {
+      "key": "rehab",
+      "label": "Reconstruction timing",
+      "weight": 0.1,
+      "group": "maintenance history",
+      "rationale": "More recent reconstruction or rehabilitation generally reduces expected vulnerability relative to peers of similar age."
+    },
+    {
+      "key": "skew",
+      "label": "Skew angle",
+      "weight": 0.1,
+      "group": "geometry",
+      "rationale": "Skew is consistently treated as a meaningful irregularity driver in bridge seismic vulnerability and fragility studies."
+    },
+    {
+      "key": "maxSpan",
+      "label": "Maximum span length",
+      "weight": 0.1,
+      "group": "geometry",
+      "rationale": "Longer spans tend to imply greater demand concentration and more consequential structural response when detailing is weak."
+    },
+    {
+      "key": "bridgeClass",
+      "label": "Bridge class / HWB class",
+      "weight": 0.09,
+      "group": "system type",
+      "rationale": "Bridge class preserves important system-level fragility distinctions without directly importing hazard intensity into the intrinsic score."
+    },
+    {
+      "key": "spans",
+      "label": "Number of spans",
+      "weight": 0.06,
+      "group": "geometry",
+      "rationale": "More spans increase geometry complexity, support interaction, and the chance of uneven seismic demand distribution."
+    }
+  ],
+  "layers": [
+    {
+      "label": "Structural / age / geometry inputs",
+      "description": "Year built, rehab timing, spans, max span, skew, bridge class, condition, and SVI."
+    },
+    {
+      "label": "Normalized vulnerability indicators",
+      "description": "Bridge-specific variables are normalized into interpretable intrinsic vulnerability components."
+    },
+    {
+      "label": "Prototype vulnerability score",
+      "description": "A transparent research prior layer combines those indicators without using PGA."
+    },
+    {
+      "label": "Consequence and prioritization",
+      "description": "ADT and optional NDVI adjustments appear later in inspection prioritization rather than baseline vulnerability."
+    }
+  ],
+  "references": [
+    {
+      "title": "Mangalathu et al. (2019) - Rapid seismic damage evaluation of bridges using machine learning techniques",
+      "url": "https://www.mainslab.net/_files/ugd/3ad6e3_f43d6856c0a1462db8afbeeb35dfe141.pdf",
+      "note": "Supports the use of bridge-specific structural features and ML for bridge seismic damage evaluation."
+    },
+    {
+      "title": "Gorishniy et al. (2021) - Revisiting deep learning models for tabular data",
+      "url": "https://arxiv.org/abs/2106.11959",
+      "note": "Motivates strong tabular baselines and careful comparison across model families instead of assuming deep learning is always best."
+    },
+    {
+      "title": "Shwartz-Ziv and Armon (2022) - Tabular data: Deep learning is not all you need",
+      "url": "https://www.sciencedirect.com/science/article/pii/S1566253521002360",
+      "note": "Supports the use of interpretable tree-based and boosted tabular models in engineering-data settings."
+    }
+  ]
+}

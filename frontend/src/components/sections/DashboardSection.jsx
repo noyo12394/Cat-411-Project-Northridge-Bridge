@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import DashboardForm from '../dashboard/DashboardForm'
 import DashboardResults from '../dashboard/DashboardResults'
 import ModeTabs from '../dashboard/ModeTabs'
+import PortfolioWorkbench from '../dashboard/PortfolioWorkbench'
 import SectionHeading from '../common/SectionHeading'
 import { createInitialInputs, DASHBOARD_MODES, runBridgeAssessment } from '../../lib/modelAdapter'
 
@@ -74,6 +75,7 @@ export default function DashboardSection({ researchData, onBridgeStateChange }) 
         />
         <DashboardResults result={result} modeMeta={modeMeta} />
       </div>
+      <PortfolioWorkbench bridges={researchData.portfolio} onLoadBridge={handleLoadSample} />
     </section>
   )
 }

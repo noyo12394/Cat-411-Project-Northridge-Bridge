@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-15T05:32:48.378169+00:00",
+  "generatedAt": "2026-04-15T20:01:42.066376+00:00",
   "counts": {
     "totalBridges": 25975,
     "hazardSampled": 16796,
@@ -10,12 +10,21 @@
     "meanSVI": 0.450561,
     "medianSVI": 0.449804,
     "meanEDR": 0.008538,
+    "meanPrototypeVulnerability": 0.492513,
+    "meanPriorityScore": 0.54274,
     "sviRiskBands": {
-      "Low": 571,
-      "Guarded": 8188,
-      "Elevated": 12981,
-      "High": 4104,
-      "Critical": 131
+      "Low": 1251,
+      "Guarded": 12648,
+      "Elevated": 11582,
+      "High": 493,
+      "Critical": 1
+    },
+    "prototypeRiskBands": {
+      "Low": 11,
+      "Guarded": 9908,
+      "Elevated": 15118,
+      "High": 938,
+      "Critical": 0
     },
     "modalDamageStates": {
       "None": 25861,
@@ -189,7 +198,7 @@
     },
     "maxSpan": {
       "min": 0.0,
-      "max": 61.0
+      "max": 200.13124
     },
     "condition": {
       "min": 0,
@@ -201,51 +210,60 @@
     },
     "adt": {
       "min": 0,
-      "max": 120000
+      "max": 264292
     }
   },
   "sampleBridges": [
     {
       "label": "Portfolio Lower Risk",
-      "structureNumber": "      57 0688L ",
-      "countyCode": 73,
-      "yearBuilt": 1970,
-      "yearReconstructed": 0.0,
-      "spans": 3,
-      "maxSpan": 64.9,
-      "skew": 0,
+      "structureNumber": "      37 0302  ",
+      "countyCode": 85,
+      "countyLabel": "County 085",
+      "yearBuilt": 1971,
+      "yearReconstructed": 2010.0,
+      "spans": 2,
+      "maxSpan": 92.847772,
+      "skew": 2,
       "condition": 7.0,
-      "svi": 0.345404,
-      "bridgeClass": "HWB8",
-      "adt": 11050
+      "svi": 0.284188,
+      "bridgeClass": "HWB6",
+      "adt": 137000,
+      "prototypeVulnerability": 0.4065,
+      "priorityScore": 0.5579
     },
     {
       "label": "Portfolio Mid Risk",
-      "structureNumber": "      29C0249  ",
-      "countyCode": 77,
-      "yearBuilt": 1990,
+      "structureNumber": "      53C1666  ",
+      "countyCode": 37,
+      "countyLabel": "County 037",
+      "yearBuilt": 1979,
       "yearReconstructed": 0.0,
-      "spans": 19,
-      "maxSpan": 13.4,
-      "skew": 99,
+      "spans": 1,
+      "maxSpan": 53.149608,
+      "skew": 27,
       "condition": 7.0,
-      "svi": 0.449804,
-      "bridgeClass": "HWB5",
-      "adt": 1120
+      "svi": 0.560924,
+      "bridgeClass": "HWB1",
+      "adt": 35177,
+      "prototypeVulnerability": 0.4844,
+      "priorityScore": 0.5836
     },
     {
       "label": "Portfolio Higher Risk",
-      "structureNumber": "      53 1716F ",
-      "countyCode": 37,
-      "yearBuilt": 1967,
+      "structureNumber": "      51 0037  ",
+      "countyCode": 83,
+      "countyLabel": "County 083",
+      "yearBuilt": 1963,
       "yearReconstructed": 0.0,
-      "spans": 12,
-      "maxSpan": 35.1,
-      "skew": 99,
-      "condition": 8.0,
-      "svi": 0.556262,
+      "spans": 11,
+      "maxSpan": 700.131256,
+      "skew": 0,
+      "condition": 7.0,
+      "svi": 0.614804,
       "bridgeClass": "HWB6",
-      "adt": 13700
+      "adt": 13500,
+      "prototypeVulnerability": 0.5825,
+      "priorityScore": 0.6327
     }
   ],
   "pipeline": [
@@ -267,7 +285,7 @@
     {
       "label": "SVI scoring",
       "file": "bridges_with_svi.csv",
-      "output": "April 2026 weighted intrinsic screening"
+      "output": "Updated intrinsic screening and revised fragility medians"
     },
     {
       "label": "ML comparison",

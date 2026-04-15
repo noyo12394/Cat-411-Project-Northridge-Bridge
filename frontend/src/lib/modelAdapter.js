@@ -28,13 +28,10 @@ const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value))
 const lerp = (start, end, value) => start + (end - start) * value
 
 function normalize(value, min, max) {
-  if (value == null || Number.isNaN(value)) {
+  if (value == null || Number.isNaN(Number(value)) || max <= min) {
     return 0
   }
-  if (max <= min) {
-    return 0
-  }
-  return clamp((value - min) / (max - min))
+  return clamp((Number(value) - min) / (max - min))
 }
 
 function currentYear() {
@@ -50,12 +47,23 @@ function getClassProfile(bridgeClass, researchData) {
   return profiles.find((item) => item.bridgeClass === bridgeClass) ?? defaultProfile
 }
 
-function makeContribution(label, value, narrative, direction = 'up') {
+function getPriors(researchData) {
+  return researchData.methodology?.priors ?? []
+}
+
+function getPriorWeight(key, researchData, fallback) {
+  return getPriors(researchData).find((item) => item.key === key)?.weight ?? fallback
+}
+
+function getPriorNarrative(key, researchData, fallback) {
+  return getPriors(researchData).find((item) => item.key === key)?.rationale ?? fallback
+}
+
+function makeContribution(label, value, narrative) {
   return {
     label,
     value: Number(value.toFixed(3)),
     narrative,
-    direction,
   }
 }
 
@@ -66,12 +74,12 @@ export function createInitialInputs(sampleBridge, researchData) {
   return {
     yearBuilt: selected.yearBuilt ?? 1988,
     yearReconstructed:
-      selected.yearReconstructed && selected.yearReconstructed > 0
+      selected.yearReconstructed && Number(selected.yearReconstructed) > 0
         ? selected.yearReconstructed
         : '',
     skew: selected.skew ?? 18,
     spans: selected.spans ?? 3,
-    maxSpan: selected.maxSpan ?? 24,
+    maxSpan: selected.maxSpan ?? selected.maxSpanFt ?? 80,
     condition: selected.condition ?? 6,
     bridgeClass: selected.bridgeClass ?? 'HWB6',
     svi: Number(selected.svi ?? researchData.summary.portfolio.meanSVI ?? 0.45),
@@ -92,7 +100,7 @@ function deriveIntrinsicComponents(inputs, researchData) {
   const rehabNormalized = normalize(
     recentRehabDelta,
     0,
-    currentYear() - (ranges.yearReconstructed.max || 2024),
+    currentYear() - (ranges.yearReconstructed.max || currentYear()),
   )
   const skewNormalized = normalize(Number(inputs.skew), ranges.skew.min, ranges.skew.max)
   const spanCountNormalized = normalize(
@@ -129,48 +137,48 @@ function scoreIntrinsic(inputs, researchData) {
   const contributions = [
     makeContribution(
       'Condition rating',
-      components.condition * 0.26,
-      'Lower structural condition ratings increase baseline vulnerability.',
+      components.condition * getPriorWeight('condition', researchData, 0.22),
+      getPriorNarrative('condition', researchData, 'Condition remains the clearest bridge-health signal in inspection-led vulnerability screening.'),
     ),
     makeContribution(
-      'SVI score',
-      components.svi * 0.2,
-      'SVI carries the revised multi-factor structural screening signal.',
+      'SVI',
+      components.svi * getPriorWeight('svi', researchData, 0.18),
+      getPriorNarrative('svi', researchData, 'SVI carries the revised multi-factor structural screening signal.'),
     ),
     makeContribution(
-      'Bridge age',
-      components.age * 0.15,
-      'Older bridges generally map to earlier design eras and weaker seismic detailing.',
-    ),
-    makeContribution(
-      'Maximum span length',
-      components.maxSpan * 0.12,
-      'Longer spans tend to increase structural demand and complexity.',
-    ),
-    makeContribution(
-      'Skew angle',
-      components.skew * 0.1,
-      'Higher skew can amplify irregular seismic response.',
-    ),
-    makeContribution(
-      'Bridge class',
-      components.bridgeClass * 0.09,
-      'HAZUS bridge class captures system-level fragility family differences.',
-    ),
-    makeContribution(
-      'Number of spans',
-      components.spans * 0.05,
-      'Additional spans increase geometry complexity and support interaction.',
+      'Bridge age / design era',
+      components.age * getPriorWeight('age', researchData, 0.15),
+      getPriorNarrative('age', researchData, 'Older bridges generally map to earlier design eras and weaker seismic detailing.'),
     ),
     makeContribution(
       'Reconstruction timing',
-      components.rehab * 0.03,
-      'Long time since reconstruction reduces confidence in modernized performance.',
+      components.rehab * getPriorWeight('rehab', researchData, 0.1),
+      getPriorNarrative('rehab', researchData, 'More recent rehabilitation reduces expected vulnerability relative to legacy peers.'),
+    ),
+    makeContribution(
+      'Skew angle',
+      components.skew * getPriorWeight('skew', researchData, 0.1),
+      getPriorNarrative('skew', researchData, 'Higher skew can amplify irregular seismic response.'),
+    ),
+    makeContribution(
+      'Maximum span length',
+      components.maxSpan * getPriorWeight('maxSpan', researchData, 0.1),
+      getPriorNarrative('maxSpan', researchData, 'Longer spans increase structural demand concentration and consequence.'),
+    ),
+    makeContribution(
+      'Bridge class / HWB class',
+      components.bridgeClass * getPriorWeight('bridgeClass', researchData, 0.09),
+      getPriorNarrative('bridgeClass', researchData, 'Bridge class captures system-level fragility family differences without importing PGA into the baseline score.'),
+    ),
+    makeContribution(
+      'Number of spans',
+      components.spans * getPriorWeight('spans', researchData, 0.06),
+      getPriorNarrative('spans', researchData, 'Additional spans increase geometry complexity and support interaction.'),
     ),
   ]
 
   const rawScore = contributions.reduce((sum, item) => sum + item.value, 0)
-  const intrinsicScore = clamp(0.12 + rawScore)
+  const intrinsicScore = clamp(0.08 + rawScore)
   return {
     score: intrinsicScore,
     components,
@@ -180,8 +188,9 @@ function scoreIntrinsic(inputs, researchData) {
 
 function deriveRiskLevel(score) {
   if (score < 0.28) return 'Low'
-  if (score < 0.46) return 'Medium'
-  if (score < 0.66) return 'High'
+  if (score < 0.46) return 'Guarded'
+  if (score < 0.66) return 'Elevated'
+  if (score < 0.82) return 'High'
   return 'Critical'
 }
 
@@ -255,24 +264,22 @@ export function runBridgeAssessment(inputs, mode, researchData) {
 
   let headlineScore = intrinsic.score
   let modeNarrative =
-    'Intrinsic vulnerability reflects bridge-intrinsic screening only. PGA remains outside this baseline score.'
+    'Intrinsic vulnerability reflects a bridge-intrinsic screening score only. PGA remains outside this baseline score.'
   let scenarioTag = 'No event-specific hazard demand applied'
 
   if (mode === 'event') {
     const pga = clamp(Number(inputs.scenarioPga || 0), 0, 0.5)
     const pgaNormalized = clamp(Math.sqrt(pga / 0.4))
-    headlineScore = clamp(
-      intrinsic.score * 0.5 + pgaNormalized * 0.5 + intrinsic.components.bridgeClass * 0.05,
-    )
+    headlineScore = clamp(intrinsic.score * 0.6 + pgaNormalized * 0.35 + intrinsic.components.bridgeClass * 0.05)
     modeNarrative =
       'Event damage mode introduces PGA only after the intrinsic vulnerability layer, keeping hazard and vulnerability conceptually separate.'
     scenarioTag = pga > 0 ? `Scenario PGA = ${pga.toFixed(2)} g` : 'Scenario PGA not provided'
   }
 
   if (mode === 'priority') {
-    headlineScore = clamp(intrinsic.score * 0.58 + traffic.score * 0.24 + ndvi.shift + 0.14)
+    headlineScore = clamp(intrinsic.score * 0.68 + traffic.score * 0.22 + ndvi.shift + 0.1)
     modeNarrative =
-      'Inspection prioritization combines vulnerability with traffic consequence and optional post-event NDVI evidence.'
+      'Inspection prioritization combines intrinsic vulnerability with traffic consequence and optional post-event NDVI evidence.'
     scenarioTag = 'ADT affects prioritization only; it does not change intrinsic vulnerability.'
   }
 
@@ -283,7 +290,7 @@ export function runBridgeAssessment(inputs, mode, researchData) {
   const inspectionPriorityRank =
     mode === 'priority'
       ? `Top ${100 - priorityPercentile}% attention band`
-      : headlineScore > 0.6
+      : headlineScore > 0.66
         ? 'Escalate targeted review'
         : 'Routine-to-targeted review'
 

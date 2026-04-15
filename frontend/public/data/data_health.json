@@ -3,8 +3,8 @@
   "recommendedFeatureImportanceValid": false,
   "recommendedMetrics": [
     {
-      "Feature Set": "Bridge Vulnerability Structural",
-      "Model": "Elastic Net",
+      "Feature Set": "Structural + SVI + HAZUS Class",
+      "Model": "Ridge",
       "Transform": "Raw target",
       "MAE": 0.0,
       "RMSE": 0.0,
@@ -19,103 +19,109 @@
   ],
   "recommendedFeatureImportance": [
     {
+      "Feature": "SVI",
+      "Importance": 0.0,
+      "Importance_std": 0.0,
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
+    },
+    {
       "Feature": "HWB_CLASS",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "design_era_1989",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "age_years",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "time_since_rehab",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "reconstructed_flag",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "spans",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "max_span_log1p",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "skew",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "cond",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "deck_area_log1p",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     },
     {
       "Feature": "operating_rating",
       "Importance": 0.0,
       "Importance_std": 0.0,
-      "Label": "Bridge Vulnerability Structural :: Elastic Net :: raw target"
+      "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
     }
   ],
   "fallbackFeatureImportance": [
     {
       "feature": "Condition rating",
-      "importance": 0.24
+      "importance": 0.22
     },
     {
-      "feature": "SVI score",
+      "feature": "SVI",
       "importance": 0.18
     },
     {
-      "feature": "Year built / age",
-      "importance": 0.14
+      "feature": "Bridge age / design era",
+      "importance": 0.15
     },
     {
-      "feature": "Maximum span length",
-      "importance": 0.12
+      "feature": "Reconstruction timing",
+      "importance": 0.1
     },
     {
       "feature": "Skew angle",
       "importance": 0.1
     },
     {
-      "feature": "Bridge class",
+      "feature": "Maximum span length",
+      "importance": 0.1
+    },
+    {
+      "feature": "Bridge class / HWB class",
       "importance": 0.09
     },
     {
       "feature": "Number of spans",
-      "importance": 0.07
-    },
-    {
-      "feature": "Reconstruction timing",
       "importance": 0.06
     }
   ],
@@ -128,6 +134,6 @@
   },
   "notes": {
     "metrics": "The exporter marks recommended regression metrics as invalid when the current repo snapshot contains perfect zero-error rows, so the frontend can avoid presenting them as credible evidence.",
-    "importance": "The exporter falls back to domain-prior contribution weights when the recommended feature-importance file is degenerate or all-zero."
+    "importance": "The exporter falls back to literature-informed prototype priors when the recommended feature-importance file is degenerate or all-zero."
   }
 }

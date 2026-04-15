@@ -1,7 +1,7 @@
 [
   {
-    "Feature Set": "Bridge Vulnerability Structural",
-    "Model": "Elastic Net",
+    "Feature Set": "Structural + SVI + HAZUS Class",
+    "Model": "Ridge",
     "Transform": "Raw target",
     "MAE": 0.0,
     "RMSE": 0.0,

@@ -1,5 +1,6 @@
 const links = [
   { label: 'Logic', href: '#feature-discipline' },
+  { label: 'Engine', href: '#vulnerability-engine' },
   { label: 'Pipeline', href: '#research-pipeline' },
   { label: 'Dashboard', href: '#dashboard' },
   { label: 'Analytics', href: '#analytics' },
@@ -27,7 +28,7 @@ export default function Header() {
           href="#dashboard"
           className="inline-flex items-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5"
         >
-          Open Dashboard
+          Explore Dashboard
         </a>
       </div>
     </header>

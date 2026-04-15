@@ -11,6 +11,7 @@ import ObjectivesSection from './components/sections/ObjectivesSection'
 import PipelineSection from './components/sections/PipelineSection'
 import SignificanceSection from './components/sections/SignificanceSection'
 import TransparencySection from './components/sections/TransparencySection'
+import VulnerabilityEngineSection from './components/sections/VulnerabilityEngineSection'
 import WhyDifferentSection from './components/sections/WhyDifferentSection'
 import { useResearchData } from './hooks/useResearchData'
 
@@ -47,6 +48,7 @@ function App() {
         <ObjectivesSection />
         <WhyDifferentSection />
         <FeatureDisciplineSection />
+        <VulnerabilityEngineSection methodology={researchData.methodology} />
         <PipelineSection pipeline={researchData.summary.pipeline} />
         <ComparativeFrameworkSection />
         <DashboardSection
@@ -55,7 +57,10 @@ function App() {
           onBridgeStateChange={setBridgeState}
         />
         <AnalyticsSection researchData={researchData} />
-        <TransparencySection researchData={researchData} diagnostics={loading ? 'Loading exported research snapshots...' : diagnostics} />
+        <TransparencySection
+          researchData={researchData}
+          diagnostics={loading ? 'Loading exported research snapshots...' : diagnostics}
+        />
         <InterpretabilitySection />
         <SignificanceSection />
       </main>

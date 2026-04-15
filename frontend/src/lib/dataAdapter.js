@@ -2,6 +2,8 @@ import { fallbackResearchData } from '../data/fallbackResearchData'
 
 const DATA_PATHS = {
   summary: '/data/site_summary.json',
+  bridgePortfolio: '/data/bridge_portfolio.json',
+  methodology: '/data/methodology_priors.json',
   damageState: '/data/damage_state_best_by_feature_set.json',
   futureScenario: '/data/future_scenario_summary.json',
   hybridBest: '/data/ml_hybrid_best_by_feature_set.json',
@@ -61,10 +63,22 @@ function isUsableFeatureImportance(rows = []) {
   return rows.some((row) => Number(row.importance ?? row.Importance ?? 0) > 0)
 }
 
+function enrichPortfolio(portfolio = []) {
+  return portfolio.map((bridge) => ({
+    ...bridge,
+    searchableText: [bridge.structureNumber, bridge.bridgeClass, bridge.countyLabel]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase(),
+  }))
+}
+
 export async function loadResearchData() {
-  const [summary, damageState, futureScenario, hybridBest, recommendedMetrics, recommendedImportance, health, proxyValidation, researchManifest] =
+  const [summary, bridgePortfolio, methodology, damageState, futureScenario, hybridBest, recommendedMetrics, recommendedImportance, health, proxyValidation, researchManifest] =
     await Promise.all([
       fetchJson(DATA_PATHS.summary),
+      fetchJson(DATA_PATHS.bridgePortfolio),
+      fetchJson(DATA_PATHS.methodology),
       fetchJson(DATA_PATHS.damageState),
       fetchJson(DATA_PATHS.futureScenario),
       fetchJson(DATA_PATHS.hybridBest),
@@ -99,6 +113,8 @@ export async function loadResearchData() {
       ].filter(Boolean),
     },
     summary,
+    methodology: methodology ?? fallbackResearchData.methodology,
+    portfolio: enrichPortfolio(bridgePortfolio ?? fallbackResearchData.portfolio.bridges),
     analytics: {
       classifierMetrics: formatClassifierMetrics(damageState),
       futureScenarios: formatFutureScenario(futureScenario),

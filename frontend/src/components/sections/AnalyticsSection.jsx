@@ -11,7 +11,7 @@ function mapCounts(record = {}) {
 }
 
 export default function AnalyticsSection({ researchData }) {
-  const riskBands = mapCounts(researchData.summary.portfolio.sviRiskBands)
+  const riskBands = mapCounts(researchData.summary.portfolio.prototypeRiskBands ?? researchData.summary.portfolio.sviRiskBands)
   const damageStates = mapCounts(researchData.summary.portfolio.modalDamageStates)
   const calibrationPoints = researchData.summary.calibrationPoints
   const featureImportance = researchData.analytics.featureImportance
@@ -22,8 +22,8 @@ export default function AnalyticsSection({ researchData }) {
     <section id="analytics" className="space-y-8">
       <SectionHeading
         eyebrow="Charts / analytics"
-        title="Repo-driven visuals for screening, calibration, and future scenario context"
-        description="The charts below are wired to exported JSON snapshots from the repo when available. Where the adapter detects degenerate or placeholder-like outputs, it falls back with explicit labeling rather than silently fabricating certainty."
+        title="Repo-backed visuals for portfolio screening, calibration, and future scenario context"
+        description="The charts below use exported repo JSON wherever those files are trustworthy. For the intrinsic vulnerability layer, the dashboard now prioritizes the prototype portfolio score and transparent priors rather than conflating the frontend with a finalized backend model."
       />
       <div className="grid gap-5 xl:grid-cols-2">
         <FeatureImportanceChart data={featureImportance} source={researchData.availability.featureImportanceSource} />

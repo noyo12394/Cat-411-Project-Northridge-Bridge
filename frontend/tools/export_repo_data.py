@@ -25,6 +25,83 @@ CSV_EXPORTS = [
     'future_scenario_summary.csv',
 ]
 
+PROTOTYPE_PRIORS = [
+    {
+        'key': 'condition',
+        'label': 'Condition rating',
+        'weight': 0.22,
+        'group': 'condition',
+        'rationale': 'Condition remains the clearest bridge-health signal in inspection-led vulnerability screening.',
+    },
+    {
+        'key': 'svi',
+        'label': 'SVI',
+        'weight': 0.18,
+        'group': 'intrinsic index',
+        'rationale': 'The revised Seismic Vulnerability Index aggregates multiple structural vulnerability factors into one interpretable score.',
+    },
+    {
+        'key': 'age',
+        'label': 'Bridge age / design era',
+        'weight': 0.15,
+        'group': 'age / detailing',
+        'rationale': 'Older bridges are more likely to reflect earlier seismic detailing assumptions and legacy configurations.',
+    },
+    {
+        'key': 'rehab',
+        'label': 'Reconstruction timing',
+        'weight': 0.10,
+        'group': 'maintenance history',
+        'rationale': 'More recent reconstruction or rehabilitation generally reduces expected vulnerability relative to peers of similar age.',
+    },
+    {
+        'key': 'skew',
+        'label': 'Skew angle',
+        'weight': 0.10,
+        'group': 'geometry',
+        'rationale': 'Skew is consistently treated as a meaningful irregularity driver in bridge seismic vulnerability and fragility studies.',
+    },
+    {
+        'key': 'maxSpan',
+        'label': 'Maximum span length',
+        'weight': 0.10,
+        'group': 'geometry',
+        'rationale': 'Longer spans tend to imply greater demand concentration and more consequential structural response when detailing is weak.',
+    },
+    {
+        'key': 'bridgeClass',
+        'label': 'Bridge class / HWB class',
+        'weight': 0.09,
+        'group': 'system type',
+        'rationale': 'Bridge class preserves important system-level fragility distinctions without directly importing hazard intensity into the intrinsic score.',
+    },
+    {
+        'key': 'spans',
+        'label': 'Number of spans',
+        'weight': 0.06,
+        'group': 'geometry',
+        'rationale': 'More spans increase geometry complexity, support interaction, and the chance of uneven seismic demand distribution.',
+    },
+]
+
+METHODOLOGY_REFERENCES = [
+    {
+        'title': 'Mangalathu et al. (2019) - Rapid seismic damage evaluation of bridges using machine learning techniques',
+        'url': 'https://www.mainslab.net/_files/ugd/3ad6e3_f43d6856c0a1462db8afbeeb35dfe141.pdf',
+        'note': 'Supports the use of bridge-specific structural features and ML for bridge seismic damage evaluation.',
+    },
+    {
+        'title': 'Gorishniy et al. (2021) - Revisiting deep learning models for tabular data',
+        'url': 'https://arxiv.org/abs/2106.11959',
+        'note': 'Motivates strong tabular baselines and careful comparison across model families instead of assuming deep learning is always best.',
+    },
+    {
+        'title': 'Shwartz-Ziv and Armon (2022) - Tabular data: Deep learning is not all you need',
+        'url': 'https://www.sciencedirect.com/science/article/pii/S1566253521002360',
+        'note': 'Supports the use of interpretable tree-based and boosted tabular models in engineering-data settings.',
+    },
+]
+
 
 def clean_value(value):
     if pd.isna(value):
@@ -51,34 +128,163 @@ def normalize_counts(series: pd.Series):
     return {str(key): int(value) for key, value in series.items()}
 
 
-def risk_band_distribution(svi: pd.Series):
-    bins = [0.0, 0.25, 0.4, 0.55, 0.7, 1.0]
+def normalize(value, minimum, maximum):
+    if value is None or pd.isna(value) or maximum <= minimum:
+        return 0.0
+    return max(0.0, min(1.0, (float(value) - float(minimum)) / (float(maximum) - float(minimum))))
+
+
+def current_year():
+    return 2026
+
+
+def max_span_to_feet(series: pd.Series):
+    return series.astype(float) * 3.28084
+
+
+def risk_band_distribution(scores: pd.Series):
+    bins = [0.0, 0.28, 0.46, 0.66, 0.82, 1.0]
     labels = ['Low', 'Guarded', 'Elevated', 'High', 'Critical']
-    cats = pd.cut(svi.clip(lower=0, upper=1), bins=bins, labels=labels, include_lowest=True)
+    cats = pd.cut(scores.clip(lower=0, upper=1), bins=bins, labels=labels, include_lowest=True)
     return normalize_counts(cats.value_counts().reindex(labels, fill_value=0))
 
 
-def sample_bridge_rows(df: pd.DataFrame):
+def score_to_band(score: float):
+    if score < 0.28:
+        return 'Low'
+    if score < 0.46:
+        return 'Guarded'
+    if score < 0.66:
+        return 'Elevated'
+    if score < 0.82:
+        return 'High'
+    return 'Critical'
+
+
+def county_label(code):
+    if code is None or pd.isna(code):
+        return 'County unknown'
+    return f'County {int(code):03d}'
+
+
+def build_class_profiles(df: pd.DataFrame):
+    return (
+        df.groupby('HWB_CLASS', dropna=False)
+        .agg(count=('HWB_CLASS', 'size'), meanSVI=('SVI', 'mean'), meanEDR=('EDR', 'mean'))
+        .reset_index()
+        .sort_values('meanSVI', ascending=False)
+    )
+
+
+def compute_intrinsic_scores(df: pd.DataFrame, class_profiles: pd.DataFrame):
+    class_mean_lookup = class_profiles.set_index('HWB_CLASS')['meanSVI'].to_dict()
+
+    year_min = float(df['year'].min())
+    recon_max = float(df['YEAR_RECONSTRUCTED_106'].dropna().max()) if df['YEAR_RECONSTRUCTED_106'].dropna().any() else current_year()
+    spans_max = float(min(df['spans'].max(), 24))
+    max_span_ft = max_span_to_feet(df['max_span'])
+    max_span_ft_max = float(max_span_ft.quantile(0.98))
+    skew_max = float(df['skew'].max())
+    cond_min = float(df['cond'].min())
+    cond_max = float(df['cond'].max())
+    svi_min = float(df['SVI'].min())
+    svi_max = float(df['SVI'].max())
+    adt_log = df['ADT_029'].fillna(0).clip(lower=0).map(lambda x: math.log1p(float(x)))
+    adt_max = float(adt_log.quantile(0.99)) if len(adt_log) else 1.0
+
+    rows = []
+    for row in df.itertuples(index=False):
+        year_built = float(getattr(row, 'year'))
+        year_recon = getattr(row, 'YEAR_RECONSTRUCTED_106')
+        bridge_age = current_year() - year_built
+        rehab_years = current_year() - float(year_recon) if year_recon and not pd.isna(year_recon) and float(year_recon) > 0 else bridge_age
+
+        class_mean = class_mean_lookup.get(getattr(row, 'HWB_CLASS'), float(df['SVI'].mean()))
+        components = {
+            'condition': 1 - normalize(getattr(row, 'cond'), cond_min, cond_max),
+            'svi': normalize(getattr(row, 'SVI'), svi_min, svi_max),
+            'age': normalize(bridge_age, 0, current_year() - year_min),
+            'rehab': normalize(rehab_years, 0, current_year() - recon_max if current_year() - recon_max > 0 else current_year() - year_min),
+            'skew': normalize(getattr(row, 'skew'), 0, skew_max),
+            'maxSpan': normalize(getattr(row, 'max_span') * 3.28084, 0, max_span_ft_max),
+            'bridgeClass': normalize(class_mean, 0.25, 0.6),
+            'spans': normalize(min(getattr(row, 'spans'), 24), 1, spans_max),
+        }
+        intrinsic_score = sum(
+            prior['weight'] * components[prior['key']] for prior in PROTOTYPE_PRIORS
+        )
+        intrinsic_score = max(0.0, min(1.0, 0.08 + intrinsic_score))
+        traffic_score = normalize(math.log1p(max(float(getattr(row, 'ADT_029') or 0), 0.0)), 0, adt_max)
+        priority_score = max(0.0, min(1.0, intrinsic_score * 0.72 + traffic_score * 0.28))
+        rows.append(
+            {
+                'structureNumber': clean_value(getattr(row, 'STRUCTURE_NUMBER_008')),
+                'countyCode': clean_value(getattr(row, 'COUNTY_CODE_003')),
+                'countyLabel': county_label(getattr(row, 'COUNTY_CODE_003')),
+                'bridgeClass': clean_value(getattr(row, 'HWB_CLASS')),
+                'yearBuilt': int(clean_value(year_built) or 0),
+                'yearReconstructed': clean_value(year_recon),
+                'spans': int(clean_value(getattr(row, 'spans')) or 0),
+                'maxSpanFt': clean_value(getattr(row, 'max_span') * 3.28084),
+                'maxSpanM': clean_value(getattr(row, 'max_span')),
+                'skew': clean_value(getattr(row, 'skew')),
+                'condition': clean_value(getattr(row, 'cond')),
+                'svi': clean_value(getattr(row, 'SVI')),
+                'edr': clean_value(getattr(row, 'EDR')),
+                'adt': clean_value(getattr(row, 'ADT_029')),
+                'latitude': clean_value(getattr(row, 'latitude')),
+                'longitude': clean_value(getattr(row, 'longitude')),
+                'prototypeVulnerability': round(intrinsic_score, 4),
+                'priorityScore': round(priority_score, 4),
+                'riskBand': score_to_band(intrinsic_score),
+                'inspectionTier': 'Immediate review' if priority_score >= 0.78 else 'Priority review' if priority_score >= 0.6 else 'Routine review',
+                'componentCondition': round(components['condition'], 4),
+                'componentSVI': round(components['svi'], 4),
+                'componentAge': round(components['age'], 4),
+                'componentRehab': round(components['rehab'], 4),
+                'componentSkew': round(components['skew'], 4),
+                'componentMaxSpan': round(components['maxSpan'], 4),
+                'componentBridgeClass': round(components['bridgeClass'], 4),
+                'componentSpans': round(components['spans'], 4),
+            }
+        )
+
+    return rows, {
+        'yearBuilt': {'min': int(year_min), 'max': int(df['year'].max())},
+        'yearReconstructed': {'min': int(df['YEAR_RECONSTRUCTED_106'].dropna().min()) if df['YEAR_RECONSTRUCTED_106'].dropna().any() else 0, 'max': int(recon_max)},
+        'skew': {'min': 0, 'max': int(skew_max)},
+        'spans': {'min': int(df['spans'].min()), 'max': int(df['spans'].max())},
+        'maxSpan': {'min': clean_value(max_span_ft.min()), 'max': clean_value(max_span_ft_max)},
+        'condition': {'min': int(cond_min), 'max': int(cond_max)},
+        'svi': {'min': clean_value(svi_min), 'max': clean_value(svi_max)},
+        'adt': {'min': 0, 'max': int(df['ADT_029'].fillna(0).quantile(0.99))},
+    }
+
+
+def sample_bridge_rows(portfolio_rows):
     picks = []
     labelled_quantiles = [('Portfolio Lower Risk', 0.15), ('Portfolio Mid Risk', 0.5), ('Portfolio Higher Risk', 0.85)]
-    ranked = df.sort_values('SVI').reset_index(drop=True)
+    ranked = sorted(portfolio_rows, key=lambda row: row['prototypeVulnerability'])
     for label, q in labelled_quantiles:
         idx = min(len(ranked) - 1, max(0, int(q * (len(ranked) - 1))))
-        row = ranked.iloc[idx]
+        row = ranked[idx]
         picks.append(
             {
                 'label': label,
-                'structureNumber': clean_value(row.get('STRUCTURE_NUMBER_008')),
-                'countyCode': clean_value(row.get('COUNTY_CODE_003')),
-                'yearBuilt': int(clean_value(row.get('year')) or 0),
-                'yearReconstructed': clean_value(row.get('YEAR_RECONSTRUCTED_106')),
-                'spans': int(clean_value(row.get('spans')) or 0),
-                'maxSpan': clean_value(row.get('max_span')),
-                'skew': clean_value(row.get('skew')),
-                'condition': clean_value(row.get('cond')),
-                'svi': clean_value(row.get('SVI')),
-                'bridgeClass': clean_value(row.get('HWB_CLASS')),
-                'adt': clean_value(row.get('ADT_029')) if 'ADT_029' in row else None,
+                'structureNumber': row['structureNumber'],
+                'countyCode': row['countyCode'],
+                'countyLabel': row['countyLabel'],
+                'yearBuilt': row['yearBuilt'],
+                'yearReconstructed': row['yearReconstructed'],
+                'spans': row['spans'],
+                'maxSpan': row['maxSpanFt'],
+                'skew': row['skew'],
+                'condition': row['condition'],
+                'svi': row['svi'],
+                'bridgeClass': row['bridgeClass'],
+                'adt': row['adt'],
+                'prototypeVulnerability': row['prototypeVulnerability'],
+                'priorityScore': row['priorityScore'],
             }
         )
     return picks
@@ -95,13 +301,7 @@ def build_summary(repo_root: Path):
     mapping = {'P_DS0': 'None', 'P_DS1': 'Slight', 'P_DS2': 'Moderate', 'P_DS3': 'Extensive', 'P_DS4': 'Complete'}
     modal_damage = bridges_with_edr[ds_cols].idxmax(axis=1).map(mapping) if ds_cols else pd.Series(dtype='object')
 
-    class_profiles = (
-        bridges_with_svi.groupby('HWB_CLASS', dropna=False)
-        .agg(count=('HWB_CLASS', 'size'), meanSVI=('SVI', 'mean'), meanEDR=('EDR', 'mean'))
-        .reset_index()
-        .sort_values('meanSVI', ascending=False)
-    )
-
+    class_profiles = build_class_profiles(bridges_with_svi)
     county_profiles = (
         bridges_with_svi.groupby('COUNTY_CODE_003', dropna=False)
         .agg(count=('COUNTY_CODE_003', 'size'), meanSVI=('SVI', 'mean'), meanEDR=('EDR', 'mean'))
@@ -110,26 +310,8 @@ def build_summary(repo_root: Path):
         .head(12)
     )
 
-    feature_ranges = {
-        'yearBuilt': {
-            'min': int(bridges_with_svi['year'].min()),
-            'max': int(bridges_with_svi['year'].max()),
-        },
-        'yearReconstructed': {
-            'min': int(bridges_with_svi['YEAR_RECONSTRUCTED_106'].dropna().min()),
-            'max': int(bridges_with_svi['YEAR_RECONSTRUCTED_106'].dropna().max()),
-        },
-        'skew': {'min': 0, 'max': int(bridges_with_svi['skew'].max())},
-        'spans': {'min': int(bridges_with_svi['spans'].min()), 'max': int(bridges_with_svi['spans'].max())},
-        'maxSpan': {
-            'min': clean_value(bridges_with_svi['max_span'].min()),
-            'max': clean_value(bridges_with_svi['max_span'].quantile(0.98)),
-        },
-        'condition': {'min': int(bridges_with_svi['cond'].min()), 'max': int(bridges_with_svi['cond'].max())},
-        'svi': {'min': clean_value(bridges_with_svi['SVI'].min()), 'max': clean_value(bridges_with_svi['SVI'].max())},
-        'adt': {'min': 0, 'max': 120000},
-    }
-
+    portfolio_rows, feature_ranges = compute_intrinsic_scores(bridges_with_svi, class_profiles)
+    portfolio_df = pd.DataFrame(portfolio_rows)
     calibration = bridge_ml_predictions[['Actual_EDR', 'Predicted_EDR', 'SVI', 'year', 'cond', 'HWB_CLASS']].copy()
     if len(calibration) > 240:
         calibration = calibration.iloc[:: max(1, len(calibration) // 240)].copy()
@@ -146,24 +328,27 @@ def build_summary(repo_root: Path):
             'meanSVI': clean_value(bridges_with_svi['SVI'].mean()),
             'medianSVI': clean_value(bridges_with_svi['SVI'].median()),
             'meanEDR': clean_value(bridges_with_edr['EDR'].mean()),
+            'meanPrototypeVulnerability': clean_value(portfolio_df['prototypeVulnerability'].mean()),
+            'meanPriorityScore': clean_value(portfolio_df['priorityScore'].mean()),
             'sviRiskBands': risk_band_distribution(bridges_with_svi['SVI']),
+            'prototypeRiskBands': risk_band_distribution(portfolio_df['prototypeVulnerability']),
             'modalDamageStates': normalize_counts(modal_damage.value_counts()),
         },
         'classProfiles': to_records(class_profiles.rename(columns={'HWB_CLASS': 'bridgeClass'}), limit=12),
         'countyProfiles': to_records(county_profiles.rename(columns={'COUNTY_CODE_003': 'countyCode'}), limit=12),
         'featureRanges': feature_ranges,
-        'sampleBridges': sample_bridge_rows(bridges_with_svi),
+        'sampleBridges': sample_bridge_rows(portfolio_rows),
         'pipeline': [
             {'label': 'Bridge inventory', 'file': 'CA25.txt', 'output': 'Raw statewide NBI bridge inventory'},
             {'label': 'ShakeMap sampling', 'file': 'pga_mean.flt', 'output': 'pga_nbi_bridge.csv'},
             {'label': 'Fragility / EDR', 'file': 'bridges_with_edr.csv', 'output': 'Modal damage probabilities + EDR'},
-            {'label': 'SVI scoring', 'file': 'bridges_with_svi.csv', 'output': 'April 2026 weighted intrinsic screening'},
+            {'label': 'SVI scoring', 'file': 'bridges_with_svi.csv', 'output': 'Updated intrinsic screening and revised fragility medians'},
             {'label': 'ML comparison', 'file': 'ml_hybrid_best_by_feature_set.csv', 'output': 'Bridge vulnerability vs event-damage framing'},
             {'label': 'Scenario scoring', 'file': 'future_scenario_summary.csv', 'output': 'Uniform PGA stress-test summaries'},
         ],
         'calibrationPoints': to_records(calibration, limit=240),
     }
-    return summary
+    return summary, portfolio_rows
 
 
 def compute_bridge_ml_metrics(repo_root: Path):
@@ -217,14 +402,14 @@ def export_health(repo_root: Path, public_data_root: Path):
         importance_valid = bool((feature_df['Importance'].abs() > 1e-9).any()) if 'Importance' in feature_df.columns else False
 
     fallback_importance = [
-        {'feature': 'Condition rating', 'importance': 0.24},
-        {'feature': 'SVI score', 'importance': 0.18},
-        {'feature': 'Year built / age', 'importance': 0.14},
-        {'feature': 'Maximum span length', 'importance': 0.12},
+        {'feature': 'Condition rating', 'importance': 0.22},
+        {'feature': 'SVI', 'importance': 0.18},
+        {'feature': 'Bridge age / design era', 'importance': 0.15},
+        {'feature': 'Reconstruction timing', 'importance': 0.10},
         {'feature': 'Skew angle', 'importance': 0.10},
-        {'feature': 'Bridge class', 'importance': 0.09},
-        {'feature': 'Number of spans', 'importance': 0.07},
-        {'feature': 'Reconstruction timing', 'importance': 0.06},
+        {'feature': 'Maximum span length', 'importance': 0.10},
+        {'feature': 'Bridge class / HWB class', 'importance': 0.09},
+        {'feature': 'Number of spans', 'importance': 0.06},
     ]
 
     health = {
@@ -236,7 +421,7 @@ def export_health(repo_root: Path, public_data_root: Path):
         'bridgeMlCalibrationMetrics': compute_bridge_ml_metrics(repo_root),
         'notes': {
             'metrics': 'The exporter marks recommended regression metrics as invalid when the current repo snapshot contains perfect zero-error rows, so the frontend can avoid presenting them as credible evidence.',
-            'importance': 'The exporter falls back to domain-prior contribution weights when the recommended feature-importance file is degenerate or all-zero.',
+            'importance': 'The exporter falls back to literature-informed prototype priors when the recommended feature-importance file is degenerate or all-zero.',
         },
     }
     (public_data_root / 'data_health.json').write_text(json.dumps(health, indent=2), encoding='utf-8')
@@ -270,6 +455,32 @@ def export_proxy_validation(public_data_root: Path):
     (public_data_root / 'proxy_validation.json').write_text(json.dumps(proxy, indent=2), encoding='utf-8')
 
 
+def export_methodology(public_data_root: Path):
+    methodology = {
+        'status': 'research-prototype',
+        'engineLabel': 'Literature-informed prototype vulnerability engine',
+        'discipline': {
+            'core': 'No PGA in the intrinsic vulnerability score.',
+            'event': 'PGA is introduced only in event-damage scenario mode.',
+            'priority': 'ADT changes prioritization and consequence, not structural vulnerability.',
+            'ndvi': 'NDVI remains an optional contextual modifier rather than a structural core driver.',
+        },
+        'priors': PROTOTYPE_PRIORS,
+        'layers': [
+            {'label': 'Structural / age / geometry inputs', 'description': 'Year built, rehab timing, spans, max span, skew, bridge class, condition, and SVI.'},
+            {'label': 'Normalized vulnerability indicators', 'description': 'Bridge-specific variables are normalized into interpretable intrinsic vulnerability components.'},
+            {'label': 'Prototype vulnerability score', 'description': 'A transparent research prior layer combines those indicators without using PGA.'},
+            {'label': 'Consequence and prioritization', 'description': 'ADT and optional NDVI adjustments appear later in inspection prioritization rather than baseline vulnerability.'},
+        ],
+        'references': METHODOLOGY_REFERENCES,
+    }
+    (public_data_root / 'methodology_priors.json').write_text(json.dumps(methodology, indent=2), encoding='utf-8')
+
+
+def export_bridge_portfolio(public_data_root: Path, portfolio_rows):
+    (public_data_root / 'bridge_portfolio.json').write_text(json.dumps(portfolio_rows, indent=2), encoding='utf-8')
+
+
 def copy_research_figures(repo_root: Path, public_research_root: Path):
     figures_root = repo_root / 'figures'
     manifest = []
@@ -297,8 +508,10 @@ def main():
     public_data_root.mkdir(parents=True, exist_ok=True)
     public_research_root.mkdir(parents=True, exist_ok=True)
 
-    summary = build_summary(repo_root)
+    summary, portfolio_rows = build_summary(repo_root)
     (public_data_root / 'site_summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
+    export_bridge_portfolio(public_data_root, portfolio_rows)
+    export_methodology(public_data_root)
     export_csv_jsons(repo_root, public_data_root)
     export_health(repo_root, public_data_root)
     export_proxy_validation(public_data_root)
