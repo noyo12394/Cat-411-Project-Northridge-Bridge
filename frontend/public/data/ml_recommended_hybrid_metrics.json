@@ -1,16 +1,16 @@
 [
   {
     "Feature Set": "Structural + SVI + HAZUS Class",
-    "Model": "Ridge",
+    "Model": "Extra Trees",
     "Transform": "Raw target",
-    "MAE": 0.0,
-    "RMSE": 0.0,
-    "RMSLE": 0.0,
-    "MedianAE": 0.0,
-    "R2": 1.0,
-    "MAE_Positive": null,
-    "RMSE_Positive": null,
-    "RMSLE_Positive": null,
-    "R2_Positive": null
+    "MAE": 0.012929,
+    "RMSE": 0.039761,
+    "RMSLE": 0.034852,
+    "MedianAE": 0.002611,
+    "R2": 0.195126,
+    "MAE_Positive": 0.016676,
+    "RMSE_Positive": 0.048015,
+    "RMSLE_Positive": 0.041877,
+    "R2_Positive": 0.216613
   }
 ]

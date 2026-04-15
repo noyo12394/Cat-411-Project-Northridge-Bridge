@@ -1,74 +1,74 @@
 [
   {
-    "Feature": "SVI",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
     "Feature": "HWB_CLASS",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "design_era_1989",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "age_years",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "time_since_rehab",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "reconstructed_flag",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "spans",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "max_span_log1p",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "skew",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
-  },
-  {
-    "Feature": "cond",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
+    "Importance": 0.16234,
+    "Importance_std": 0.015626,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
   },
   {
     "Feature": "deck_area_log1p",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
+    "Importance": 0.128704,
+    "Importance_std": 0.011406,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "design_era_1989",
+    "Importance": 0.085909,
+    "Importance_std": 0.010059,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
   },
   {
     "Feature": "operating_rating",
-    "Importance": 0.0,
-    "Importance_std": 0.0,
-    "Label": "Structural + SVI + HAZUS Class :: Ridge :: raw target"
+    "Importance": 0.079793,
+    "Importance_std": 0.015632,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "time_since_rehab",
+    "Importance": 0.076443,
+    "Importance_std": 0.008175,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "max_span_log1p",
+    "Importance": 0.076357,
+    "Importance_std": 0.011729,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "age_years",
+    "Importance": 0.062574,
+    "Importance_std": 0.005176,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "spans",
+    "Importance": 0.050955,
+    "Importance_std": 0.008637,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "SVI",
+    "Importance": 0.040275,
+    "Importance_std": 0.00583,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "skew",
+    "Importance": 0.038272,
+    "Importance_std": 0.004836,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "reconstructed_flag",
+    "Importance": 0.028716,
+    "Importance_std": 0.005204,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
+  },
+  {
+    "Feature": "cond",
+    "Importance": 0.012386,
+    "Importance_std": 0.006626,
+    "Label": "Structural + SVI + HAZUS Class :: Extra Trees :: raw target"
   }
 ]
