@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { BridgeStateVisual } from '../components/visuals/BridgeStateVisual'
+import { BridgeStateVisual } from '../components/visuals/BridgeStateVisual.tsx'
 import { MetricCard } from '../components/common/MetricCard'
 import { Panel } from '../components/common/Panel'
 import { SectionShell } from '../components/common/SectionShell'

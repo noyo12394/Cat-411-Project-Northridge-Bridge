@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { MetricCard } from '../components/common/MetricCard'
-import { BridgeStateVisual } from '../components/visuals/BridgeStateVisual'
+import { BridgeStateVisual } from '../components/visuals/BridgeStateVisual.tsx'
 import { revealTransition } from '../animations/motion'
 import type { DashboardAssessment, ResearchData } from '../types/research'
 
