@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { motion as Motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { getBridgeStageLegend, getBridgeStructuralState } from '../../lib/bridgeVisualState'
 
@@ -62,6 +62,7 @@ export default function BridgeStateVisual({
 }) {
   const reducedMotion = useReducedMotion()
   const replayControls = useAnimationControls()
+  const previousVisualScore = useRef(null)
   const visual = useMemo(() => visualState ?? getBridgeStructuralState({ vulnerabilityScore: score }), [score, visualState])
   const stageLegend = useMemo(() => getBridgeStageLegend(), [])
   const cracks = useMemo(() => buildCracks(visual), [visual])
@@ -70,11 +71,35 @@ export default function BridgeStateVisual({
   useEffect(() => {
     if (!replayToken || reducedMotion) return
     replayControls.start({
-      scale: [1, 1.012, 1],
-      y: [0, -5, 0],
-      transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+      scale: [1, 1.018 + visual.supportFailure * 0.02, 1],
+      y: [0, -6 - visual.deckSag * 0.05, 0],
+      x: [0, visual.pierTilt * 0.08, -visual.pierTilt * 0.06, 0],
+      rotate: [0, visual.segmentRotation * 0.04, -visual.segmentRotation * 0.03, 0],
+      transition: { duration: 0.92, ease: [0.22, 1, 0.36, 1] },
     })
-  }, [reducedMotion, replayControls, replayToken])
+  }, [reducedMotion, replayControls, replayToken, visual.deckSag, visual.pierTilt, visual.segmentRotation, visual.supportFailure])
+
+  useEffect(() => {
+    if (reducedMotion) return
+    if (previousVisualScore.current == null) {
+      previousVisualScore.current = visual.visualScore ?? visual.score
+      return
+    }
+
+    const nextScore = visual.visualScore ?? visual.score
+    const delta = Math.abs(nextScore - previousVisualScore.current)
+    previousVisualScore.current = nextScore
+
+    if (delta < 0.04) return
+
+    replayControls.start({
+      scale: [1, 1.01 + delta * 0.05, 1],
+      x: [0, delta * 6, -delta * 5, 0],
+      y: [0, -delta * 8, 0],
+      rotate: [0, delta * 1.6, -delta * 1.2, 0],
+      transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
+    })
+  }, [reducedMotion, replayControls, visual.score, visual.visualScore])
 
   const waveTravel = 0.2 + visual.waveAmplitude * 0.06
   const deckBaseline = 160 + visual.deckSag * 0.55
@@ -228,7 +253,7 @@ export default function BridgeStateVisual({
                 strokeDasharray="6 12"
                 strokeOpacity={Math.max(0.08, 0.3 + visual.stressGlow * 0.34 - index * 0.08)}
                 animate={reducedMotion ? { opacity: 0.26 } : { pathLength: [0.84, 1, 0.84], opacity: [0.22, 0.34 + visual.stressGlow * 0.26, 0.22] }}
-                transition={reducedMotion ? { duration: 0.2 } : { duration: 3.2 + index * 0.24, repeat: Infinity, ease: 'easeInOut' }}
+                transition={reducedMotion ? { duration: 0.2 } : { duration: 2.6 + index * 0.2 - visual.waveAmplitude * 0.05, repeat: Infinity, ease: 'easeInOut' }}
               />
             ))}
 
@@ -364,6 +389,10 @@ export default function BridgeStateVisual({
           <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-3 py-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">Support drift</p>
             <p className="mt-2 text-2xl font-semibold text-white">{range(visual.pierTilt, 0, 99).toFixed(1)}</p>
+          </div>
+          <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-3 py-3">
+            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">Visual intensity</p>
+            <p className="mt-2 text-2xl font-semibold text-white">{range((visual.visualScore ?? visual.score) * 100, 0, 100).toFixed(0)}</p>
           </div>
         </div>
       </div>

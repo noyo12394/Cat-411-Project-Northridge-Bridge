@@ -47,7 +47,9 @@ export default function DashboardSection({
 
   const handleModeChange = (nextMode) => {
     setMode(nextMode)
-    pushAssessment(inputs, nextMode)
+    const nextReplayToken = Date.now()
+    setReplayToken(nextReplayToken)
+    pushAssessment(inputs, nextMode, { replayToken: nextReplayToken })
   }
 
   const handleRun = (event) => {
@@ -60,14 +62,18 @@ export default function DashboardSection({
   const handleReset = () => {
     const seeded = createInitialInputs(null, researchData)
     setInputs(seeded)
-    pushAssessment(seeded, mode)
+    const nextReplayToken = Date.now()
+    setReplayToken(nextReplayToken)
+    pushAssessment(seeded, mode, { replayToken: nextReplayToken })
   }
 
   const handleLoadSample = (sample) => {
     if (!sample) return
     const seeded = createInitialInputs(sample, researchData)
     setInputs(seeded)
-    pushAssessment(seeded, mode)
+    const nextReplayToken = Date.now()
+    setReplayToken(nextReplayToken)
+    pushAssessment(seeded, mode, { replayToken: nextReplayToken })
   }
 
   const handleOpenPortfolio = async () => {

@@ -73,25 +73,27 @@ export function getBridgeStructuralState({
   const contextualStress = clamp(Math.max(0, ndviShift) * 1.4, 0, 0.08)
   const base = clamp(structuralScore ?? vulnerabilityScore)
   const stateScore = clamp(base + eventAmplifier * 0.12 + contextualStress)
-  const stage = stageFor(stateScore)
+  const visualScore = clamp(0.03 + Math.pow(stateScore, 0.84) * 0.97)
+  const stage = stageFor(visualScore)
 
-  const deckSag = lerp(1.5, 34, Math.pow(stateScore, 1.28))
-  const crackOpacity = clamp(0.03 + smoothstep(0.18, 0.96, stateScore) * 0.94)
-  const crackCount = Math.max(0, Math.round(lerp(0, 10, smoothstep(0.24, 0.96, stateScore))))
-  const pierTilt = lerp(0, 13.5, Math.pow(smoothstep(0.18, 1, stateScore), 1.12))
-  const jointGap = lerp(0, 28, smoothstep(0.42, 0.98, stateScore + eventAmplifier * 0.05))
-  const debrisOpacity = lerp(0, 0.55, smoothstep(0.82, 1.0, stateScore + eventAmplifier * 0.06))
-  const collapseOffset = lerp(0, 70, smoothstep(0.86, 1.0, stateScore + eventAmplifier * 0.12))
-  const supportFailure = smoothstep(0.72, 1.0, stateScore + eventAmplifier * 0.08)
-  const stressGlow = lerp(0.08, 0.62, smoothstep(0.14, 0.98, stateScore))
-  const waveAmplitude = lerp(1.4, 6.5, smoothstep(0.12, 1.0, stateScore + eventAmplifier * 0.06))
-  const segmentRotation = lerp(0.3, 7.6, smoothstep(0.22, 1.0, stateScore))
-  const dustCount = Math.max(2, Math.round(lerp(2, 10, smoothstep(0.82, 1.0, stateScore + eventAmplifier * 0.08))))
-  const deckBreak = stateScore >= 0.86
-  const tint = clamp(0.14 + stateScore * 0.42 + eventAmplifier * 0.08)
+  const deckSag = lerp(1.5, 48, Math.pow(visualScore, 1.18))
+  const crackOpacity = clamp(0.02 + smoothstep(0.14, 0.94, visualScore) * 0.98)
+  const crackCount = Math.max(0, Math.round(lerp(0, 12, smoothstep(0.2, 0.94, visualScore))))
+  const pierTilt = lerp(0, 18, Math.pow(smoothstep(0.12, 1, visualScore), 1.06))
+  const jointGap = lerp(0, 44, smoothstep(0.34, 0.96, visualScore + eventAmplifier * 0.08))
+  const debrisOpacity = lerp(0, 0.72, smoothstep(0.74, 1.0, visualScore + eventAmplifier * 0.08))
+  const collapseOffset = lerp(0, 118, smoothstep(0.78, 1.0, visualScore + eventAmplifier * 0.16))
+  const supportFailure = smoothstep(0.62, 0.98, visualScore + eventAmplifier * 0.12)
+  const stressGlow = lerp(0.08, 0.76, smoothstep(0.1, 0.98, visualScore))
+  const waveAmplitude = lerp(1.4, 8.8, smoothstep(0.08, 1.0, visualScore + eventAmplifier * 0.08))
+  const segmentRotation = lerp(0.3, 11.4, smoothstep(0.18, 1.0, visualScore))
+  const dustCount = Math.max(2, Math.round(lerp(2, 14, smoothstep(0.76, 1.0, visualScore + eventAmplifier * 0.1))))
+  const deckBreak = visualScore >= 0.8
+  const tint = clamp(0.14 + visualScore * 0.48 + eventAmplifier * 0.1)
 
   return {
     score: Number(stateScore.toFixed(3)),
+    visualScore: Number(visualScore.toFixed(3)),
     baseScore: Number(base.toFixed(3)),
     mode,
     stageKey: stage.key,
