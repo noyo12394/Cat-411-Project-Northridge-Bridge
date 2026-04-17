@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { loadResearchData } from '../lib/dataAdapter'
-import { fallbackResearchData } from '../data/fallbackResearchData'
+import { loadResearchData } from '../lib/dataAdapter.js'
+import { fallbackResearchData } from '../data/fallbackResearchData.js'
 
 export function useResearchData() {
   const [state, setState] = useState({
