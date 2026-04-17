@@ -53,6 +53,7 @@ export default function HeroSection({ researchData, bridgeState }) {
         <BridgeStateVisual
           score={bridgeState?.score ?? portfolio.meanPrototypeVulnerability ?? portfolio.meanSVI}
           visualState={bridgeState?.visualState}
+          replayToken={bridgeState?.replayToken}
           title="Adaptive bridge state visual"
         />
       </div>

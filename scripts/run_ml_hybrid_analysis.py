@@ -313,6 +313,39 @@ def regression_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict:
     return metrics
 
 
+def count_positive_targets(values: np.ndarray, threshold: float = 1e-12) -> int:
+    return int(np.count_nonzero(np.asarray(values, dtype=float) > threshold))
+
+
+def assert_non_degenerate_target(values: np.ndarray, context: str) -> None:
+    positive = count_positive_targets(values)
+    if positive == 0:
+        raise ValueError(
+            f'{context} contains no positive EDR values. '
+            'Refusing to write degenerate all-zero ML artifacts.'
+        )
+
+
+def assert_non_degenerate_predictions(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    label: str,
+) -> None:
+    actual_positive = count_positive_targets(y_true)
+    predicted_positive = count_positive_targets(y_pred)
+
+    if actual_positive == 0:
+        raise ValueError(
+            f'{label} holdout contains no positive EDR rows. '
+            'Check the source engineering tables before exporting.'
+        )
+    if predicted_positive == 0:
+        raise ValueError(
+            f'{label} predicted only zeros despite {actual_positive} positive-damage rows. '
+            'Refusing to export degenerate model artifacts.'
+        )
+
+
 def make_preprocessor(features: list[str]) -> ColumnTransformer:
     numeric_features = [feature for feature in features if feature not in CATEGORICAL_FEATURES]
     categorical_features = [feature for feature in features if feature in CATEGORICAL_FEATURES]
@@ -857,7 +890,8 @@ def main() -> None:
     dataset_df.to_csv(dataset_path, index=False)
 
     y = dataset_df[TARGET].to_numpy()
-    positive_indicator = dataset_df['positive_pga_flag'].to_numpy()
+    positive_indicator = (dataset_df[TARGET].to_numpy() > 1e-12).astype(int)
+    assert_non_degenerate_target(y, 'Statewide training target')
     cv = list(StratifiedKFold(n_splits=3, shuffle=True, random_state=RANDOM_STATE).split(dataset_df, positive_indicator))
     train_idx, test_idx = train_test_split(
         np.arange(len(dataset_df)),
@@ -953,6 +987,7 @@ def main() -> None:
         test_idx,
         f'{best_feature_set} :: {best_model_name}',
     )
+    assert_non_degenerate_predictions(best_y_test, best_y_pred, f'{best_feature_set} :: {best_model_name}')
     best_pred_df.to_csv(processed_dir / 'ml_hybrid_predictions.csv', index=False)
     best_importance_df.to_csv(processed_dir / 'ml_hybrid_feature_importance.csv', index=False)
 
@@ -1006,6 +1041,12 @@ def main() -> None:
         recommended_y_pred = log_y_pred
         recommended_full_model = make_models(make_preprocessor(recommended_features), log_target=True)[recommended_model_name]
 
+    assert_non_degenerate_predictions(
+        recommended_y_test,
+        recommended_y_pred,
+        f'{RECOMMENDED_FEATURE_SET} :: {recommended_model_name} :: {recommended_transform_label}',
+    )
+
     recommended_metrics_df = pd.DataFrame([{
         'Feature Set': RECOMMENDED_FEATURE_SET,
         'Model': recommended_model_name,
@@ -1039,6 +1080,7 @@ def main() -> None:
     X_full = dataset_df[recommended_features].copy()
     recommended_full_model.fit(X_full, y)
     statewide_pred = np.clip(recommended_full_model.predict(X_full), 0, None)
+    assert_non_degenerate_predictions(y, statewide_pred, f'{RECOMMENDED_FEATURE_SET} :: statewide full-fit')
 
     statewide_scores = dataset_df[[
         'join_id', 'STRUCTURE_NUMBER_008', 'COUNTY_CODE_003', 'latitude', 'longitude',
@@ -1072,6 +1114,7 @@ def main() -> None:
 
     print('Statewide bridges used for ML:', f'{len(dataset_df):,}')
     print('Bridges with positive PGA:', f'{int(dataset_df["positive_pga_flag"].sum()):,}')
+    print('Bridges with positive EDR:', f'{count_positive_targets(y):,}')
     print('\nTop 12 model rows:')
     print(results_df.head(12).to_string(index=False))
     print('\nBest by feature set:')

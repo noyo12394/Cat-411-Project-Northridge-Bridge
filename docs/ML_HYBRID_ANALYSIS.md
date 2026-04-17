@@ -51,27 +51,27 @@ This refreshed analysis rebuilds the machine-learning pipeline on the full Calif
 
 | Feature Set | Model | CV_MAE | CV_RMSE | CV_RMSLE | CV_R2 | Holdout_RMSE | Holdout_R2 | Holdout_RMSE_Positive | Holdout_R2_Positive |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Event Damage Hybrid | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 1.000000 | nan | nan |
-| Structural + HAZUS Class | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 1.000000 | nan | nan |
-| Structural + SVI | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 1.000000 | nan | nan |
-| Structural + SVI + HAZUS Class | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 1.000000 | nan | nan |
-| Structural Core | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 1.000000 | nan | nan |
+| Event Damage Hybrid | MLPRegressor | 0.000205 | 0.000625 | 0.000533 | 0.999772 | 0.000571 | 0.999834 | 0.000703 | 0.999832 |
+| HAZUS Benchmark | Gradient Boosting | 0.000807 | 0.004213 | 0.003387 | 0.989992 | 0.004315 | 0.990523 | 0.005341 | 0.990306 |
+| Structural + HAZUS Class | Extra Trees | 0.012108 | 0.038232 | 0.033596 | 0.175733 | 0.039341 | 0.212044 | 0.047676 | 0.227622 |
+| Structural + SVI | Extra Trees | 0.012475 | 0.038490 | 0.033805 | 0.164816 | 0.039623 | 0.200714 | 0.048262 | 0.208539 |
+| Structural + SVI + HAZUS Class | Extra Trees | 0.012255 | 0.038512 | 0.033862 | 0.163664 | 0.039797 | 0.193692 | 0.048204 | 0.210410 |
+| Structural Core | Extra Trees | 0.012409 | 0.038518 | 0.033820 | 0.163660 | 0.039286 | 0.214257 | 0.047678 | 0.227569 |
 
 ## Top Overall Results
 
 | Feature Set | Model | CV_MAE | CV_RMSE | CV_RMSLE | CV_R2 | Holdout_MAE | Holdout_RMSE | Holdout_RMSLE | Holdout_R2 | Holdout_RMSE_Positive | Holdout_R2_Positive |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| HAZUS Benchmark | Ridge | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | Elastic Net | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | LinearSVR | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | Decision Tree | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | KNN Regressor | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | Random Forest | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | Extra Trees | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | AdaBoost | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | Gradient Boosting | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
-| HAZUS Benchmark | HistGradientBoosting | -0.000000 | -0.000000 | -0.000000 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan |
+| Event Damage Hybrid | MLPRegressor | 0.000205 | 0.000625 | 0.000533 | 0.999772 | 0.000184 | 0.000571 | 0.000494 | 0.999834 | 0.000703 | 0.999832 |
+| Event Damage Hybrid | Gradient Boosting | 0.000215 | 0.000956 | 0.000796 | 0.999470 | 0.000202 | 0.000866 | 0.000709 | 0.999619 | 0.001069 | 0.999612 |
+| Event Damage Hybrid | Decision Tree | 0.000364 | 0.002211 | 0.001771 | 0.997239 | 0.000318 | 0.001887 | 0.001514 | 0.998187 | 0.002336 | 0.998146 |
+| Event Damage Hybrid | HistGradientBoosting | 0.000479 | 0.002412 | 0.001942 | 0.996709 | 0.000518 | 0.002516 | 0.002018 | 0.996778 | 0.003113 | 0.996706 |
+| HAZUS Benchmark | Gradient Boosting | 0.000807 | 0.004213 | 0.003387 | 0.989992 | 0.000848 | 0.004315 | 0.003449 | 0.990523 | 0.005341 | 0.990306 |
+| HAZUS Benchmark | Random Forest | 0.000784 | 0.004379 | 0.003524 | 0.989190 | 0.000790 | 0.004195 | 0.003401 | 0.991039 | 0.005194 | 0.990834 |
+| HAZUS Benchmark | MLPRegressor | 0.001167 | 0.004391 | 0.003597 | 0.989079 | 0.001103 | 0.004427 | 0.003601 | 0.990022 | 0.005477 | 0.989808 |
+| HAZUS Benchmark | KNN Regressor | 0.000758 | 0.004403 | 0.003546 | 0.989086 | 0.000765 | 0.004498 | 0.003632 | 0.989702 | 0.005568 | 0.989467 |
+| Event Damage Hybrid | AdaBoost | 0.001430 | 0.004549 | 0.003889 | 0.988272 | 0.001500 | 0.004725 | 0.004036 | 0.988636 | 0.005841 | 0.988407 |
+| HAZUS Benchmark | HistGradientBoosting | 0.000861 | 0.004583 | 0.003691 | 0.988157 | 0.000940 | 0.004847 | 0.003887 | 0.988040 | 0.006000 | 0.987768 |
 
 ## Target-Transform Check
 
@@ -79,31 +79,31 @@ The professor note about training on the log of the model was implemented direct
 
 | Transform | MAE | RMSE | RMSLE | MedianAE | R2 | MAE_Positive | RMSE_Positive | RMSLE_Positive | R2_Positive |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Raw target | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan | nan | nan |
-| log1p -> expm1 target | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 1.000000 | nan | nan | nan | nan |
+| Raw target | 0.012929 | 0.039761 | 0.034852 | 0.002611 | 0.195126 | 0.016676 | 0.048015 | 0.041877 | 0.216613 |
+| log1p -> expm1 target | 0.012523 | 0.039797 | 0.034843 | 0.002430 | 0.193692 | 0.016270 | 0.048204 | 0.042015 | 0.210410 |
 
 ## Best Overall Benchmark
 
-- Feature set: `HAZUS Benchmark`
-- Model: `Ridge`
-- Holdout MAE: `0.000000`
-- Holdout RMSE: `0.000000`
-- Holdout RMSLE: `0.000000`
-- Holdout R2: `1.000000`
-- Holdout RMSE on positive-damage bridges only: `nan`
-- Holdout R2 on positive-damage bridges only: `nan`
+- Feature set: `Event Damage Hybrid`
+- Model: `MLPRegressor`
+- Holdout MAE: `0.000184`
+- Holdout RMSE: `0.000571`
+- Holdout RMSLE: `0.000494`
+- Holdout R2: `0.999834`
+- Holdout RMSE on positive-damage bridges only: `0.000703`
+- Holdout R2 on positive-damage bridges only: `0.999832`
 
 ## Recommended Final Model For Presentation
 
 - Feature set: `Structural + SVI + HAZUS Class`
-- Model: `Ridge`
+- Model: `Extra Trees`
 - Target transform used for the final exported model: `Raw target`
-- Holdout MAE: `0.000000`
-- Holdout RMSE: `0.000000`
-- Holdout RMSLE: `0.000000`
-- Holdout R2: `1.000000`
-- Holdout RMSE on positive-damage bridges only: `nan`
-- Holdout R2 on positive-damage bridges only: `nan`
+- Holdout MAE: `0.012929`
+- Holdout RMSE: `0.039761`
+- Holdout RMSLE: `0.034852`
+- Holdout R2: `0.195126`
+- Holdout RMSE on positive-damage bridges only: `0.048015`
+- Holdout R2 on positive-damage bridges only: `0.216613`
 
 This is the recommended presentation model because it is a pure bridge-intrinsic vulnerability model: it removes PGA and traffic/network consequence variables and keeps only structural class, age / rehabilitation, geometry, condition, and rating information.
 

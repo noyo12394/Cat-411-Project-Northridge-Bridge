@@ -9,15 +9,20 @@ import { createInitialInputs, DASHBOARD_MODES, runBridgeAssessment } from '../..
 export default function DashboardSection({ researchData, onBridgeStateChange }) {
   const [mode, setMode] = useState('intrinsic')
   const [inputs, setInputs] = useState(() => createInitialInputs(null, researchData))
+  const [replayToken, setReplayToken] = useState(0)
   const [result, setResult] = useState(() =>
     runBridgeAssessment(createInitialInputs(null, researchData), 'intrinsic', researchData),
   )
 
   const pushAssessment = useCallback(
-    (nextInputs, nextMode) => {
+    (nextInputs, nextMode, options = {}) => {
       const next = runBridgeAssessment(nextInputs, nextMode, researchData)
       setResult(next)
-      onBridgeStateChange?.({ score: next.vulnerabilityScore, visualState: next.visualState })
+      onBridgeStateChange?.({
+        score: next.vulnerabilityScore,
+        visualState: next.visualState,
+        replayToken: options.replayToken ?? 0,
+      })
       return next
     },
     [onBridgeStateChange, researchData],
@@ -36,7 +41,9 @@ export default function DashboardSection({ researchData, onBridgeStateChange }) 
   }, [researchData.portfolio])
 
   const handleChange = (field, value) => {
-    setInputs((current) => ({ ...current, [field]: value }))
+    const nextInputs = { ...inputs, [field]: value }
+    setInputs(nextInputs)
+    pushAssessment(nextInputs, mode)
   }
 
   const handleModeChange = (nextMode) => {
@@ -46,7 +53,9 @@ export default function DashboardSection({ researchData, onBridgeStateChange }) 
 
   const handleRun = (event) => {
     event.preventDefault()
-    pushAssessment(inputs, mode)
+    const nextReplayToken = Date.now()
+    setReplayToken(nextReplayToken)
+    pushAssessment(inputs, mode, { replayToken: nextReplayToken })
   }
 
   const handleReset = () => {
@@ -80,7 +89,7 @@ export default function DashboardSection({ researchData, onBridgeStateChange }) 
           sampleBridges={researchData.summary.sampleBridges}
           onRun={handleRun}
         />
-        <DashboardResults result={result} modeMeta={modeMeta} />
+        <DashboardResults result={result} modeMeta={modeMeta} replayToken={replayToken} />
       </div>
       <PortfolioWorkbench bridges={portfolioBridges} onLoadBridge={handleLoadSample} />
     </section>

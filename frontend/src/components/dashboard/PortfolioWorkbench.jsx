@@ -67,6 +67,7 @@ export default function PortfolioWorkbench({ bridges, onLoadBridge }) {
 
   const handleSelect = (bridge) => {
     setSelectedBridgeId(bridge.structureNumber)
+    onLoadBridge?.(bridge)
   }
 
   return (

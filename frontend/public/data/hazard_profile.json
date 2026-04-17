@@ -1,0 +1,3029 @@
+{
+  "sampledBridges": 16796,
+  "positivePgaBridges": 16796,
+  "quantiles": {
+    "p50": 0.029944,
+    "p75": 0.096325,
+    "p90": 0.219592,
+    "p95": 0.362616,
+    "max": 0.866554
+  },
+  "histogram": [
+    {
+      "label": "0.00-0.11 g",
+      "start": 0.0,
+      "end": 0.1083,
+      "count": 13220
+    },
+    {
+      "label": "0.11-0.22 g",
+      "start": 0.1083,
+      "end": 0.2166,
+      "count": 1890
+    },
+    {
+      "label": "0.22-0.33 g",
+      "start": 0.2166,
+      "end": 0.325,
+      "count": 665
+    },
+    {
+      "label": "0.33-0.43 g",
+      "start": 0.325,
+      "end": 0.4333,
+      "count": 328
+    },
+    {
+      "label": "0.43-0.54 g",
+      "start": 0.4333,
+      "end": 0.5416,
+      "count": 249
+    },
+    {
+      "label": "0.54-0.65 g",
+      "start": 0.5416,
+      "end": 0.6499,
+      "count": 157
+    },
+    {
+      "label": "0.65-0.76 g",
+      "start": 0.6499,
+      "end": 0.7582,
+      "count": 164
+    },
+    {
+      "label": "0.76-0.87 g",
+      "start": 0.7582,
+      "end": 0.8666,
+      "count": 123
+    }
+  ],
+  "countyHotspots": [
+    {
+      "countyLabel": "County 037",
+      "bridgeCount": 3549,
+      "meanPga": 0.259136,
+      "maxPga": 0.866554,
+      "meanEdr": 0.055079
+    },
+    {
+      "countyLabel": "County 111",
+      "bridgeCount": 501,
+      "meanPga": 0.240975,
+      "maxPga": 0.796416,
+      "meanEdr": 0.049523
+    },
+    {
+      "countyLabel": "County 069",
+      "bridgeCount": 76,
+      "meanPga": 0.008948,
+      "maxPga": 0.290339,
+      "meanEdr": 0.00064
+    },
+    {
+      "countyLabel": "County 059",
+      "bridgeCount": 1181,
+      "meanPga": 0.092911,
+      "maxPga": 0.15827,
+      "meanEdr": 0.000857
+    },
+    {
+      "countyLabel": "County 071",
+      "bridgeCount": 1422,
+      "meanPga": 0.051508,
+      "maxPga": 0.1116,
+      "meanEdr": 0.000173
+    },
+    {
+      "countyLabel": "County 065",
+      "bridgeCount": 1120,
+      "meanPga": 0.04378,
+      "maxPga": 0.110065,
+      "meanEdr": 9.6e-05
+    },
+    {
+      "countyLabel": "County 029",
+      "bridgeCount": 668,
+      "meanPga": 0.046939,
+      "maxPga": 0.102009,
+      "meanEdr": 5.1e-05
+    },
+    {
+      "countyLabel": "County 083",
+      "bridgeCount": 421,
+      "meanPga": 0.05198,
+      "maxPga": 0.083458,
+      "meanEdr": 8.3e-05
+    },
+    {
+      "countyLabel": "County 073",
+      "bridgeCount": 1632,
+      "meanPga": 0.027953,
+      "maxPga": 0.054295,
+      "meanEdr": 2e-06
+    },
+    {
+      "countyLabel": "County 079",
+      "bridgeCount": 402,
+      "meanPga": 0.015505,
+      "maxPga": 0.035143,
+      "meanEdr": 0.0
+    },
+    {
+      "countyLabel": "County 107",
+      "bridgeCount": 607,
+      "meanPga": 0.016878,
+      "maxPga": 0.027409,
+      "meanEdr": 0.0
+    },
+    {
+      "countyLabel": "County 027",
+      "bridgeCount": 69,
+      "meanPga": 0.00852,
+      "maxPga": 0.025316,
+      "meanEdr": 0.0
+    }
+  ],
+  "samplePoints": [
+    {
+      "structureNumber": "      53C2114  ",
+      "latitude": 34.278494,
+      "longitude": -118.527469,
+      "countyLabel": "County 037",
+      "pga": 0.866554,
+      "edr": 0.436902,
+      "svi": 0.387764
+    },
+    {
+      "structureNumber": "      53 2512  ",
+      "latitude": 34.277356,
+      "longitude": -118.529175,
+      "countyLabel": "County 037",
+      "pga": 0.866554,
+      "edr": 0.427636,
+      "svi": 0.406404
+    },
+    {
+      "structureNumber": "      53 2634  ",
+      "latitude": 34.277986,
+      "longitude": -118.527044,
+      "countyLabel": "County 037",
+      "pga": 0.866554,
+      "edr": 0.412713,
+      "svi": 0.437724
+    },
+    {
+      "structureNumber": "      53C1974  ",
+      "latitude": 34.285328,
+      "longitude": -118.563014,
+      "countyLabel": "County 037",
+      "pga": 0.8614,
+      "edr": 0.401181,
+      "svi": 0.456022
+    },
+    {
+      "structureNumber": "      53C1976  ",
+      "latitude": 34.293797,
+      "longitude": -118.569783,
+      "countyLabel": "County 037",
+      "pga": 0.86023,
+      "edr": 0.421644,
+      "svi": 0.410502
+    },
+    {
+      "structureNumber": "      53 2465  ",
+      "latitude": 34.278167,
+      "longitude": -118.515397,
+      "countyLabel": "County 037",
+      "pga": 0.85138,
+      "edr": 0.45947,
+      "svi": 0.326524
+    },
+    {
+      "structureNumber": "      53 2464  ",
+      "latitude": 34.278444,
+      "longitude": -118.519797,
+      "countyLabel": "County 037",
+      "pga": 0.85138,
+      "edr": 0.454096,
+      "svi": 0.336284
+    },
+    {
+      "structureNumber": "      53 2466  ",
+      "latitude": 34.278186,
+      "longitude": -118.511031,
+      "countyLabel": "County 037",
+      "pga": 0.85138,
+      "edr": 0.439304,
+      "svi": 0.364009
+    },
+    {
+      "structureNumber": "      53 2513  ",
+      "latitude": 34.278786,
+      "longitude": -118.523842,
+      "countyLabel": "County 037",
+      "pga": 0.85138,
+      "edr": 0.434038,
+      "svi": 0.374204
+    },
+    {
+      "structureNumber": "      53 2510  ",
+      "latitude": 34.274833,
+      "longitude": -118.536069,
+      "countyLabel": "County 037",
+      "pga": 0.848521,
+      "edr": 0.391889,
+      "svi": 0.458964
+    },
+    {
+      "structureNumber": "      53 2501  ",
+      "latitude": 34.272639,
+      "longitude": -118.562025,
+      "countyLabel": "County 037",
+      "pga": 0.845769,
+      "edr": 0.446073,
+      "svi": 0.344244
+    },
+    {
+      "structureNumber": "      53 2500  ",
+      "latitude": 34.273131,
+      "longitude": -118.569508,
+      "countyLabel": "County 037",
+      "pga": 0.845769,
+      "edr": 0.432721,
+      "svi": 0.369644
+    },
+    {
+      "structureNumber": "      53 2509  ",
+      "latitude": 34.273864,
+      "longitude": -118.546486,
+      "countyLabel": "County 037",
+      "pga": 0.845573,
+      "edr": 0.429666,
+      "svi": 0.375364
+    },
+    {
+      "structureNumber": "      53 2647  ",
+      "latitude": 34.272097,
+      "longitude": -118.555917,
+      "countyLabel": "County 037",
+      "pga": 0.845573,
+      "edr": 0.411303,
+      "svi": 0.412604
+    },
+    {
+      "structureNumber": "      53 2502  ",
+      "latitude": 34.272322,
+      "longitude": -118.557686,
+      "countyLabel": "County 037",
+      "pga": 0.845573,
+      "edr": 0.41067,
+      "svi": 0.413932
+    },
+    {
+      "structureNumber": "      53 2502K ",
+      "latitude": 34.272853,
+      "longitude": -118.558222,
+      "countyLabel": "County 037",
+      "pga": 0.845573,
+      "edr": 0.390105,
+      "svi": 0.458844
+    },
+    {
+      "structureNumber": "      53 2502S ",
+      "latitude": 34.272125,
+      "longitude": -118.557528,
+      "countyLabel": "County 037",
+      "pga": 0.845573,
+      "edr": 0.389788,
+      "svi": 0.459564
+    },
+    {
+      "structureNumber": "      53 2790R ",
+      "latitude": 34.349883,
+      "longitude": -118.540756,
+      "countyLabel": "County 037",
+      "pga": 0.837554,
+      "edr": 0.423173,
+      "svi": 0.377824
+    },
+    {
+      "structureNumber": "      53 2796F ",
+      "latitude": 34.336756,
+      "longitude": -118.511997,
+      "countyLabel": "County 037",
+      "pga": 0.836478,
+      "edr": 0.4561,
+      "svi": 0.314684
+    },
+    {
+      "structureNumber": "      53 2797F ",
+      "latitude": 34.335053,
+      "longitude": -118.510789,
+      "countyLabel": "County 037",
+      "pga": 0.836478,
+      "edr": 0.452566,
+      "svi": 0.321004
+    },
+    {
+      "structureNumber": "      53 0996R ",
+      "latitude": 34.336528,
+      "longitude": -118.509869,
+      "countyLabel": "County 037",
+      "pga": 0.836478,
+      "edr": 0.444982,
+      "svi": 0.334804
+    },
+    {
+      "structureNumber": "      53 1796  ",
+      "latitude": 34.340706,
+      "longitude": -118.522856,
+      "countyLabel": "County 037",
+      "pga": 0.836478,
+      "edr": 0.427561,
+      "svi": 0.367804
+    },
+    {
+      "structureNumber": "      53 0996L ",
+      "latitude": 34.336356,
+      "longitude": -118.510039,
+      "countyLabel": "County 037",
+      "pga": 0.836478,
+      "edr": 0.303782,
+      "svi": 0.682929
+    },
+    {
+      "structureNumber": "      53 2204  ",
+      "latitude": 34.274719,
+      "longitude": -118.493689,
+      "countyLabel": "County 037",
+      "pga": 0.835256,
+      "edr": 0.331688,
+      "svi": 0.592804
+    },
+    {
+      "structureNumber": "      53 0849K ",
+      "latitude": 34.335558,
+      "longitude": -118.507611,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.475807,
+      "svi": 0.27346
+    },
+    {
+      "structureNumber": "      53 2795G ",
+      "latitude": 34.33365,
+      "longitude": -118.507269,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.469418,
+      "svi": 0.284188
+    },
+    {
+      "structureNumber": "      53 2795F ",
+      "latitude": 34.332764,
+      "longitude": -118.507919,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.467913,
+      "svi": 0.286744
+    },
+    {
+      "structureNumber": "      53 1936  ",
+      "latitude": 34.338378,
+      "longitude": -118.506842,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.463394,
+      "svi": 0.294484
+    },
+    {
+      "structureNumber": "      53 1936F ",
+      "latitude": 34.338714,
+      "longitude": -118.507572,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.450469,
+      "svi": 0.317204
+    },
+    {
+      "structureNumber": "      53 2974E ",
+      "latitude": 34.329258,
+      "longitude": -118.505706,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.450112,
+      "svi": 0.317844
+    },
+    {
+      "structureNumber": "      53 1936G ",
+      "latitude": 34.338314,
+      "longitude": -118.506444,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.428827,
+      "svi": 0.357364
+    },
+    {
+      "structureNumber": "      53 1962F ",
+      "latitude": 34.333131,
+      "longitude": -118.505342,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.421794,
+      "svi": 0.371044
+    },
+    {
+      "structureNumber": "      53 1984R ",
+      "latitude": 34.325172,
+      "longitude": -118.502492,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.399111,
+      "svi": 0.417568
+    },
+    {
+      "structureNumber": "      53 1961G ",
+      "latitude": 34.3348,
+      "longitude": -118.505389,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.383491,
+      "svi": 0.452004
+    },
+    {
+      "structureNumber": "      53 0848G ",
+      "latitude": 34.333792,
+      "longitude": -118.504842,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.380137,
+      "svi": 0.459684
+    },
+    {
+      "structureNumber": "      53 0849  ",
+      "latitude": 34.336158,
+      "longitude": -118.508111,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.359709,
+      "svi": 0.5089
+    },
+    {
+      "structureNumber": "      53 0848  ",
+      "latitude": 34.333639,
+      "longitude": -118.505025,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.359556,
+      "svi": 0.509284
+    },
+    {
+      "structureNumber": "      53C0183  ",
+      "latitude": 34.332803,
+      "longitude": -118.506011,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.349935,
+      "svi": 0.534084
+    },
+    {
+      "structureNumber": "      53 1013  ",
+      "latitude": 34.333614,
+      "longitude": -118.505011,
+      "countyLabel": "County 037",
+      "pga": 0.830256,
+      "edr": 0.312118,
+      "svi": 0.643964
+    },
+    {
+      "structureNumber": "      53 2499  ",
+      "latitude": 34.273122,
+      "longitude": -118.579158,
+      "countyLabel": "County 037",
+      "pga": 0.825961,
+      "edr": 0.394718,
+      "svi": 0.421044
+    },
+    {
+      "structureNumber": "      53 2498  ",
+      "latitude": 34.273128,
+      "longitude": -118.582628,
+      "countyLabel": "County 037",
+      "pga": 0.825961,
+      "edr": 0.376118,
+      "svi": 0.462724
+    },
+    {
+      "structureNumber": "      53C1687  ",
+      "latitude": 34.269892,
+      "longitude": -118.590756,
+      "countyLabel": "County 037",
+      "pga": 0.825961,
+      "edr": 0.359808,
+      "svi": 0.502044
+    },
+    {
+      "structureNumber": "      53C1759  ",
+      "latitude": 34.250044,
+      "longitude": -118.495208,
+      "countyLabel": "County 037",
+      "pga": 0.822242,
+      "edr": 0.404312,
+      "svi": 0.395644
+    },
+    {
+      "structureNumber": "      53C1289  ",
+      "latitude": 34.243108,
+      "longitude": -118.493439,
+      "countyLabel": "County 037",
+      "pga": 0.822242,
+      "edr": 0.380229,
+      "svi": 0.447844
+    },
+    {
+      "structureNumber": "      53C1758  ",
+      "latitude": 34.24895,
+      "longitude": -118.493556,
+      "countyLabel": "County 037",
+      "pga": 0.822242,
+      "edr": 0.303779,
+      "svi": 0.656604
+    },
+    {
+      "structureNumber": "      53 2790L ",
+      "latitude": 34.349883,
+      "longitude": -118.541711,
+      "countyLabel": "County 037",
+      "pga": 0.818822,
+      "edr": 0.41079,
+      "svi": 0.377824
+    },
+    {
+      "structureNumber": "      53C0392  ",
+      "latitude": 34.3504,
+      "longitude": -118.545928,
+      "countyLabel": "County 037",
+      "pga": 0.818822,
+      "edr": 0.302165,
+      "svi": 0.655644
+    },
+    {
+      "structureNumber": "      53 1832  ",
+      "latitude": 34.277633,
+      "longitude": -118.605164,
+      "countyLabel": "County 037",
+      "pga": 0.818384,
+      "edr": 0.435118,
+      "svi": 0.330412
+    },
+    {
+      "structureNumber": "      53 2096  ",
+      "latitude": 34.350361,
+      "longitude": -118.503942,
+      "countyLabel": "County 037",
+      "pga": 0.813715,
+      "edr": 0.36574,
+      "svi": 0.46894
+    },
+    {
+      "structureNumber": "      53C1295  ",
+      "latitude": 34.250625,
+      "longitude": -118.535947,
+      "countyLabel": "County 037",
+      "pga": 0.804895,
+      "edr": 0.322795,
+      "svi": 0.567004
+    },
+    {
+      "structureNumber": "      53C1226  ",
+      "latitude": 34.2499,
+      "longitude": -118.537225,
+      "countyLabel": "County 037",
+      "pga": 0.804895,
+      "edr": 0.301432,
+      "svi": 0.632284
+    },
+    {
+      "structureNumber": "      53C1395  ",
+      "latitude": 34.246778,
+      "longitude": -118.540336,
+      "countyLabel": "County 037",
+      "pga": 0.804895,
+      "edr": 0.301235,
+      "svi": 0.632924
+    },
+    {
+      "structureNumber": "      53C2166  ",
+      "latitude": 34.374097,
+      "longitude": -118.5548,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.377458,
+      "svi": 0.422844
+    },
+    {
+      "structureNumber": "      53C2165  ",
+      "latitude": 34.374183,
+      "longitude": -118.553669,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.377331,
+      "svi": 0.423124
+    },
+    {
+      "structureNumber": "      53 2139M ",
+      "latitude": 34.362967,
+      "longitude": -118.555881,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.342028,
+      "svi": 0.507604
+    },
+    {
+      "structureNumber": "      53C0855  ",
+      "latitude": 34.370497,
+      "longitude": -118.557567,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.318317,
+      "svi": 0.572844
+    },
+    {
+      "structureNumber": "      53C1807  ",
+      "latitude": 34.374769,
+      "longitude": -118.552464,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.317853,
+      "svi": 0.574204
+    },
+    {
+      "structureNumber": "      53 1792L ",
+      "latitude": 34.36205,
+      "longitude": -118.555203,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.315063,
+      "svi": 0.582448
+    },
+    {
+      "structureNumber": "      53 1792R ",
+      "latitude": 34.362333,
+      "longitude": -118.554881,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.315063,
+      "svi": 0.582448
+    },
+    {
+      "structureNumber": "      53C0861  ",
+      "latitude": 34.361428,
+      "longitude": -118.555822,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.291985,
+      "svi": 0.655924
+    },
+    {
+      "structureNumber": "      53C1546  ",
+      "latitude": 34.359739,
+      "longitude": -118.555614,
+      "countyLabel": "County 037",
+      "pga": 0.80075,
+      "edr": 0.291985,
+      "svi": 0.655924
+    },
+    {
+      "structureNumber": "      53 2058  ",
+      "latitude": 34.277739,
+      "longitude": -118.610572,
+      "countyLabel": "County 037",
+      "pga": 0.800147,
+      "edr": 0.403259,
+      "svi": 0.367724
+    },
+    {
+      "structureNumber": "      53 1831  ",
+      "latitude": 34.276342,
+      "longitude": -118.617017,
+      "countyLabel": "County 037",
+      "pga": 0.800147,
+      "edr": 0.40271,
+      "svi": 0.368824
+    },
+    {
+      "structureNumber": "      53C1885  ",
+      "latitude": 34.319972,
+      "longitude": -118.496736,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.446076,
+      "svi": 0.286502
+    },
+    {
+      "structureNumber": "      53 1986  ",
+      "latitude": 34.320819,
+      "longitude": -118.496169,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.428991,
+      "svi": 0.316848
+    },
+    {
+      "structureNumber": "      53 1984L ",
+      "latitude": 34.324583,
+      "longitude": -118.502414,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.369756,
+      "svi": 0.437332
+    },
+    {
+      "structureNumber": "      53C0316  ",
+      "latitude": 34.321683,
+      "longitude": -118.495958,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.36905,
+      "svi": 0.438942
+    },
+    {
+      "structureNumber": "      53 1011  ",
+      "latitude": 34.321683,
+      "longitude": -118.495961,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.297923,
+      "svi": 0.632484
+    },
+    {
+      "structureNumber": "      53 1012  ",
+      "latitude": 34.321489,
+      "longitude": -118.496211,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.296342,
+      "svi": 0.637684
+    },
+    {
+      "structureNumber": "      53C1716  ",
+      "latitude": 34.319692,
+      "longitude": -118.496731,
+      "countyLabel": "County 037",
+      "pga": 0.798841,
+      "edr": 0.290997,
+      "svi": 0.655644
+    },
+    {
+      "structureNumber": "      53C1227  ",
+      "latitude": 34.250092,
+      "longitude": -118.491569,
+      "countyLabel": "County 037",
+      "pga": 0.798721,
+      "edr": 0.411507,
+      "svi": 0.349566
+    },
+    {
+      "structureNumber": "      53C1822  ",
+      "latitude": 34.257336,
+      "longitude": -118.490158,
+      "countyLabel": "County 037",
+      "pga": 0.798721,
+      "edr": 0.373825,
+      "svi": 0.427964
+    },
+    {
+      "structureNumber": "      53 2395  ",
+      "latitude": 34.278378,
+      "longitude": -118.502347,
+      "countyLabel": "County 037",
+      "pga": 0.798391,
+      "edr": 0.431185,
+      "svi": 0.312284
+    },
+    {
+      "structureNumber": "      53 2396  ",
+      "latitude": 34.277892,
+      "longitude": -118.497922,
+      "countyLabel": "County 037",
+      "pga": 0.798391,
+      "edr": 0.374808,
+      "svi": 0.425284
+    },
+    {
+      "structureNumber": "      52 0302  ",
+      "latitude": 34.281347,
+      "longitude": -118.691653,
+      "countyLabel": "County 111",
+      "pga": 0.796416,
+      "edr": 0.421776,
+      "svi": 0.327028
+    },
+    {
+      "structureNumber": "      52 0301  ",
+      "latitude": 34.281992,
+      "longitude": -118.682833,
+      "countyLabel": "County 111",
+      "pga": 0.796416,
+      "edr": 0.398416,
+      "svi": 0.372364
+    },
+    {
+      "structureNumber": "      52 0300  ",
+      "latitude": 34.281944,
+      "longitude": -118.678839,
+      "countyLabel": "County 111",
+      "pga": 0.796416,
+      "edr": 0.364182,
+      "svi": 0.446524
+    },
+    {
+      "structureNumber": "      53C1069  ",
+      "latitude": 34.306222,
+      "longitude": -118.506328,
+      "countyLabel": "County 037",
+      "pga": 0.795076,
+      "edr": 0.339141,
+      "svi": 0.505924
+    },
+    {
+      "structureNumber": "      53C1097  ",
+      "latitude": 34.306039,
+      "longitude": -118.501481,
+      "countyLabel": "County 037",
+      "pga": 0.795076,
+      "edr": 0.288884,
+      "svi": 0.655644
+    },
+    {
+      "structureNumber": "      52C0297  ",
+      "latitude": 34.268767,
+      "longitude": -118.673717,
+      "countyLabel": "County 111",
+      "pga": 0.793168,
+      "edr": 0.347292,
+      "svi": 0.482124
+    },
+    {
+      "structureNumber": "      52C0232  ",
+      "latitude": 34.27425,
+      "longitude": -118.66575,
+      "countyLabel": "County 111",
+      "pga": 0.793168,
+      "edr": 0.338056,
+      "svi": 0.505644
+    },
+    {
+      "structureNumber": "      52C0237  ",
+      "latitude": 34.273708,
+      "longitude": -118.670914,
+      "countyLabel": "County 111",
+      "pga": 0.793168,
+      "edr": 0.338056,
+      "svi": 0.505644
+    },
+    {
+      "structureNumber": "      52C0296  ",
+      "latitude": 34.268456,
+      "longitude": -118.671858,
+      "countyLabel": "County 111",
+      "pga": 0.793168,
+      "edr": 0.319179,
+      "svi": 0.557204
+    },
+    {
+      "structureNumber": "      52C0029  ",
+      "latitude": 34.265144,
+      "longitude": -118.668783,
+      "countyLabel": "County 111",
+      "pga": 0.793168,
+      "edr": 0.314613,
+      "svi": 0.57046
+    },
+    {
+      "structureNumber": "      52C0171  ",
+      "latitude": 34.260861,
+      "longitude": -118.660594,
+      "countyLabel": "County 111",
+      "pga": 0.793168,
+      "edr": 0.292862,
+      "svi": 0.638529
+    },
+    {
+      "structureNumber": "      53C1290  ",
+      "latitude": 34.242642,
+      "longitude": -118.545908,
+      "countyLabel": "County 037",
+      "pga": 0.79231,
+      "edr": 0.304847,
+      "svi": 0.598404
+    },
+    {
+      "structureNumber": "      53C1228  ",
+      "latitude": 34.249906,
+      "longitude": -118.544178,
+      "countyLabel": "County 037",
+      "pga": 0.79231,
+      "edr": 0.294158,
+      "svi": 0.632604
+    },
+    {
+      "structureNumber": "      53C1384  ",
+      "latitude": 34.244022,
+      "longitude": -118.544656,
+      "countyLabel": "County 037",
+      "pga": 0.79231,
+      "edr": 0.293626,
+      "svi": 0.634364
+    },
+    {
+      "structureNumber": "      52 0282  ",
+      "latitude": 34.278867,
+      "longitude": -118.662336,
+      "countyLabel": "County 111",
+      "pga": 0.79179,
+      "edr": 0.392345,
+      "svi": 0.378328
+    },
+    {
+      "structureNumber": "      52 0324  ",
+      "latitude": 34.281364,
+      "longitude": -118.671597,
+      "countyLabel": "County 111",
+      "pga": 0.79179,
+      "edr": 0.386636,
+      "svi": 0.390187
+    },
+    {
+      "structureNumber": "      52C0293  ",
+      "latitude": 34.275781,
+      "longitude": -118.662156,
+      "countyLabel": "County 111",
+      "pga": 0.79179,
+      "edr": 0.287107,
+      "svi": 0.655404
+    },
+    {
+      "structureNumber": "      53 2793L ",
+      "latitude": 34.272314,
+      "longitude": -118.490347,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.38416,
+      "svi": 0.381644
+    },
+    {
+      "structureNumber": "      53 2793R ",
+      "latitude": 34.272297,
+      "longitude": -118.490869,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.38416,
+      "svi": 0.381644
+    },
+    {
+      "structureNumber": "      53 2794R ",
+      "latitude": 34.26965,
+      "longitude": -118.487578,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.375429,
+      "svi": 0.400164
+    },
+    {
+      "structureNumber": "      53 2794L ",
+      "latitude": 34.269992,
+      "longitude": -118.487511,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.375096,
+      "svi": 0.400884
+    },
+    {
+      "structureNumber": "      53C1308  ",
+      "latitude": 34.271844,
+      "longitude": -118.487075,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.366363,
+      "svi": 0.420107
+    },
+    {
+      "structureNumber": "      53C1136  ",
+      "latitude": 34.264617,
+      "longitude": -118.488553,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.365057,
+      "svi": 0.423044
+    },
+    {
+      "structureNumber": "      53 2209  ",
+      "latitude": 34.265611,
+      "longitude": -118.476269,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.360279,
+      "svi": 0.433924
+    },
+    {
+      "structureNumber": "      53 2208  ",
+      "latitude": 34.265911,
+      "longitude": -118.480456,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.341791,
+      "svi": 0.478284
+    },
+    {
+      "structureNumber": "      53C0382  ",
+      "latitude": 34.268819,
+      "longitude": -118.487203,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.30531,
+      "svi": 0.578564
+    },
+    {
+      "structureNumber": "      53 2207  ",
+      "latitude": 34.267694,
+      "longitude": -118.485044,
+      "countyLabel": "County 037",
+      "pga": 0.782134,
+      "edr": 0.287095,
+      "svi": 0.636769
+    },
+    {
+      "structureNumber": "      53 2182S ",
+      "latitude": 34.273261,
+      "longitude": -118.592278,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.412125,
+      "svi": 0.322604
+    },
+    {
+      "structureNumber": "      53C1134  ",
+      "latitude": 34.264392,
+      "longitude": -118.594836,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.35283,
+      "svi": 0.447004
+    },
+    {
+      "structureNumber": "      53 2181  ",
+      "latitude": 34.274542,
+      "longitude": -118.596619,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.348531,
+      "svi": 0.457276
+    },
+    {
+      "structureNumber": "      53 2182  ",
+      "latitude": 34.273472,
+      "longitude": -118.592469,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.333426,
+      "svi": 0.495044
+    },
+    {
+      "structureNumber": "      53C1363  ",
+      "latitude": 34.267214,
+      "longitude": -118.592908,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.297267,
+      "svi": 0.598284
+    },
+    {
+      "structureNumber": "      53C1713  ",
+      "latitude": 34.276581,
+      "longitude": -118.486283,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.297762,
+      "svi": 0.596724
+    },
+    {
+      "structureNumber": "      53C1712  ",
+      "latitude": 34.279047,
+      "longitude": -118.485014,
+      "countyLabel": "County 037",
+      "pga": 0.779333,
+      "edr": 0.286774,
+      "svi": 0.632444
+    },
+    {
+      "structureNumber": "      52C0292  ",
+      "latitude": 34.30075,
+      "longitude": -118.690642,
+      "countyLabel": "County 111",
+      "pga": 0.770895,
+      "edr": 0.321662,
+      "svi": 0.512084
+    },
+    {
+      "structureNumber": "      53C1753  ",
+      "latitude": 34.242639,
+      "longitude": -118.571028,
+      "countyLabel": "County 037",
+      "pga": 0.770447,
+      "edr": 0.332865,
+      "svi": 0.481884
+    },
+    {
+      "structureNumber": "      53C1146  ",
+      "latitude": 34.249422,
+      "longitude": -118.562111,
+      "countyLabel": "County 037",
+      "pga": 0.770447,
+      "edr": 0.280812,
+      "svi": 0.635364
+    },
+    {
+      "structureNumber": "      53C1177  ",
+      "latitude": 34.26255,
+      "longitude": -118.610717,
+      "countyLabel": "County 037",
+      "pga": 0.768032,
+      "edr": 0.35593,
+      "svi": 0.422364
+    },
+    {
+      "structureNumber": "      53C1342  ",
+      "latitude": 34.266197,
+      "longitude": -118.609125,
+      "countyLabel": "County 037",
+      "pga": 0.768032,
+      "edr": 0.299017,
+      "svi": 0.572004
+    },
+    {
+      "structureNumber": "      53C1132  ",
+      "latitude": 34.264383,
+      "longitude": -118.609928,
+      "countyLabel": "County 037",
+      "pga": 0.768032,
+      "edr": 0.295752,
+      "svi": 0.582044
+    },
+    {
+      "structureNumber": "      53 1926  ",
+      "latitude": 34.322136,
+      "longitude": -118.446608,
+      "countyLabel": "County 037",
+      "pga": 0.767876,
+      "edr": 0.371618,
+      "svi": 0.387484
+    },
+    {
+      "structureNumber": "      52C0300  ",
+      "latitude": 34.268228,
+      "longitude": -118.682658,
+      "countyLabel": "County 111",
+      "pga": 0.762948,
+      "edr": 0.34808,
+      "svi": 0.432644
+    },
+    {
+      "structureNumber": "      52C0299  ",
+      "latitude": 34.267325,
+      "longitude": -118.67825,
+      "countyLabel": "County 111",
+      "pga": 0.762948,
+      "edr": 0.337973,
+      "svi": 0.456884
+    },
+    {
+      "structureNumber": "      52C0298  ",
+      "latitude": 34.2686,
+      "longitude": -118.6762,
+      "countyLabel": "County 111",
+      "pga": 0.762948,
+      "edr": 0.327942,
+      "svi": 0.482124
+    },
+    {
+      "structureNumber": "      53 1951R ",
+      "latitude": 34.323303,
+      "longitude": -118.469747,
+      "countyLabel": "County 037",
+      "pga": 0.758709,
+      "edr": 0.320086,
+      "svi": 0.495564
+    },
+    {
+      "structureNumber": "      53 1951L ",
+      "latitude": 34.323517,
+      "longitude": -118.469756,
+      "countyLabel": "County 037",
+      "pga": 0.758709,
+      "edr": 0.304375,
+      "svi": 0.539169
+    },
+    {
+      "structureNumber": "      53 1924L ",
+      "latitude": 34.32375,
+      "longitude": -118.460567,
+      "countyLabel": "County 037",
+      "pga": 0.758709,
+      "edr": 0.298255,
+      "svi": 0.557204
+    },
+    {
+      "structureNumber": "      53 1924R ",
+      "latitude": 34.323525,
+      "longitude": -118.460561,
+      "countyLabel": "County 037",
+      "pga": 0.758709,
+      "edr": 0.283638,
+      "svi": 0.603009
+    },
+    {
+      "structureNumber": "      53C1305  ",
+      "latitude": 34.312256,
+      "longitude": -118.470411,
+      "countyLabel": "County 037",
+      "pga": 0.758709,
+      "edr": 0.275029,
+      "svi": 0.632004
+    },
+    {
+      "structureNumber": "      53 1500  ",
+      "latitude": 34.257131,
+      "longitude": -118.471828,
+      "countyLabel": "County 037",
+      "pga": 0.757689,
+      "edr": 0.386315,
+      "svi": 0.342612
+    },
+    {
+      "structureNumber": "      53 1498  ",
+      "latitude": 34.249875,
+      "longitude": -118.472061,
+      "countyLabel": "County 037",
+      "pga": 0.757689,
+      "edr": 0.330901,
+      "svi": 0.465884
+    },
+    {
+      "structureNumber": "      53 1496  ",
+      "latitude": 34.242706,
+      "longitude": -118.472783,
+      "countyLabel": "County 037",
+      "pga": 0.757689,
+      "edr": 0.321379,
+      "svi": 0.490404
+    },
+    {
+      "structureNumber": "      53 1990G ",
+      "latitude": 34.314453,
+      "longitude": -118.488161,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.403174,
+      "svi": 0.309644
+    },
+    {
+      "structureNumber": "      53 1985F ",
+      "latitude": 34.316503,
+      "longitude": -118.489767,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.38687,
+      "svi": 0.340844
+    },
+    {
+      "structureNumber": "      53 1989F ",
+      "latitude": 34.314636,
+      "longitude": -118.490053,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.351866,
+      "svi": 0.414969
+    },
+    {
+      "structureNumber": "      53 1988F ",
+      "latitude": 34.317089,
+      "longitude": -118.489464,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.334749,
+      "svi": 0.455524
+    },
+    {
+      "structureNumber": "      53 1991F ",
+      "latitude": 34.317939,
+      "longitude": -118.491356,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.333955,
+      "svi": 0.457484
+    },
+    {
+      "structureNumber": "      53 2016L ",
+      "latitude": 34.319144,
+      "longitude": -118.484917,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.324853,
+      "svi": 0.480524
+    },
+    {
+      "structureNumber": "      53 2016R ",
+      "latitude": 34.319228,
+      "longitude": -118.484458,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.324282,
+      "svi": 0.482004
+    },
+    {
+      "structureNumber": "      53 0730  ",
+      "latitude": 34.31455,
+      "longitude": -118.488939,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.323575,
+      "svi": 0.483844
+    },
+    {
+      "structureNumber": "      53 2017L ",
+      "latitude": 34.322953,
+      "longitude": -118.479436,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.312929,
+      "svi": 0.512364
+    },
+    {
+      "structureNumber": "      53 2017R ",
+      "latitude": 34.322744,
+      "longitude": -118.479386,
+      "countyLabel": "County 037",
+      "pga": 0.757213,
+      "edr": 0.297472,
+      "svi": 0.556809
+    },
+    {
+      "structureNumber": "      52 0283  ",
+      "latitude": 34.268092,
+      "longitude": -118.635794,
+      "countyLabel": "County 111",
+      "pga": 0.754783,
+      "edr": 0.372402,
+      "svi": 0.366644
+    },
+    {
+      "structureNumber": "      53C1936  ",
+      "latitude": 34.372631,
+      "longitude": -118.513264,
+      "countyLabel": "County 037",
+      "pga": 0.754078,
+      "edr": 0.326267,
+      "svi": 0.471644
+    },
+    {
+      "structureNumber": "      53 2608  ",
+      "latitude": 34.365967,
+      "longitude": -118.502803,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.379353,
+      "svi": 0.350644
+    },
+    {
+      "structureNumber": "      53 2070  ",
+      "latitude": 34.364869,
+      "longitude": -118.503414,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.344831,
+      "svi": 0.425488
+    },
+    {
+      "structureNumber": "      53 2146  ",
+      "latitude": 34.371517,
+      "longitude": -118.499681,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.342225,
+      "svi": 0.431608
+    },
+    {
+      "structureNumber": "      53 2070S ",
+      "latitude": 34.364814,
+      "longitude": -118.503217,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.325492,
+      "svi": 0.472764
+    },
+    {
+      "structureNumber": "      53 0363L ",
+      "latitude": 34.3723,
+      "longitude": -118.499981,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.31017,
+      "svi": 0.513604
+    },
+    {
+      "structureNumber": "      53 0363M ",
+      "latitude": 34.372464,
+      "longitude": -118.499844,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.271323,
+      "svi": 0.634564
+    },
+    {
+      "structureNumber": "      53C2320  ",
+      "latitude": 34.365419,
+      "longitude": -118.505272,
+      "countyLabel": "County 037",
+      "pga": 0.753562,
+      "edr": 0.265433,
+      "svi": 0.655644
+    },
+    {
+      "structureNumber": "      53 1548  ",
+      "latitude": 34.289403,
+      "longitude": -118.467103,
+      "countyLabel": "County 037",
+      "pga": 0.753175,
+      "edr": 0.327879,
+      "svi": 0.466044
+    },
+    {
+      "structureNumber": "      53 1506  ",
+      "latitude": 34.278939,
+      "longitude": -118.469614,
+      "countyLabel": "County 037",
+      "pga": 0.753175,
+      "edr": 0.312638,
+      "svi": 0.506128
+    },
+    {
+      "structureNumber": "      53 1133  ",
+      "latitude": 34.291528,
+      "longitude": -118.467794,
+      "countyLabel": "County 037",
+      "pga": 0.753175,
+      "edr": 0.265476,
+      "svi": 0.654684
+    },
+    {
+      "structureNumber": "      53 1927  ",
+      "latitude": 34.311339,
+      "longitude": -118.432572,
+      "countyLabel": "County 037",
+      "pga": 0.752633,
+      "edr": 0.367456,
+      "svi": 0.373844
+    },
+    {
+      "structureNumber": "      53 1928  ",
+      "latitude": 34.308558,
+      "longitude": -118.429261,
+      "countyLabel": "County 037",
+      "pga": 0.752633,
+      "edr": 0.36125,
+      "svi": 0.387124
+    },
+    {
+      "structureNumber": "      53 1895L ",
+      "latitude": 34.316578,
+      "longitude": -118.439994,
+      "countyLabel": "County 037",
+      "pga": 0.752633,
+      "edr": 0.315595,
+      "svi": 0.497164
+    },
+    {
+      "structureNumber": "      53 1895R ",
+      "latitude": 34.316419,
+      "longitude": -118.440172,
+      "countyLabel": "County 037",
+      "pga": 0.752633,
+      "edr": 0.315595,
+      "svi": 0.497164
+    },
+    {
+      "structureNumber": "      53C1749  ",
+      "latitude": 34.31535,
+      "longitude": -118.440803,
+      "countyLabel": "County 037",
+      "pga": 0.752633,
+      "edr": 0.271506,
+      "svi": 0.632044
+    },
+    {
+      "structureNumber": "      53C2234  ",
+      "latitude": 34.386281,
+      "longitude": -118.572133,
+      "countyLabel": "County 037",
+      "pga": 0.751255,
+      "edr": 0.349687,
+      "svi": 0.410684
+    },
+    {
+      "structureNumber": "      53 2809R ",
+      "latitude": 34.385875,
+      "longitude": -118.568522,
+      "countyLabel": "County 037",
+      "pga": 0.751255,
+      "edr": 0.339193,
+      "svi": 0.435124
+    },
+    {
+      "structureNumber": "      53 2809L ",
+      "latitude": 34.385864,
+      "longitude": -118.568894,
+      "countyLabel": "County 037",
+      "pga": 0.751255,
+      "edr": 0.303691,
+      "svi": 0.527764
+    },
+    {
+      "structureNumber": "      53 1783  ",
+      "latitude": 34.378708,
+      "longitude": -118.565997,
+      "countyLabel": "County 037",
+      "pga": 0.751255,
+      "edr": 0.287911,
+      "svi": 0.575032
+    },
+    {
+      "structureNumber": "      53C2203  ",
+      "latitude": 34.379486,
+      "longitude": -118.583794,
+      "countyLabel": "County 037",
+      "pga": 0.746774,
+      "edr": 0.346375,
+      "svi": 0.411244
+    },
+    {
+      "structureNumber": "      53 2213  ",
+      "latitude": 34.265669,
+      "longitude": -118.467625,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.395075,
+      "svi": 0.305924
+    },
+    {
+      "structureNumber": "      53 2211  ",
+      "latitude": 34.265539,
+      "longitude": -118.471842,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.393387,
+      "svi": 0.309084
+    },
+    {
+      "structureNumber": "      53 2213F ",
+      "latitude": 34.266506,
+      "longitude": -118.467625,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.392408,
+      "svi": 0.310924
+    },
+    {
+      "structureNumber": "      53 1501  ",
+      "latitude": 34.264383,
+      "longitude": -118.471911,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.321542,
+      "svi": 0.465884
+    },
+    {
+      "structureNumber": "      53 2212F ",
+      "latitude": 34.264361,
+      "longitude": -118.472733,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.311596,
+      "svi": 0.492004
+    },
+    {
+      "structureNumber": "      53 1507  ",
+      "latitude": 34.271719,
+      "longitude": -118.471883,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.303113,
+      "svi": 0.515404
+    },
+    {
+      "structureNumber": "      53 2216G ",
+      "latitude": 34.261914,
+      "longitude": -118.471697,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.298635,
+      "svi": 0.528204
+    },
+    {
+      "structureNumber": "      53 2217H ",
+      "latitude": 34.263147,
+      "longitude": -118.472667,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.280666,
+      "svi": 0.583084
+    },
+    {
+      "structureNumber": "      53 2210G ",
+      "latitude": 34.264392,
+      "longitude": -118.473156,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.278266,
+      "svi": 0.590884
+    },
+    {
+      "structureNumber": "      53 2214  ",
+      "latitude": 34.265644,
+      "longitude": -118.460242,
+      "countyLabel": "County 037",
+      "pga": 0.743443,
+      "edr": 0.277729,
+      "svi": 0.592644
+    },
+    {
+      "structureNumber": "      53C1977  ",
+      "latitude": 34.232944,
+      "longitude": -118.557997,
+      "countyLabel": "County 037",
+      "pga": 0.739623,
+      "edr": 0.375504,
+      "svi": 0.338284
+    },
+    {
+      "structureNumber": "      53C1280  ",
+      "latitude": 34.228133,
+      "longitude": -118.5462,
+      "countyLabel": "County 037",
+      "pga": 0.739623,
+      "edr": 0.366101,
+      "svi": 0.357404
+    },
+    {
+      "structureNumber": "      53C1257  ",
+      "latitude": 34.235367,
+      "longitude": -118.547719,
+      "countyLabel": "County 037",
+      "pga": 0.739623,
+      "edr": 0.359383,
+      "svi": 0.371524
+    },
+    {
+      "structureNumber": "      53C1334  ",
+      "latitude": 34.232489,
+      "longitude": -118.553414,
+      "countyLabel": "County 037",
+      "pga": 0.739623,
+      "edr": 0.31043,
+      "svi": 0.488484
+    },
+    {
+      "structureNumber": "      52 0303  ",
+      "latitude": 34.281419,
+      "longitude": -118.70045,
+      "countyLabel": "County 111",
+      "pga": 0.73056,
+      "edr": 0.381783,
+      "svi": 0.313024
+    },
+    {
+      "structureNumber": "      52C0115  ",
+      "latitude": 34.278917,
+      "longitude": -118.702381,
+      "countyLabel": "County 111",
+      "pga": 0.73056,
+      "edr": 0.329678,
+      "svi": 0.424324
+    },
+    {
+      "structureNumber": "      52C0119  ",
+      "latitude": 34.286136,
+      "longitude": -118.697308,
+      "countyLabel": "County 111",
+      "pga": 0.73056,
+      "edr": 0.298346,
+      "svi": 0.505644
+    },
+    {
+      "structureNumber": "      52 0343  ",
+      "latitude": 34.281422,
+      "longitude": -118.700636,
+      "countyLabel": "County 111",
+      "pga": 0.73056,
+      "edr": 0.298247,
+      "svi": 0.505924
+    },
+    {
+      "structureNumber": "      52C0231  ",
+      "latitude": 34.282553,
+      "longitude": -118.699417,
+      "countyLabel": "County 111",
+      "pga": 0.73056,
+      "edr": 0.258554,
+      "svi": 0.632604
+    },
+    {
+      "structureNumber": "      52C0291  ",
+      "latitude": 34.301572,
+      "longitude": -118.692103,
+      "countyLabel": "County 111",
+      "pga": 0.728766,
+      "edr": 0.294524,
+      "svi": 0.513244
+    },
+    {
+      "structureNumber": "      53C1259  ",
+      "latitude": 34.235597,
+      "longitude": -118.496283,
+      "countyLabel": "County 037",
+      "pga": 0.727002,
+      "edr": 0.352064,
+      "svi": 0.367964
+    },
+    {
+      "structureNumber": "      53C1276  ",
+      "latitude": 34.228369,
+      "longitude": -118.497089,
+      "countyLabel": "County 037",
+      "pga": 0.727002,
+      "edr": 0.347404,
+      "svi": 0.378066
+    },
+    {
+      "structureNumber": "      53C1225  ",
+      "latitude": 34.249869,
+      "longitude": -118.598683,
+      "countyLabel": "County 037",
+      "pga": 0.719906,
+      "edr": 0.381537,
+      "svi": 0.298364
+    },
+    {
+      "structureNumber": "      53C0424  ",
+      "latitude": 34.257389,
+      "longitude": -118.597164,
+      "countyLabel": "County 037",
+      "pga": 0.719906,
+      "edr": 0.263704,
+      "svi": 0.592364
+    },
+    {
+      "structureNumber": "      53C1756  ",
+      "latitude": 34.239061,
+      "longitude": -118.564514,
+      "countyLabel": "County 037",
+      "pga": 0.719035,
+      "edr": 0.331969,
+      "svi": 0.400142
+    },
+    {
+      "structureNumber": "      53C1755  ",
+      "latitude": 34.235431,
+      "longitude": -118.564478,
+      "countyLabel": "County 037",
+      "pga": 0.719035,
+      "edr": 0.3019,
+      "svi": 0.475142
+    },
+    {
+      "structureNumber": "      53C1145  ",
+      "latitude": 34.234219,
+      "longitude": -118.562167,
+      "countyLabel": "County 037",
+      "pga": 0.719035,
+      "edr": 0.27646,
+      "svi": 0.548964
+    },
+    {
+      "structureNumber": "      53 1132  ",
+      "latitude": 34.279214,
+      "longitude": -118.455044,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.359406,
+      "svi": 0.339412
+    },
+    {
+      "structureNumber": "      53 1131  ",
+      "latitude": 34.276894,
+      "longitude": -118.452589,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.355598,
+      "svi": 0.34726
+    },
+    {
+      "structureNumber": "      53C1078  ",
+      "latitude": 34.275806,
+      "longitude": -118.453547,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.312402,
+      "svi": 0.446404
+    },
+    {
+      "structureNumber": "      53C1190  ",
+      "latitude": 34.275367,
+      "longitude": -118.453175,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.290245,
+      "svi": 0.506284
+    },
+    {
+      "structureNumber": "      53C1307  ",
+      "latitude": 34.276089,
+      "longitude": -118.453853,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.290245,
+      "svi": 0.506284
+    },
+    {
+      "structureNumber": "      53C1715  ",
+      "latitude": 34.278936,
+      "longitude": -118.456047,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.281354,
+      "svi": 0.532524
+    },
+    {
+      "structureNumber": "      53C1231  ",
+      "latitude": 34.280819,
+      "longitude": -118.455311,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.265637,
+      "svi": 0.582604
+    },
+    {
+      "structureNumber": "      53C1714  ",
+      "latitude": 34.281356,
+      "longitude": -118.454856,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.25592,
+      "svi": 0.616284
+    },
+    {
+      "structureNumber": "      53C1211  ",
+      "latitude": 34.288522,
+      "longitude": -118.451822,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.251095,
+      "svi": 0.633884
+    },
+    {
+      "structureNumber": "      53 1519M ",
+      "latitude": 34.280269,
+      "longitude": -118.455739,
+      "countyLabel": "County 037",
+      "pga": 0.718326,
+      "edr": 0.245069,
+      "svi": 0.656764
+    },
+    {
+      "structureNumber": "      53C1725  ",
+      "latitude": 34.24985,
+      "longitude": -118.615822,
+      "countyLabel": "County 037",
+      "pga": 0.716987,
+      "edr": 0.285577,
+      "svi": 0.517364
+    },
+    {
+      "structureNumber": "      53C1070  ",
+      "latitude": 34.254722,
+      "longitude": -118.614681,
+      "countyLabel": "County 037",
+      "pga": 0.716987,
+      "edr": 0.259522,
+      "svi": 0.600746
+    },
+    {
+      "structureNumber": "      53C1153  ",
+      "latitude": 34.257058,
+      "longitude": -118.612953,
+      "countyLabel": "County 037",
+      "pga": 0.716987,
+      "edr": 0.251982,
+      "svi": 0.627724
+    },
+    {
+      "structureNumber": "      53C1327  ",
+      "latitude": 34.252331,
+      "longitude": -118.614978,
+      "countyLabel": "County 037",
+      "pga": 0.716987,
+      "edr": 0.250726,
+      "svi": 0.632364
+    },
+    {
+      "structureNumber": "      53C1326  ",
+      "latitude": 34.2481,
+      "longitude": -118.614697,
+      "countyLabel": "County 037",
+      "pga": 0.716987,
+      "edr": 0.250263,
+      "svi": 0.634084
+    },
+    {
+      "structureNumber": "      53C1292  ",
+      "latitude": 34.242542,
+      "longitude": -118.610267,
+      "countyLabel": "County 037",
+      "pga": 0.716987,
+      "edr": 0.250198,
+      "svi": 0.634324
+    },
+    {
+      "structureNumber": "      53 1436  ",
+      "latitude": 34.270567,
+      "longitude": -118.447156,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.351262,
+      "svi": 0.34636
+    },
+    {
+      "structureNumber": "      53 1130  ",
+      "latitude": 34.274061,
+      "longitude": -118.449814,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.348691,
+      "svi": 0.35176
+    },
+    {
+      "structureNumber": "      53C1175  ",
+      "latitude": 34.270164,
+      "longitude": -118.4479,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.346447,
+      "svi": 0.356524
+    },
+    {
+      "structureNumber": "      53 1220  ",
+      "latitude": 34.273169,
+      "longitude": -118.449194,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.336582,
+      "svi": 0.37804
+    },
+    {
+      "structureNumber": "      53 2325K ",
+      "latitude": 34.267036,
+      "longitude": -118.444169,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.333505,
+      "svi": 0.384952
+    },
+    {
+      "structureNumber": "      53 2324R ",
+      "latitude": 34.266489,
+      "longitude": -118.443678,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.317129,
+      "svi": 0.423484
+    },
+    {
+      "structureNumber": "      53 2326S ",
+      "latitude": 34.266356,
+      "longitude": -118.443469,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.310861,
+      "svi": 0.439084
+    },
+    {
+      "structureNumber": "      53 2324L ",
+      "latitude": 34.266853,
+      "longitude": -118.443989,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.307086,
+      "svi": 0.448724
+    },
+    {
+      "structureNumber": "      53 2328G ",
+      "latitude": 34.263831,
+      "longitude": -118.442175,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.293649,
+      "svi": 0.484684
+    },
+    {
+      "structureNumber": "      53 2330F ",
+      "latitude": 34.266311,
+      "longitude": -118.442453,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.290735,
+      "svi": 0.492844
+    },
+    {
+      "structureNumber": "      53C1240  ",
+      "latitude": 34.274792,
+      "longitude": -118.452486,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.28604,
+      "svi": 0.506284
+    },
+    {
+      "structureNumber": "      53 2196  ",
+      "latitude": 34.266322,
+      "longitude": -118.443772,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.285999,
+      "svi": 0.506404
+    },
+    {
+      "structureNumber": "      53C1131M ",
+      "latitude": 34.272492,
+      "longitude": -118.450294,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.285958,
+      "svi": 0.506524
+    },
+    {
+      "structureNumber": "      53C1869M ",
+      "latitude": 34.273203,
+      "longitude": -118.451131,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.285916,
+      "svi": 0.506644
+    },
+    {
+      "structureNumber": "      53 2327F ",
+      "latitude": 34.263847,
+      "longitude": -118.441997,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.283706,
+      "svi": 0.513107
+    },
+    {
+      "structureNumber": "      53 2342R ",
+      "latitude": 34.266103,
+      "longitude": -118.445725,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.280484,
+      "svi": 0.522684
+    },
+    {
+      "structureNumber": "      53 1128  ",
+      "latitude": 34.264767,
+      "longitude": -118.441756,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.277139,
+      "svi": 0.532827
+    },
+    {
+      "structureNumber": "      53 2342L ",
+      "latitude": 34.266606,
+      "longitude": -118.446067,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.27686,
+      "svi": 0.533684
+    },
+    {
+      "structureNumber": "      53 2358K ",
+      "latitude": 34.263839,
+      "longitude": -118.442658,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.26197,
+      "svi": 0.581644
+    },
+    {
+      "structureNumber": "      53 2343G ",
+      "latitude": 34.265808,
+      "longitude": -118.445497,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.260933,
+      "svi": 0.585164
+    },
+    {
+      "structureNumber": "      53C1662  ",
+      "latitude": 34.260442,
+      "longitude": -118.444133,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.260113,
+      "svi": 0.587964
+    },
+    {
+      "structureNumber": "      53 2357  ",
+      "latitude": 34.2656,
+      "longitude": -118.450014,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.259682,
+      "svi": 0.589444
+    },
+    {
+      "structureNumber": "      53 2345F ",
+      "latitude": 34.26775,
+      "longitude": -118.441967,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.258985,
+      "svi": 0.591844
+    },
+    {
+      "structureNumber": "      53 2215  ",
+      "latitude": 34.265608,
+      "longitude": -118.454692,
+      "countyLabel": "County 037",
+      "pga": 0.711812,
+      "edr": 0.258684,
+      "svi": 0.592884
+    },
+    {
+      "structureNumber": "      53 2076  ",
+      "latitude": 34.377347,
+      "longitude": -118.493533,
+      "countyLabel": "County 037",
+      "pga": 0.710855,
+      "edr": 0.328886,
+      "svi": 0.393952
+    },
+    {
+      "structureNumber": "      53 2094  ",
+      "latitude": 34.378275,
+      "longitude": -118.492519,
+      "countyLabel": "County 037",
+      "pga": 0.710855,
+      "edr": 0.29223,
+      "svi": 0.486884
+    },
+    {
+      "structureNumber": "      53C2235  ",
+      "latitude": 34.378036,
+      "longitude": -118.592581,
+      "countyLabel": "County 037",
+      "pga": 0.707448,
+      "edr": 0.281152,
+      "svi": 0.512364
+    },
+    {
+      "structureNumber": "      52C0289  ",
+      "latitude": 34.2677,
+      "longitude": -118.692597,
+      "countyLabel": "County 111",
+      "pga": 0.705177,
+      "edr": 0.271508,
+      "svi": 0.537284
+    },
+    {
+      "structureNumber": "      52C0082  ",
+      "latitude": 34.271653,
+      "longitude": -118.701089,
+      "countyLabel": "County 111",
+      "pga": 0.705177,
+      "edr": 0.245481,
+      "svi": 0.626204
+    },
+    {
+      "structureNumber": "      53 1115  ",
+      "latitude": 34.303319,
+      "longitude": -118.479269,
+      "countyLabel": "County 037",
+      "pga": 0.698763,
+      "edr": 0.341554,
+      "svi": 0.346564
+    },
+    {
+      "structureNumber": "      53C1106  ",
+      "latitude": 34.280267,
+      "longitude": -118.430214,
+      "countyLabel": "County 037",
+      "pga": 0.698499,
+      "edr": 0.297351,
+      "svi": 0.45056
+    },
+    {
+      "structureNumber": "      53 2352  ",
+      "latitude": 34.27505,
+      "longitude": -118.425036,
+      "countyLabel": "County 037",
+      "pga": 0.698499,
+      "edr": 0.295601,
+      "svi": 0.455204
+    },
+    {
+      "structureNumber": "      53C0920  ",
+      "latitude": 34.287192,
+      "longitude": -118.426128,
+      "countyLabel": "County 037",
+      "pga": 0.698499,
+      "edr": 0.275965,
+      "svi": 0.510622
+    },
+    {
+      "structureNumber": "      53C0302  ",
+      "latitude": 34.27725,
+      "longitude": -118.433728,
+      "countyLabel": "County 037",
+      "pga": 0.698499,
+      "edr": 0.275384,
+      "svi": 0.512364
+    },
+    {
+      "structureNumber": "      53C0921  ",
+      "latitude": 34.283728,
+      "longitude": -118.428233,
+      "countyLabel": "County 037",
+      "pga": 0.698499,
+      "edr": 0.25357,
+      "svi": 0.582702
+    },
+    {
+      "structureNumber": "      53C1521  ",
+      "latitude": 34.381519,
+      "longitude": -118.546731,
+      "countyLabel": "County 037",
+      "pga": 0.694834,
+      "edr": 0.296098,
+      "svi": 0.447284
+    },
+    {
+      "structureNumber": "      53C1522  ",
+      "latitude": 34.380325,
+      "longitude": -118.54605,
+      "countyLabel": "County 037",
+      "pga": 0.694834,
+      "edr": 0.296098,
+      "svi": 0.447284
+    },
+    {
+      "structureNumber": "      53C0840  ",
+      "latitude": 34.388244,
+      "longitude": -118.546,
+      "countyLabel": "County 037",
+      "pga": 0.694834,
+      "edr": 0.292805,
+      "svi": 0.456044
+    },
+    {
+      "structureNumber": "      53C1554  ",
+      "latitude": 34.388264,
+      "longitude": -118.558147,
+      "countyLabel": "County 037",
+      "pga": 0.694834,
+      "edr": 0.284599,
+      "svi": 0.478604
+    },
+    {
+      "structureNumber": "      53C0826  ",
+      "latitude": 34.388917,
+      "longitude": -118.548292,
+      "countyLabel": "County 037",
+      "pga": 0.694834,
+      "edr": 0.27894,
+      "svi": 0.494804
+    },
+    {
+      "structureNumber": "      53C0805  ",
+      "latitude": 34.378958,
+      "longitude": -118.552542,
+      "countyLabel": "County 037",
+      "pga": 0.694834,
+      "edr": 0.243226,
+      "svi": 0.611884
+    },
+    {
+      "structureNumber": "      53 2057  ",
+      "latitude": 34.393919,
+      "longitude": -118.571694,
+      "countyLabel": "County 037",
+      "pga": 0.690776,
+      "edr": 0.296952,
+      "svi": 0.437764
+    },
+    {
+      "structureNumber": "      52C0290  ",
+      "latitude": 34.306142,
+      "longitude": -118.721711,
+      "countyLabel": "County 111",
+      "pga": 0.687784,
+      "edr": 0.299089,
+      "svi": 0.426924
+    },
+    {
+      "structureNumber": "      52C0227  ",
+      "latitude": 34.293381,
+      "longitude": -118.720917,
+      "countyLabel": "County 111",
+      "pga": 0.687784,
+      "edr": 0.273165,
+      "svi": 0.498204
+    },
+    {
+      "structureNumber": "      52C0226  ",
+      "latitude": 34.2968,
+      "longitude": -118.721125,
+      "countyLabel": "County 111",
+      "pga": 0.687784,
+      "edr": 0.257088,
+      "svi": 0.548444
+    },
+    {
+      "structureNumber": "      53 2113  ",
+      "latitude": 34.297075,
+      "longitude": -118.417425,
+      "countyLabel": "County 037",
+      "pga": 0.685425,
+      "edr": 0.352555,
+      "svi": 0.303484
+    },
+    {
+      "structureNumber": "      53 2114  ",
+      "latitude": 34.293556,
+      "longitude": -118.413692,
+      "countyLabel": "County 037",
+      "pga": 0.685425,
+      "edr": 0.295181,
+      "svi": 0.432764
+    },
+    {
+      "structureNumber": "      53 1898R ",
+      "latitude": 34.299336,
+      "longitude": -118.419769,
+      "countyLabel": "County 037",
+      "pga": 0.685425,
+      "edr": 0.271983,
+      "svi": 0.497124
+    },
+    {
+      "structureNumber": "      53 1898L ",
+      "latitude": 34.299475,
+      "longitude": -118.419567,
+      "countyLabel": "County 037",
+      "pga": 0.685425,
+      "edr": 0.268877,
+      "svi": 0.506444
+    },
+    {
+      "structureNumber": "      53C0958  ",
+      "latitude": 34.296328,
+      "longitude": -118.418356,
+      "countyLabel": "County 037",
+      "pga": 0.685425,
+      "edr": 0.26674,
+      "svi": 0.512964
+    },
+    {
+      "structureNumber": "      53 2927  ",
+      "latitude": 34.407958,
+      "longitude": -118.576814,
+      "countyLabel": "County 037",
+      "pga": 0.683615,
+      "edr": 0.375994,
+      "svi": 0.256844
+    },
+    {
+      "structureNumber": "      53C2371  ",
+      "latitude": 34.4075,
+      "longitude": -118.580833,
+      "countyLabel": "County 037",
+      "pga": 0.683615,
+      "edr": 0.323344,
+      "svi": 0.361884
+    },
+    {
+      "structureNumber": "      53C2372  ",
+      "latitude": 34.403611,
+      "longitude": -118.588611,
+      "countyLabel": "County 037",
+      "pga": 0.683615,
+      "edr": 0.323344,
+      "svi": 0.361884
+    },
+    {
+      "structureNumber": "      53C1544  ",
+      "latitude": 34.387694,
+      "longitude": -118.535011,
+      "countyLabel": "County 037",
+      "pga": 0.678321,
+      "edr": 0.282437,
+      "svi": 0.453724
+    },
+    {
+      "structureNumber": "      53C1625  ",
+      "latitude": 34.385428,
+      "longitude": -118.532814,
+      "countyLabel": "County 037",
+      "pga": 0.678321,
+      "edr": 0.282437,
+      "svi": 0.453724
+    },
+    {
+      "structureNumber": "      53C2319  ",
+      "latitude": 34.383856,
+      "longitude": -118.530825,
+      "countyLabel": "County 037",
+      "pga": 0.678321,
+      "edr": 0.258545,
+      "svi": 0.524284
+    },
+    {
+      "structureNumber": "      52 0299  ",
+      "latitude": 34.281439,
+      "longitude": -118.709178,
+      "countyLabel": "County 111",
+      "pga": 0.677312,
+      "edr": 0.335021,
+      "svi": 0.326452
+    },
+    {
+      "structureNumber": "      52 0309  ",
+      "latitude": 34.281483,
+      "longitude": -118.718044,
+      "countyLabel": "County 111",
+      "pga": 0.677312,
+      "edr": 0.313828,
+      "svi": 0.373
+    },
+    {
+      "structureNumber": "      52C0120  ",
+      "latitude": 34.286219,
+      "longitude": -118.723908,
+      "countyLabel": "County 111",
+      "pga": 0.677312,
+      "edr": 0.261463,
+      "svi": 0.513044
+    },
+    {
+      "structureNumber": "      52C0236  ",
+      "latitude": 34.290256,
+      "longitude": -118.721628,
+      "countyLabel": "County 111",
+      "pga": 0.677312,
+      "edr": 0.247545,
+      "svi": 0.558524
+    },
+    {
+      "structureNumber": "      52C0228  ",
+      "latitude": 34.289772,
+      "longitude": -118.722628,
+      "countyLabel": "County 111",
+      "pga": 0.677312,
+      "edr": 0.243363,
+      "svi": 0.573084
+    },
+    {
+      "structureNumber": "      53C1258  ",
+      "latitude": 34.235339,
+      "longitude": -118.592653,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.343884,
+      "svi": 0.298364
+    },
+    {
+      "structureNumber": "      53C1275  ",
+      "latitude": 34.228094,
+      "longitude": -118.593317,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.298456,
+      "svi": 0.398604
+    },
+    {
+      "structureNumber": "      53C1268  ",
+      "latitude": 34.233358,
+      "longitude": -118.601569,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.240211,
+      "svi": 0.57028
+    },
+    {
+      "structureNumber": "      53C1277  ",
+      "latitude": 34.228094,
+      "longitude": -118.594358,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.24007,
+      "svi": 0.570784
+    },
+    {
+      "structureNumber": "      53C1117  ",
+      "latitude": 34.230733,
+      "longitude": -118.59745,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.231425,
+      "svi": 0.602608
+    },
+    {
+      "structureNumber": "      53 0146  ",
+      "latitude": 34.235272,
+      "longitude": -118.604739,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.223666,
+      "svi": 0.633084
+    },
+    {
+      "structureNumber": "      53C1072  ",
+      "latitude": 34.228608,
+      "longitude": -118.595014,
+      "countyLabel": "County 037",
+      "pga": 0.670906,
+      "edr": 0.22335,
+      "svi": 0.634364
+    },
+    {
+      "structureNumber": "      53C1433  ",
+      "latitude": 34.376878,
+      "longitude": -118.471064,
+      "countyLabel": "County 037",
+      "pga": 0.670675,
+      "edr": 0.21789,
+      "svi": 0.656524
+    },
+    {
+      "structureNumber": "      53C2082  ",
+      "latitude": 34.309597,
+      "longitude": -118.409867,
+      "countyLabel": "County 037",
+      "pga": 0.670304,
+      "edr": 0.310328,
+      "svi": 0.369204
+    },
+    {
+      "structureNumber": "      52C0274  ",
+      "latitude": 34.268147,
+      "longitude": -118.708883,
+      "countyLabel": "County 111",
+      "pga": 0.669313,
+      "edr": 0.29233,
+      "svi": 0.411084
+    },
+    {
+      "structureNumber": "      52C0235  ",
+      "latitude": 34.267131,
+      "longitude": -118.716472,
+      "countyLabel": "County 111",
+      "pga": 0.669313,
+      "edr": 0.262657,
+      "svi": 0.493302
+    },
+    {
+      "structureNumber": "      53C1330  ",
+      "latitude": 34.215578,
+      "longitude": -118.544106,
+      "countyLabel": "County 037",
+      "pga": 0.66662,
+      "edr": 0.318642,
+      "svi": 0.344236
+    },
+    {
+      "structureNumber": "      53C0535  ",
+      "latitude": 34.220453,
+      "longitude": -118.546192,
+      "countyLabel": "County 037",
+      "pga": 0.66662,
+      "edr": 0.264599,
+      "svi": 0.48211
+    },
+    {
+      "structureNumber": "      53C1385  ",
+      "latitude": 34.216736,
+      "longitude": -118.544731,
+      "countyLabel": "County 037",
+      "pga": 0.66662,
+      "edr": 0.255822,
+      "svi": 0.508964
+    },
+    {
+      "structureNumber": "      53 2928  ",
+      "latitude": 34.423008,
+      "longitude": -118.582953,
+      "countyLabel": "County 037",
+      "pga": 0.665306,
+      "edr": 0.303736,
+      "svi": 0.376044
+    },
+    {
+      "structureNumber": "      53 2925  ",
+      "latitude": 34.424861,
+      "longitude": -118.583772,
+      "countyLabel": "County 037",
+      "pga": 0.665306,
+      "edr": 0.28229,
+      "svi": 0.429844
+    },
+    {
+      "structureNumber": "      53C2318  ",
+      "latitude": 34.391833,
+      "longitude": -118.536961,
+      "countyLabel": "County 037",
+      "pga": 0.662602,
+      "edr": 0.300277,
+      "svi": 0.379564
+    },
+    {
+      "structureNumber": "      53C2317  ",
+      "latitude": 34.395553,
+      "longitude": -118.538344,
+      "countyLabel": "County 037",
+      "pga": 0.662602,
+      "edr": 0.281284,
+      "svi": 0.427484
+    },
+    {
+      "structureNumber": "      53C2009  ",
+      "latitude": 34.231775,
+      "longitude": -118.459181,
+      "countyLabel": "County 037",
+      "pga": 0.660817,
+      "edr": 0.284283,
+      "svi": 0.416284
+    },
+    {
+      "structureNumber": "      53 1439  ",
+      "latitude": 34.228117,
+      "longitude": -118.472875,
+      "countyLabel": "County 037",
+      "pga": 0.660817,
+      "edr": 0.273279,
+      "svi": 0.445864
+    },
+    {
+      "structureNumber": "      53 1410  ",
+      "latitude": 34.235425,
+      "longitude": -118.47285,
+      "countyLabel": "County 037",
+      "pga": 0.660817,
+      "edr": 0.257468,
+      "svi": 0.492004
+    },
+    {
+      "structureNumber": "      53C1840  ",
+      "latitude": 34.423892,
+      "longitude": -118.562214,
+      "countyLabel": "County 037",
+      "pga": 0.657725,
+      "edr": 0.265046,
+      "svi": 0.463216
+    },
+    {
+      "structureNumber": "      53C1762  ",
+      "latitude": 34.21315,
+      "longitude": -118.497506,
+      "countyLabel": "County 037",
+      "pga": 0.651758,
+      "edr": 0.288915,
+      "svi": 0.387964
+    },
+    {
+      "structureNumber": "      53C1304  ",
+      "latitude": 34.220586,
+      "longitude": -118.499014,
+      "countyLabel": "County 037",
+      "pga": 0.651758,
+      "edr": 0.251035,
+      "svi": 0.493364
+    },
+    {
+      "structureNumber": "      53C1152  ",
+      "latitude": 34.257519,
+      "longitude": -118.443889,
+      "countyLabel": "County 037",
+      "pga": 0.649922,
+      "edr": 0.243263,
+      "svi": 0.514444
+    },
+    {
+      "structureNumber": "      53 2095  ",
+      "latitude": 34.272114,
+      "longitude": -118.428886,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.321219,
+      "svi": 0.310004
+    },
+    {
+      "structureNumber": "      53 1127  ",
+      "latitude": 34.262928,
+      "longitude": -118.440544,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.270931,
+      "svi": 0.430084
+    },
+    {
+      "structureNumber": "      53 2337  ",
+      "latitude": 34.269669,
+      "longitude": -118.432269,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.269868,
+      "svi": 0.433004
+    },
+    {
+      "structureNumber": "      53 2351S ",
+      "latitude": 34.265331,
+      "longitude": -118.441425,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.26349,
+      "svi": 0.450924
+    },
+    {
+      "structureNumber": "      53 2364S ",
+      "latitude": 34.271242,
+      "longitude": -118.429058,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.261177,
+      "svi": 0.457604
+    },
+    {
+      "structureNumber": "      53 2354S ",
+      "latitude": 34.270722,
+      "longitude": -118.430578,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.258599,
+      "svi": 0.465164
+    },
+    {
+      "structureNumber": "      53 2346F ",
+      "latitude": 34.266603,
+      "longitude": -118.440044,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.258356,
+      "svi": 0.465884
+    },
+    {
+      "structureNumber": "      53 1127H ",
+      "latitude": 34.262542,
+      "longitude": -118.441072,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.252774,
+      "svi": 0.482724
+    },
+    {
+      "structureNumber": "      53 2329G ",
+      "latitude": 34.264764,
+      "longitude": -118.441247,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.248896,
+      "svi": 0.494804
+    },
+    {
+      "structureNumber": "      53 1127G ",
+      "latitude": 34.263169,
+      "longitude": -118.440261,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.237971,
+      "svi": 0.530644
+    },
+    {
+      "structureNumber": "      53C0368  ",
+      "latitude": 34.266686,
+      "longitude": -118.440281,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.236754,
+      "svi": 0.534816
+    },
+    {
+      "structureNumber": "      53 2344R ",
+      "latitude": 34.26695,
+      "longitude": -118.441078,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.222769,
+      "svi": 0.585644
+    },
+    {
+      "structureNumber": "      53 2347G ",
+      "latitude": 34.266133,
+      "longitude": -118.440189,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.222197,
+      "svi": 0.587844
+    },
+    {
+      "structureNumber": "      53 2350G ",
+      "latitude": 34.264533,
+      "longitude": -118.440789,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.221762,
+      "svi": 0.589524
+    },
+    {
+      "structureNumber": "      53 2344L ",
+      "latitude": 34.267228,
+      "longitude": -118.441406,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.221309,
+      "svi": 0.591284
+    },
+    {
+      "structureNumber": "      53 2186  ",
+      "latitude": 34.267069,
+      "longitude": -118.440417,
+      "countyLabel": "County 037",
+      "pga": 0.649214,
+      "edr": 0.20554,
+      "svi": 0.656924
+    },
+    {
+      "structureNumber": "      53C1488R ",
+      "latitude": 34.418653,
+      "longitude": -118.548583,
+      "countyLabel": "County 037",
+      "pga": 0.644245,
+      "edr": 0.281788,
+      "svi": 0.392124
+    },
+    {
+      "structureNumber": "      53C2316  ",
+      "latitude": 34.414275,
+      "longitude": -118.543317,
+      "countyLabel": "County 037",
+      "pga": 0.644245,
+      "edr": 0.276249,
+      "svi": 0.406404
+    },
+    {
+      "structureNumber": "      53C1488L ",
+      "latitude": 34.418708,
+      "longitude": -118.548736,
+      "countyLabel": "County 037",
+      "pga": 0.644245,
+      "edr": 0.265112,
+      "svi": 0.436569
+    },
+    {
+      "structureNumber": "      53C1300  ",
+      "latitude": 34.219831,
+      "longitude": -118.587269,
+      "countyLabel": "County 037",
+      "pga": 0.64084,
+      "edr": 0.320219,
+      "svi": 0.298364
+    },
+    {
+      "structureNumber": "      53C1150  ",
+      "latitude": 34.223728,
+      "longitude": -118.588381,
+      "countyLabel": "County 037",
+      "pga": 0.64084,
+      "edr": 0.257517,
+      "svi": 0.451524
+    },
+    {
+      "structureNumber": "      53C0378  ",
+      "latitude": 34.423497,
+      "longitude": -118.540006,
+      "countyLabel": "County 037",
+      "pga": 0.64025,
+      "edr": 0.211334,
+      "svi": 0.609684
+    },
+    {
+      "structureNumber": "      53 2119  ",
+      "latitude": 34.282489,
+      "longitude": -118.415414,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.262301,
+      "svi": 0.431524
+    },
+    {
+      "structureNumber": "      53 2356  ",
+      "latitude": 34.277603,
+      "longitude": -118.421883,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.26203,
+      "svi": 0.432284
+    },
+    {
+      "structureNumber": "      53 2130  ",
+      "latitude": 34.280019,
+      "longitude": -118.418728,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.260091,
+      "svi": 0.437764
+    },
+    {
+      "structureNumber": "      53 2120  ",
+      "latitude": 34.284897,
+      "longitude": -118.412208,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.259319,
+      "svi": 0.439964
+    },
+    {
+      "structureNumber": "      53 2105G ",
+      "latitude": 34.288139,
+      "longitude": -118.409094,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.259123,
+      "svi": 0.440524
+    },
+    {
+      "structureNumber": "      53 2120G ",
+      "latitude": 34.284717,
+      "longitude": -118.412075,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.256242,
+      "svi": 0.448844
+    },
+    {
+      "structureNumber": "      53 2104F ",
+      "latitude": 34.28695,
+      "longitude": -118.408947,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.24205,
+      "svi": 0.492244
+    },
+    {
+      "structureNumber": "      53 2102G ",
+      "latitude": 34.285753,
+      "longitude": -118.410428,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.240797,
+      "svi": 0.496284
+    },
+    {
+      "structureNumber": "      53 2103G ",
+      "latitude": 34.286431,
+      "longitude": -118.409297,
+      "countyLabel": "County 037",
+      "pga": 0.637658,
+      "edr": 0.236002,
+      "svi": 0.512089
+    },
+    {
+      "structureNumber": "      52 0322L ",
+      "latitude": 34.282364,
+      "longitude": -118.731056,
+      "countyLabel": "County 111",
+      "pga": 0.62615,
+      "edr": 0.280108,
+      "svi": 0.362964
+    },
+    {
+      "structureNumber": "      52 0322R ",
+      "latitude": 34.282044,
+      "longitude": -118.731053,
+      "countyLabel": "County 111",
+      "pga": 0.62615,
+      "edr": 0.280108,
+      "svi": 0.362964
+    }
+  ]
+}

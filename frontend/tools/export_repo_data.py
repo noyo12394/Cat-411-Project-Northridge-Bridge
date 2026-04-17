@@ -102,6 +102,14 @@ METHODOLOGY_REFERENCES = [
     },
 ]
 
+FRAGILITY_DAMAGE_WEIGHTS = {
+    'P_DS0': 0.0,
+    'P_DS1': 0.03,
+    'P_DS2': 0.08,
+    'P_DS3': 0.25,
+    'P_DS4': 1.0,
+}
+
 
 def clean_value(value):
     if pd.isna(value):
@@ -167,6 +175,19 @@ def county_label(code):
     return f'County {int(code):03d}'
 
 
+def normal_cdf(value: float):
+    return 0.5 * (1 + math.erf(value / math.sqrt(2)))
+
+
+def exceedance_probability(pga: float, theta: float | None, beta: float | None):
+    if pga <= 0 or theta is None or beta is None:
+        return 0.0
+    if pd.isna(theta) or pd.isna(beta) or theta <= 0 or beta <= 0:
+        return 0.0
+    z_score = (math.log(pga) - math.log(theta)) / beta
+    return max(0.0, min(1.0, normal_cdf(z_score)))
+
+
 def build_class_profiles(df: pd.DataFrame):
     return (
         df.groupby('HWB_CLASS', dropna=False)
@@ -178,6 +199,14 @@ def build_class_profiles(df: pd.DataFrame):
 
 def compute_intrinsic_scores(df: pd.DataFrame, class_profiles: pd.DataFrame):
     class_mean_lookup = class_profiles.set_index('HWB_CLASS')['meanSVI'].to_dict()
+    modal_mapping = {
+        'P_DS0': 'None',
+        'P_DS1': 'Slight',
+        'P_DS2': 'Moderate',
+        'P_DS3': 'Extensive',
+        'P_DS4': 'Complete',
+    }
+    ds_cols = [col for col in ['P_DS0', 'P_DS1', 'P_DS2', 'P_DS3', 'P_DS4'] if col in df.columns]
 
     year_min = float(df['year'].min())
     recon_max = float(df['YEAR_RECONSTRUCTED_106'].dropna().max()) if df['YEAR_RECONSTRUCTED_106'].dropna().any() else current_year()
@@ -234,6 +263,12 @@ def compute_intrinsic_scores(df: pd.DataFrame, class_profiles: pd.DataFrame):
                 'adt': clean_value(getattr(row, 'ADT_029')),
                 'latitude': clean_value(getattr(row, 'latitude')),
                 'longitude': clean_value(getattr(row, 'longitude')),
+                'pga': clean_value(getattr(row, 'pga')) if hasattr(row, 'pga') else None,
+                'modalDamageState': (
+                    modal_mapping[max(ds_cols, key=lambda col: float(getattr(row, col) or 0.0))]
+                    if ds_cols
+                    else None
+                ),
                 'prototypeVulnerability': round(intrinsic_score, 4),
                 'priorityScore': round(priority_score, 4),
                 'riskBand': score_to_band(intrinsic_score),
@@ -258,6 +293,195 @@ def compute_intrinsic_scores(df: pd.DataFrame, class_profiles: pd.DataFrame):
         'condition': {'min': int(cond_min), 'max': int(cond_max)},
         'svi': {'min': clean_value(svi_min), 'max': clean_value(svi_max)},
         'adt': {'min': 0, 'max': int(df['ADT_029'].fillna(0).quantile(0.99))},
+    }
+
+
+def build_hazard_profile(df: pd.DataFrame):
+    hazard_df = df[df['pga'].notna()].copy()
+    if hazard_df.empty:
+        return {
+            'sampledBridges': 0,
+            'positivePgaBridges': 0,
+            'quantiles': {'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'max': 0.0},
+            'histogram': [],
+            'countyHotspots': [],
+            'samplePoints': [],
+        }
+
+    positive_df = hazard_df[hazard_df['pga'].astype(float) > 0].copy()
+    pga_series = hazard_df['pga'].astype(float).clip(lower=0)
+    upper = max(float(pga_series.max()), 0.35)
+    bucket_count = 8
+    edges = [round(upper * idx / bucket_count, 4) for idx in range(bucket_count + 1)]
+    histogram = []
+    for idx in range(bucket_count):
+        start = edges[idx]
+        end = edges[idx + 1]
+        mask = (pga_series >= start) & (pga_series < end if idx < bucket_count - 1 else pga_series <= end)
+        histogram.append(
+            {
+                'label': f'{start:.2f}-{end:.2f} g',
+                'start': round(start, 4),
+                'end': round(end, 4),
+                'count': int(mask.sum()),
+            }
+        )
+
+    county_hotspots = (
+        hazard_df.groupby('COUNTY_CODE_003', dropna=False)
+        .agg(
+            bridgeCount=('COUNTY_CODE_003', 'size'),
+            meanPga=('pga', 'mean'),
+            maxPga=('pga', 'max'),
+            meanEdr=('EDR', 'mean'),
+        )
+        .reset_index()
+        .sort_values(['maxPga', 'meanEdr', 'bridgeCount'], ascending=[False, False, False])
+        .head(12)
+    )
+    county_hotspots['countyLabel'] = county_hotspots['COUNTY_CODE_003'].map(county_label)
+
+    map_sample = hazard_df.sort_values(['pga', 'EDR'], ascending=[False, False]).head(320)
+    sample_points = [
+        {
+            'structureNumber': clean_value(row.STRUCTURE_NUMBER_008),
+            'latitude': clean_value(row.latitude),
+            'longitude': clean_value(row.longitude),
+            'countyLabel': county_label(row.COUNTY_CODE_003),
+            'pga': clean_value(row.pga),
+            'edr': clean_value(row.EDR),
+            'svi': clean_value(row.SVI),
+        }
+        for row in map_sample.itertuples(index=False)
+        if not pd.isna(row.latitude) and not pd.isna(row.longitude)
+    ]
+
+    return {
+        'sampledBridges': int(len(hazard_df)),
+        'positivePgaBridges': int(len(positive_df)),
+        'quantiles': {
+            'p50': clean_value(pga_series.quantile(0.5)),
+            'p75': clean_value(pga_series.quantile(0.75)),
+            'p90': clean_value(pga_series.quantile(0.9)),
+            'p95': clean_value(pga_series.quantile(0.95)),
+            'max': clean_value(pga_series.max()),
+        },
+        'histogram': histogram,
+        'countyHotspots': to_records(
+            county_hotspots[['countyLabel', 'bridgeCount', 'meanPga', 'maxPga', 'meanEdr']]
+        ),
+        'samplePoints': sample_points,
+    }
+
+
+def build_fragility_profile(df: pd.DataFrame):
+    ds_cols = ['P_DS0', 'P_DS1', 'P_DS2', 'P_DS3', 'P_DS4']
+    available_ds_cols = [col for col in ds_cols if col in df.columns]
+    if not available_ds_cols:
+        return {
+            'overallDamageProbabilities': [],
+            'damageByClass': [],
+            'fragilityCurves': [],
+        }
+
+    state_labels = {
+        'P_DS0': 'None',
+        'P_DS1': 'Slight',
+        'P_DS2': 'Moderate',
+        'P_DS3': 'Extensive',
+        'P_DS4': 'Complete',
+    }
+    overall_damage_probabilities = [
+        {
+            'state': state_labels[col],
+            'probability': clean_value(df[col].astype(float).mean()),
+        }
+        for col in available_ds_cols
+    ]
+
+    damage_by_class = (
+        df.groupby('HWB_CLASS', dropna=False)
+        .agg(
+            count=('HWB_CLASS', 'size'),
+            meanPga=('pga', 'mean'),
+            meanEdr=('EDR', 'mean'),
+            ds0=('P_DS0', 'mean'),
+            ds1=('P_DS1', 'mean'),
+            ds2=('P_DS2', 'mean'),
+            ds3=('P_DS3', 'mean'),
+            ds4=('P_DS4', 'mean'),
+        )
+        .reset_index()
+        .rename(columns={'HWB_CLASS': 'bridgeClass'})
+        .sort_values(['meanEdr', 'count'], ascending=[False, False])
+        .head(12)
+    )
+
+    valid_df = df[
+        df[['SVI', 'BETA_SVI', 'MU_DS1_LINEAR', 'MU_DS2_LINEAR', 'MU_DS3_LINEAR', 'MU_DS4_LINEAR']]
+        .notna()
+        .all(axis=1)
+    ].copy()
+    quantiles = [('Lower vulnerability', 0.2), ('Median vulnerability', 0.5), ('Higher vulnerability', 0.8)]
+    pga_values = [round(0.45 * idx / 12, 4) for idx in range(13)]
+    fragility_curves = []
+    if not valid_df.empty:
+        sorted_df = valid_df.sort_values('SVI').reset_index(drop=True)
+        for label, quantile in quantiles:
+            index = min(len(sorted_df) - 1, max(0, int(quantile * (len(sorted_df) - 1))))
+            center_svi = float(sorted_df.iloc[index]['SVI'])
+            window = sorted_df[(sorted_df['SVI'] - center_svi).abs() <= 0.03]
+            if len(window) < 40:
+                start = max(0, index - 80)
+                end = min(len(sorted_df), index + 81)
+                window = sorted_df.iloc[start:end]
+            theta = {
+                'ds1': float(window['MU_DS1_LINEAR'].mean()),
+                'ds2': float(window['MU_DS2_LINEAR'].mean()),
+                'ds3': float(window['MU_DS3_LINEAR'].mean()),
+                'ds4': float(window['MU_DS4_LINEAR'].mean()),
+            }
+            beta = float(window['BETA_SVI'].mean())
+            points = []
+            for pga in pga_values:
+                ex1 = exceedance_probability(pga, theta['ds1'], beta)
+                ex2 = exceedance_probability(pga, theta['ds2'], beta)
+                ex3 = exceedance_probability(pga, theta['ds3'], beta)
+                ex4 = exceedance_probability(pga, theta['ds4'], beta)
+                state_probabilities = {
+                    'P_DS0': max(0.0, min(1.0, 1 - ex1)),
+                    'P_DS1': max(0.0, min(1.0, ex1 - ex2)),
+                    'P_DS2': max(0.0, min(1.0, ex2 - ex3)),
+                    'P_DS3': max(0.0, min(1.0, ex3 - ex4)),
+                    'P_DS4': max(0.0, min(1.0, ex4)),
+                }
+                edr = sum(
+                    FRAGILITY_DAMAGE_WEIGHTS[state] * probability
+                    for state, probability in state_probabilities.items()
+                )
+                points.append(
+                    {
+                        'pga': round(pga, 4),
+                        'ds1': round(ex1, 6),
+                        'ds2': round(ex2, 6),
+                        'ds3': round(ex3, 6),
+                        'ds4': round(ex4, 6),
+                        'edr': round(edr, 6),
+                    }
+                )
+            fragility_curves.append(
+                {
+                    'label': label,
+                    'meanSvi': clean_value(window['SVI'].mean()),
+                    'beta': clean_value(beta),
+                    'points': points,
+                }
+            )
+
+    return {
+        'overallDamageProbabilities': overall_damage_probabilities,
+        'damageByClass': to_records(damage_by_class),
+        'fragilityCurves': fragility_curves,
     }
 
 
@@ -301,16 +525,16 @@ def build_summary(repo_root: Path):
     mapping = {'P_DS0': 'None', 'P_DS1': 'Slight', 'P_DS2': 'Moderate', 'P_DS3': 'Extensive', 'P_DS4': 'Complete'}
     modal_damage = bridges_with_edr[ds_cols].idxmax(axis=1).map(mapping) if ds_cols else pd.Series(dtype='object')
 
-    class_profiles = build_class_profiles(bridges_with_svi)
+    class_profiles = build_class_profiles(bridges_with_edr)
     county_profiles = (
-        bridges_with_svi.groupby('COUNTY_CODE_003', dropna=False)
+        bridges_with_edr.groupby('COUNTY_CODE_003', dropna=False)
         .agg(count=('COUNTY_CODE_003', 'size'), meanSVI=('SVI', 'mean'), meanEDR=('EDR', 'mean'))
         .reset_index()
         .sort_values(['count', 'meanSVI'], ascending=[False, False])
         .head(12)
     )
 
-    portfolio_rows, feature_ranges = compute_intrinsic_scores(bridges_with_svi, class_profiles)
+    portfolio_rows, feature_ranges = compute_intrinsic_scores(bridges_with_edr, class_profiles)
     portfolio_df = pd.DataFrame(portfolio_rows)
     calibration = bridge_ml_predictions[['Actual_EDR', 'Predicted_EDR', 'SVI', 'year', 'cond', 'HWB_CLASS']].copy()
     if len(calibration) > 240:
@@ -481,6 +705,23 @@ def export_bridge_portfolio(public_data_root: Path, portfolio_rows):
     (public_data_root / 'bridge_portfolio.json').write_text(json.dumps(portfolio_rows, indent=2), encoding='utf-8')
 
 
+def export_hazard_and_fragility(repo_root: Path, public_data_root: Path):
+    bridges_with_edr = pd.read_csv(
+        repo_root / 'data' / 'processed' / 'bridges_with_edr.csv',
+        low_memory=False,
+    )
+    hazard_profile = build_hazard_profile(bridges_with_edr)
+    fragility_profile = build_fragility_profile(bridges_with_edr)
+    (public_data_root / 'hazard_profile.json').write_text(
+        json.dumps(hazard_profile, indent=2),
+        encoding='utf-8',
+    )
+    (public_data_root / 'fragility_profile.json').write_text(
+        json.dumps(fragility_profile, indent=2),
+        encoding='utf-8',
+    )
+
+
 def copy_research_figures(repo_root: Path, public_research_root: Path):
     figures_root = repo_root / 'figures'
     manifest = []
@@ -515,6 +756,7 @@ def main():
     export_csv_jsons(repo_root, public_data_root)
     export_health(repo_root, public_data_root)
     export_proxy_validation(public_data_root)
+    export_hazard_and_fragility(repo_root, public_data_root)
     copy_research_figures(repo_root, public_research_root)
 
     print('Exported frontend data to', public_data_root)

@@ -17,7 +17,7 @@ function StatCard({ label, value, hint, accent = 'slate' }) {
   )
 }
 
-export default function DashboardResults({ result, modeMeta }) {
+export default function DashboardResults({ result, modeMeta, replayToken = 0 }) {
   return (
     <div className="space-y-5">
       <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
@@ -39,7 +39,13 @@ export default function DashboardResults({ result, modeMeta }) {
         </div>
       </div>
 
-      <BridgeStateVisual score={result.vulnerabilityScore} visualState={result.visualState} title={`${modeMeta.label} structural signal`} />
+      <BridgeStateVisual
+        score={result.vulnerabilityScore}
+        visualState={result.visualState}
+        replayToken={replayToken}
+        title={`${modeMeta.label} structural signal`}
+        caption={result.visualState?.summary}
+      />
 
       <div className="grid gap-5 xl:grid-cols-[1.25fr_0.75fr]">
         <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">

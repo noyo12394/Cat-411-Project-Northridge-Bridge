@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
 
 @layer base {
   html {
@@ -10,26 +14,93 @@
   }
 
   body {
-    @apply font-sans antialiased text-slate-950;
+    @apply font-sans antialiased text-ink;
+    margin: 0;
     background:
-      radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.16), transparent 24%),
-      radial-gradient(circle at 100% 12%, rgba(139, 92, 246, 0.1), transparent 20%),
-      linear-gradient(180deg, #f8fbff 0%, #f3f7fd 38%, #eef3fb 100%);
+      radial-gradient(circle at 10% 0%, rgba(73, 182, 255, 0.1), transparent 26%),
+      radial-gradient(circle at 88% 14%, rgba(255, 156, 105, 0.08), transparent 22%),
+      linear-gradient(180deg, #070b13 0%, #09111b 34%, #070b13 100%);
   }
 
   * {
-    @apply border-slate-200;
+    @apply border-line;
+    box-sizing: border-box;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.18);
-    color: #0f172a;
+    background: rgba(125, 211, 252, 0.25);
+    color: #eff4fb;
   }
 }
 
 @layer components {
-  .field-input {
-    @apply h-12 w-full rounded-2xl border border-slate-200/90 bg-white/95 px-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10;
+  .lab-button {
+    @apply inline-flex items-center justify-center rounded-full border border-line bg-white/5 px-5 py-3 text-sm font-semibold text-ink transition duration-200 focus:outline-none;
+  }
+
+  .lab-button:hover {
+    border-color: rgba(73, 182, 255, 0.24);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .lab-button:focus-visible {
+    box-shadow: 0 0 0 2px rgba(73, 182, 255, 0.3);
+  }
+
+  .lab-button-primary {
+    @apply border-transparent bg-[linear-gradient(135deg,rgba(73,182,255,0.92),rgba(125,211,252,0.85))] text-slate-950 shadow-[0_16px_36px_rgba(73,182,255,0.26)] hover:brightness-105;
+  }
+
+  .lab-input {
+    @apply h-12 w-full rounded-[1.2rem] border border-line bg-white/5 px-4 text-sm text-ink outline-none transition placeholder:text-muted;
+  }
+
+  .lab-input:focus {
+    border-color: rgba(73, 182, 255, 0.28);
+    box-shadow: 0 0 0 4px rgba(73, 182, 255, 0.1);
+  }
+
+  .lab-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(73, 182, 255, 0.18), rgba(255, 156, 105, 0.2));
+    outline: none;
+  }
+
+  .lab-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 2px solid rgba(239, 244, 251, 0.8);
+    background: linear-gradient(135deg, #7dd3fc, #49b6ff);
+    box-shadow: 0 0 0 6px rgba(73, 182, 255, 0.16);
+    cursor: pointer;
+  }
+
+  .lab-range::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 2px solid rgba(239, 244, 251, 0.8);
+    background: linear-gradient(135deg, #7dd3fc, #49b6ff);
+    box-shadow: 0 0 0 6px rgba(73, 182, 255, 0.16);
+    cursor: pointer;
   }
 }
 
@@ -37,11 +108,27 @@
 .recharts-legend-item-text,
 .recharts-label,
 .recharts-text {
-  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 }
 
 .recharts-default-tooltip {
   border-radius: 18px !important;
-  border: 1px solid rgba(226, 232, 240, 0.95) !important;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12) !important;
+  border: 1px solid rgba(173, 196, 223, 0.18) !important;
+  background: rgba(9, 15, 24, 0.94) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.32) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
