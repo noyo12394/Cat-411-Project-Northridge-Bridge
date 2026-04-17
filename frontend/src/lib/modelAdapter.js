@@ -1,3 +1,5 @@
+import { getBridgeStructuralState } from './bridgeVisualState'
+
 const DAMAGE_LABELS = ['None', 'Minor', 'Moderate', 'Major', 'Complete']
 
 export const DASHBOARD_MODES = [
@@ -25,7 +27,6 @@ export const DASHBOARD_MODES = [
 ]
 
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value))
-const lerp = (start, end, value) => start + (end - start) * value
 
 function normalize(value, min, max) {
   if (value == null || Number.isNaN(Number(value)) || max <= min) {
@@ -225,16 +226,6 @@ function deriveConfidence(inputs, mode) {
   return clamp(base + filledFields * 0.015, 0.55, 0.94)
 }
 
-function buildVisualState(score, mode) {
-  return {
-    vulnerability: score,
-    sag: lerp(2, mode === 'event' ? 24 : 16, score),
-    crack: lerp(0.04, mode === 'event' ? 0.95 : 0.82, score),
-    supportShift: lerp(0, mode === 'event' ? 14 : 8, score),
-    deckFracture: score > 0.65,
-  }
-}
-
 function ndviAdjustmentScore(ndviChange) {
   if (ndviChange === '' || ndviChange == null || Number.isNaN(Number(ndviChange))) {
     return {
@@ -316,6 +307,21 @@ export function runBridgeAssessment(inputs, mode, researchData) {
     )
   }
 
+  const structuralVisualScore =
+    mode === 'priority'
+      ? clamp(intrinsic.score + Math.max(0, ndvi.shift) * 0.5, 0, 1)
+      : mode === 'event'
+        ? clamp(intrinsic.score * 0.76 + clamp(Number(inputs.scenarioPga || 0) / 0.4, 0, 1) * 0.24, 0, 1)
+        : intrinsic.score
+
+  const visualState = getBridgeStructuralState({
+    vulnerabilityScore: mode === 'intrinsic' ? intrinsic.score : headlineScore,
+    structuralScore: structuralVisualScore,
+    mode,
+    eventIntensity: mode === 'event' ? clamp(Number(inputs.scenarioPga || 0) / 0.4, 0, 1) : 0,
+    ndviShift: ndvi.shift,
+  })
+
   return {
     mode,
     vulnerabilityScore: Number((mode === 'intrinsic' ? intrinsic.score : headlineScore).toFixed(3)),
@@ -330,6 +336,6 @@ export function runBridgeAssessment(inputs, mode, researchData) {
     topContributors,
     narrative: modeNarrative,
     scenarioTag,
-    visualState: buildVisualState(mode === 'intrinsic' ? intrinsic.score : headlineScore, mode),
+    visualState,
   }
 }
