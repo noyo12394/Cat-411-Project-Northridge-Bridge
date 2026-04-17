@@ -28,6 +28,13 @@ export default function DashboardSection({ researchData, onBridgeStateChange }) 
     [mode],
   )
 
+  const portfolioBridges = useMemo(() => {
+    if (Array.isArray(researchData.portfolio)) {
+      return researchData.portfolio
+    }
+    return researchData.portfolio?.bridges ?? []
+  }, [researchData.portfolio])
+
   const handleChange = (field, value) => {
     setInputs((current) => ({ ...current, [field]: value }))
   }
@@ -75,7 +82,7 @@ export default function DashboardSection({ researchData, onBridgeStateChange }) 
         />
         <DashboardResults result={result} modeMeta={modeMeta} />
       </div>
-      <PortfolioWorkbench bridges={researchData.portfolio} onLoadBridge={handleLoadSample} />
+      <PortfolioWorkbench bridges={portfolioBridges} onLoadBridge={handleLoadSample} />
     </section>
   )
 }
