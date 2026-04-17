@@ -14,9 +14,11 @@ import TransparencySection from './components/sections/TransparencySection'
 import VulnerabilityEngineSection from './components/sections/VulnerabilityEngineSection'
 import WhyDifferentSection from './components/sections/WhyDifferentSection'
 import { useResearchData } from './hooks/useResearchData'
+import SectionErrorBoundary from './components/common/SectionErrorBoundary'
 
 function App() {
-  const { data: researchData, loading, diagnostics } = useResearchData()
+  const { data: researchData, loading, diagnostics, ensurePortfolioLoaded, portfolioLoading } =
+    useResearchData()
   const [bridgeState, setBridgeState] = useState(null)
 
   const heroBridgeState = useMemo(() => bridgeState, [bridgeState])
@@ -44,19 +46,27 @@ function App() {
     <div className="min-h-screen bg-transparent text-slate-950">
       <Header />
       <main className="mx-auto flex w-full max-w-[1440px] flex-col gap-20 px-4 pb-16 pt-28 sm:px-6 lg:px-8">
-        <HeroSection researchData={researchData} bridgeState={heroBridgeState} />
+        <SectionErrorBoundary sectionLabel="Hero section">
+          <HeroSection researchData={researchData} bridgeState={heroBridgeState} />
+        </SectionErrorBoundary>
         <ObjectivesSection />
         <WhyDifferentSection />
         <FeatureDisciplineSection />
         <VulnerabilityEngineSection methodology={researchData.methodology} />
         <PipelineSection pipeline={researchData.summary.pipeline} />
         <ComparativeFrameworkSection />
-        <DashboardSection
-          key={dashboardKey}
-          researchData={researchData}
-          onBridgeStateChange={setBridgeState}
-        />
-        <AnalyticsSection researchData={researchData} />
+        <SectionErrorBoundary sectionLabel="Dashboard section">
+          <DashboardSection
+            key={dashboardKey}
+            researchData={researchData}
+            onBridgeStateChange={setBridgeState}
+            onEnsurePortfolioLoaded={ensurePortfolioLoaded}
+            portfolioLoading={portfolioLoading}
+          />
+        </SectionErrorBoundary>
+        <SectionErrorBoundary sectionLabel="Analytics section">
+          <AnalyticsSection researchData={researchData} />
+        </SectionErrorBoundary>
         <TransparencySection
           researchData={researchData}
           diagnostics={loading ? 'Loading exported research snapshots...' : diagnostics}

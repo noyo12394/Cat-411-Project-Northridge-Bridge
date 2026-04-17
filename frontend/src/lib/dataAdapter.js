@@ -1,4 +1,4 @@
-import { fallbackResearchData } from '../data/fallbackResearchData'
+import { fallbackResearchData } from '../data/fallbackResearchData.js'
 
 const DATA_PATHS = {
   summary: '/data/site_summary.json',
@@ -74,10 +74,9 @@ function enrichPortfolio(portfolio = []) {
 }
 
 export async function loadResearchData() {
-  const [summary, bridgePortfolio, methodology, damageState, futureScenario, hybridBest, recommendedMetrics, recommendedImportance, health, proxyValidation, researchManifest] =
+  const [summary, methodology, damageState, futureScenario, hybridBest, recommendedMetrics, recommendedImportance, health, proxyValidation, researchManifest] =
     await Promise.all([
       fetchJson(DATA_PATHS.summary),
-      fetchJson(DATA_PATHS.bridgePortfolio),
       fetchJson(DATA_PATHS.methodology),
       fetchJson(DATA_PATHS.damageState),
       fetchJson(DATA_PATHS.futureScenario),
@@ -103,6 +102,7 @@ export async function loadResearchData() {
   return {
     availability: {
       repoData: true,
+      portfolioLoaded: false,
       figures: Array.isArray(researchManifest) && researchManifest.length > 0,
       featureImportanceSource,
       recommendedMetricsValid: Boolean(healthPayload.recommendedMetricsValid),
@@ -114,7 +114,7 @@ export async function loadResearchData() {
     },
     summary,
     methodology: methodology ?? fallbackResearchData.methodology,
-    portfolio: enrichPortfolio(bridgePortfolio ?? fallbackResearchData.portfolio.bridges),
+    portfolio: enrichPortfolio(fallbackResearchData.portfolio.bridges),
     analytics: {
       classifierMetrics: formatClassifierMetrics(damageState),
       futureScenarios: formatFutureScenario(futureScenario),
@@ -133,4 +133,12 @@ export async function loadResearchData() {
     },
     evidence: Array.isArray(researchManifest) ? researchManifest : fallbackResearchData.evidence,
   }
+}
+
+export async function loadBridgePortfolio() {
+  const bridgePortfolio = await fetchJson(DATA_PATHS.bridgePortfolio)
+  if (!bridgePortfolio) {
+    return enrichPortfolio(fallbackResearchData.portfolio.bridges)
+  }
+  return enrichPortfolio(bridgePortfolio)
 }

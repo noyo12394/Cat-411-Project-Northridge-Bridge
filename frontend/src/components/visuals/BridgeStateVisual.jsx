@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
+import { motion as Motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { getBridgeStageLegend, getBridgeStructuralState } from '../../lib/bridgeVisualState'
 
 const spring = {
@@ -135,13 +135,13 @@ export default function BridgeStateVisual({
   return (
     <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#07111d_0%,#091524_35%,#0c1626_100%)] p-6 shadow-[0_28px_80px_rgba(15,23,42,0.34)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(56,189,248,0.12),transparent_28%),radial-gradient(circle_at_82%_12%,rgba(139,92,246,0.12),transparent_24%),linear-gradient(90deg,rgba(148,163,184,0.05)_1px,transparent_1px),linear-gradient(rgba(148,163,184,0.05)_1px,transparent_1px)] bg-[size:auto,auto,32px_32px,32px_32px]" />
-      <motion.div className="pointer-events-none absolute inset-0" animate={{ opacity: [0.38, 0.52 + visual.stressGlow * 0.3, 0.38] }} transition={{ duration: reducedMotion ? 0.2 : 3.2, repeat: Infinity, ease: 'easeInOut' }}>
+      <Motion.div className="pointer-events-none absolute inset-0" animate={{ opacity: [0.38, 0.52 + visual.stressGlow * 0.3, 0.38] }} transition={{ duration: reducedMotion ? 0.2 : 3.2, repeat: Infinity, ease: 'easeInOut' }}>
         <div className="absolute inset-x-20 top-12 h-32 rounded-full bg-sky-400/10 blur-3xl" />
         <div
           className="absolute inset-x-24 bottom-12 h-28 rounded-full blur-3xl"
           style={{ background: `rgba(249, 115, 22, ${tintOpacity})` }}
         />
-      </motion.div>
+      </Motion.div>
 
       <div className="relative flex flex-col gap-5 border-b border-white/10 pb-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-2xl">
@@ -175,7 +175,7 @@ export default function BridgeStateVisual({
         ))}
       </div>
 
-      <motion.div className="relative mt-6" animate={replayControls}>
+      <Motion.div className="relative mt-6" animate={replayControls}>
         <svg viewBox="0 0 760 390" className="w-full overflow-visible">
           <defs>
             <linearGradient id="bridgeDeckFill" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -193,7 +193,7 @@ export default function BridgeStateVisual({
             </radialGradient>
           </defs>
 
-          <motion.ellipse
+          <Motion.ellipse
             cx="384"
             cy="338"
             rx="292"
@@ -203,7 +203,7 @@ export default function BridgeStateVisual({
             transition={spring}
           />
 
-          <motion.g
+          <Motion.g
             animate={
               reducedMotion
                 ? { x: 0, y: 0 }
@@ -219,7 +219,7 @@ export default function BridgeStateVisual({
             }
           >
             {Array.from({ length: 4 }).map((_, index) => (
-              <motion.path
+              <Motion.path
                 key={`wave-${index}`}
                 d={`M ${74 - index * 20} ${94 + index * 26} C ${192 - index * 10} ${36 + index * 12}, ${430 + index * 4} ${42 + index * 8}, ${688 + index * 20} ${120 + index * 10}`}
                 fill="none"
@@ -233,7 +233,7 @@ export default function BridgeStateVisual({
             ))}
 
             {piers.map((pier) => (
-              <motion.rect
+              <Motion.rect
                 key={pier.key}
                 x={pier.x}
                 y={pier.y + pier.settle}
@@ -249,7 +249,7 @@ export default function BridgeStateVisual({
               />
             ))}
 
-            <motion.path
+            <Motion.path
               d={`M88 ${deckBaseline + 2} C 210 ${deckBaseline - 44}, 304 ${deckBaseline - 48}, 386 ${deckBaseline - 6} S 574 ${deckBaseline + 30}, 678 ${deckBaseline + 12}`}
               fill="none"
               stroke="rgba(103,232,249,0.18)"
@@ -260,7 +260,7 @@ export default function BridgeStateVisual({
             />
 
             {segments.map((segment) => (
-              <motion.rect
+              <Motion.rect
                 key={segment.key}
                 x={segment.x}
                 y={segment.y + segment.extraDrop}
@@ -276,7 +276,7 @@ export default function BridgeStateVisual({
               />
             ))}
 
-            <motion.path
+            <Motion.path
               d={`M90 ${deckBaseline + 12} H676`}
               stroke={`rgba(241,245,249,${0.68 - visual.collapseOffset * 0.004})`}
               strokeWidth="4"
@@ -286,7 +286,7 @@ export default function BridgeStateVisual({
             />
 
             {cracks.map((crack) => (
-              <motion.path
+              <Motion.path
                 key={crack.key}
                 d={crack.path}
                 fill="none"
@@ -300,7 +300,7 @@ export default function BridgeStateVisual({
             ))}
 
             {visual.jointGap > 3 ? (
-              <motion.rect
+              <Motion.rect
                 x={384}
                 y={deckBaseline - 24}
                 width={Math.max(3, visual.jointGap * 0.42)}
@@ -312,7 +312,7 @@ export default function BridgeStateVisual({
             ) : null}
 
             {visual.deckBreak ? (
-              <motion.path
+              <Motion.path
                 d={`M420 ${deckBaseline + 8} L430 ${deckBaseline + 26}`}
                 stroke="#fbbf24"
                 strokeWidth="3.2"
@@ -323,7 +323,7 @@ export default function BridgeStateVisual({
             ) : null}
 
             {dust.map((puff) => (
-              <motion.circle
+              <Motion.circle
                 key={puff.key}
                 cx={puff.x}
                 cy={puff.y}
@@ -347,9 +347,9 @@ export default function BridgeStateVisual({
                 }}
               />
             ))}
-          </motion.g>
+          </Motion.g>
         </svg>
-      </motion.div>
+      </Motion.div>
 
       <div className="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px]">
         <div className="rounded-[24px] border border-white/10 bg-white/[0.04] px-4 py-4 text-sm leading-7 text-slate-300">
