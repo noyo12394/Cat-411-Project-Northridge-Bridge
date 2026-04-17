@@ -15,31 +15,38 @@ function SummaryChip({ label, value, hint }) {
 }
 
 export default function PortfolioWorkbench({ bridges, onLoadBridge }) {
+  const normalizedBridges = useMemo(() => {
+    if (Array.isArray(bridges)) {
+      return bridges
+    }
+    return bridges?.bridges ?? []
+  }, [bridges])
+
   const [query, setQuery] = useState('')
   const [county, setCounty] = useState('all')
   const [bridgeClass, setBridgeClass] = useState('all')
   const [riskBand, setRiskBand] = useState('all')
   const [rankingMetric, setRankingMetric] = useState('prototypeVulnerability')
-  const [selectedBridgeId, setSelectedBridgeId] = useState(bridges[0]?.structureNumber ?? null)
+  const [selectedBridgeId, setSelectedBridgeId] = useState(null)
 
   const countyOptions = useMemo(
-    () => [...new Set(bridges.map((bridge) => bridge.countyLabel))].slice(0, 80),
-    [bridges],
+    () => [...new Set(normalizedBridges.map((bridge) => bridge.countyLabel))].slice(0, 80),
+    [normalizedBridges],
   )
   const classOptions = useMemo(
-    () => [...new Set(bridges.map((bridge) => bridge.bridgeClass))],
-    [bridges],
+    () => [...new Set(normalizedBridges.map((bridge) => bridge.bridgeClass))],
+    [normalizedBridges],
   )
 
   const filtered = useMemo(() => {
-    return bridges.filter((bridge) => {
+    return normalizedBridges.filter((bridge) => {
       const matchesQuery = !query || bridge.searchableText.includes(query.toLowerCase())
       const matchesCounty = county === 'all' || bridge.countyLabel === county
       const matchesClass = bridgeClass === 'all' || bridge.bridgeClass === bridgeClass
       const matchesRisk = riskBand === 'all' || bridge.riskBand === riskBand
       return matchesQuery && matchesCounty && matchesClass && matchesRisk
     })
-  }, [bridges, query, county, bridgeClass, riskBand])
+  }, [normalizedBridges, query, county, bridgeClass, riskBand])
 
   const selectedBridge = useMemo(() => {
     if (!filtered.length) {
