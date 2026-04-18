@@ -17,6 +17,11 @@ function formatMetric(value, digits = 1) {
   return clamp(value, 0, 999).toFixed(digits)
 }
 
+function formatRange(range = []) {
+  const [start = 0, end = 1] = range
+  return `${start.toFixed(2)}-${end.toFixed(2)}`
+}
+
 function StateChip({ label, active, tone }) {
   const activeClasses =
     tone === 'critical'
@@ -237,6 +242,8 @@ export default function BridgeStateVisual({
         ? 'View: Inspection Prioritization'
         : 'View: Intrinsic Vulnerability'
 
+  const currentStage = stageLegend.find((stage) => stage.key === visual.stageKey) ?? stageLegend[0]
+
   return (
     <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#07111d_0%,#091524_35%,#0c1626_100%)] p-6 shadow-[0_28px_80px_rgba(15,23,42,0.34)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(56,189,248,0.12),transparent_24%),radial-gradient(circle_at_82%_10%,rgba(139,92,246,0.10),transparent_22%),linear-gradient(90deg,rgba(148,163,184,0.05)_1px,transparent_1px),linear-gradient(rgba(148,163,184,0.05)_1px,transparent_1px)] bg-[size:auto,auto,32px_32px,32px_32px]" />
@@ -271,6 +278,55 @@ export default function BridgeStateVisual({
             tone={stage.key === 'critical' ? 'critical' : 'default'}
           />
         ))}
+      </div>
+
+      <div className="relative mt-4 rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-4">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-400">State guide</p>
+            <p className="mt-1 text-sm text-slate-300">
+              Current band: <span className="font-semibold text-white">{currentStage.label}</span>{' '}
+              <span className="text-slate-400">({formatRange(currentStage.range)})</span>
+            </p>
+          </div>
+          <div className="rounded-full border border-white/10 bg-slate-950/30 px-3 py-1.5 text-xs font-semibold text-slate-200">
+            Score {score.toFixed(2)}
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <div className="relative h-2 rounded-full bg-white/10">
+            <Motion.div
+              className="absolute inset-y-0 left-0 rounded-full bg-[linear-gradient(90deg,#38bdf8_0%,#60a5fa_45%,#f59e0b_100%)]"
+              animate={{ width: `${clamp(score, 0, 1) * 100}%` }}
+              transition={spring}
+            />
+            <Motion.div
+              className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border border-white/80 bg-white shadow-[0_0_18px_rgba(255,255,255,0.35)]"
+              animate={{ left: `calc(${clamp(score, 0, 1) * 100}% - 8px)` }}
+              transition={spring}
+            />
+          </div>
+          <div className="mt-3 grid gap-2 sm:grid-cols-5">
+            {stageLegend.map((stage) => {
+              const active = stage.key === visual.stageKey
+
+              return (
+                <div
+                  key={`${stage.key}-range`}
+                  className={`rounded-[18px] border px-3 py-2 ${
+                    active ? 'border-sky-300/50 bg-sky-400/10' : 'border-white/8 bg-white/[0.02]'
+                  }`}
+                >
+                  <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${active ? 'text-sky-100' : 'text-slate-400'}`}>
+                    {stage.label}
+                  </p>
+                  <p className={`mt-1 text-xs ${active ? 'text-slate-200' : 'text-slate-500'}`}>{formatRange(stage.range)}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
 
       <div className="relative mt-6 rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0.02)_100%)] p-4">
@@ -477,9 +533,9 @@ export default function BridgeStateVisual({
             <p className="mt-2 text-2xl font-semibold text-white">{formatMetric(visual.pierTilt)}</p>
           </div>
           <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-3 py-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">Failure onset</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">Joint separation</p>
             <p className="mt-2 text-2xl font-semibold text-white">
-              {formatMetric((visual.visualScore ?? visual.score) * 100, 0)}
+              {formatMetric(visual.jointGap)}
             </p>
           </div>
         </div>

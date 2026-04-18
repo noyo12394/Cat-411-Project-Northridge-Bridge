@@ -80,12 +80,11 @@ export function getBridgeStructuralState({
   const elevated = smoothstep(0.5, 0.69, visualScore)
   const severe = smoothstep(0.7, 0.84, visualScore + eventAmplifier * 0.03)
   const critical = smoothstep(0.85, 1.0, visualScore + eventAmplifier * 0.04)
-  const hairline = smoothstep(0.42, 0.55, visualScore)
 
-  const deckSag = 1.2 + mild * 5.5 + elevated * 10 + severe * 12 + critical * 16 + eventAmplifier * 3
-  const crackOpacity = clamp(hairline * 0.18 + elevated * 0.32 + severe * 0.32 + critical * 0.18, 0, 0.92)
-  const crackCount = visualScore < 0.42 ? 0 : Math.round(1 + elevated * 2 + severe * 3 + critical * 3)
-  const pierTilt = mild * 1.8 + elevated * 4 + severe * 6 + critical * 8
+  const deckSag = 1.2 + mild * 7 + elevated * 11 + severe * 13 + critical * 18 + eventAmplifier * 3
+  const crackOpacity = clamp(elevated * 0.34 + severe * 0.36 + critical * 0.22, 0, 0.92)
+  const crackCount = visualScore < 0.5 ? 0 : Math.round(1 + elevated * 2 + severe * 3 + critical * 3)
+  const pierTilt = mild * 1.5 + elevated * 4.5 + severe * 7 + critical * 9
   const jointGap = elevated * 4 + severe * 10 + critical * 20 + eventAmplifier * 4
   const debrisOpacity = critical * 0.28
   const collapseOffset = critical * 42 + Math.max(0, eventAmplifier - 0.65) * 14
@@ -130,5 +129,7 @@ export function getBridgeStageLegend() {
     key: stage.key,
     label: stage.label,
     heading: stage.heading,
+    range: stage.range,
+    summary: stage.summary,
   }))
 }
