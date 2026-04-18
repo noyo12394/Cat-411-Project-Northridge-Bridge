@@ -3,36 +3,36 @@ const STAGES = [
     key: 'stable',
     label: 'Stable',
     heading: 'Stable structural state',
-    range: [0.0, 0.25],
+    range: [0.0, 0.29],
     summary: 'Bridge remains visually stable under the current vulnerability state.',
   },
   {
     key: 'moderate',
     label: 'Moderate',
     heading: 'Moderate structural stress',
-    range: [0.25, 0.5],
-    summary: 'Bridge exhibits moderate sagging and localized stress indicators.',
+    range: [0.3, 0.49],
+    summary: 'Bridge exhibits slight deck sag with mild support strain, while remaining largely intact.',
   },
   {
     key: 'elevated',
     label: 'Elevated',
     heading: 'Elevated vulnerability',
-    range: [0.5, 0.7],
-    summary: 'Bridge shows visible cracking, joint strain, and growing support misalignment.',
+    range: [0.5, 0.69],
+    summary: 'Bridge shows visible cracking near the joints, moderate sagging, and controlled support misalignment.',
   },
   {
     key: 'severe',
     label: 'Severe',
     heading: 'Severe structural instability',
-    range: [0.7, 0.85],
-    summary: 'Bridge shows severe instability, progressive cracking, and support distress.',
+    range: [0.7, 0.84],
+    summary: 'Bridge shows clear cracking, stronger deck deformation, and localized support distress.',
   },
   {
     key: 'critical',
     label: 'Critical',
     heading: 'Critical failure state',
     range: [0.85, 1.0],
-    summary: 'Bridge shows partial failure behavior with major separation and collapse risk.',
+    summary: 'Bridge shows severe cracking, partial deck separation, and near-failure behavior.',
   },
 ]
 
@@ -45,7 +45,7 @@ function smoothstep(min, max, value) {
 }
 
 function stageFor(score) {
-  if (score < 0.25) return STAGES[0]
+  if (score < 0.3) return STAGES[0]
   if (score < 0.5) return STAGES[1]
   if (score < 0.7) return STAGES[2]
   if (score < 0.85) return STAGES[3]
@@ -70,26 +70,32 @@ export function getBridgeStructuralState({
   structuralScore,
 } = {}) {
   const eventAmplifier = mode === 'event' ? clamp(eventIntensity, 0, 1) : 0
-  const contextualStress = clamp(Math.max(0, ndviShift) * 1.4, 0, 0.08)
+  const contextualStress = clamp(Math.max(0, ndviShift) * 0.6, 0, 0.03)
   const base = clamp(structuralScore ?? vulnerabilityScore)
-  const stateScore = clamp(base + eventAmplifier * 0.12 + contextualStress)
-  const visualScore = clamp(0.03 + Math.pow(stateScore, 0.84) * 0.97)
+  const stateScore = clamp(base + eventAmplifier * 0.06 + contextualStress)
+  const visualScore = clamp(stateScore)
   const stage = stageFor(visualScore)
 
-  const deckSag = lerp(1.5, 48, Math.pow(visualScore, 1.18))
-  const crackOpacity = clamp(0.02 + smoothstep(0.14, 0.94, visualScore) * 0.98)
-  const crackCount = Math.max(0, Math.round(lerp(0, 12, smoothstep(0.2, 0.94, visualScore))))
-  const pierTilt = lerp(0, 18, Math.pow(smoothstep(0.12, 1, visualScore), 1.06))
-  const jointGap = lerp(0, 44, smoothstep(0.34, 0.96, visualScore + eventAmplifier * 0.08))
-  const debrisOpacity = lerp(0, 0.72, smoothstep(0.74, 1.0, visualScore + eventAmplifier * 0.08))
-  const collapseOffset = lerp(0, 118, smoothstep(0.78, 1.0, visualScore + eventAmplifier * 0.16))
-  const supportFailure = smoothstep(0.62, 0.98, visualScore + eventAmplifier * 0.12)
-  const stressGlow = lerp(0.08, 0.76, smoothstep(0.1, 0.98, visualScore))
-  const waveAmplitude = lerp(1.4, 8.8, smoothstep(0.08, 1.0, visualScore + eventAmplifier * 0.08))
-  const segmentRotation = lerp(0.3, 11.4, smoothstep(0.18, 1.0, visualScore))
-  const dustCount = Math.max(2, Math.round(lerp(2, 14, smoothstep(0.76, 1.0, visualScore + eventAmplifier * 0.1))))
-  const deckBreak = visualScore >= 0.8
-  const tint = clamp(0.14 + visualScore * 0.48 + eventAmplifier * 0.1)
+  const mild = smoothstep(0.3, 0.49, visualScore)
+  const elevated = smoothstep(0.5, 0.69, visualScore)
+  const severe = smoothstep(0.7, 0.84, visualScore + eventAmplifier * 0.03)
+  const critical = smoothstep(0.85, 1.0, visualScore + eventAmplifier * 0.04)
+  const hairline = smoothstep(0.42, 0.55, visualScore)
+
+  const deckSag = 1.2 + mild * 5.5 + elevated * 10 + severe * 12 + critical * 16 + eventAmplifier * 3
+  const crackOpacity = clamp(hairline * 0.18 + elevated * 0.32 + severe * 0.32 + critical * 0.18, 0, 0.92)
+  const crackCount = visualScore < 0.42 ? 0 : Math.round(1 + elevated * 2 + severe * 3 + critical * 3)
+  const pierTilt = mild * 1.8 + elevated * 4 + severe * 6 + critical * 8
+  const jointGap = elevated * 4 + severe * 10 + critical * 20 + eventAmplifier * 4
+  const debrisOpacity = critical * 0.28
+  const collapseOffset = critical * 42 + Math.max(0, eventAmplifier - 0.65) * 14
+  const supportFailure = smoothstep(0.76, 0.98, visualScore + eventAmplifier * 0.08)
+  const stressGlow = 0.08 + mild * 0.05 + elevated * 0.08 + severe * 0.11 + critical * 0.14
+  const waveAmplitude = 1 + visualScore * 0.6
+  const segmentRotation = severe * 2.4 + critical * 7.4
+  const dustCount = critical > 0.04 ? Math.max(2, Math.round(2 + critical * 4)) : 0
+  const deckBreak = visualScore >= 0.9
+  const tint = clamp(0.12 + elevated * 0.18 + severe * 0.18 + critical * 0.2 + eventAmplifier * 0.08)
 
   return {
     score: Number(stateScore.toFixed(3)),

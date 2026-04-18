@@ -4,9 +4,9 @@ import { getBridgeStageLegend, getBridgeStructuralState } from '../../lib/bridge
 
 const spring = {
   type: 'spring',
-  stiffness: 120,
-  damping: 18,
-  mass: 0.9,
+  stiffness: 128,
+  damping: 22,
+  mass: 0.86,
 }
 
 function clamp(value, min, max) {
@@ -34,127 +34,150 @@ function StateChip({ label, active, tone }) {
   )
 }
 
+function buildPierPath({ x, topY, baseY, width, lean }) {
+  const halfWidth = width / 2
+  const bottomCenter = x + lean
+  return `M ${x - halfWidth} ${topY} L ${x + halfWidth} ${topY} L ${bottomCenter + halfWidth} ${baseY} L ${bottomCenter - halfWidth} ${baseY} Z`
+}
+
 function buildGeometry(visual) {
-  const deckThickness = 28
-  const baseY = 258
-  const gap = 6 + visual.jointGap * 0.38
-  const rightShift = visual.jointGap * 0.2
-  const rightDrop = visual.collapseOffset * 0.24 + visual.supportFailure * 18
-  const leftSag = visual.deckSag * 0.78
-  const rightSag = visual.deckSag * 0.94 + rightDrop * 0.38
+  const baseY = 248
+  const deckThickness = 24
+  const jointGap = 2 + visual.jointGap * 0.38
+  const rightShift = visual.jointGap * 0.14 + visual.supportFailure * 3.8
+  const rightDrop = visual.collapseOffset * 0.26
+  const leftSag = visual.deckSag * 0.52
+  const rightSag = visual.deckSag * 0.68 + rightDrop * 0.22
 
   const left = {
-    startX: 108,
-    endX: 382,
-    y0: 110 + leftSag * 0.08,
-    y1: 116 + leftSag * 0.42,
-    y2: 120 + leftSag * 0.72,
-    y3: 116 + leftSag * 0.48,
+    startX: 156,
+    endX: 380,
+    y0: 118,
+    c1x: 214,
+    c1y: 118 + leftSag * 0.08,
+    c2x: 286,
+    c2y: 126 + leftSag * 0.42,
+    y3: 130 + leftSag * 0.58,
   }
 
   const right = {
-    startX: 392 + gap,
-    endX: 652 + rightShift,
-    y0: 116 + rightSag * 0.34,
-    y1: 122 + rightSag * 0.68,
-    y2: 126 + rightSag * 0.94,
-    y3: 118 + rightSag * 0.58 + rightDrop * 0.12,
+    startX: 384 + jointGap,
+    endX: 566 + rightShift,
+    y0: 124 + rightSag * 0.12,
+    c1x: 446 + rightShift * 0.18,
+    c1y: 130 + rightSag * 0.38,
+    c2x: 514 + rightShift * 0.24,
+    c2y: 138 + rightSag * 0.62,
+    y3: 140 + rightSag * 0.74 + rightDrop * 0.18,
   }
 
-  const leftDeckPath = `M ${left.startX} ${left.y0} C 170 ${left.y0 - 4}, 238 ${left.y1}, 286 ${left.y2} S 346 ${left.y3}, ${left.endX} ${left.y3}`
-  const rightDeckPath = `M ${right.startX} ${right.y0} C 448 ${right.y0 + 4}, 514 ${right.y1}, 564 ${right.y2} S 622 ${right.y3}, ${right.endX} ${right.y3}`
+  const leftDeckPath = `M ${left.startX} ${left.y0} C ${left.c1x} ${left.c1y}, ${left.c2x} ${left.c2y}, ${left.endX} ${left.y3}`
+  const rightDeckPath = `M ${right.startX} ${right.y0} C ${right.c1x} ${right.c1y}, ${right.c2x} ${right.c2y}, ${right.endX} ${right.y3}`
 
   const piers = [
     {
       key: 'pier-west',
-      x: 176,
-      topY: left.y0 + 22,
-      width: 24,
-      height: baseY - (left.y0 + 22),
-      rotation: -visual.pierTilt * 0.08,
+      x: 210,
+      topY: 146 + leftSag * 0.08,
+      width: 18,
+      lean: -visual.pierTilt * 0.04,
       settle: 0,
+      compression: 0,
     },
     {
       key: 'pier-mid',
       x: 304,
-      topY: left.y2 + 18,
-      width: 26,
-      height: baseY - (left.y2 + 18),
-      rotation: visual.pierTilt * 0.12,
-      settle: visual.supportFailure * 3,
+      topY: 150 + leftSag * 0.2,
+      width: 19,
+      lean: visual.pierTilt * 0.08,
+      settle: visual.supportFailure * 2.5,
+      compression: visual.supportFailure * 2,
     },
     {
       key: 'pier-east',
-      x: 492 + rightShift * 0.2,
-      topY: right.y1 + 18,
-      width: 28,
-      height: baseY - (right.y1 + 18) - visual.supportFailure * 12,
-      rotation: -visual.pierTilt * 0.28 - visual.supportFailure * 4,
-      settle: visual.supportFailure * 10,
+      x: 436 + rightShift * 0.12,
+      topY: 150 + rightSag * 0.16,
+      width: 19,
+      lean: visual.pierTilt * 0.16 + visual.supportFailure * 7,
+      settle: visual.supportFailure * 6,
+      compression: visual.supportFailure * 10,
     },
     {
       key: 'pier-far-east',
-      x: 610 + rightShift * 0.18,
-      topY: right.y3 + 16,
-      width: 22,
-      height: baseY - (right.y3 + 16) - visual.supportFailure * 6,
-      rotation: visual.pierTilt * 0.14,
-      settle: visual.supportFailure * 5,
+      x: 520 + rightShift * 0.18,
+      topY: 144 + rightSag * 0.34 + rightDrop * 0.08,
+      width: 18,
+      lean: -visual.pierTilt * 0.08 - visual.supportFailure * 6,
+      settle: visual.supportFailure * 4,
+      compression: visual.supportFailure * 6,
     },
-  ]
+  ].map((pier) => {
+    const y = pier.topY + pier.settle
+    const bottomY = baseY - pier.compression
+    return {
+      ...pier,
+      y,
+      bottomY,
+      path: buildPierPath({ x: pier.x, topY: y, baseY: bottomY, width: pier.width, lean: pier.lean }),
+      capX: pier.x - pier.width / 2 - 8,
+      capY: y - 6,
+      capWidth: pier.width + 16,
+    }
+  })
 
   return {
     baseY,
     deckThickness,
-    gap,
-    rightDrop,
-    rightShift,
-    rightRotation: visual.segmentRotation * 0.4 + visual.supportFailure * 6,
+    jointX: 382,
+    jointY: (left.y3 + right.y0) / 2,
     leftDeckPath,
     rightDeckPath,
-    jointX: 387,
-    jointY: (left.y3 + right.y0) / 2,
-    piers,
     shadowY: baseY + 12,
+    jointGap,
+    rightDrop,
+    rightShift,
+    rightRotation: visual.segmentRotation,
+    piers,
   }
 }
 
 function buildCracks(visual, geometry) {
-  if (visual.crackOpacity < 0.08) {
+  if (visual.crackCount <= 0 || visual.crackOpacity <= 0.04) {
     return []
   }
 
   const seeds = [
-    { x: 284, y: 144, dx: -14, dy: 30 },
-    { x: 344, y: 150, dx: 12, dy: 24 },
-    { x: geometry.jointX - 4, y: geometry.jointY - 4, dx: -8, dy: 30 },
-    { x: geometry.jointX + geometry.gap + 6, y: geometry.jointY + 2, dx: 12, dy: 34 },
-    { x: 514 + geometry.rightShift * 0.25, y: 156 + geometry.rightDrop * 0.18, dx: -12, dy: 28 },
-    { x: 580 + geometry.rightShift * 0.12, y: 164 + geometry.rightDrop * 0.28, dx: 14, dy: 24 },
+    { x: 292, y: 152, dx: -10, dy: 18 },
+    { x: geometry.jointX - 14, y: geometry.jointY - 8, dx: -7, dy: 22 },
+    { x: geometry.jointX + 10, y: geometry.jointY - 4, dx: 8, dy: 20 },
+    { x: 432 + geometry.rightShift * 0.1, y: 156 + geometry.rightDrop * 0.05, dx: -8, dy: 22 },
+    { x: 518 + geometry.rightShift * 0.16, y: 154 + geometry.rightDrop * 0.12, dx: 10, dy: 24 },
+    { x: 560 + geometry.rightShift * 0.18, y: 148 + geometry.rightDrop * 0.16, dx: -8, dy: 16 },
   ]
 
-  return seeds.slice(0, Math.max(1, visual.crackCount)).map((seed, index) => {
-    const branch = 7 + index * 1.8
+  return seeds.slice(0, visual.crackCount).map((seed, index) => {
+    const branch = 4 + index * 1.4
     return {
       key: `crack-${index}`,
-      path: `M ${seed.x} ${seed.y} l ${seed.dx * 0.35} ${seed.dy * 0.34} l ${branch} ${branch * 0.9} l ${-branch * 0.6} ${branch}`,
+      path: `M ${seed.x} ${seed.y} l ${seed.dx * 0.5} ${seed.dy * 0.46} l ${branch} ${branch * 0.9} l ${-branch * 0.7} ${branch * 0.95}`,
       opacity: Math.max(0, visual.crackOpacity - index * 0.08),
-      width: index < 2 ? 2.8 : 2.1,
+      width: index < 2 ? 2.3 : 1.8,
+      stroke: index < 2 ? '#fb923c' : '#fca5a5',
     }
   })
 }
 
 function buildDust(visual, geometry) {
-  if (visual.debrisOpacity < 0.04) {
+  if (visual.dustCount <= 0 || visual.debrisOpacity <= 0.02) {
     return []
   }
 
-  return Array.from({ length: Math.max(2, visual.dustCount) }).map((_, index) => ({
+  return Array.from({ length: visual.dustCount }).map((_, index) => ({
     key: `dust-${index}`,
-    x: geometry.jointX + 18 + index * 10,
-    y: geometry.baseY - 10 - (index % 3) * 5,
-    scale: 0.3 + index * 0.09,
-    delay: index * 0.05,
+    x: geometry.jointX + 24 + index * 8,
+    y: geometry.baseY - 4 - (index % 3) * 4,
+    radius: 10 + index * 1.5,
+    opacity: Math.max(0.04, visual.debrisOpacity * (0.22 - index * 0.015)),
   }))
 }
 
@@ -166,7 +189,7 @@ export default function BridgeStateVisual({
   replayToken = 0,
 }) {
   const reducedMotion = useReducedMotion()
-  const replayControls = useAnimationControls()
+  const pulseControls = useAnimationControls()
   const previousVisualScore = useRef(null)
 
   const visual = useMemo(
@@ -179,23 +202,13 @@ export default function BridgeStateVisual({
   const stageLegend = useMemo(() => getBridgeStageLegend(), [])
 
   useEffect(() => {
-    if (!replayToken || reducedMotion) return
-    replayControls.start({
-      scale: [1, 1.01 + visual.supportFailure * 0.025, 1],
-      x: [0, 3 + visual.pierTilt * 0.14, -2 - visual.pierTilt * 0.08, 0],
-      y: [0, -4 - visual.deckSag * 0.05, 0],
-      rotate: [0, visual.segmentRotation * 0.02, -visual.segmentRotation * 0.015, 0],
-      transition: { duration: 0.82, ease: [0.22, 1, 0.36, 1] },
-    })
-  }, [
-    reducedMotion,
-    replayControls,
-    replayToken,
-    visual.deckSag,
-    visual.pierTilt,
-    visual.segmentRotation,
-    visual.supportFailure,
-  ])
+    if (!reducedMotion && replayToken) {
+      pulseControls.start({
+        opacity: [0, 0.18, 0],
+        transition: { duration: 0.62, ease: [0.22, 1, 0.36, 1] },
+      })
+    }
+  }, [pulseControls, reducedMotion, replayToken])
 
   useEffect(() => {
     if (reducedMotion) return
@@ -209,16 +222,13 @@ export default function BridgeStateVisual({
     const delta = Math.abs(nextScore - previousVisualScore.current)
     previousVisualScore.current = nextScore
 
-    if (delta < 0.035) return
+    if (delta < 0.03) return
 
-    replayControls.start({
-      scale: [1, 1.008 + delta * 0.045, 1],
-      x: [0, delta * 5, -delta * 4, 0],
-      y: [0, -delta * 8, 0],
-      rotate: [0, delta * 1.3, -delta * 1.1, 0],
-      transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+    pulseControls.start({
+      opacity: [0, 0.14 + delta * 0.2, 0],
+      transition: { duration: 0.54, ease: [0.22, 1, 0.36, 1] },
     })
-  }, [reducedMotion, replayControls, visual.score, visual.visualScore])
+  }, [pulseControls, reducedMotion, visual.score, visual.visualScore])
 
   const modeLabel =
     visual.mode === 'event'
@@ -267,16 +277,20 @@ export default function BridgeStateVisual({
         <svg viewBox="0 0 760 310" className="h-[280px] w-full">
           <defs>
             <linearGradient id="deckStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#e2e8f0" stopOpacity="0.94" />
-              <stop offset="45%" stopColor="#9ae6ff" stopOpacity="0.88" />
-              <stop offset="100%" stopColor="#f6ad55" stopOpacity={0.24 + visual.emergencyTint * 0.32} />
+              <stop offset="0%" stopColor="#e2e8f0" stopOpacity="0.96" />
+              <stop offset="45%" stopColor="#a5f3fc" stopOpacity="0.88" />
+              <stop offset="100%" stopColor="#f59e0b" stopOpacity={0.16 + visual.emergencyTint * 0.28} />
+            </linearGradient>
+            <linearGradient id="deckHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.42)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0.08)" />
             </linearGradient>
             <linearGradient id="pierFill" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#dbeafe" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#64748b" stopOpacity="0.82" />
+              <stop offset="0%" stopColor="#dbeafe" stopOpacity="0.92" />
+              <stop offset="100%" stopColor="#64748b" stopOpacity="0.84" />
             </linearGradient>
             <radialGradient id="dustFill" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="rgba(255,237,213,0.92)" />
+              <stop offset="0%" stopColor="rgba(255,237,213,0.82)" />
               <stop offset="100%" stopColor="rgba(249,115,22,0)" />
             </radialGradient>
           </defs>
@@ -293,182 +307,156 @@ export default function BridgeStateVisual({
             />
           ))}
 
-          <Motion.g animate={replayControls} style={{ transformBox: 'fill-box', transformOrigin: 'center center' }}>
-            <Motion.ellipse
-              cx="384"
-              cy={geometry.shadowY}
-              rx="264"
-              ry={12 + visual.supportFailure * 6}
-              fill="rgba(2,6,23,0.55)"
-              animate={{ opacity: 0.36 + visual.stressGlow * 0.22, scaleX: 1 + visual.waveAmplitude * 0.01 }}
-              transition={spring}
-            />
+          <Motion.rect
+            x="48"
+            y="52"
+            width="664"
+            height="202"
+            rx="26"
+            fill="rgba(96,165,250,0.09)"
+            initial={{ opacity: 0 }}
+            animate={pulseControls}
+          />
 
-            {geometry.piers.map((pier) => (
-              <Motion.g
-                key={pier.key}
-                animate={{ x: pier.x, y: pier.topY + pier.settle, rotate: pier.rotation }}
-                transition={spring}
-                style={{ transformBox: 'fill-box', transformOrigin: 'center top' }}
-              >
-                <rect
-                  x={-pier.width / 2}
-                  y="0"
-                  width={pier.width}
-                  height={pier.height}
-                  rx="12"
-                  fill="url(#pierFill)"
-                  stroke={`rgba(255,255,255,${0.18 + visual.crackOpacity * 0.1})`}
-                  strokeWidth="1.2"
-                />
-                <rect
-                  x={-pier.width / 2 - 10}
-                  y="-9"
-                  width={pier.width + 20}
-                  height="10"
-                  rx="5"
-                  fill="rgba(203,213,225,0.92)"
-                  opacity={0.84}
-                />
-              </Motion.g>
-            ))}
+          <Motion.ellipse
+            cx="380"
+            cy={geometry.shadowY}
+            rx="198"
+            ry={11 + visual.supportFailure * 4}
+            fill="rgba(2,6,23,0.46)"
+            animate={{ opacity: 0.24 + visual.stressGlow * 0.2, scaleX: 1 + visual.waveAmplitude * 0.01 }}
+            transition={spring}
+          />
 
-            <Motion.path
-              d={geometry.leftDeckPath}
-              fill="none"
-              stroke="rgba(8,15,28,0.55)"
-              strokeWidth={geometry.deckThickness + 12}
-              strokeLinecap="round"
-              animate={{ d: geometry.leftDeckPath }}
-              transition={spring}
-            />
-            <Motion.path
-              d={geometry.rightDeckPath}
-              fill="none"
-              stroke="rgba(8,15,28,0.55)"
-              strokeWidth={geometry.deckThickness + 12}
-              strokeLinecap="round"
-              animate={{ d: geometry.rightDeckPath }}
-              transition={spring}
-            />
-
-            <Motion.path
-              d={geometry.leftDeckPath}
-              fill="none"
-              stroke="url(#deckStroke)"
-              strokeWidth={geometry.deckThickness}
-              strokeLinecap="round"
-              animate={{ d: geometry.leftDeckPath }}
-              transition={spring}
-            />
-
-            <Motion.g
-              animate={{
-                x: geometry.rightShift * 0.18,
-                y: geometry.rightDrop * 0.18,
-                rotate: geometry.rightRotation,
-              }}
-              transition={spring}
-              style={{ transformBox: 'fill-box', transformOrigin: '460px 140px' }}
-            >
+          {geometry.piers.map((pier) => (
+            <g key={pier.key}>
               <Motion.path
-                d={geometry.rightDeckPath}
-                fill="none"
-                stroke="url(#deckStroke)"
-                strokeWidth={geometry.deckThickness}
-                strokeLinecap="round"
-                animate={{ d: geometry.rightDeckPath }}
+                d={pier.path}
+                fill="url(#pierFill)"
+                stroke={`rgba(255,255,255,${0.14 + visual.crackOpacity * 0.12})`}
+                strokeWidth="1.1"
+                animate={{ d: pier.path }}
                 transition={spring}
               />
-            </Motion.g>
-
-            <Motion.path
-              d={geometry.leftDeckPath}
-              fill="none"
-              stroke="rgba(255,255,255,0.35)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeDasharray="1 10"
-              animate={{ opacity: 0.16 + visual.stressGlow * 0.18 }}
-              transition={spring}
-            />
-
-            <Motion.path
-              d={geometry.rightDeckPath}
-              fill="none"
-              stroke="rgba(255,255,255,0.26)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeDasharray="1 10"
-              animate={{ opacity: 0.12 + visual.stressGlow * 0.16 }}
-              transition={spring}
-            />
-
-            {geometry.gap > 8 ? (
               <Motion.rect
-                x={geometry.jointX}
-                y={geometry.jointY - 18}
-                width={geometry.gap * 0.84}
-                height={42 + visual.supportFailure * 8}
-                rx="10"
-                fill="rgba(6,11,20,0.82)"
-                animate={{ opacity: 0.24 + visual.supportFailure * 0.4 }}
+                x={pier.capX}
+                y={pier.capY}
+                width={pier.capWidth}
+                height="8"
+                rx="4"
+                fill="rgba(226,232,240,0.9)"
+                animate={{ x: pier.capX, y: pier.capY, width: pier.capWidth }}
                 transition={spring}
               />
-            ) : null}
+            </g>
+          ))}
 
-            {cracks.map((crack) => (
-              <Motion.path
-                key={crack.key}
-                d={crack.path}
-                fill="none"
-                stroke={crack.key.includes('0') || crack.key.includes('2') ? '#fb923c' : '#fca5a5'}
-                strokeWidth={crack.width}
-                strokeLinecap="round"
-                animate={{ opacity: crack.opacity }}
-                transition={spring}
-              />
-            ))}
+          <Motion.path
+            d={geometry.leftDeckPath}
+            fill="none"
+            stroke="rgba(8,15,28,0.56)"
+            strokeWidth={geometry.deckThickness + 12}
+            strokeLinecap="round"
+            animate={{ d: geometry.leftDeckPath }}
+            transition={spring}
+          />
+          <Motion.path
+            d={geometry.rightDeckPath}
+            fill="none"
+            stroke="rgba(8,15,28,0.56)"
+            strokeWidth={geometry.deckThickness + 12}
+            strokeLinecap="round"
+            animate={{ d: geometry.rightDeckPath }}
+            transition={spring}
+          />
 
-            {visual.deckBreak ? (
-              <Motion.path
-                d={`M ${geometry.jointX + 6} ${geometry.jointY - 6} l 10 16 l -7 20`}
-                fill="none"
-                stroke="#fde68a"
-                strokeWidth="3.2"
-                strokeLinecap="round"
-                animate={{ opacity: 0.45 + visual.crackOpacity * 0.34 }}
-                transition={spring}
-              />
-            ) : null}
+          <Motion.path
+            d={geometry.leftDeckPath}
+            fill="none"
+            stroke="url(#deckStroke)"
+            strokeWidth={geometry.deckThickness}
+            strokeLinecap="round"
+            animate={{ d: geometry.leftDeckPath }}
+            transition={spring}
+          />
+          <Motion.path
+            d={geometry.rightDeckPath}
+            fill="none"
+            stroke="url(#deckStroke)"
+            strokeWidth={geometry.deckThickness}
+            strokeLinecap="round"
+            animate={{ d: geometry.rightDeckPath }}
+            transition={spring}
+          />
 
-            {dust.map((puff) => (
-              <Motion.circle
-                key={puff.key}
-                cx={puff.x}
-                cy={puff.y}
-                r="14"
-                fill="url(#dustFill)"
-                animate={
-                  reducedMotion
-                    ? { opacity: visual.debrisOpacity * 0.18, scale: 0.6 + puff.scale * visual.debrisOpacity }
-                    : {
-                        opacity: [0, visual.debrisOpacity * 0.3, 0],
-                        scale: [0.4, 0.9 + puff.scale * 0.6, 1.3 + puff.scale],
-                        y: [0, -10 - puff.scale * 4, -22 - puff.scale * 8],
-                        x: [0, (puff.scale - 0.4) * 6, (puff.scale - 0.4) * 10],
-                      }
-                }
-                transition={{
-                  duration: reducedMotion ? 0.2 : 2.4 + puff.delay,
-                  repeat: reducedMotion ? 0 : Infinity,
-                  repeatDelay: reducedMotion ? 0 : 0.5,
-                  delay: puff.delay,
-                  ease: 'easeOut',
-                }}
-              />
-            ))}
-          </Motion.g>
+          <Motion.path
+            d={geometry.leftDeckPath}
+            fill="none"
+            stroke="url(#deckHighlight)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            animate={{ d: geometry.leftDeckPath, opacity: 0.16 + visual.stressGlow * 0.1 }}
+            transition={spring}
+          />
+          <Motion.path
+            d={geometry.rightDeckPath}
+            fill="none"
+            stroke="url(#deckHighlight)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            animate={{ d: geometry.rightDeckPath, opacity: 0.14 + visual.stressGlow * 0.1 }}
+            transition={spring}
+          />
+
+          {geometry.jointGap > 2 ? (
+            <Motion.rect
+              x={geometry.jointX}
+              y={geometry.jointY - 14}
+              width={geometry.jointGap}
+              height={30 + visual.supportFailure * 12}
+              rx="8"
+              fill="rgba(6,11,20,0.86)"
+              animate={{ x: geometry.jointX, y: geometry.jointY - 14, width: geometry.jointGap }}
+              transition={spring}
+            />
+          ) : null}
+
+          {cracks.map((crack) => (
+            <Motion.path
+              key={crack.key}
+              d={crack.path}
+              fill="none"
+              stroke={crack.stroke}
+              strokeWidth={crack.width}
+              strokeLinecap="round"
+              animate={{ d: crack.path, opacity: crack.opacity }}
+              transition={spring}
+            />
+          ))}
+
+          {visual.deckBreak ? (
+            <Motion.path
+              d={`M ${geometry.jointX + 2} ${geometry.jointY - 12} l 8 12 l -6 18`}
+              fill="none"
+              stroke="#fde68a"
+              strokeWidth="3"
+              strokeLinecap="round"
+              animate={{ opacity: 0.3 + visual.crackOpacity * 0.35 }}
+              transition={spring}
+            />
+          ) : null}
+
+          {dust.map((puff) => (
+            <Motion.circle
+              key={puff.key}
+              cx={puff.x}
+              cy={puff.y}
+              r={puff.radius}
+              fill="url(#dustFill)"
+              animate={{ opacity: puff.opacity, scale: 0.5 + visual.debrisOpacity * 0.9 }}
+              transition={spring}
+            />
+          ))}
         </svg>
       </div>
 
