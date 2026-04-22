@@ -39,6 +39,13 @@ export default function DashboardSection({
     [mode],
   )
 
+  const portfolioBridges = useMemo(() => {
+    if (Array.isArray(researchData.portfolio)) {
+      return researchData.portfolio
+    }
+    return researchData.portfolio?.bridges ?? []
+  }, [researchData.portfolio])
+
   const handleChange = (field, value) => {
     const nextInputs = { ...inputs, [field]: value }
     setInputs(nextInputs)
@@ -113,7 +120,7 @@ export default function DashboardSection({
             </p>
           </div>
         ) : (
-          <PortfolioWorkbench bridges={researchData.portfolio} onLoadBridge={handleLoadSample} />
+          <PortfolioWorkbench bridges={portfolioBridges} onLoadBridge={handleLoadSample} />
         )
       ) : (
         <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(243,247,252,0.96)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">

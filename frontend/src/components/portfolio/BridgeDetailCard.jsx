@@ -21,10 +21,27 @@ function ContributionRow({ label, value }) {
   )
 }
 
+function safeNumber(value, fallback = 0) {
+  const numeric = Number(value)
+  return Number.isFinite(numeric) ? numeric : fallback
+}
+
+function formatFixed(value, digits = 3, fallback = 'n/a') {
+  const numeric = Number(value)
+  return Number.isFinite(numeric) ? numeric.toFixed(digits) : fallback
+}
+
 export default function BridgeDetailCard({ bridge, onLoadBridge }) {
   if (!bridge) {
     return null
   }
+
+  const latitude = Number(bridge.latitude)
+  const longitude = Number(bridge.longitude)
+  const coordinates =
+    Number.isFinite(latitude) && Number.isFinite(longitude)
+      ? `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
+      : 'Coordinates unavailable'
 
   return (
     <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(247,249,253,0.96)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">
@@ -44,28 +61,28 @@ export default function BridgeDetailCard({ bridge, onLoadBridge }) {
       </div>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <DetailPill label="Prototype score" value={bridge.prototypeVulnerability.toFixed(3)} />
-        <DetailPill label="Priority score" value={bridge.priorityScore.toFixed(3)} />
-        <DetailPill label="SVI" value={bridge.svi.toFixed(3)} />
-        <DetailPill label="Repo EDR" value={bridge.edr.toFixed(3)} />
-        <DetailPill label="Condition" value={bridge.condition} />
-        <DetailPill label="ADT" value={bridge.adt ? bridge.adt.toLocaleString() : 'n/a'} />
-        <DetailPill label="Spans" value={bridge.spans} />
-        <DetailPill label="Max span" value={`${bridge.maxSpanFt.toFixed(1)} ft`} />
+        <DetailPill label="Prototype score" value={formatFixed(bridge.prototypeVulnerability)} />
+        <DetailPill label="Priority score" value={formatFixed(bridge.priorityScore)} />
+        <DetailPill label="SVI" value={formatFixed(bridge.svi)} />
+        <DetailPill label="Repo EDR" value={formatFixed(bridge.edr)} />
+        <DetailPill label="Condition" value={bridge.condition ?? 'n/a'} />
+        <DetailPill label="ADT" value={bridge.adt ? Number(bridge.adt).toLocaleString() : 'n/a'} />
+        <DetailPill label="Spans" value={bridge.spans ?? 'n/a'} />
+        <DetailPill label="Max span" value={Number.isFinite(Number(bridge.maxSpanFt)) ? `${Number(bridge.maxSpanFt).toFixed(1)} ft` : 'n/a'} />
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[0.92fr_1.08fr]">
         <div className="rounded-[24px] border border-slate-200 bg-white/85 p-5">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Why this bridge scores high</p>
           <div className="mt-4 space-y-4">
-            <ContributionRow label="Condition component" value={bridge.componentCondition} />
-            <ContributionRow label="SVI component" value={bridge.componentSVI} />
-            <ContributionRow label="Age / design era" value={bridge.componentAge} />
-            <ContributionRow label="Reconstruction timing" value={bridge.componentRehab} />
-            <ContributionRow label="Skew" value={bridge.componentSkew} />
-            <ContributionRow label="Max span" value={bridge.componentMaxSpan} />
-            <ContributionRow label="Bridge class" value={bridge.componentBridgeClass} />
-            <ContributionRow label="Span count" value={bridge.componentSpans} />
+            <ContributionRow label="Condition component" value={safeNumber(bridge.componentCondition)} />
+            <ContributionRow label="SVI component" value={safeNumber(bridge.componentSVI)} />
+            <ContributionRow label="Age / design era" value={safeNumber(bridge.componentAge)} />
+            <ContributionRow label="Reconstruction timing" value={safeNumber(bridge.componentRehab)} />
+            <ContributionRow label="Skew" value={safeNumber(bridge.componentSkew)} />
+            <ContributionRow label="Max span" value={safeNumber(bridge.componentMaxSpan)} />
+            <ContributionRow label="Bridge class" value={safeNumber(bridge.componentBridgeClass)} />
+            <ContributionRow label="Span count" value={safeNumber(bridge.componentSpans)} />
           </div>
         </div>
 
@@ -76,8 +93,8 @@ export default function BridgeDetailCard({ bridge, onLoadBridge }) {
             This bridge ranks where it does because the prototype engine combines its condition, SVI, age, geometry, and bridge class into one intrinsic screening score. Traffic appears only in the downstream priority score, which is why a high-ADT bridge can move up in urgency without changing its structural vulnerability logic.
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            <DetailPill label="Inspection tier" value={bridge.inspectionTier} />
-            <DetailPill label="Coordinates" value={`${bridge.latitude.toFixed(2)}, ${bridge.longitude.toFixed(2)}`} />
+            <DetailPill label="Inspection tier" value={bridge.inspectionTier ?? 'n/a'} />
+            <DetailPill label="Coordinates" value={coordinates} />
           </div>
         </div>
       </div>
