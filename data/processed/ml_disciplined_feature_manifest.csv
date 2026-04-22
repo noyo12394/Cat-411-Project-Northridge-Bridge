@@ -1,0 +1,18 @@
+Feature,Role,Use
+age_years,intrinsic structural,Bridge age derived from year built.
+time_since_rehab,intrinsic structural,"Years since reconstruction, falling back to bridge age."
+reconstructed_flag,intrinsic structural,Whether a reconstruction year is recorded.
+spans,intrinsic structural,Number of main spans.
+max_span_log1p,intrinsic structural,Log transformed maximum span length.
+skew,intrinsic structural,Skew angle in degrees.
+cond,intrinsic structural,Condition rating proxy.
+deck_area_log1p,intrinsic structural,Log transformed bridge deck area / structural scale.
+operating_rating,intrinsic structural,Operating rating from inventory.
+HWB_CLASS,intrinsic structural class,"HAZUS bridge class used as structural-system descriptor, not hazard demand."
+design_era_1989,intrinsic design context,Design-era category derived from effective construction / reconstruction year.
+SVI,contextual vulnerability covariate,Added only in Structural + SVI family to test incremental value.
+ndvi_change,post-event proxy,Added only in extended post-event family.
+ndvi_loss,post-event proxy,Negative NDVI change recoded as nonnegative post-event loss proxy.
+adt_raw,consequence / prioritization only,"Used only after vulnerability prediction for ranking, never in core regression."
+truck_pct,consequence / prioritization only,Used only after vulnerability prediction for ranking.
+detour_km,consequence / prioritization only,Used only after vulnerability prediction for ranking.

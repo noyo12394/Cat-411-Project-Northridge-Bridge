@@ -199,14 +199,43 @@ For a deeper machine-learning comparison, the repository now includes:
 - `scripts/run_ml_hybrid_analysis.py`
 - `scripts/export_recommended_hybrid.py`
 - `docs/ML_HYBRID_ANALYSIS.md`
+- `scripts/run_disciplined_ml_study.py`
+- `docs/ML_DISCIPLINED_STUDY.md`
 
-This add-on compares:
+### Disciplined Vulnerability Study
+
+The disciplined ML study is the recommended professor-facing model comparison when the research question is bridge-intrinsic vulnerability. It separates:
+- `Structural-only core`: physical / condition / geometry / class variables only
+- `Structural + SVI`: the same core variables plus SVI as an additive covariate
+- `Structural + SVI + NDVI`: a clearly separated post-event proxy extension
+- `ml_consequence_priority_scores.csv`: a downstream prioritization layer where ADT, truck share, and detour distance affect inspection ranking, not structural vulnerability prediction
+
+Run it with:
+
+```bash
+python scripts/run_disciplined_ml_study.py
+```
+
+Key outputs include:
+- `data/processed/ml_disciplined_model_comparison.csv`
+- `data/processed/ml_disciplined_best_by_family.csv`
+- `data/processed/ml_disciplined_ablation_summary.csv`
+- `data/processed/ml_disciplined_permutation_importance.csv`
+- `data/processed/ml_disciplined_linear_coefficients.csv`
+- `figures/ml_disciplined_model_comparison.png`
+- `figures/ml_disciplined_ablation_rmse.png`
+- `figures/ml_disciplined_feature_importance.png`
+- `figures/ml_disciplined_priority_layer.png`
+
+### Hybrid / Event-Damage Study
+
+The older hybrid add-on compares:
 - `HAZUS Benchmark` models
 - `Bridge Vulnerability Compact` models
 - `Bridge Vulnerability Structural` models
 - `Event Damage Hybrid` models
 
-It also:
+That hybrid workflow also:
 - rebuilds the ML dataset on all California bridges, not only the ShakeMap-affected subset
 - tests the professor-requested `log1p(EDR) -> expm1(...)` target transform and saves the raw-vs-log comparison
 - exports benchmark artifacts for the overall best model

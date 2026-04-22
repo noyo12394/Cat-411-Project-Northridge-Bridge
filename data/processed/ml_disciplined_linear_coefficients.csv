@@ -1,0 +1,396 @@
+Model Family,Encoded Feature,Source Feature,Coefficient,Abs_Coefficient,Model
+Structural-only core,cat__HWB_CLASS_HWB2,HWB_CLASS,0.009725281587505364,0.009725281587505364,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB1,HWB_CLASS,0.004488472597100435,0.004488472597100435,Elastic Net
+Structural-only core,num__deck_area_log1p,deck_area_log1p,0.004447773619164699,0.004447773619164699,Elastic Net
+Structural-only core,num__operating_rating,operating_rating,0.0027199449602707685,0.0027199449602707685,Elastic Net
+Structural-only core,num__spans,spans,-0.0017062014579784955,0.0017062014579784955,Elastic Net
+Structural-only core,cat__design_era_1989_1990+,design_era_1989,-0.001619630769266116,0.001619630769266116,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB4,HWB_CLASS,0.001554722546922603,0.001554722546922603,Elastic Net
+Structural-only core,num__cond,cond,0.0011664156640188216,0.0011664156640188216,Elastic Net
+Structural-only core,num__age_years,age_years,0.0009409411490387,0.0009409411490387,Elastic Net
+Structural-only core,cat__design_era_1989_1975-1989,design_era_1989,0.0006434192909525937,0.0006434192909525937,Elastic Net
+Structural-only core,num__reconstructed_flag,reconstructed_flag,0.0005900790924297643,0.0005900790924297643,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.0003383112804624277,0.0003383112804624277,Elastic Net
+Structural-only core,num__skew,skew,-0.00030532108137730594,0.00030532108137730594,Elastic Net
+Structural-only core,num__time_since_rehab,time_since_rehab,4.0898572848677816e-05,4.0898572848677816e-05,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB7,HWB_CLASS,0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB12,HWB_CLASS,0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB28,HWB_CLASS,0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural-only core,num__max_span_log1p,max_span_log1p,-0.0,0.0,Elastic Net
+Structural-only core,cat__design_era_1989_Pre-1975,design_era_1989,0.0,0.0,Elastic Net
+Structural-only core,cat__HWB_CLASS_HWB2,HWB_CLASS,0.010075528164399793,0.010075528164399793,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB1,HWB_CLASS,0.00519164582354564,0.00519164582354564,Lasso Regression
+Structural-only core,num__deck_area_log1p,deck_area_log1p,0.00461111758451849,0.00461111758451849,Lasso Regression
+Structural-only core,num__operating_rating,operating_rating,0.002731181206209994,0.002731181206209994,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB4,HWB_CLASS,0.002306829538933447,0.002306829538933447,Lasso Regression
+Structural-only core,cat__design_era_1989_1990+,design_era_1989,-0.00178790478182352,0.00178790478182352,Lasso Regression
+Structural-only core,num__spans,spans,-0.0017441547865344408,0.0017441547865344408,Lasso Regression
+Structural-only core,num__cond,cond,0.0011854910288234012,0.0011854910288234012,Lasso Regression
+Structural-only core,num__age_years,age_years,0.0008960105353582104,0.0008960105353582104,Lasso Regression
+Structural-only core,cat__design_era_1989_1975-1989,design_era_1989,0.0007566963067472841,0.0007566963067472841,Lasso Regression
+Structural-only core,num__reconstructed_flag,reconstructed_flag,0.0006421480209274612,0.0006421480209274612,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.000474568945705091,0.000474568945705091,Lasso Regression
+Structural-only core,num__skew,skew,-0.000349495407034274,0.000349495407034274,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.000208813926019009,0.000208813926019009,Lasso Regression
+Structural-only core,num__time_since_rehab,time_since_rehab,8.22999351557778e-05,8.22999351557778e-05,Lasso Regression
+Structural-only core,num__max_span_log1p,max_span_log1p,-2.0566938538430057e-05,2.0566938538430057e-05,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB7,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB12,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB6,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB28,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural-only core,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural-only core,cat__design_era_1989_Pre-1975,design_era_1989,-0.0,0.0,Lasso Regression
+Structural-only core,cat__design_era_1989_1990+,design_era_1989,-62988236402.08531,62988236402.08531,Linear Regression
+Structural-only core,cat__design_era_1989_Pre-1975,design_era_1989,-62988236402.08336,62988236402.08336,Linear Regression
+Structural-only core,cat__design_era_1989_1975-1989,design_era_1989,-62988236402.08154,62988236402.08154,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB3,HWB_CLASS,-13044859263.656788,13044859263.656788,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB9,HWB_CLASS,-13044859263.656336,13044859263.656336,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB5,HWB_CLASS,-13044859263.65564,13044859263.65564,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB8,HWB_CLASS,-13044859263.655512,13044859263.655512,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB10,HWB_CLASS,-13044859263.654612,13044859263.654612,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB6,HWB_CLASS,-13044859263.653786,13044859263.653786,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB7,HWB_CLASS,-13044859263.653446,13044859263.653446,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB12,HWB_CLASS,-13044859263.652868,13044859263.652868,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB11,HWB_CLASS,-13044859263.652775,13044859263.652775,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB4,HWB_CLASS,-13044859263.648523,13044859263.648523,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB1,HWB_CLASS,-13044859263.646667,13044859263.646667,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB2,HWB_CLASS,-13044859263.642572,13044859263.642572,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB28,HWB_CLASS,-13044859263.641401,13044859263.641401,Linear Regression
+Structural-only core,num__deck_area_log1p,deck_area_log1p,0.00572260781393892,0.00572260781393892,Linear Regression
+Structural-only core,num__operating_rating,operating_rating,0.0027512899566179794,0.0027512899566179794,Linear Regression
+Structural-only core,num__spans,spans,-0.0019971780927847504,0.0019971780927847504,Linear Regression
+Structural-only core,num__cond,cond,0.0012028431844163104,0.0012028431844163104,Linear Regression
+Structural-only core,num__reconstructed_flag,reconstructed_flag,0.00076107377166151,0.00076107377166151,Linear Regression
+Structural-only core,num__age_years,age_years,0.0005689158926334513,0.0005689158926334513,Linear Regression
+Structural-only core,num__skew,skew,-0.0005050873517599844,0.0005050873517599844,Linear Regression
+Structural-only core,num__max_span_log1p,max_span_log1p,-0.00047782321110027853,0.00047782321110027853,Linear Regression
+Structural-only core,num__time_since_rehab,time_since_rehab,0.00042146110719155406,0.00042146110719155406,Linear Regression
+Structural-only core,cat__HWB_CLASS_HWB28,HWB_CLASS,0.011945852799778545,0.011945852799778545,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB2,HWB_CLASS,0.011443728151446748,0.011443728151446748,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB1,HWB_CLASS,0.006647164069402283,0.006647164069402283,Support Vector Regressor (LinearSVR)
+Structural-only core,num__deck_area_log1p,deck_area_log1p,0.0065502366106127,0.0065502366106127,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__design_era_1989_1975-1989,design_era_1989,0.006224570957030122,0.006224570957030122,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB4,HWB_CLASS,0.005508250945030647,0.005508250945030647,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0049881998083834275,0.0049881998083834275,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.004035596968421959,0.004035596968421959,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__design_era_1989_Pre-1975,design_era_1989,0.0038026292287825806,0.0038026292287825806,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.0035571993733131877,0.0035571993733131877,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.003468922090193479,0.003468922090193479,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.003259544716359529,0.003259544716359529,Support Vector Regressor (LinearSVR)
+Structural-only core,num__operating_rating,operating_rating,0.0028527530672986206,0.0028527530672986206,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.002460279534724214,0.002460279534724214,Support Vector Regressor (LinearSVR)
+Structural-only core,num__spans,spans,-0.0021352620844325696,0.0021352620844325696,Support Vector Regressor (LinearSVR)
+Structural-only core,num__cond,cond,0.0017663783783428803,0.0017663783783428803,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0013563455216940958,0.0013563455216940958,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__design_era_1989_1990+,design_era_1989,0.001096189780082083,0.001096189780082083,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB7,HWB_CLASS,-0.000999180915415967,0.000999180915415967,Support Vector Regressor (LinearSVR)
+Structural-only core,num__reconstructed_flag,reconstructed_flag,0.0007858062436313863,0.0007858062436313863,Support Vector Regressor (LinearSVR)
+Structural-only core,num__skew,skew,-0.0007491417714466593,0.0007491417714466593,Support Vector Regressor (LinearSVR)
+Structural-only core,num__max_span_log1p,max_span_log1p,-0.0004540494917165369,0.0004540494917165369,Support Vector Regressor (LinearSVR)
+Structural-only core,num__age_years,age_years,-0.0003017546008876439,0.0003017546008876439,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.00029633707125926057,0.00029633707125926057,Support Vector Regressor (LinearSVR)
+Structural-only core,num__time_since_rehab,time_since_rehab,0.00021775592307038318,0.00021775592307038318,Support Vector Regressor (LinearSVR)
+Structural-only core,cat__HWB_CLASS_HWB28,HWB_CLASS,0.009120490683181288,0.009120490683181288,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB2,HWB_CLASS,0.009034939533307682,0.009034939533307682,Ridge Regression
+Structural-only core,num__deck_area_log1p,deck_area_log1p,0.005739414425540963,0.005739414425540963,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB1,HWB_CLASS,0.005115565041314086,0.005115565041314086,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0050764165439958755,0.0050764165439958755,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.004662339000496425,0.004662339000496425,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.003930110240299962,0.003930110240299962,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.0038780290296340256,0.0038780290296340256,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB4,HWB_CLASS,0.003165894551199472,0.003165894551199472,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0029646125431994964,0.0029646125431994964,Ridge Regression
+Structural-only core,num__operating_rating,operating_rating,0.002766871762462587,0.002766871762462587,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.0021640934672517613,0.0021640934672517613,Ridge Regression
+Structural-only core,num__spans,spans,-0.001993789130865275,0.001993789130865275,Ridge Regression
+Structural-only core,cat__design_era_1989_1990+,design_era_1989,-0.0018689138649017614,0.0018689138649017614,Ridge Regression
+Structural-only core,cat__design_era_1989_1975-1989,design_era_1989,0.0017212486055942972,0.0017212486055942972,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB7,HWB_CLASS,-0.0016766465590708308,0.0016766465590708308,Ridge Regression
+Structural-only core,num__cond,cond,0.0011938171056732542,0.0011938171056732542,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0011042694472152414,0.0011042694472152414,Ridge Regression
+Structural-only core,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.0009803729782483347,0.0009803729782483347,Ridge Regression
+Structural-only core,num__reconstructed_flag,reconstructed_flag,0.0007676153414546662,0.0007676153414546662,Ridge Regression
+Structural-only core,num__age_years,age_years,0.0005497855425496645,0.0005497855425496645,Ridge Regression
+Structural-only core,num__skew,skew,-0.0005016278387253982,0.0005016278387253982,Ridge Regression
+Structural-only core,num__max_span_log1p,max_span_log1p,-0.0005000407312706918,0.0005000407312706918,Ridge Regression
+Structural-only core,num__time_since_rehab,time_since_rehab,0.00041637944634321904,0.00041637944634321904,Ridge Regression
+Structural-only core,cat__design_era_1989_Pre-1975,design_era_1989,0.000147665260737999,0.000147665260737999,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.009518661943539059,0.009518661943539059,Elastic Net
+Structural + SVI,num__deck_area_log1p,deck_area_log1p,0.0044517991089579765,0.0044517991089579765,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.0043470551497888765,0.0043470551497888765,Elastic Net
+Structural + SVI,num__operating_rating,operating_rating,0.0027216583093621306,0.0027216583093621306,Elastic Net
+Structural + SVI,num__spans,spans,-0.0017101101487265414,0.0017101101487265414,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.0014986218513309173,0.0014986218513309173,Elastic Net
+Structural + SVI,cat__design_era_1989_1990+,design_era_1989,-0.0014878565286233765,0.0014878565286233765,Elastic Net
+Structural + SVI,num__cond,cond,0.001212067804174338,0.001212067804174338,Elastic Net
+Structural + SVI,num__age_years,age_years,0.0009136509579728817,0.0009136509579728817,Elastic Net
+Structural + SVI,cat__design_era_1989_1975-1989,design_era_1989,0.00067299737151183,0.00067299737151183,Elastic Net
+Structural + SVI,num__reconstructed_flag,reconstructed_flag,0.0005855239808886937,0.0005855239808886937,Elastic Net
+Structural + SVI,num__skew,skew,-0.0004183446005138588,0.0004183446005138588,Elastic Net
+Structural + SVI,num__SVI,SVI,0.0002243394233029169,0.0002243394233029169,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.00021356998058173228,0.00021356998058173228,Elastic Net
+Structural + SVI,num__time_since_rehab,time_since_rehab,4.696277226619973e-05,4.696277226619973e-05,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB7,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB6,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB12,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI,num__max_span_log1p,max_span_log1p,-0.0,0.0,Elastic Net
+Structural + SVI,cat__design_era_1989_Pre-1975,design_era_1989,0.0,0.0,Elastic Net
+Structural + SVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.009911002033738157,0.009911002033738157,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.0050826338506417875,0.0050826338506417875,Lasso Regression
+Structural + SVI,num__deck_area_log1p,deck_area_log1p,0.004618113403375469,0.004618113403375469,Lasso Regression
+Structural + SVI,num__operating_rating,operating_rating,0.002733543680578329,0.002733543680578329,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.0022575755709326483,0.0022575755709326483,Lasso Regression
+Structural + SVI,num__spans,spans,-0.0017496444206506951,0.0017496444206506951,Lasso Regression
+Structural + SVI,cat__design_era_1989_1990+,design_era_1989,-0.0017066406971172723,0.0017066406971172723,Lasso Regression
+Structural + SVI,num__cond,cond,0.0012181032722294737,0.0012181032722294737,Lasso Regression
+Structural + SVI,num__age_years,age_years,0.0008781209586068244,0.0008781209586068244,Lasso Regression
+Structural + SVI,cat__design_era_1989_1975-1989,design_era_1989,0.0007660968797205558,0.0007660968797205558,Lasso Regression
+Structural + SVI,num__reconstructed_flag,reconstructed_flag,0.0006394459987266837,0.0006394459987266837,Lasso Regression
+Structural + SVI,num__skew,skew,-0.0004333039120403408,0.0004333039120403408,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.0003882016466622408,0.0003882016466622408,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.00031731534544115515,0.00031731534544115515,Lasso Regression
+Structural + SVI,num__SVI,SVI,0.00016439117267504986,0.00016439117267504986,Lasso Regression
+Structural + SVI,num__time_since_rehab,time_since_rehab,8.174235865607621e-05,8.174235865607621e-05,Lasso Regression
+Structural + SVI,num__max_span_log1p,max_span_log1p,-2.3543331415491745e-05,2.3543331415491745e-05,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB7,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB12,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB6,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI,cat__design_era_1989_Pre-1975,design_era_1989,-0.0,0.0,Lasso Regression
+Structural + SVI,cat__design_era_1989_1990+,design_era_1989,-110410179662.20514,110410179662.20514,Linear Regression
+Structural + SVI,cat__design_era_1989_Pre-1975,design_era_1989,-110410179662.20244,110410179662.20244,Linear Regression
+Structural + SVI,cat__design_era_1989_1975-1989,design_era_1989,-110410179662.20003,110410179662.20003,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-12693715106.090591,12693715106.090591,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-12693715106.089882,12693715106.089882,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-12693715106.08974,12693715106.08974,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-12693715106.089697,12693715106.089697,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-12693715106.089539,12693715106.089539,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB6,HWB_CLASS,-12693715106.088612,12693715106.088612,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB7,HWB_CLASS,-12693715106.087076,12693715106.087076,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB12,HWB_CLASS,-12693715106.086931,12693715106.086931,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-12693715106.084883,12693715106.084883,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB4,HWB_CLASS,-12693715106.082237,12693715106.082237,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB1,HWB_CLASS,-12693715106.082127,12693715106.082127,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB28,HWB_CLASS,-12693715106.074965,12693715106.074965,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB2,HWB_CLASS,-12693715106.074732,12693715106.074732,Linear Regression
+Structural + SVI,num__deck_area_log1p,deck_area_log1p,0.006830146032547859,0.006830146032547859,Linear Regression
+Structural + SVI,num__operating_rating,operating_rating,0.0026203568691191737,0.0026203568691191737,Linear Regression
+Structural + SVI,num__spans,spans,-0.002273264549069721,0.002273264549069721,Linear Regression
+Structural + SVI,num__max_span_log1p,max_span_log1p,-0.0013243381769672139,0.0013243381769672139,Linear Regression
+Structural + SVI,num__cond,cond,0.0009225762537727366,0.0009225762537727366,Linear Regression
+Structural + SVI,num__SVI,SVI,-0.0006487166521372661,0.0006487166521372661,Linear Regression
+Structural + SVI,num__age_years,age_years,0.0006375760223132878,0.0006375760223132878,Linear Regression
+Structural + SVI,num__reconstructed_flag,reconstructed_flag,0.0005536872989716329,0.0005536872989716329,Linear Regression
+Structural + SVI,num__time_since_rehab,time_since_rehab,0.0002535037738964715,0.0002535037738964715,Linear Regression
+Structural + SVI,num__skew,skew,-0.00023467016936033395,0.00023467016936033395,Linear Regression
+Structural + SVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.012769776840868368,0.012769776840868368,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.01232605472713498,0.01232605472713498,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.00729658320632058,0.00729658320632058,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__deck_area_log1p,deck_area_log1p,0.006735777453918526,0.006735777453918526,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__design_era_1989_1975-1989,design_era_1989,0.006347768075639243,0.006347768075639243,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.005644240745239105,0.005644240745239105,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.00518123276487253,0.00518123276487253,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.005146316074692646,0.005146316074692646,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.004535019567935404,0.004535019567935404,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.004363234026709714,0.004363234026709714,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__design_era_1989_Pre-1975,design_era_1989,0.00417744636058392,0.00417744636058392,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.003224712144584339,0.003224712144584339,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__operating_rating,operating_rating,0.0028521355324246872,0.0028521355324246872,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__spans,spans,-0.002116150012221809,0.002116150012221809,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.0020580733702517417,0.0020580733702517417,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__cond,cond,0.0015175519080722374,0.0015175519080722374,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__SVI,SVI,-0.0013305248527228728,0.0013305248527228728,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0009336157014286618,0.0009336157014286618,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.0009105598381146662,0.0009105598381146662,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__reconstructed_flag,reconstructed_flag,0.0007374294688191067,0.0007374294688191067,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__design_era_1989_1990+,design_era_1989,0.0007215470287964615,0.0007215470287964615,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__max_span_log1p,max_span_log1p,-0.0005109336784489318,0.0005109336784489318,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB7,HWB_CLASS,-0.00043713056595171375,0.00043713056595171375,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__time_since_rehab,time_since_rehab,0.0001485330077024217,0.0001485330077024217,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__skew,skew,-7.898798558695991e-05,7.898798558695991e-05,Support Vector Regressor (LinearSVR)
+Structural + SVI,num__age_years,age_years,-9.561333504791792e-06,9.561333504791792e-06,Support Vector Regressor (LinearSVR)
+Structural + SVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.009308479748301037,0.009308479748301037,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.009199409153714462,0.009199409153714462,Ridge Regression
+Structural + SVI,num__deck_area_log1p,deck_area_log1p,0.005764969810372705,0.005764969810372705,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.0052909554693438094,0.0052909554693438094,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.005091962983254604,0.005091962983254604,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0049108717838271514,0.0049108717838271514,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.0041756551812220325,0.0041756551812220325,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.003824319834546049,0.003824319834546049,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.003158953033196385,0.003158953033196385,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0031229225451486885,0.0031229225451486885,Ridge Regression
+Structural + SVI,num__operating_rating,operating_rating,0.0027611497462563376,0.0027611497462563376,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.0023660087102567204,0.0023660087102567204,Ridge Regression
+Structural + SVI,cat__design_era_1989_1990+,design_era_1989,-0.002007968137286368,0.002007968137286368,Ridge Regression
+Structural + SVI,num__spans,spans,-0.001982124700557111,0.001982124700557111,Ridge Regression
+Structural + SVI,cat__design_era_1989_1975-1989,design_era_1989,0.0017272183262420533,0.0017272183262420533,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB7,HWB_CLASS,-0.001505315843459878,0.001505315843459878,Ridge Regression
+Structural + SVI,num__cond,cond,0.00112469671753216,0.00112469671753216,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0010909505810499356,0.0010909505810499356,Ridge Regression
+Structural + SVI,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.0008697899421930545,0.0008697899421930545,Ridge Regression
+Structural + SVI,num__reconstructed_flag,reconstructed_flag,0.0007707482662400461,0.0007707482662400461,Ridge Regression
+Structural + SVI,num__age_years,age_years,0.0006343145296078313,0.0006343145296078313,Ridge Regression
+Structural + SVI,num__max_span_log1p,max_span_log1p,-0.0005170448600272828,0.0005170448600272828,Ridge Regression
+Structural + SVI,num__time_since_rehab,time_since_rehab,0.000381836498087709,0.000381836498087709,Ridge Regression
+Structural + SVI,num__SVI,SVI,-0.0003374466200610989,0.0003374466200610989,Ridge Regression
+Structural + SVI,num__skew,skew,-0.00032656305545084144,0.00032656305545084144,Ridge Regression
+Structural + SVI,cat__design_era_1989_Pre-1975,design_era_1989,0.0002807498124781194,0.0002807498124781194,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.00902493055683432,0.00902493055683432,Elastic Net
+Structural + SVI + NDVI,num__deck_area_log1p,deck_area_log1p,0.004183618423747763,0.004183618423747763,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.003992531228783059,0.003992531228783059,Elastic Net
+Structural + SVI + NDVI,num__operating_rating,operating_rating,0.0026210465782640978,0.0026210465782640978,Elastic Net
+Structural + SVI + NDVI,num__ndvi_loss,ndvi_loss,0.0019816013067449362,0.0019816013067449362,Elastic Net
+Structural + SVI + NDVI,cat__design_era_1989_1990+,design_era_1989,-0.0017450124904743376,0.0017450124904743376,Elastic Net
+Structural + SVI + NDVI,num__spans,spans,-0.001667453117263774,0.001667453117263774,Elastic Net
+Structural + SVI + NDVI,num__ndvi_change,ndvi_change,-0.0012139448561623426,0.0012139448561623426,Elastic Net
+Structural + SVI + NDVI,num__cond,cond,0.0011218777518512534,0.0011218777518512534,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.0009702855409094698,0.0009702855409094698,Elastic Net
+Structural + SVI + NDVI,num__reconstructed_flag,reconstructed_flag,0.0007529286129901071,0.0007529286129901071,Elastic Net
+Structural + SVI + NDVI,num__age_years,age_years,0.0006698561443880902,0.0006698561443880902,Elastic Net
+Structural + SVI + NDVI,cat__design_era_1989_1975-1989,design_era_1989,0.0005498312604786609,0.0005498312604786609,Elastic Net
+Structural + SVI + NDVI,num__skew,skew,-0.0004581383758636341,0.0004581383758636341,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.00033552265253213514,0.00033552265253213514,Elastic Net
+Structural + SVI + NDVI,num__SVI,SVI,0.00028880590166522246,0.00028880590166522246,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.00017305114676098777,0.00017305114676098777,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB7,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB6,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI + NDVI,num__time_since_rehab,time_since_rehab,0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0,0.0,Elastic Net
+Structural + SVI + NDVI,num__max_span_log1p,max_span_log1p,-0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__design_era_1989_Pre-1975,design_era_1989,0.0,0.0,Elastic Net
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.009414777647682827,0.009414777647682827,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.004667785111690442,0.004667785111690442,Lasso Regression
+Structural + SVI + NDVI,num__deck_area_log1p,deck_area_log1p,0.004429746813606289,0.004429746813606289,Lasso Regression
+Structural + SVI + NDVI,num__operating_rating,operating_rating,0.002632418834076224,0.002632418834076224,Lasso Regression
+Structural + SVI + NDVI,num__ndvi_loss,ndvi_loss,0.0020038127008362755,0.0020038127008362755,Lasso Regression
+Structural + SVI + NDVI,cat__design_era_1989_1990+,design_era_1989,-0.00195351958152602,0.00195351958152602,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.00179007079025251,0.00179007079025251,Lasso Regression
+Structural + SVI + NDVI,num__spans,spans,-0.0017269952792608929,0.0017269952792608929,Lasso Regression
+Structural + SVI + NDVI,num__ndvi_change,ndvi_change,-0.001208581657187549,0.001208581657187549,Lasso Regression
+Structural + SVI + NDVI,num__cond,cond,0.0011225306123665633,0.0011225306123665633,Lasso Regression
+Structural + SVI + NDVI,num__reconstructed_flag,reconstructed_flag,0.0007744312759952841,0.0007744312759952841,Lasso Regression
+Structural + SVI + NDVI,cat__design_era_1989_1975-1989,design_era_1989,0.0006666976035766402,0.0006666976035766402,Lasso Regression
+Structural + SVI + NDVI,num__age_years,age_years,0.000648172948535125,0.000648172948535125,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.0006145010548446267,0.0006145010548446267,Lasso Regression
+Structural + SVI + NDVI,num__skew,skew,-0.00047369457758678996,0.00047369457758678996,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.00042315505553177285,0.00042315505553177285,Lasso Regression
+Structural + SVI + NDVI,num__SVI,SVI,0.00023305311180574386,0.00023305311180574386,Lasso Regression
+Structural + SVI + NDVI,num__max_span_log1p,max_span_log1p,-0.000132732717712809,0.000132732717712809,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB6,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB7,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB11,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB12,HWB_CLASS,0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,num__time_since_rehab,time_since_rehab,0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__design_era_1989_Pre-1975,design_era_1989,-0.0,0.0,Lasso Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB28,HWB_CLASS,33842399279.55891,33842399279.55891,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB2,HWB_CLASS,33842399279.55582,33842399279.55582,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB1,HWB_CLASS,33842399279.552246,33842399279.552246,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB4,HWB_CLASS,33842399279.55003,33842399279.55003,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB11,HWB_CLASS,33842399279.546577,33842399279.546577,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB12,HWB_CLASS,33842399279.54646,33842399279.54646,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB7,HWB_CLASS,33842399279.545685,33842399279.545685,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB6,HWB_CLASS,33842399279.545135,33842399279.545135,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB10,HWB_CLASS,33842399279.544228,33842399279.544228,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB5,HWB_CLASS,33842399279.54332,33842399279.54332,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB8,HWB_CLASS,33842399279.543076,33842399279.543076,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB9,HWB_CLASS,33842399279.54247,33842399279.54247,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB3,HWB_CLASS,33842399279.542347,33842399279.542347,Linear Regression
+Structural + SVI + NDVI,cat__design_era_1989_1990+,design_era_1989,-858191581.4665242,858191581.4665242,Linear Regression
+Structural + SVI + NDVI,cat__design_era_1989_Pre-1975,design_era_1989,-858191581.463672,858191581.463672,Linear Regression
+Structural + SVI + NDVI,cat__design_era_1989_1975-1989,design_era_1989,-858191581.462484,858191581.462484,Linear Regression
+Structural + SVI + NDVI,num__deck_area_log1p,deck_area_log1p,0.005526732160371483,0.005526732160371483,Linear Regression
+Structural + SVI + NDVI,num__operating_rating,operating_rating,0.002641550543181666,0.002641550543181666,Linear Regression
+Structural + SVI + NDVI,num__ndvi_loss,ndvi_loss,0.0020852019421590895,0.0020852019421590895,Linear Regression
+Structural + SVI + NDVI,num__spans,spans,-0.0019709428890325137,0.0019709428890325137,Linear Regression
+Structural + SVI + NDVI,num__ndvi_change,ndvi_change,-0.0011999403419499948,0.0011999403419499948,Linear Regression
+Structural + SVI + NDVI,num__cond,cond,0.0010492922200476525,0.0010492922200476525,Linear Regression
+Structural + SVI + NDVI,num__reconstructed_flag,reconstructed_flag,0.000757980954377632,0.000757980954377632,Linear Regression
+Structural + SVI + NDVI,num__age_years,age_years,0.0006614058748057212,0.0006614058748057212,Linear Regression
+Structural + SVI + NDVI,num__max_span_log1p,max_span_log1p,-0.0005736391919855689,0.0005736391919855689,Linear Regression
+Structural + SVI + NDVI,num__skew,skew,-0.00041191813692126875,0.00041191813692126875,Linear Regression
+Structural + SVI + NDVI,num__SVI,SVI,-0.00016824222500633546,0.00016824222500633546,Linear Regression
+Structural + SVI + NDVI,num__time_since_rehab,time_since_rehab,-0.00013787698856162928,0.00013787698856162928,Linear Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.013265290216471529,0.013265290216471529,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.012243816125141353,0.012243816125141353,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.007103204217049564,0.007103204217049564,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__deck_area_log1p,deck_area_log1p,0.006574597620065708,0.006574597620065708,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__design_era_1989_1975-1989,design_era_1989,0.006390015157264168,0.006390015157264168,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.0052771207140438516,0.0052771207140438516,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.005029704973607241,0.005029704973607241,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.00500762921452399,0.00500762921452399,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.0046921785219348824,0.0046921785219348824,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__design_era_1989_Pre-1975,design_era_1989,0.004379793949531768,0.004379793949531768,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.004355253035655412,0.004355253035655412,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.0031642798549632624,0.0031642798549632624,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__ndvi_change,ndvi_change,-0.0028525267282564705,0.0028525267282564705,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__operating_rating,operating_rating,0.0027631385175217187,0.0027631385175217187,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.0025623440092218024,0.0025623440092218024,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__spans,spans,-0.0021879539504749586,0.0021879539504749586,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__cond,cond,0.0014334043562187716,0.0014334043562187716,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__SVI,SVI,-0.0011144203014854428,0.0011144203014854428,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.0009286059991700721,0.0009286059991700721,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__ndvi_loss,ndvi_loss,0.0008939140534674621,0.0008939140534674621,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__reconstructed_flag,reconstructed_flag,0.0007777486123162563,0.0007777486123162563,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB7,HWB_CLASS,-0.0006460573736651588,0.0006460573736651588,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__max_span_log1p,max_span_log1p,-0.0005682406323730601,0.0005682406323730601,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0005582412553783288,0.0005582412553783288,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__time_since_rehab,time_since_rehab,-0.0004699269408836264,0.0004699269408836264,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__design_era_1989_1990+,design_era_1989,0.00017532792778828313,0.00017532792778828313,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__skew,skew,-0.00016041115333543352,0.00016041115333543352,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,num__age_years,age_years,-9.854437228341827e-05,9.854437228341827e-05,Support Vector Regressor (LinearSVR)
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB28,HWB_CLASS,0.009815945114149342,0.009815945114149342,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB2,HWB_CLASS,0.008776944147992585,0.008776944147992585,Ridge Regression
+Structural + SVI + NDVI,num__deck_area_log1p,deck_area_log1p,0.005555007557023696,0.005555007557023696,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB1,HWB_CLASS,0.004908808065977146,0.004908808065977146,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB3,HWB_CLASS,-0.004801177286673047,0.004801177286673047,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB9,HWB_CLASS,-0.004730278672731016,0.004730278672731016,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB5,HWB_CLASS,-0.004137332989652669,0.004137332989652669,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB8,HWB_CLASS,-0.004103584260316508,0.004103584260316508,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB10,HWB_CLASS,-0.0031810843906173755,0.0031810843906173755,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB4,HWB_CLASS,0.0027375618423558772,0.0027375618423558772,Ridge Regression
+Structural + SVI + NDVI,num__operating_rating,operating_rating,0.002647720489609672,0.002647720489609672,Ridge Regression
+Structural + SVI + NDVI,cat__design_era_1989_1990+,design_era_1989,-0.0022902919567928757,0.0022902919567928757,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB6,HWB_CLASS,-0.0022631221584838777,0.0022631221584838777,Ridge Regression
+Structural + SVI + NDVI,num__ndvi_loss,ndvi_loss,0.002093521521882476,0.002093521521882476,Ridge Regression
+Structural + SVI + NDVI,num__spans,spans,-0.0019617181765991,0.0019617181765991,Ridge Regression
+Structural + SVI + NDVI,cat__design_era_1989_1975-1989,design_era_1989,0.0017682393279909235,0.0017682393279909235,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB7,HWB_CLASS,-0.0015568197626936744,0.0015568197626936744,Ridge Regression
+Structural + SVI + NDVI,num__ndvi_change,ndvi_change,-0.001188570746020933,0.001188570746020933,Ridge Regression
+Structural + SVI + NDVI,num__cond,cond,0.0010211058573360088,0.0010211058573360088,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB12,HWB_CLASS,-0.0009684770514990457,0.0009684770514990457,Ridge Regression
+Structural + SVI + NDVI,num__reconstructed_flag,reconstructed_flag,0.0007514053245674011,0.0007514053245674011,Ridge Regression
+Structural + SVI + NDVI,num__age_years,age_years,0.0006580205905257658,0.0006580205905257658,Ridge Regression
+Structural + SVI + NDVI,num__max_span_log1p,max_span_log1p,-0.0006122892260005191,0.0006122892260005191,Ridge Regression
+Structural + SVI + NDVI,cat__design_era_1989_Pre-1975,design_era_1989,0.0005220526302402783,0.0005220526302402783,Ridge Regression
+Structural + SVI + NDVI,cat__HWB_CLASS_HWB11,HWB_CLASS,-0.0004973825982111982,0.0004973825982111982,Ridge Regression
+Structural + SVI + NDVI,num__skew,skew,-0.00038087007208372875,0.00038087007208372875,Ridge Regression
+Structural + SVI + NDVI,num__SVI,SVI,-0.00024902007938331136,0.00024902007938331136,Ridge Regression
+Structural + SVI + NDVI,num__time_since_rehab,time_since_rehab,-0.00010409343496281842,0.00010409343496281842,Ridge Regression
