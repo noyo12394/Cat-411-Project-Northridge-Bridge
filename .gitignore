@@ -8,3 +8,5 @@ outputs/core/*
 !outputs/core/README.md
 outputs/ndvi/*
 !outputs/ndvi/README.md
+.vercel
+.env*.local
