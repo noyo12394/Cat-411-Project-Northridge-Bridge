@@ -40,7 +40,8 @@ Documentation:
 - `README.md`: setup and high-level project explanation
 - `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
 - `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
-- `docs/RESULTS_SUMMARY.md`: plain-English summary of the tested core workflow results
+- `docs/RESULTS_SUMMARY.md`: recommended professor-facing summary that separates intrinsic vulnerability, NDVI proxy validation, and event-damage results
+- `docs/EXPLAINABLE_AI.md`: explainable-AI layer describing feature importance, coefficient interpretation, and the role separation of SVI and NDVI
 - `docs/ML_HYBRID_ANALYSIS.md`: advanced comparison of HAZUS-only, SVI-only, and hybrid machine-learning models
 - `docs/PROXY_VALIDATION.md`: proxy-validation results for the optional NDVI branch, including weighted kappa and within-one-state accuracy
 - `data/README.md`: data layout and folder meaning
@@ -241,6 +242,28 @@ That hybrid workflow also:
 - exports benchmark artifacts for the overall best model
 - exports a separate recommended no-PGA bridge-vulnerability model built from the most interpretable structural variables
 - writes richer validation plots, including log-scale fit plots, decile calibration, and a mutual-information screen
+
+## Recommended Result Framing
+
+The repo is easiest to defend if results are presented in three layers:
+
+1. `Intrinsic vulnerability screening`
+   Use the full-California no-PGA models when the question is which bridges appear structurally more vulnerable in general.
+2. `NDVI proxy validation`
+   Use the NDVI branch only for post-event proxy / validation claims, not as a baseline structural predictor.
+3. `Event-damage prediction`
+   Use the hazard-inclusive models only when the question is damage under a specific earthquake scenario.
+
+If you only read one summary before presenting the project, read:
+
+- `docs/RESULTS_SUMMARY.md`
+- `docs/EXPLAINABLE_AI.md`
+
+To refresh the explainable-AI figures:
+
+```bash
+python scripts/export_xai_figures.py
+```
 
 ## Exploratory Model Add-Ons
 

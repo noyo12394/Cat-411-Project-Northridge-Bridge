@@ -63,6 +63,8 @@ CORE_FIGURES = {
     'ml_recommended_hybrid_feature_importance.png': 'Feature importance for the recommended hybrid engineering model.',
     'ml_recommended_hybrid_decile_calibration.png': 'Decile calibration plot for the recommended hybrid engineering model.',
     'ml_recommended_hybrid_mutual_information.png': 'Mutual-information ranking for the recommended statewide feature set.',
+    'xai_global_feature_importance.png': 'Explainable-AI summary showing global feature importance and linear coefficient magnitude across the intrinsic bridge models.',
+    'xai_svi_ndvi_role_summary.png': 'Explainable-AI figure separating the role of SVI in intrinsic screening from the role of NDVI in post-event proxy validation.',
     'damage_state_confusion_matrices.png': 'Confusion matrices for the best exploratory damage-state classifiers.',
     'future_scenario_mean_edr.png': 'Scenario-sensitivity plot showing how statewide mean and upper-tail EDR change with PGA.',
     'future_scenario_risk_bands.png': 'Bridge counts by risk band across hypothetical future PGA scenarios.',

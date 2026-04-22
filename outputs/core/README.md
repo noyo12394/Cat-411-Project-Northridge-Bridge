@@ -3,8 +3,8 @@
 This folder contains packaged outputs for easier review.
 
 - `pga_nbi_bridge.csv`: Bridge inventory with cleaned coordinates and sampled PGA values. Currently present.
-- `bridges_with_edr.csv`: HAZUS-based bridge damage probabilities and Expected Damage Ratio. Currently present.
-- `bridges_with_svi.csv`: Bridge-level Seismic Vulnerability Index scores merged onto the damage table. Currently present.
+- `bridges_with_edr.csv`: Bridge damage table with HAZUS class labels, updated SVI-driven fragility parameters, damage-state probabilities, and Expected Damage Ratio. Currently present.
+- `bridges_with_svi.csv`: Bridge-level Seismic Vulnerability Index scores rebuilt with the April 2026 weighting table and reconstruction-year multiplier. Currently present.
 - `bridge_ml_predictions.csv`: Machine-learning predictions and evaluation outputs for bridge damage modeling. Currently present.
 - `bridges_with_pga_affected_only.csv`: Exploratory subset of bridges with usable PGA values from the week-1 workflow. Currently present.
 - `ml_statewide_training_dataset.csv`: Statewide ML training table rebuilt on all California bridges with engineered HAZUS, SVI, and bridge features. Currently present.
@@ -52,6 +52,8 @@ This folder contains packaged outputs for easier review.
 - `ml_recommended_hybrid_feature_importance.png`: Feature importance for the recommended hybrid engineering model. Currently present.
 - `ml_recommended_hybrid_decile_calibration.png`: Decile calibration plot for the recommended hybrid engineering model. Currently present.
 - `ml_recommended_hybrid_mutual_information.png`: Mutual-information ranking for the recommended statewide feature set. Currently present.
+- `xai_global_feature_importance.png`: Explainable-AI summary showing global feature importance and linear coefficient magnitude across the intrinsic bridge models. Currently present.
+- `xai_svi_ndvi_role_summary.png`: Explainable-AI figure separating the role of SVI in intrinsic screening from the role of NDVI in post-event proxy validation. Currently present.
 - `damage_state_confusion_matrices.png`: Confusion matrices for the best exploratory damage-state classifiers. Currently present.
 - `future_scenario_mean_edr.png`: Scenario-sensitivity plot showing how statewide mean and upper-tail EDR change with PGA. Currently present.
 - `future_scenario_risk_bands.png`: Bridge counts by risk band across hypothetical future PGA scenarios. Currently present.
