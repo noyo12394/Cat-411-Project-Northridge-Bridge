@@ -93,7 +93,7 @@ export default function DashboardSection({
       <SectionHeading
         eyebrow="Centerpiece interactive dashboard"
         title="One interface, three carefully separated modes"
-        description="The dashboard defaults to intrinsic vulnerability screening. Event damage and inspection prioritization are available as connected but separate views so the platform never treats hazard demand or traffic consequence as baseline structural vulnerability."
+        description="The dashboard defaults to intrinsic vulnerability screening. Event damage and inspection prioritization are available as connected but separate views so the platform never treats hazard demand or traffic consequence as baseline structural vulnerability. The output panel also exposes a local explainable-AI layer for the currently selected bridge state."
       />
       <ModeTabs modes={DASHBOARD_MODES} activeMode={mode} onChange={handleModeChange} />
       <div className="grid gap-5 xl:grid-cols-[0.92fr_1.08fr]">

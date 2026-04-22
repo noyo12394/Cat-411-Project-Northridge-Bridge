@@ -10,6 +10,16 @@
     "path": "/research/ml_recommended_hybrid_decile_calibration.png"
   },
   {
+    "file": "xai_global_feature_importance.png",
+    "title": "Xai Global Feature Importance",
+    "path": "/research/xai_global_feature_importance.png"
+  },
+  {
+    "file": "xai_svi_ndvi_role_summary.png",
+    "title": "Xai Svi Ndvi Role Summary",
+    "path": "/research/xai_svi_ndvi_role_summary.png"
+  },
+  {
     "file": "damage_state_confusion_matrices.png",
     "title": "Damage State Confusion Matrices",
     "path": "/research/damage_state_confusion_matrices.png"

@@ -11,6 +11,8 @@ import pandas as pd
 RESEARCH_FIGURES = [
     'ml_recommended_hybrid_actual_vs_predicted.png',
     'ml_recommended_hybrid_decile_calibration.png',
+    'xai_global_feature_importance.png',
+    'xai_svi_ndvi_role_summary.png',
     'damage_state_confusion_matrices.png',
     'future_scenario_mean_edr.png',
     'future_scenario_risk_bands.png',

@@ -49,8 +49,13 @@ export default function DashboardResults({ result, modeMeta, replayToken = 0 }) 
 
       <div className="grid gap-5 xl:grid-cols-[1.25fr_0.75fr]">
         <div className="rounded-[30px] border border-white/80 bg-white/92 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Interpretability</p>
-          <h3 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-slate-950">Top contributing features</h3>
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Interpretability / explainable AI</p>
+          <h3 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-slate-950">Top contributing features for this bridge state</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            This is the local explanation layer of the dashboard. It translates the current bridge inputs into the
+            strongest contribution themes, while the analytics section carries the repo-backed global XAI figures
+            such as feature importance, coefficient magnitude, and calibration artifacts.
+          </p>
           <div className="mt-5 space-y-3">
             {result.topContributors.map((item) => (
               <div key={item.label} className="rounded-[22px] border border-slate-200/80 bg-slate-50/80 p-4">
@@ -82,6 +87,7 @@ export default function DashboardResults({ result, modeMeta, replayToken = 0 }) 
               <li>• Event mode introduces PGA only as a scenario layer after screening.</li>
               <li>• ADT changes prioritization and disruption, not intrinsic vulnerability.</li>
               <li>• NDVI acts only as an optional post-event adjustment.</li>
+              <li>• Dashboard contribution chips are local explanations, not a claim of causal attribution.</li>
             </ul>
           </div>
         </div>

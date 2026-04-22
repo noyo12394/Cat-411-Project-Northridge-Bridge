@@ -219,6 +219,8 @@ export const fallbackResearchData = {
   },
   evidence: [
     { title: 'Damage state confusion matrices', path: '/research/damage_state_confusion_matrices.png' },
+    { title: 'XAI global feature importance', path: '/research/xai_global_feature_importance.png' },
+    { title: 'XAI SVI and NDVI role summary', path: '/research/xai_svi_ndvi_role_summary.png' },
     { title: 'Future scenario mean EDR', path: '/research/future_scenario_mean_edr.png' },
     { title: 'Future scenario risk bands', path: '/research/future_scenario_risk_bands.png' },
   ],
