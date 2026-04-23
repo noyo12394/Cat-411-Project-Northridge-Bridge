@@ -6,10 +6,10 @@ import PortfolioMap from '../portfolio/PortfolioMap'
 
 function SummaryChip({ label, value, hint }) {
   return (
-    <div className="rounded-[24px] border border-slate-200/80 bg-white/90 px-4 py-4 shadow-sm">
-      <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">{label}</p>
-      <p className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">{value}</p>
-      {hint ? <p className="mt-2 text-sm leading-6 text-slate-500">{hint}</p> : null}
+    <div className="rounded-[24px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,251,255,0.98)_100%)] px-4 py-4 shadow-sm">
+      <p className="text-[11px] uppercase tracking-[0.24em] text-slate-600">{label}</p>
+      <p className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-900">{value}</p>
+      {hint ? <p className="mt-2 text-sm leading-6 text-slate-700">{hint}</p> : null}
     </div>
   )
 }
@@ -72,12 +72,12 @@ export default function PortfolioWorkbench({ bridges, onLoadBridge }) {
 
   return (
     <div className="space-y-5">
-      <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(243,247,252,0.96)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">
+      <div className="rounded-[32px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(244,248,254,0.98)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.09)]">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Portfolio explorer</p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">Search, filter, rank, and inspect individual bridges</h3>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+            <p className="paper-eyebrow">Portfolio explorer</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-900">Search, filter, rank, and inspect individual bridges</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
               This layer uses real bridge rows exported from the repo. The map, ranking, and table are data-backed; the intrinsic score itself is a transparent frontend prototype until the final backend model is connected.
             </p>
           </div>

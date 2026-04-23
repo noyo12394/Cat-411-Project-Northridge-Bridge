@@ -3,11 +3,11 @@ import SectionHeading from '../common/SectionHeading'
 
 function EvidenceTile({ item }) {
   return (
-    <div className="overflow-hidden rounded-[26px] border border-white/80 bg-white/92 shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
+    <div className="overflow-hidden rounded-[26px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(247,250,255,0.98)_100%)] shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
       <img src={item.path} alt={item.title} className="h-48 w-full object-cover" />
       <div className="border-t border-slate-200/70 p-4">
-        <p className="text-sm font-semibold text-slate-950">{item.title}</p>
-        <p className="mt-1 text-sm leading-6 text-slate-600">Copied from the repository figure exports for this frontend preview.</p>
+        <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+        <p className="mt-1 text-sm leading-6 text-slate-700">Copied from the repository figure exports for this frontend preview.</p>
       </div>
     </div>
   )
@@ -54,7 +54,7 @@ export default function TransparencySection({ researchData, diagnostics }) {
             title="Global evidence and local explanation are intentionally separated"
             description="The analytics section shows global XAI from repo-backed feature importance, coefficients, and calibration figures. The dashboard shows local explanation for the current bridge state. That separation helps the site explain model behavior without overstating certainty or causality."
           />
-          <div className="rounded-[28px] border border-slate-200/80 bg-slate-50 px-5 py-4 text-sm leading-6 text-slate-600">
+          <div className="rounded-[28px] border border-slate-200/90 bg-slate-50/95 px-5 py-4 text-sm leading-6 text-slate-700">
             {diagnostics}
           </div>
         </div>

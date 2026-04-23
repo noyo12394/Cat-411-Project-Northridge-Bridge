@@ -23,16 +23,16 @@ export default function PortfolioMap({ bridges, selectedBridge, onSelect }) {
   const plotted = bridges.slice(0, 900)
 
   return (
-    <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(240,245,255,0.92)_100%)] p-5 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">
+    <div className="rounded-[32px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(242,247,255,0.96)_100%)] p-5 shadow-[0_28px_70px_rgba(15,23,42,0.09)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Map view</p>
-          <h3 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-slate-950">California bridge portfolio</h3>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600">
+          <p className="paper-eyebrow">Map view</p>
+          <h3 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-slate-900">California bridge portfolio</h3>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-700">
             Real bridge locations from the processed statewide bridge file. Point color follows the prototype intrinsic vulnerability band, not PGA.
           </p>
         </div>
-        <div className="rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-sm font-medium text-slate-600">
+        <div className="paper-chip">
           {bridges.length.toLocaleString()} filtered bridges
         </div>
       </div>
@@ -67,9 +67,9 @@ export default function PortfolioMap({ bridges, selectedBridge, onSelect }) {
         </svg>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-3 text-xs font-medium text-slate-600">
+      <div className="mt-4 flex flex-wrap gap-3 text-xs font-medium text-slate-700">
         {['Low', 'Guarded', 'Elevated', 'High', 'Critical'].map((band) => (
-          <div key={band} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1.5">
+          <div key={band} className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1.5">
             <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: riskColor(band) }} />
             {band}
           </div>

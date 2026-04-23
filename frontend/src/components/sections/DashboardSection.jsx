@@ -14,20 +14,18 @@ export default function DashboardSection({
 }) {
   const [mode, setMode] = useState('intrinsic')
   const [inputs, setInputs] = useState(() => createInitialInputs(null, researchData))
-  const [replayToken, setReplayToken] = useState(0)
   const [showPortfolio, setShowPortfolio] = useState(false)
   const [result, setResult] = useState(() =>
     runBridgeAssessment(createInitialInputs(null, researchData), 'intrinsic', researchData),
   )
 
   const pushAssessment = useCallback(
-    (nextInputs, nextMode, options = {}) => {
+    (nextInputs, nextMode) => {
       const next = runBridgeAssessment(nextInputs, nextMode, researchData)
       setResult(next)
       onBridgeStateChange?.({
         score: next.vulnerabilityScore,
         visualState: next.visualState,
-        replayToken: options.replayToken ?? 0,
       })
       return next
     },
@@ -54,33 +52,25 @@ export default function DashboardSection({
 
   const handleModeChange = (nextMode) => {
     setMode(nextMode)
-    const nextReplayToken = Date.now()
-    setReplayToken(nextReplayToken)
-    pushAssessment(inputs, nextMode, { replayToken: nextReplayToken })
+    pushAssessment(inputs, nextMode)
   }
 
   const handleRun = (event) => {
     event.preventDefault()
-    const nextReplayToken = Date.now()
-    setReplayToken(nextReplayToken)
-    pushAssessment(inputs, mode, { replayToken: nextReplayToken })
+    pushAssessment(inputs, mode)
   }
 
   const handleReset = () => {
     const seeded = createInitialInputs(null, researchData)
     setInputs(seeded)
-    const nextReplayToken = Date.now()
-    setReplayToken(nextReplayToken)
-    pushAssessment(seeded, mode, { replayToken: nextReplayToken })
+    pushAssessment(seeded, mode)
   }
 
   const handleLoadSample = (sample) => {
     if (!sample) return
     const seeded = createInitialInputs(sample, researchData)
     setInputs(seeded)
-    const nextReplayToken = Date.now()
-    setReplayToken(nextReplayToken)
-    pushAssessment(seeded, mode, { replayToken: nextReplayToken })
+    pushAssessment(seeded, mode)
   }
 
   const handleOpenPortfolio = async () => {
@@ -106,16 +96,16 @@ export default function DashboardSection({
           sampleBridges={researchData.summary.sampleBridges}
           onRun={handleRun}
         />
-        <DashboardResults result={result} modeMeta={modeMeta} replayToken={replayToken} />
+        <DashboardResults result={result} modeMeta={modeMeta} inputs={inputs} />
       </div>
       {showPortfolio ? (
         portfolioLoading ? (
-          <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(243,247,252,0.96)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Portfolio explorer</p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">
+          <div className="rounded-[32px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(244,248,254,0.98)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.09)]">
+            <p className="paper-eyebrow">Portfolio explorer</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-900">
               Loading statewide bridge rows
             </h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700">
               We are loading the full statewide portfolio in the background so the rest of the dashboard stays responsive.
             </p>
           </div>
@@ -123,19 +113,19 @@ export default function DashboardSection({
           <PortfolioWorkbench bridges={portfolioBridges} onLoadBridge={handleLoadSample} />
         )
       ) : (
-        <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(243,247,252,0.96)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Portfolio explorer</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">
+        <div className="rounded-[32px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(244,248,254,0.98)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.09)]">
+          <p className="paper-eyebrow">Portfolio explorer</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-900">
             Load the statewide bridge explorer on demand
           </h3>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700">
             The full bridge portfolio contains {researchData.summary.counts.totalBridges.toLocaleString()} rows.
             We defer that heavy explorer until you open it so the research dashboard paints faster and stays reliable on first load.
           </p>
           <button
             type="button"
             onClick={handleOpenPortfolio}
-            className="mt-5 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(15,23,42,0.22)] transition hover:-translate-y-0.5"
+            className="mt-5 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(15,23,42,0.22)] transition hover:-translate-y-0.5 hover:bg-slate-900"
           >
             Open statewide explorer
           </button>

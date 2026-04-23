@@ -57,7 +57,15 @@ function getStatus(v) {
   return STATUS_LEVELS.find((l) => v >= l.min && v < l.max) ?? STATUS_LEVELS[4]
 }
 
-export default function EnhancedBridgeVisualizer({ vulnerability = 20, svi, edr, damageProbs, pga }) {
+export default function EnhancedBridgeVisualizer({
+  vulnerability = 20,
+  svi,
+  edr,
+  damageProbs,
+  pga,
+  showMetrics = true,
+  showDamageBreakdown = true,
+}) {
   const effectiveVulnerability = useMemo(() => {
     const base = Math.max(0, Math.min(100, vulnerability))
     const moderateDamage = damageProbs?.DS2 ?? 0
@@ -306,49 +314,53 @@ export default function EnhancedBridgeVisualizer({ vulnerability = 20, svi, edr,
         </svg>
       </div>
 
-      <div className="grid grid-cols-4 gap-2">
-        {damageProbs && (
-          <>
-            <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-              <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS0 none</div>
-              <div className="mt-0.5 font-mono text-xs font-semibold text-moss">{(damageProbs.DS0 * 100).toFixed(1)}%</div>
-            </div>
-            <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-              <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS1 slight</div>
-              <div className="mt-0.5 font-mono text-xs font-semibold text-signal">{(damageProbs.DS1 * 100).toFixed(1)}%</div>
-            </div>
-            <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-              <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS2 mod</div>
-              <div className="mt-0.5 font-mono text-xs font-semibold text-ember">{(damageProbs.DS2 * 100).toFixed(1)}%</div>
-            </div>
-            <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-              <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS3+DS4</div>
-              <div className="mt-0.5 font-mono text-xs font-semibold text-hazard">{((damageProbs.DS3 + damageProbs.DS4) * 100).toFixed(1)}%</div>
-            </div>
-          </>
-        )}
-      </div>
+      {showDamageBreakdown ? (
+        <div className="grid grid-cols-4 gap-2">
+          {damageProbs ? (
+            <>
+              <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+                <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS0 none</div>
+                <div className="mt-0.5 font-mono text-xs font-semibold text-moss">{(damageProbs.DS0 * 100).toFixed(1)}%</div>
+              </div>
+              <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+                <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS1 slight</div>
+                <div className="mt-0.5 font-mono text-xs font-semibold text-signal">{(damageProbs.DS1 * 100).toFixed(1)}%</div>
+              </div>
+              <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+                <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS2 mod</div>
+                <div className="mt-0.5 font-mono text-xs font-semibold text-ember">{(damageProbs.DS2 * 100).toFixed(1)}%</div>
+              </div>
+              <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+                <div className="font-mono text-[9px] uppercase tracking-wider text-muted">DS3+DS4</div>
+                <div className="mt-0.5 font-mono text-xs font-semibold text-hazard">{((damageProbs.DS3 + damageProbs.DS4) * 100).toFixed(1)}%</div>
+              </div>
+            </>
+          ) : null}
+        </div>
+      ) : null}
 
-      <div className="grid grid-cols-3 gap-2">
-        <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-          <div className="font-mono text-[9px] uppercase tracking-wider text-muted">SVI</div>
-          <div className="mt-0.5 font-mono text-xs font-semibold text-ocean">
-            {typeof svi === 'number' ? svi.toFixed(3) : 'n/a'}
+      {showMetrics ? (
+        <div className="grid grid-cols-3 gap-2">
+          <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+            <div className="font-mono text-[9px] uppercase tracking-wider text-muted">SVI</div>
+            <div className="mt-0.5 font-mono text-xs font-semibold text-ocean">
+              {typeof svi === 'number' ? svi.toFixed(3) : 'n/a'}
+            </div>
+          </div>
+          <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+            <div className="font-mono text-[9px] uppercase tracking-wider text-muted">EDR</div>
+            <div className="mt-0.5 font-mono text-xs font-semibold text-ember">
+              {typeof edr === 'number' ? edr.toFixed(4) : 'n/a'}
+            </div>
+          </div>
+          <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
+            <div className="font-mono text-[9px] uppercase tracking-wider text-muted">PGA (g)</div>
+            <div className="mt-0.5 font-mono text-xs font-semibold text-signal">
+              {typeof pga === 'number' ? pga.toFixed(2) : 'n/a'}
+            </div>
           </div>
         </div>
-        <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-          <div className="font-mono text-[9px] uppercase tracking-wider text-muted">EDR</div>
-          <div className="mt-0.5 font-mono text-xs font-semibold text-ember">
-            {typeof edr === 'number' ? edr.toFixed(4) : 'n/a'}
-          </div>
-        </div>
-        <div className="rounded-xl border border-line bg-canvas/60 p-2.5 text-center">
-          <div className="font-mono text-[9px] uppercase tracking-wider text-muted">PGA (g)</div>
-          <div className="mt-0.5 font-mono text-xs font-semibold text-signal">
-            {typeof pga === 'number' ? pga.toFixed(2) : 'n/a'}
-          </div>
-        </div>
-      </div>
+      ) : null}
 
       <div
         className="rounded-2xl border p-3 text-center transition-all duration-300"

@@ -10,7 +10,7 @@ const links = [
 export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between rounded-full border border-white/70 bg-white/75 px-5 py-3 shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between rounded-full border border-slate-200/80 bg-[rgba(248,250,255,0.88)] px-5 py-3 shadow-[0_18px_50px_rgba(15,23,42,0.14)] backdrop-blur-xl">
         <a href="#top" className="flex items-center gap-3 text-sm font-semibold tracking-[-0.02em] text-slate-950">
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-indigo-500 to-violet-500 text-white shadow-lg shadow-blue-500/30">
             BV
@@ -19,14 +19,14 @@ export default function Header() {
         </a>
         <nav className="hidden items-center gap-5 md:flex">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm font-medium text-slate-600 transition hover:text-slate-950">
+            <a key={link.href} href={link.href} className="text-sm font-medium text-slate-700 transition hover:text-slate-950">
               {link.label}
             </a>
           ))}
         </nav>
         <a
           href="#dashboard"
-          className="inline-flex items-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5"
+          className="inline-flex items-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-900"
         >
           Explore Dashboard
         </a>

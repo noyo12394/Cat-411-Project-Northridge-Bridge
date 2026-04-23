@@ -1,7 +1,7 @@
 const variants = {
   primary: 'bg-ink text-white shadow-float hover:-translate-y-0.5 hover:bg-[#0d1a2a]',
-  secondary: 'bg-white text-ink ring-1 ring-slate-200 hover:-translate-y-0.5 hover:bg-slate-50',
-  subtle: 'bg-ocean/8 text-ocean ring-1 ring-ocean/10 hover:bg-ocean/12',
+  secondary: 'bg-white text-slate-800 ring-1 ring-slate-200/90 hover:-translate-y-0.5 hover:bg-slate-50',
+  subtle: 'bg-ocean/10 text-sky-800 ring-1 ring-ocean/20 hover:bg-ocean/14',
 }
 
 export default function Button({

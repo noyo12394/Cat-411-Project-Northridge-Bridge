@@ -1,8 +1,8 @@
 function DetailPill({ label, value }) {
   return (
-    <div className="rounded-[18px] border border-slate-200/80 bg-slate-50/80 px-3 py-3">
-      <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500">{label}</p>
-      <p className="mt-2 text-sm font-semibold text-slate-950">{value}</p>
+    <div className="rounded-[18px] border border-slate-200/90 bg-slate-50/92 px-3 py-3">
+      <p className="text-[11px] uppercase tracking-[0.22em] text-slate-600">{label}</p>
+      <p className="mt-2 text-sm font-semibold text-slate-900">{value}</p>
     </div>
   )
 }
@@ -44,12 +44,12 @@ export default function BridgeDetailCard({ bridge, onLoadBridge }) {
       : 'Coordinates unavailable'
 
   return (
-    <div className="rounded-[32px] border border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(247,249,253,0.96)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)]">
+    <div className="rounded-[32px] border border-slate-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(247,249,253,0.98)_100%)] p-6 shadow-[0_28px_70px_rgba(15,23,42,0.09)]">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Bridge detail</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-950">{bridge.structureNumber}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-600">{bridge.countyLabel} · {bridge.bridgeClass} · risk band {bridge.riskBand}</p>
+          <p className="paper-eyebrow">Bridge detail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-900">{bridge.structureNumber}</h3>
+          <p className="mt-2 text-sm leading-6 text-slate-700">{bridge.countyLabel} · {bridge.bridgeClass} · risk band {bridge.riskBand}</p>
         </div>
         <button
           type="button"
@@ -72,8 +72,8 @@ export default function BridgeDetailCard({ bridge, onLoadBridge }) {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[0.92fr_1.08fr]">
-        <div className="rounded-[24px] border border-slate-200 bg-white/85 p-5">
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-500">Why this bridge scores high</p>
+        <div className="rounded-[24px] border border-slate-200/90 bg-white/92 p-5">
+          <p className="paper-eyebrow">Why this bridge scores high</p>
           <div className="mt-4 space-y-4">
             <ContributionRow label="Condition component" value={safeNumber(bridge.componentCondition)} />
             <ContributionRow label="SVI component" value={safeNumber(bridge.componentSVI)} />
@@ -87,7 +87,7 @@ export default function BridgeDetailCard({ bridge, onLoadBridge }) {
         </div>
 
         <div className="rounded-[24px] border border-slate-900/10 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_28%),linear-gradient(180deg,#0f172a_0%,#111827_100%)] p-5 text-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.18)]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-400">Narrative interpretation</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-slate-300">Narrative interpretation</p>
           <h4 className="mt-3 text-xl font-semibold text-white">Bridge-specific story</h4>
           <p className="mt-4 text-sm leading-7 text-slate-300">
             This bridge ranks where it does because the prototype engine combines its condition, SVI, age, geometry, and bridge class into one intrinsic screening score. Traffic appears only in the downstream priority score, which is why a high-ADT bridge can move up in urgency without changing its structural vulnerability logic.
