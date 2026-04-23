@@ -1,17 +1,40 @@
-export default function SectionHeading({ eyebrow, title, description, align = 'left', actions }) {
+export default function SectionHeading({
+  eyebrow,
+  title,
+  description,
+  align = 'left',
+  actions,
+  theme = 'canvas',
+}) {
+  const isPaper = theme === 'paper'
+
   return (
     <div className={`flex flex-col gap-5 ${align === 'center' ? 'items-center text-center' : ''}`}>
       {eyebrow ? (
-        <span className="inline-flex w-fit items-center rounded-full border border-slate-200/90 bg-white/88 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.28em] text-slate-600 shadow-sm backdrop-blur">
+        <span
+          className={`inline-flex w-fit max-w-full items-center rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.28em] shadow-sm backdrop-blur ${
+            isPaper
+              ? 'border border-slate-200/90 bg-white/88 text-slate-600'
+              : 'border border-white/12 bg-white/5 text-slate-300'
+          }`}
+        >
           {eyebrow}
         </span>
       ) : null}
       <div className="space-y-4">
-        <h2 className="max-w-4xl font-display text-3xl font-semibold tracking-[-0.05em] text-slate-900 sm:text-4xl lg:text-[3rem]">
+        <h2
+          className={`max-w-4xl font-display text-[clamp(2.15rem,4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.05em] ${
+            isPaper ? 'text-slate-900' : 'text-slate-50'
+          }`}
+        >
           {title}
         </h2>
         {description ? (
-          <p className="max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
+          <p
+            className={`max-w-3xl text-[clamp(1rem,1.35vw,1.12rem)] leading-8 ${
+              isPaper ? 'text-slate-700' : 'text-slate-300'
+            }`}
+          >
             {description}
           </p>
         ) : null}

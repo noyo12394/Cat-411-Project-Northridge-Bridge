@@ -15,11 +15,11 @@ export default function InsightCard({ eyebrow, title, description, children, ton
         </p>
       ) : null}
       <div className="mt-3 space-y-3">
-        <h3 className={`text-xl font-semibold tracking-[-0.03em] ${tone === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+        <h3 className={`text-xl font-semibold leading-snug tracking-[-0.03em] ${tone === 'dark' ? 'text-white' : 'text-slate-900'}`}>
           {title}
         </h3>
         {description ? (
-          <p className={`text-sm leading-6 ${tone === 'dark' ? 'text-slate-200' : 'text-slate-700'}`}>
+          <p className={`text-[15px] leading-7 ${tone === 'dark' ? 'text-slate-200' : 'text-slate-700'}`}>
             {description}
           </p>
         ) : null}

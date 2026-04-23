@@ -44,7 +44,7 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-950">
+    <div className="min-h-screen bg-transparent text-ink">
       <Header />
       <main className="mx-auto flex w-full max-w-[1440px] flex-col gap-20 px-4 pb-16 pt-28 sm:px-6 lg:px-8">
         <SectionErrorBoundary sectionLabel="Hero section">

@@ -25,6 +25,7 @@ export default function HeroSection({ researchData, bridgeState }) {
             eyebrow="Bridge vulnerability prediction and decision-support dashboard"
             title="A research-grade bridge intelligence platform for intrinsic vulnerability screening, prioritization, and future scenario analysis"
             description="Built from the California bridge inventory, the Northridge ShakeMap workflow, revised SVI scoring, HAZUS-style fragility outputs, NDVI proxy validation, and machine-learning comparisons. The interface is explicit about what is repo-backed today and what remains a transparent prototype layer until the final backend model is wired in."
+            theme="paper"
             actions={
               <>
                 <a href="#dashboard" className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(15,23,42,0.18)] transition hover:-translate-y-0.5">

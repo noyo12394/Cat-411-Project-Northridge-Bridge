@@ -16,10 +16,11 @@
   body {
     @apply font-sans antialiased text-ink;
     margin: 0;
+    text-rendering: optimizeLegibility;
     background:
-      radial-gradient(circle at 12% 0%, rgba(73, 182, 255, 0.14), transparent 28%),
-      radial-gradient(circle at 88% 12%, rgba(255, 156, 105, 0.09), transparent 24%),
-      linear-gradient(180deg, #07111c 0%, #0a1420 34%, #07111c 100%);
+      radial-gradient(circle at 12% 0%, rgba(73, 182, 255, 0.16), transparent 28%),
+      radial-gradient(circle at 88% 12%, rgba(255, 156, 105, 0.11), transparent 24%),
+      linear-gradient(180deg, #08121d 0%, #0b1623 36%, #08111b 100%);
   }
 
   * {
