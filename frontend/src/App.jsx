@@ -10,6 +10,7 @@ import InterpretabilitySection from './components/sections/InterpretabilitySecti
 import ObjectivesSection from './components/sections/ObjectivesSection'
 import PipelineSection from './components/sections/PipelineSection'
 import SignificanceSection from './components/sections/SignificanceSection'
+import SVIResultsSection from './components/sections/SVIResultsSection'
 import TransparencySection from './components/sections/TransparencySection'
 import VulnerabilityEngineSection from './components/sections/VulnerabilityEngineSection'
 import WhyDifferentSection from './components/sections/WhyDifferentSection'
@@ -55,6 +56,9 @@ function App() {
         <VulnerabilityEngineSection methodology={researchData.methodology} />
         <PipelineSection pipeline={researchData.summary.pipeline} />
         <ComparativeFrameworkSection />
+        <SectionErrorBoundary sectionLabel="SVI results section">
+          <SVIResultsSection researchData={researchData} onBridgeStateChange={setBridgeState} />
+        </SectionErrorBoundary>
         <SectionErrorBoundary sectionLabel="Dashboard section">
           <DashboardSection
             key={dashboardKey}
