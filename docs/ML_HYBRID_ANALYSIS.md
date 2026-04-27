@@ -95,17 +95,17 @@ The professor note about training on the log of the model was implemented direct
 
 ## Recommended Final Model For Presentation
 
-- Feature set: `Structural + SVI + HAZUS Class`
+- Feature set: `Structural + HAZUS Class`
 - Model: `Extra Trees`
 - Target transform used for the final exported model: `Raw target`
-- Holdout MAE: `0.012929`
-- Holdout RMSE: `0.039761`
-- Holdout RMSLE: `0.034852`
-- Holdout R2: `0.195126`
-- Holdout RMSE on positive-damage bridges only: `0.048015`
-- Holdout R2 on positive-damage bridges only: `0.216613`
+- Holdout MAE: `0.012350`
+- Holdout RMSE: `0.039341`
+- Holdout RMSLE: `0.034440`
+- Holdout R2: `0.212044`
+- Holdout RMSE on positive-damage bridges only: `0.047676`
+- Holdout R2 on positive-damage bridges only: `0.227622`
 
-This is the recommended presentation model because it is a pure bridge-intrinsic vulnerability model: it removes PGA and traffic/network consequence variables and keeps only structural class, age / rehabilitation, geometry, condition, and rating information.
+This is the recommended presentation model because it is the strongest cross-validated no-PGA bridge-intrinsic vulnerability model in the statewide study. It removes PGA and traffic/network consequence variables while retaining a meaningful structural-system descriptor through `HWB_CLASS`. The SVI-inclusive model remains valuable for interpretability, but it is not the strongest RMSE winner.
 
 ## Important Interpretation Note
 

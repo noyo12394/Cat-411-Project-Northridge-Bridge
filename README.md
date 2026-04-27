@@ -41,6 +41,7 @@ Documentation:
 - `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
 - `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
 - `docs/RESULTS_SUMMARY.md`: recommended professor-facing summary that separates intrinsic vulnerability, NDVI proxy validation, and event-damage results
+- `docs/ML_METHOD_RECOMMENDATION.md`: concise recommendation of the strongest no-PGA ML method versus the best event-damage method
 - `docs/EXPLAINABLE_AI.md`: explainable-AI layer describing feature importance, coefficient interpretation, and the role separation of SVI and NDVI
 - `docs/ML_HYBRID_ANALYSIS.md`: advanced comparison of HAZUS-only, SVI-only, and hybrid machine-learning models
 - `docs/PROXY_VALIDATION.md`: proxy-validation results for the optional NDVI branch, including weighted kappa and within-one-state accuracy
@@ -171,6 +172,8 @@ Core outputs created by the workflow:
 - `data/processed/ml_feature_manifest.csv`
 - `data/processed/ml_hybrid_comparison.csv`
 - `data/processed/ml_hybrid_best_by_feature_set.csv`
+- `data/processed/ml_method_recommendation_summary.csv`
+- `data/processed/ml_method_recommendation_top5_no_pga.csv`
 - `data/processed/ml_hybrid_predictions.csv`
 - `data/processed/ml_target_transform_comparison.csv`
 - `data/processed/ml_recommended_hybrid_metrics.csv`
@@ -198,8 +201,10 @@ That script exports the main notebook visuals for the PGA, HAZUS, SVI, and noteb
 For a deeper machine-learning comparison, the repository now includes:
 
 - `scripts/run_ml_hybrid_analysis.py`
+- `scripts/export_ml_method_recommendation.py`
 - `scripts/export_recommended_hybrid.py`
 - `docs/ML_HYBRID_ANALYSIS.md`
+- `docs/ML_METHOD_RECOMMENDATION.md`
 - `scripts/run_disciplined_ml_study.py`
 - `docs/ML_DISCIPLINED_STUDY.md`
 

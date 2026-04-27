@@ -42,15 +42,23 @@ This means the target distribution is highly skewed, with many very small values
 
 ## Layer 1. Intrinsic Vulnerability Screening
 
-The best statewide hazard-independent structural model in the current repository is:
+The strongest no-PGA statewide model in the current repository is:
+
+- Feature set: `Structural + HAZUS Class`
+- Model: `Extra Trees`
+- CV RMSE: `0.038232`
+- Holdout MAE: `0.012350`
+- Holdout RMSE: `0.039341`
+- Holdout R2: `0.212044`
+- Holdout RMSE on positive-damage bridges only: `0.047676`
+- Holdout R2 on positive-damage bridges only: `0.227622`
+
+The nearly tied pure raw-structural baseline is:
 
 - Feature set: `Structural Core`
 - Model: `Extra Trees`
-- Holdout MAE: `0.012476`
 - Holdout RMSE: `0.039286`
 - Holdout R2: `0.214257`
-- Holdout RMSE on positive-damage bridges only: `0.047678`
-- Holdout R2 on positive-damage bridges only: `0.227569`
 
 ### Interpretation
 
@@ -68,7 +76,7 @@ So the correct interpretation is:
 - it captures a real structural signal
 - it is not a full event-damage predictor
 
-The no-PGA model is therefore strongest when described as a bridge-intrinsic vulnerability surrogate or screening tool.
+The no-PGA model is therefore strongest when described as a bridge-intrinsic vulnerability surrogate or screening tool. In practice, the best professor-facing choice is `Structural + HAZUS Class + Extra Trees`, while `Structural Core + Extra Trees` serves as a strong robustness check showing that the result does not depend on SVI.
 
 ## Layer 2. SVI As An Interpretable Context Variable
 

@@ -1,0 +1,5 @@
+Question,Feature Set,Model,CV_RMSE,CV_R2,Holdout_RMSE,Holdout_R2,Holdout_RMSE_Positive,Holdout_R2_Positive,Reason
+Best hazard-independent model,Structural + HAZUS Class,Extra Trees,0.038232,0.175733,0.039341,0.212044,0.047676,0.227622,Best cross-validated no-PGA model while retaining an interpretable structural-system descriptor.
+Best pure structural-only baseline,Structural Core,Extra Trees,0.038518,0.16366,0.039286,0.214257,0.047678,0.227569,"Nearly tied with the best no-PGA model and slightly better on one holdout split, using only raw structural variables."
+Best SVI-inclusive model,Structural + SVI + HAZUS Class,Extra Trees,0.038512,0.163664,0.039797,0.193692,0.048204,0.21041,"Best model that keeps SVI explicit, useful for interpretability even though it is not the top RMSE winner."
+Best event-damage model,Event Damage Hybrid,MLPRegressor,0.000625,0.999772,0.000571,0.999834,0.000703,0.999832,"Strongest hazard-inclusive model, but it answers a different question because PGA is included."

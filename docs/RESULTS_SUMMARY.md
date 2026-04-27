@@ -63,17 +63,33 @@ the correct comparison is the no-PGA statewide vulnerability study.
 
 ### Best performance-first intrinsic model
 
-Best pure no-PGA structural model on the full California inventory:
+Best cross-validated no-PGA structural model on the full California inventory:
+
+- Feature set: `Structural + HAZUS Class`
+- Model: `Extra Trees`
+- Holdout MAE: `0.012350`
+- Holdout RMSE: `0.039341`
+- Holdout R2: `0.212044`
+- Holdout RMSE on positive-damage bridges only: `0.047676`
+- Holdout R2 on positive-damage bridges only: `0.227622`
+
+Why this is the strongest professor-facing no-PGA result:
+
+- it is the best cross-validated hazard-independent model
+- it keeps `PGA` out of the baseline vulnerability score
+- it uses `HWB_CLASS` only as a structural-system descriptor, not as hazard demand
+
+The nearly tied raw-structural robustness baseline is:
 
 - Feature set: `Structural Core`
 - Model: `Extra Trees`
-- Holdout MAE: `0.012476`
 - Holdout RMSE: `0.039286`
 - Holdout R2: `0.214257`
-- Holdout RMSE on positive-damage bridges only: `0.047678`
-- Holdout R2 on positive-damage bridges only: `0.227569`
 
-This is the strongest professor-facing result when the goal is pure intrinsic vulnerability screening.
+So the cleanest presentation position is:
+
+- `Structural + HAZUS Class + Extra Trees` as the main no-PGA method
+- `Structural Core + Extra Trees` as the pure raw-structural sensitivity check
 
 ### SVI-inclusive intrinsic model
 
@@ -186,7 +202,7 @@ Use:
 - holdout `R2` around `0.20`
 
 Recommended reference:
-- `Structural Core + Extra Trees`
+- `Structural + HAZUS Class + Extra Trees`
 
 ### Claim 2. SVI is useful mainly as an interpretable contextual vulnerability measure.
 
@@ -232,9 +248,13 @@ The repository results do **not** support the following statements:
 
 For intrinsic vulnerability screening:
 - `data/processed/ml_hybrid_best_by_feature_set.csv`
+- `data/processed/ml_method_recommendation_summary.csv`
+- `data/processed/ml_method_recommendation_top5_no_pga.csv`
 - `data/processed/ml_recommended_hybrid_metrics.csv`
 - `data/processed/ml_recommended_hybrid_feature_importance.csv`
+- `figures/ml_method_recommendation.png`
 - `docs/ML_HYBRID_ANALYSIS.md`
+- `docs/ML_METHOD_RECOMMENDATION.md`
 - `docs/EXPLAINABLE_AI.md`
 
 For the disciplined ablation:
