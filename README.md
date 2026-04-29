@@ -38,6 +38,7 @@ Project helper:
 
 Documentation:
 - `README.md`: setup and high-level project explanation
+- `docs/GITHUB_NAVIGATION_GUIDE.md`: visual GitHub map showing where to click for results, methods, figures, and the dashboard
 - `docs/WORKFLOW.md`: step-by-step workflow from raw inputs to final outputs
 - `docs/DATA_AND_METHODS.md`: detailed explanation of the collected datasets, modeling choices, and project logic
 - `docs/RESULTS_SUMMARY.md`: recommended professor-facing summary that separates intrinsic vulnerability, NDVI proxy validation, and event-damage results
